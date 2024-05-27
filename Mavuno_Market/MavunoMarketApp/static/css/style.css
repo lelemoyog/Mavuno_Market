@@ -1,3 +1,7 @@
+body {
+    background-color: violet;
+}
+
 
 /*** Spinner Start ***/
 #spinner {
@@ -494,4 +498,6 @@
     line-height: 35px;
 }
 /*** Footer End ***/
+
+
 
