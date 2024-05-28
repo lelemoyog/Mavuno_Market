@@ -8,7 +8,7 @@
     //add a click event listener to the element
     //call the function showSuccessAlert when the element is clicked
     // id is submit
-  
+
     function showSuccessAlert() {
 
         //hide #signup1 and show #signup2 get document element by id using jquery on document ready
