@@ -15,5 +15,5 @@ def contact(request):
 def home(request):
     return render(request, 'home.html')
 
-def description(request):
-    return render(request, 'description.html')
+def farmer(request):
+    return render(request, 'farmer.html')
