@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-/**body background**/
-* body{
-    background-color:red;
-}
-=======
 body {
     background-color: violet;
 }
 
 
->>>>>>> 993d1e609e4f77dd266a99db8cfe7a5f449fbc76
 /*** Spinner Start ***/
 #spinner {
     opacity: 0;
