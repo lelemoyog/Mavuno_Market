@@ -78,31 +78,38 @@
         </div>
     </section>
 
+
+    
+
     <section class="signup" style="display: none;" id="signup2">
       <div class="container">
         <div class="signup-content">
           <div class="">
             <h2 class="form-title">What would you be doing in the plartform?</h2>
+            
             <!-- create 3 bootstrap cards with the words, vendor, farmer, and transporter, one word per card -->
             <div class="row">
-              <div class="card col-md-4 mb-3">
+              <div class="card col-md-4 mb-3" style="margin:30px;"><style>
+                .card:hover {
+                  background-color: lightgray; /* Change the background color to lightgray on hover */
+                }
+              </style>
+              
                 <div class="card-body">
                   <h5 class="card-title">Vendor</h5>
                   <p class="card-text">A person or company offering something for sale, especially a trader in the street.</p>
                 </div>
               </div>
-              <div class="card col-md-4 mb-3">
+              <div class="card col-md-4 mb-3" style="margin:30px;">
                 <div class="card-body">
                   <h5 class="card-title">Farmer</h5>
                   <p class="card-text">A person who owns or manages a farm.</p>
                 </div>
               </div>
-              <div class="card col-md-4 mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">Transporter</h5>
-                  <p class="card-text">A person or company that transports goods or people.</p>
-                </div>
-              </div>
+              <div class="form-group form-button">
+                <button type="button" hre name="signup" id="signup" onclick="showSuccessAlert" class="form-submit">
+                NEXT</button>
+            </div>
             </div>
           </div>
         </div>

@@ -201,7 +201,7 @@ body {
   font-family: Poppins; }
 
 .container {
-  width: 900px;
+  width: 1000px;
   background: #fff;
   margin: 0 auto;
   box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
@@ -253,7 +253,7 @@ body {
   margin-bottom: 150px; }
 
 .signup-content {
-  padding: 75px 0; }
+  padding: 75px; }
 
 .signup-form, .signup-image, .signin-form, .signin-image {
   width: 50%;
@@ -288,7 +288,7 @@ figure {
   cursor: pointer;
   color: #fff; }
   .form-submit:hover {
-    background:  black; }
+    background:  lightgray; }
 
 #signin {
   margin-top: 16px; }
