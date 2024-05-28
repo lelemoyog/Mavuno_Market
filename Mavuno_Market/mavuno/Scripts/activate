@@ -39,17 +39,10 @@ deactivate nondestructive
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-<<<<<<< HEAD
     export VIRTUAL_ENV=$(cygpath "C:\Users\User\Desktop\Mavuno\Mavuno_Market\Mavuno_Market\mavuno")
 else
     # use the path as-is
     export VIRTUAL_ENV="C:\Users\User\Desktop\Mavuno\Mavuno_Market\Mavuno_Market\mavuno"
-=======
-    export VIRTUAL_ENV=$(cygpath "C:\Users\Admin\Documents\Mavuno_Market\Mavuno_Market\mavuno")
-else
-    # use the path as-is
-    export VIRTUAL_ENV="C:\Users\Admin\Documents\Mavuno_Market\Mavuno_Market\mavuno"
->>>>>>> 8d34a686ccef83ce383f9ffbb7c10480eb270d64
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"
