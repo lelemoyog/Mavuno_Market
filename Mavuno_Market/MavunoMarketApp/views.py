@@ -14,3 +14,12 @@ def contact(request):
 
 def home(request):
     return render(request, 'home.html')
+
+def description(request):
+    return render(request, 'description.html')
+
+def signup(request):
+    return render(request, 'signup.html')
+
+def signin(request):
+    return render(request, 'signin.html')

@@ -3,6 +3,25 @@
 (function ($) {
     "use strict";
 
+    //write a function that will show a simple alert us jquery
+    //get the element with the id of alert
+    //add a click event listener to the element
+    //call the function showSuccessAlert when the element is clicked
+    // id is submit
+  
+    function showSuccessAlert() {
+
+        //hide #signup1 and show #signup2 get document element by id using jquery on document ready
+        $('#signup1').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
+        $('#signup2').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
+    }
+
+    $('#signup').click(function () {
+        showSuccessAlert();
+    });
+
+
+
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -28,20 +47,21 @@
             } else {
                 $('.fixed-top').removeClass('shadow').css('top', 0);
             }
-        } 
+        }
     });
-    
-    
-   // Back to top button
-   $(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-        $('.back-to-top').fadeIn('slow');
-    } else {
-        $('.back-to-top').fadeOut('slow');
-    }
+
+
+    // Back to top button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        showSuccessAlert();
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
 
@@ -54,27 +74,27 @@
         dots: true,
         loop: true,
         margin: 25,
-        nav : true,
-        navText : [
+        nav: true,
+        navText: [
             '<i class="bi bi-arrow-left"></i>',
             '<i class="bi bi-arrow-right"></i>'
         ],
         responsiveClass: true,
         responsive: {
-            0:{
-                items:1
+            0: {
+                items: 1
             },
-            576:{
-                items:1
+            576: {
+                items: 1
             },
-            768:{
-                items:1
+            768: {
+                items: 1
             },
-            992:{
-                items:2
+            992: {
+                items: 2
             },
-            1200:{
-                items:2
+            1200: {
+                items: 2
             }
         }
     });
@@ -88,27 +108,27 @@
         dots: true,
         loop: true,
         margin: 25,
-        nav : true,
-        navText : [
+        nav: true,
+        navText: [
             '<i class="bi bi-arrow-left"></i>',
             '<i class="bi bi-arrow-right"></i>'
         ],
         responsiveClass: true,
         responsive: {
-            0:{
-                items:1
+            0: {
+                items: 1
             },
-            576:{
-                items:1
+            576: {
+                items: 1
             },
-            768:{
-                items:2
+            768: {
+                items: 2
             },
-            992:{
-                items:3
+            992: {
+                items: 3
             },
-            1200:{
-                items:4
+            1200: {
+                items: 4
             }
         }
     });
@@ -149,5 +169,9 @@
         button.parent().parent().find('input').val(newVal);
     });
 
+
 })(jQuery);
+
+
+
 
