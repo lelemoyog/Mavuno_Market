@@ -2,6 +2,7 @@ from django.shortcuts import render # type: ignore
 
 
 
+
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
@@ -15,6 +16,7 @@ def contact(request):
 def home(request):
     return render(request, 'home.html')
 
+
 def description(request):
     return render(request, 'description.html')
 
@@ -23,3 +25,10 @@ def signup(request):
 
 def signin(request):
     return render(request, 'signin.html')
+
+def farmer(request):
+    return render(request, 'farmer.html')
+
+def description(request):
+    return render(request, 'description.html')
+
