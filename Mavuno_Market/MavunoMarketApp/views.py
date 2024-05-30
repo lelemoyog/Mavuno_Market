@@ -32,3 +32,6 @@ def farmer(request):
 def description(request):
     return render(request, 'description.html')
 
+def profile(request):
+    return render(request, 'profile.html')
+
