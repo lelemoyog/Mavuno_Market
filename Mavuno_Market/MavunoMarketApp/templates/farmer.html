@@ -61,11 +61,11 @@
 
 <div class="container" id="farmerContainer" style="padding-top: 150px;">
     <!-- Farmer cards will be displayed here -->
-</div>
+
 
 <div class="modal" id="productModal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="close" id="modalClose">&times;</span>
         <h2 id="farmerName"></h2>
         <div id="productList" class="product-list">
             <!-- List of products will be displayed here -->
@@ -130,7 +130,7 @@ const farmers = [
         { name: 'peas', image: 'https://via.placeholder.com/150' }, 
         { name: 'Okra', image: 'https://via.placeholder.com/150' },
         { name: 'Eggplant', image: 'https://via.placeholder.com/150' }
-      ] },
+      ] },,
 ];
 
 function populateFarmers() {
@@ -187,17 +187,14 @@ function closeModal() {
     document.getElementById('productModal').style.display = 'none';
 }
 
-document.addEventListener('DOMContentLoaded', populateFarmers);
+document.getElementById('modalClose').onclick = closeModal;
+window.onclick = (event) => {
+    if (event.target == document.getElementById('productModal')) {
+        closeModal();
+    }
+};
 
-// Adding event listener to modal close button
-document.querySelector('.close').addEventListener('click', closeModal);
-
-// Adding event listener to close the modal when clicking outside
-document.addEventListener('click', (event) => {
-  if (event.target.id === 'productModal') {
-    closeModal();
-  }
-});
+document.addEventListener('DOMContentLoaded', populateFarmers);</script>
 
 
 
