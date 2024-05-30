@@ -8,7 +8,11 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
+<<<<<<< HEAD
+set VIRTUAL_ENV=C:\Users\Admin\Documents\Mavuno_Market\mavuno
+=======
 set VIRTUAL_ENV=C:\Users\User\Desktop\Mavuno\Mavuno_Market\mavuno
+>>>>>>> a5e4b398ba8067ce8c16636720ec5454b6e425ed
 
 if not defined PROMPT set PROMPT=$P$G
 
