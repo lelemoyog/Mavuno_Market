@@ -17,7 +17,7 @@
         <div class="row g-5 align-items-center">
             <div class="col-md-12 col-lg-7">
                 <h4 class="mb-3 text-secondary">100% Organic Foods</h4>
-                <h1 class="mb-5 display-3">High Quality Organic Fruits and Vegetables</h1>
+                <h1 class="mb-5 display-3" style="color: #00806c;">High Quality Organic Fruits and Vegetables</h1>
 
                 <div class="position-relative mx-auto">
                     <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number" placeholder="Search">
@@ -60,7 +60,7 @@
             <div class="tab-class text-center">
                 <div class="row g-4">
                     <div class="col-lg-4 text-start">
-                        <h1 class="mb-5">Our Organic Products</h1>
+                        <h1>Our Organic Products</h1>
                     </div>
                     <div class="col-lg-8 text-end">
                         <ul class="nav nav-pills d-inline-flex text-center mb-5">
@@ -230,9 +230,9 @@
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">Ksh 100 / kg</p>
                                                     <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                                 </div>
                                             </div>
@@ -406,7 +406,7 @@
     <!-- Featurs End -->
 
 
-    <!-- Vegitable Shop Start-->
+    {% comment %} <!-- Vegitable Shop Start-->
     <div class="container-fluid vesitable py-5">
         <div class="container py-5">
             <h1 class="mb-0">Fresh Organic Vegetables</h1>
@@ -526,9 +526,13 @@
             </div>
         </div>
     </div>
-    <!-- Vesitable Shop End -->
+    <!-- Vesitable Shop End --> {% endcomment %}
 
 
+
+
+
+    
 
 
     <!-- Fact Start -->
@@ -543,6 +547,7 @@
                             <h1>1963</h1>
                         </div>
                     </div>
+                    
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="counter bg-white rounded p-5">
                             <i class="fa fa-users text-secondary"></i>
@@ -569,7 +574,5 @@
         </div>
     </div>
     <!-- Fact Start -->
-
-
 
 {% endblock %}

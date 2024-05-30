@@ -119,7 +119,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # Directory where Django will look for additional static files
 STATICFILES_DIRS = [
-    BASE_DIR / "img" / "static" / "css" / "lib" / "js" / "scss"  ,
+    BASE_DIR / "vendor" / "fonts" / ".sass-cache" / "img" / "static" / "css" / "lib" / "js" / "scss"  ,
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
