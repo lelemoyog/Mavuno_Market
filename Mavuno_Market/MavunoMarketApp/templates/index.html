@@ -35,6 +35,11 @@
     .navbar-brand{
         color: #00806c;
     }
+    .navbar-brand img {
+        height: 60px;
+        width: auto;
+        margin-right: 10px;
+    }
    
 </style>
 <body>
@@ -63,7 +68,13 @@
         </div>
         <div class="container px-0" style="background-color: #00806c;">
             <nav class="navbar navbar-light bg-transparent navbar-expand-xl">
-                <a href="index.html" class="navbar-brand"><h1 class="display-6">Mavuno Market</h1></a>
+                <a href="index.html" class="navbar-brand">
+                    <img src="{% static 'img/MavunoLogo.png' %}" alt="MavunoLogo" class="mavuno-logo">
+                    <!-- FILEPATH: /c:/Users/Administrator/Documents/Comp tech 2.2/Mavuno-Market/Mavuno_Market/MavunoMarketApp/templates/index.html -->
+                    <!-- BEGIN: ed8c6549bwf9 -->
+                    <span style="font-size: 2em;">Mavuno Market</span>
+                    <!-- END: ed8c6549bwf9 -->
+                </a>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars text-primary"></span>
                 </button>
