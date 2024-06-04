@@ -32,3 +32,6 @@ def description(request):
 def profile(request):
     return render(request, 'profile.html')
 
+def vendor(request):
+    return render(request, 'vendor.html')
+

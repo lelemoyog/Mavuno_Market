@@ -1,48 +1,5 @@
-
-
 (function ($) {
     "use strict";
-
-    //write a function that will show a simple alert us jquery
-    //get the element with the id of alert
-    //add a click event listener to the element
-    //call the function showSuccessAlert when the element is clicked
-    // id is submit
-
-    function showSuccessAlert() {
-
-        //hide #signup1 and show #signup2 get document element by id using jquery on document ready
-        $('#signup1').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
-        $('#signup2').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
-    }
-    function showSuccessAlert2() {
-
-        //hide #signup1 and show #signup2 get document element by id using jquery on document ready
-        $('#signup2').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
-        $('#signup3').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
-    }
-
-    function showSuccessAlert3() {
-
-        //hide #signup1 and show #signup2 get document element by id using jquery on document ready
-        $('#signup2').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
-        $('#signup1').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
-    }
-
-    $('#signup').click(function () {
-        showSuccessAlert();
-    });
-
-    $('#next').click(function () {
-        showSuccessAlert2();
-    });
-
-    $('#previous').click(function () {
-        showSuccessAlert3();
-    });
-
-
-
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -81,7 +38,6 @@
         }
     });
     $('.back-to-top').click(function () {
-        showSuccessAlert();
         $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
