@@ -2,9 +2,7 @@
 {% load static %}
 {% block title %}profile{% endblock %}
 {% block content %}
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
 <style type="text/css">
     body {
         color: #797979;
@@ -413,9 +411,8 @@
         /* Optional padding between images */
     }
 </style>
-</head>
 
-<body>
+
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <div class="container bootstrap snippets bootdey">
         <div class="row">
@@ -429,16 +426,16 @@
                         <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
                                 data-cfemail="e286879b86879ba2968a87a78f838b8ecc818d8f">[email&#160;protected]</a></p>
                     </div>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+                    <ul class="nav nav-pills nav-stacked" style="background-color: #d2e3c3;padding-bottom: 10px; padding-right: 170px;margin-bottom: 10px; display: inline-block;">
+                        
                         <li><a href="#"> <i class="fa fa-plus-square-o"></i>
-
+                                <span>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#myModal">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#myModal" >
                                     Post
-                                </button>
-
+                                    </button>
+                                </span>
 
                                 <!-- Modal -->
                                 <div class="modal" id="myModal">
@@ -508,14 +505,14 @@
                                 <span class="label label-warning pull-right r-activity">9</span>
                             </a>
                         </li>
-                        <li><a href="#"> <i class="fa fa-edit"></i>
-
+                        <li ><a href="#" > <i class="fa fa-edit"></i>
+                                <span>
                                 <!-- Button to Open the Modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#myModal1">
-                                    Edit Profile
-                                </button>
-
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#myModal1">
+                                        Edit Profile
+                                    </button>
+                                </span>
                                 <!-- The Modal -->
                                 <div class="modal" id="myModal1">
                                     <div class="modal-dialog">
@@ -794,5 +791,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
 
-</body>
 {% endblock %}
