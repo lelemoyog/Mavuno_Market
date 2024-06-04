@@ -8,19 +8,15 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-<<<<<<< HEAD
-set VIRTUAL_ENV=C:\Users\Admin\Documents\Mavuno_Market\mavuno
-=======
-set VIRTUAL_ENV=C:\Users\User\Desktop\Mavuno\Mavuno_Market\mavuno
->>>>>>> a5e4b398ba8067ce8c16636720ec5454b6e425ed
+set VIRTUAL_ENV=C:\Users\Administrator\Documents\Comp tech 2.2\Mavuno-Market\mavuno
 
 if not defined PROMPT set PROMPT=$P$G
 
 if defined _OLD_VIRTUAL_PROMPT set PROMPT=%_OLD_VIRTUAL_PROMPT%
 if defined _OLD_VIRTUAL_PYTHONHOME set PYTHONHOME=%_OLD_VIRTUAL_PYTHONHOME%
 
-set _OLD_VIRTUAL_PROMPT=%PROMPT%
-set PROMPT=(mavuno) %PROMPT%
+set "_OLD_VIRTUAL_PROMPT=%PROMPT%"
+set "PROMPT=(mavuno) %PROMPT%"
 
 if defined PYTHONHOME set _OLD_VIRTUAL_PYTHONHOME=%PYTHONHOME%
 set PYTHONHOME=
@@ -29,7 +25,7 @@ if defined _OLD_VIRTUAL_PATH set PATH=%_OLD_VIRTUAL_PATH%
 if not defined _OLD_VIRTUAL_PATH set _OLD_VIRTUAL_PATH=%PATH%
 
 set PATH=%VIRTUAL_ENV%\Scripts;%PATH%
-set VIRTUAL_ENV_PROMPT=(mavuno) 
+set VIRTUAL_ENV_PROMPT=mavuno
 
 :END
 if defined _OLD_CODEPAGE (

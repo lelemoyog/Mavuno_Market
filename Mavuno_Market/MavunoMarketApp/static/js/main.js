@@ -9,17 +9,7 @@
     //call the function showSuccessAlert when the element is clicked
     // id is submit
 
-    function showSuccessAlert() {
-
-        //hide #signup1 and show #signup2 get document element by id using jquery on document ready
-        $('#signup1').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
-        $('#signup2').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
-    }
-
-    $('#signup').click(function () {
-        showSuccessAlert();
-    });
-
+   
 
 
     // Spinner
@@ -168,6 +158,16 @@
         }
         button.parent().parent().find('input').val(newVal);
     });
+
+    
+    // <!--Location Picker Form using google map api and bootstrap modal-->
+    // <!--https://www.codecheef.org/article/location-picker-form-using-google-map-api-and-bootstrap-modal-->
+    // <!--https://developers.google.com/maps/documentation/javascript/get-api-key-->
+    // <!--https://developers.google.com/maps/documentation/javascript/overview-->
+    // <!--https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-->
+    // <!--https://developers.google.com/maps/documentation/javascript/examples/places-searchbox-->
+    // <!--https://developers.google.com/maps/documentation/javascript/places-autocomplete-->
+    // <!--https://developers.google.com/maps/documentation/javascript/places-->
 
 
 })(jQuery);
