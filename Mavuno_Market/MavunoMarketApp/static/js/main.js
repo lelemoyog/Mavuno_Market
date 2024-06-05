@@ -48,6 +48,10 @@ getDocs(collection(db, "users")).then(docSnap => {
     console.log(user);
     //display the user info in the profile page
     $('#userName').text(user.name);
+    $('#profileUserName').text(user.name);
+    $('#profileUserEmail').text(user.email);
+    $('#profileLocation').text(user.location);
+    $('#profileCategory').text(user.accesslevel);
 
 })
 
