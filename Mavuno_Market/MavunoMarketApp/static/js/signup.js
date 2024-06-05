@@ -1,7 +1,7 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { User } from "/static/js/classes.js";
+import { User, } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
 //import auth from firebase
@@ -21,6 +21,7 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const analytics = getAnalytics(app);
+  var accountType;
 
 
   //to give you context this is the signup.js file that is used to handle the signup form
@@ -34,10 +35,10 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     $('#signup2').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
   }
   function showSuccessAlert2() {
-
-    //hide #signup1 and show #signup2 get document element by id using jquery on document ready
-    $('#signup2').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
-    $('#signup3').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
+    signup();
+    // //hide #signup1 and show #signup2 get document element by id using jquery on document ready
+    // $('#signup2').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
+    // $('#signup3').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
   }
 
   function showSuccessAlert3() {
@@ -64,13 +65,12 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     var email = $('#email').val();
     var password = $('#pass').val();
     var name = $('#name').val();
-    var phone = $('#phone').val();
-    var location = $('#location').val();
-
     // check if the email is valid and if the password is at least 6 characters and no field is empty
     if (email == "" || password == "" || name == "") {
       document.getElementById('error').innerHTML = 'All fields are required';
       document.getElementById('error').style.color = 'red';
+      $('#signup2').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
+    $('#signup1').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
       $('#spinner').removeClass('show');
       return;
     }
@@ -91,6 +91,8 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
         //show an error alert
         document.getElementById('error').innerHTML = errorCode;
         document.getElementById('error').style.color = 'red';
+        $('#signup2').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
+    $('#signup1').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
       });
 
 
@@ -100,12 +102,20 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     //save the user info to the database
     // ...
     const user = new User(uid, name, email);
+    var accountType = $('#account').val();
+    console.log(accountType);
+    var location = $('#location').val();
 
-    addDoc(collection(db, "users"), {
+    //conver to plain js object
+    const userObj = {
       uid: user.uid,
-      name: name, // Update to properly access the user's name property
-      email: user.email
-    })
+      name: user.name,
+      email: user.email,
+      accountType: accountType,
+      location: location
+    };
+
+    addDoc(collection(db, "users"),userObj)
       .then((docRef) => {
         // showSuccessAlert();
         document.getElementById('error').innerHTML = 'User created successfully';
@@ -135,7 +145,7 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
   document.getElementById('signup').addEventListener('click', function (event) {
 
 
-
+    $('#spinner').addClass('show');
     //prevent the default form submission
     event.preventDefault();
     //check if the pass and re_pass match 
@@ -145,19 +155,26 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     if (pass != re_pass) {
       document.getElementById('error').innerHTML = 'Passwords do not match';
       document.getElementById('error').style.color = 'red';
+      $('#signup2').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
+    $('#signup1').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
+      $('#spinner').removeClass('show');
       return;
     }
-    $('#spinner').addClass('show');
+    $('#spinner').removeClass('show');
     //call the signup function
-    signup();
+    showSuccessAlert()
   });
 
 
-
-
-
-
-
-
+$("#vendor").click(function () {
+  var accountType = "vendor";
+  $('#account').val(accountType);
+  $('#farmer').css('background-color', 'lightgray');
+});
+$("#farmer").click(function () {
+  var accountType = "farmer";
+  $('#account').val(accountType);
+  $('#farmer').css('background-color', 'lightgray');
+});
 
 })(jQuery);
