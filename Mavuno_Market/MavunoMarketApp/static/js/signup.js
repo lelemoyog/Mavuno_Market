@@ -35,7 +35,7 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     $('#signup2').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
   }
   function showSuccessAlert2() {
-    
+    signup();
     // //hide #signup1 and show #signup2 get document element by id using jquery on document ready
     // $('#signup2').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
     // $('#signup3').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
@@ -66,14 +66,6 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     var password = $('#pass').val();
     var name = $('#name').val();
 
-    // check if the email is valid and if the password is at least 6 characters and no field is empty
-    if (email == "" || password == "" || name == "") {
-      document.getElementById('error').innerHTML = 'All fields are required';
-      document.getElementById('error').style.color = 'red';
-      $('#spinner').removeClass('show');
-      return;
-    }
-
     //create the user
     createUserWithEmailAndPassword(getAuth(), email, password)
       .then((userCredential) => {
@@ -101,13 +93,18 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
   function saveUser(uid, name, email) {
     //save the user info to the database
     // ...
-    const user = new User(uid, name, email);
+    var accesslevel = $('#account').val();
+    var location = $('#location').val();
+    const user = new User(uid, name, email,accesslevel, location);
+   
 
     //conver to plain js object
     const userObj = {
       uid: user.uid,
       name: user.name,
       email: user.email,
+      accesslevel: user.accesslevel,
+      location: user.location
     };
 
    
@@ -146,8 +143,18 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     //prevent the default form submission
     event.preventDefault();
     //check if the pass and re_pass match 
+    var email = document.getElementById('email').value;
+    var name = document.getElementById('name').value;
     var pass = document.getElementById('pass').value;
     var re_pass = document.getElementById('re_pass').value;
+
+     // check if the email is valid and if the password is at least 6 characters and no field is empty
+     if (email == "" || pass == "" || name == "") {
+      document.getElementById('error').innerHTML = 'All fields are required';
+      document.getElementById('error').style.color = 'red';
+      $('#spinner').removeClass('show');
+      return;
+    }
 
     if (pass != re_pass) {
       document.getElementById('error').innerHTML = 'Passwords do not match';
@@ -157,14 +164,15 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     }
     $('#spinner').removeClass('show');
     //call the signup function
-    signup();
+    console.log(name)
+    showSuccessAlert();
   });
 
 
 $("#vendor").click(function () {
   var accountType = "vendor";
   $('#account').val(accountType);
-  $('#farmer').css('background-color', 'lightgray');
+  $('#vendor').css('background-color', 'lightgray');
 });
 $("#farmer").click(function () {
   var accountType = "farmer";
