@@ -39,6 +39,16 @@
         width: auto;
         margin-right: 10px;
     }
+
+    .fa  {
+    color: #00806c;
+}
+
+.fa:hover {
+    color: #5ddc08;
+}
+
+
    
 </style>
 <body>
@@ -52,26 +62,34 @@
 
     <!-- Navbar start -->
     <div class="container-fluid fixed-top" style="background-color: #d2e3c3;">
-        <div class="container topbar bg-primary d-none d-lg-block">
+        <div class="container topbar bg-success d-none d-lg-block">
             <div class="d-flex justify-content-between">
-                <div class="top-info ps-2">
+                 <div class="top-info ps-2">
                     <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">Station 5 jkuat, JUJA</a></small>
                     <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">mavunomarket@info.com</a></small>
                 </div>
-                <div class="top-link pe-2">
+                <div class="top-link pe-2" style="color: #00806c">
                     <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
                     <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
                     <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+        <div class="container px-0" style="color:#f3c430">
+=======
         <div class="container px-0" style="background-color: #d2e3c3;">
+>>>>>>> 4e8e8dcd096d912d59857044d8c3f2e6028aa093
             <nav class="navbar navbar-light bg-transparent navbar-expand-xl">
                 <a href="index.html" class="navbar-brand">
-                    <img src="{% static 'img/logo.png' %}" alt="MavunoLogo" class="mavuno-logo">
+                    <img src="{% static 'img/logo4.png' %}" alt="MavunoLogo" class="mavuno-logo" style="margin-bottom: 30px;">
                     <!-- FILEPATH: /c:/Users/Administrator/Documents/Comp tech 2.2/Mavuno-Market/Mavuno_Market/MavunoMarketApp/templates/index.html -->
                     <!-- BEGIN: ed8c6549bwf9 -->
-                    <span style="font-size: 2em;">Mavuno Market</span>
+<<<<<<< HEAD
+                    <span style="font-size: 3em; font-weight:bolder; color:#00806c;">Mavuno Market</span>
+=======
+                    <span style="font-size: 3em; font-weight: bolder; color: #00806c; margin-top: 30px;">Mavuno Market</span>
+>>>>>>> 4e8e8dcd096d912d59857044d8c3f2e6028aa093
                     <!-- END: ed8c6549bwf9 -->
                 </a>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -79,7 +97,7 @@
                 </button>
                 <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
-                        <a href="/home/" class="nav-item nav-link active">Home</a>
+                        <a href="/home/" class="nav-item nav-link">Home</a>
                         <a href="shop.html" class="nav-item nav-link">Shop</a>
                         <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
                         <div class="nav-item dropdown">
@@ -94,20 +112,24 @@
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="d-flex m-3 me-0">
-                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+<<<<<<< HEAD
+                        {% comment %} <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+=======
+                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-success"></i></button>
+>>>>>>> 4e8e8dcd096d912d59857044d8c3f2e6028aa093
                         <a href="" class="position-relative me-4 my-auto">
                             <i class="fa fa-shopping-bag fa-2x"></i>
                             <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
-                        </a>
+                        </a> {% endcomment %}
                         <a href="/signup/" class="my-auto">
-                            <i class="fas fa-user fa-2x"></i>
+                            <i class="fa fa-user fa-2x"></i>
                         </a>
                     </div>
                 </div>
             </nav>
         </div>
     </div>
-    <!-- Navbar End -->
+    <!-- Navbar End -->+
 
 
     <!-- Modal Search Start -->
@@ -217,7 +239,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <span class="text-light"><a href="https://mavuno-market.web.app/"><i class="fas fa-copyright text-light me-2"></i>Mavuno Market</a>, All right reserved.</span>
+                    <span class="text-light"><a href="https://mavuno-market.web.app/"><i class="fas fa-copyright text-light me-2" style="color:black;"></i>Mavuno Market</a>, All right reserved.</span>
                 </div>
             </div>
         </div>

@@ -1,17 +1,5 @@
-
-
 (function ($) {
     "use strict";
-
-    //write a function that will show a simple alert us jquery
-    //get the element with the id of alert
-    //add a click event listener to the element
-    //call the function showSuccessAlert when the element is clicked
-    // id is submit
-
-   
-
-
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -50,7 +38,6 @@
         }
     });
     $('.back-to-top').click(function () {
-        showSuccessAlert();
         $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
