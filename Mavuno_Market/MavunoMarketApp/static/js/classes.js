@@ -3,8 +3,6 @@ export class User {
         this.uid = uid;
         this.name = name;
         this.email = email;
-        this.accountType = accountType;
-        this.location = location;
     }
 }
 

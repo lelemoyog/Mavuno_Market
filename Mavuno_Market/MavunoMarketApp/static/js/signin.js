@@ -39,6 +39,9 @@ $("#signin").click(function (event) {
     signInWithEmailAndPassword(getAuth(), email, password)
     .then((userCredential) => {
         // Signed in
+        var user = userCredential.user;
+        //add user to local storage
+        localStorage.setItem('uid', user.uid);
         document.getElementById('error').innerHTML = 'successfully logged in';
         document.getElementById('error').style.color = 'green';
         window.location.href = "/home/";
