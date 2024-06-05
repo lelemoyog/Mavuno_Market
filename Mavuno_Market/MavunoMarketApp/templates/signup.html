@@ -128,20 +128,22 @@
                   background-color: lightgray; /* Change the background color to lightgray on hover */
                 }
               </style>
+
+              <input type="text" id="account" style="display: none;">
               
-                <div class="card-body">
+                <div class="card-body" id="vendor">
                   <h5 class="card-title">Vendor</h5>
                   <p class="card-text">A person or company offering something for sale, especially a trader in the street.</p>
                 </div>
               </div>
               <div class="card col-md-4 mb-3" style="margin:30px;">
-                <div class="card-body">
+                <div class="card-body" id="farmer">
                   <h5 class="card-title">Farmer</h5>
                   <p class="card-text">A person who owns or manages a farm.</p>
                 </div>
               </div>
               <h2 class="form-title">What is your location?</h2>
-              <select class="form-control">
+              <select class="form-control" id="location">
                 <option selected>Select County</option>
                 <option>Nairobi</option>
                 <option>Mombasa</option>
@@ -198,10 +200,10 @@
               </select>
               
               <div class="form-group form-button">
-                <button type="button" name="signup" id="previous" onclick="showPreviousAlert()" class="form-submit">
+                <button type="button" name="signup" id="previous"  class="form-submit">
                   Previous
                 </button>
-                <button type="button" name="signup" id="next" onclick="showSuccessAlert()" class="form-submit" style="float: right;">
+                <button type="button" name="signup" id="next"  class="form-submit" style="float: right;">
                   Next
                 </button>
               </div>
