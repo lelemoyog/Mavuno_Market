@@ -3,8 +3,7 @@
 {% block title %}profile{% endblock %}
 {% block content %}
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
 <style type="text/css">
     body {
         color: #797979;
@@ -413,386 +412,373 @@
         /* Optional padding between images */
     }
 </style>
-</head>
 
-<body>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="container bootstrap snippets bootdey">
-        <div class="row">
-            <div class="profile-nav col-md-3" style="padding-top: 150px;">
-                <div class="panel">
-                    <div class="user-heading round">
-                        <a href="#">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt>
-                        </a>
-                        <h1>Camila Muthoni </h1>
-                        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                data-cfemail="e286879b86879ba2968a87a78f838b8ecc818d8f">[email&#160;protected]</a></p>
-                    </div>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                        <li><a href="#"> <i class="fa fa-plus-square-o"></i>
 
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="profile-nav col-md-3" style="padding-top: 150px;">
+            <div class="panel">
+                <div class="user-heading round">
+                    <a href="#">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt>
+                    </a>
+                    <h1>Camila Muthoni </h1>
+                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                            data-cfemail="e286879b86879ba2968a87a78f838b8ecc818d8f">[email&#160;protected]</a></p>
+                </div>
+                <ul class="nav nav-pills nav-stacked"
+                    style="background-color: #d2e3c3;padding-bottom: 10px; padding-right: 170px;margin-bottom: 10px; display: inline-block;">
+
+                    <li><a href="#"> <i class="fa fa-plus-square-o"></i>
+                            <span>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#myModal">
                                     Post
                                 </button>
+                            </span>
 
+                            <!-- Modal -->
+                            <div class="modal" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
 
-                                <!-- Modal -->
-                                <div class="modal" id="myModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Enter product details</h4>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal"></button>
-                                            </div>
-
-                                            <!-- Modal body -->
-                                            <div class="modal-body">
-                                                <form id="productForm">
-                                                    <div class="mb-3">
-                                                        <label for="productName" class="form-label">Product Name</label>
-                                                        <input type="text" class="form-control" id="productName"
-                                                            required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="productPrice" class="form-label">Price per
-                                                            kg</label>
-                                                        <input type="number" class="form-control" id="productPrice"
-                                                            required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="productAmount" class="form-label">Available Amount
-                                                            (kg)</label>
-                                                        <input type="number" class="form-control" id="productAmount"
-                                                            required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="availabilityWindowStart"
-                                                            class="form-label">Availability Window Start</label>
-                                                        <input type="date" class="form-control"
-                                                            id="availabilityWindowStart" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="availabilityWindowEnd"
-                                                            class="form-label">Availability Window End</label>
-                                                        <input type="date" class="form-control"
-                                                            id="availabilityWindowEnd" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="productImage" class="form-label">Product
-                                                            Image</label>
-                                                        <input type="file" class="form-control" id="productImage"
-                                                            accept="image/*" required>
-                                                    </div>
-                                                </form>
-                                            </div>
-
-                                            <!-- Modal footer -->
-                                            <div class="modal-footer">
-                                                <button type="submit" form="productForm"
-                                                    class="btn btn-primary">Submit</button>
-                                                <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Close</button>
-                                            </div>
-
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Enter product details</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <form id="productForm">
+                                                <div class="mb-3">
+                                                    <label for="productName" class="form-label">Product Name</label>
+                                                    <input type="text" class="form-control" id="productName" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="productPrice" class="form-label">Price per
+                                                        kg</label>
+                                                    <input type="number" class="form-control" id="productPrice"
+                                                        required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="productAmount" class="form-label">Available Amount
+                                                        (kg)</label>
+                                                    <input type="number" class="form-control" id="productAmount"
+                                                        required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="availabilityWindowStart" class="form-label">Availability
+                                                        Window Start</label>
+                                                    <input type="date" class="form-control" id="availabilityWindowStart"
+                                                        required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="availabilityWindowEnd" class="form-label">Availability
+                                                        Window End</label>
+                                                    <input type="date" class="form-control" id="availabilityWindowEnd"
+                                                        required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="productImage" class="form-label">Product
+                                                        Image</label>
+                                                    <input type="file" class="form-control" id="productImage"
+                                                        accept="image/*" required>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="submit" form="productForm"
+                                                class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-danger"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+
                                     </div>
                                 </div>
+                            </div>
 
-                                <span class="label label-warning pull-right r-activity">9</span>
-                            </a>
-                        </li>
-                        <li><a href="#"> <i class="fa fa-edit"></i>
-
+                            <span class="label label-warning pull-right r-activity">9</span>
+                        </a>
+                    </li>
+                    <li><a href="#"> <i class="fa fa-edit"></i>
+                            <span>
                                 <!-- Button to Open the Modal -->
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#myModal1">
                                     Edit Profile
                                 </button>
+                            </span>
+                            <!-- The Modal -->
+                            <div class="modal" id="myModal1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
 
-                                <!-- The Modal -->
-                                <div class="modal" id="myModal1">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Edit Profile</h4>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal"></button>
-                                            </div>
-
-                                            <!-- Modal body -->
-                                            <div class="modal-body">
-                                                <form id="profileForm">
-                                                    <div class="mb-3">
-                                                        <label for="userName" class="form-label">Name</label>
-                                                        <input type="text" class="form-control" id="userName" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="userLocation" class="form-label">Location</label>
-                                                        <input type="text" class="form-control" id="userLocation"
-                                                            required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="userCategory" class="form-label">Category</label>
-                                                        <input type="text" class="form-control" id="userCategory"
-                                                            required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="userEmail" class="form-label">Email</label>
-                                                        <input type="email" class="form-control" id="userEmail"
-                                                            required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="userPhone" class="form-label">Phone Number</label>
-                                                        <input type="tel" class="form-control" id="userPhone" required>
-                                                    </div>
-                                                </form>
-                                            </div>
-
-                                            <!-- Modal footer -->
-                                            <div class="modal-footer">
-                                                <button type="submit" form="profileForm"
-                                                    class="btn btn-primary">Submit</button>
-                                                <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Close</button>
-                                            </div>
-
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Edit Profile</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <form id="profileForm">
+                                                <div class="mb-3">
+                                                    <label for="userName" class="form-label">Name</label>
+                                                    <input type="text" class="form-control" id="userName" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="userLocation" class="form-label">Location</label>
+                                                    <input type="text" class="form-control" id="userLocation" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="userCategory" class="form-label">Category</label>
+                                                    <input type="text" class="form-control" id="userCategory" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="userEmail" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" id="userEmail" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="userPhone" class="form-label">Phone Number</label>
+                                                    <input type="tel" class="form-control" id="userPhone" required>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="submit" form="profileForm"
+                                                class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-danger"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+
                                     </div>
                                 </div>
-
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="profile-info col-md-9">
-
-                <div class="panel" style="margin-top: 150px;">
-                    <div class="bio-graph-heading" style="font-size: large ;font-style: normal;font-weight: bolder;">
-                        Farmer Details
-                    </div>
-                    <div class="panel-body bio-graph-info" style="font-size: large;">
-                        <h1>Bio Graph</h1>
-                        <div class="row">
-                            <div class="bio-row">
-                                <p><span>Name </span>: Camila Muthoni</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Location </span>: Juja</p>
                             </div>
 
-                            <div class="bio-row">
-                                <p><span>Category </span>: Farmer</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Email </span>: carinamuthoni@gmail.com
-                                </p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Mobile </span>: 0787652654</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="posts">
-            <h1 style="font-family: Arial, Helvetica, sans-serif;">My Products</h1>
-            <div class="image-container">
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="rounded position-relative fruite-item">
-                            <div class="fruite-img">
-                                <img src="{% static 'img/grapes.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
-                            </div>
-                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                style="top: 10px; left: 10px;">Fruits</div>
-                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                <h4>Grapes</h4>
-                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold mb-0">Ksh 150 / kg</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                            class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
-                                </div>
-                                <p>available :50kg</p>
-                                <h5>Availability Window</h5>
-                                <p>from :4/05/24 to :11/05/24</p>
+        <div class="profile-info col-md-9">
 
-                            </div>
+            <div class="panel" style="margin-top: 150px;">
+                <div class="bio-graph-heading" style="font-size: large ;font-style: normal;font-weight: bolder;">
+                    Farmer Details
+                </div>
+                <div class="panel-body bio-graph-info" style="font-size: large;">
+                    <h1>Bio Graph</h1>
+                    <div class="row">
+                        <div class="bio-row">
+                            <p><span>Name </span>: Camila Muthoni</p>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="rounded position-relative fruite-item">
-                            <div class="fruite-img">
-                                <img src="{% static 'img/fruite-item-3.jpg' %}" class="img-fluid w-100 rounded-top"
-                                    alt="">
-                            </div>
-                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                style="top: 10px; left: 10px;">Fruits</div>
-                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                <h4>Bananas</h4>
-                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold mb-0">Ksh 100 / kg</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                            class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
-                                </div>
-                                <p>available :80kg</p>
-                                <h5>Availability Window</h5>
-                                <p>from :2/04/24 to :11/05/24</p>
-                            </div>
+                        <div class="bio-row">
+                            <p><span>Location </span>: Juja</p>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="rounded position-relative fruite-item">
-                            <div class="fruite-img">
-                                <img src="{% static 'img/fruite-item-1.jpg' %}" class="img-fluid w-100 rounded-top"
-                                    alt="">
-                            </div>
-                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                style="top: 10px; left: 10px;">Fruits</div>
-                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                <h4>Oranges</h4>
-                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold mb-0">Ksh150/ kg</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                            class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
-                                </div>
-                                <p>available :50kg</p>
-                                <h5>Availability Window</h5>
-                                <p>from :4/05/24 to :11/05/24</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="rounded position-relative fruite-item">
-                            <div class="fruite-img">
-                                <img src="{% static 'img/fruite-item-6.jpg' %}" class="img-fluid w-100 rounded-top"
-                                    alt="">
-                            </div>
-                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                style="top: 10px; left: 10px;">Fruits</div>
-                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                <h4>Apples</h4>
-                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold mb-0">Ksh 250 / kg</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                            class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
-                                </div>
-                                <p>available :150kg</p>
-                                <h5>Availability Window</h5>
-                                <p>from :4/05/24 to :11/05/24</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="rounded position-relative fruite-item">
-                            <div class="fruite-img">
-                                <img src="{% static 'img/newest-carrots.jpg' %}" class="img-fluid w-100 rounded-top"
-                                    alt="">
-                            </div>
-                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                style="top: 10px; left: 10px;">Vegetables</div>
-                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                <h4>Carrots</h4>
-                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold mb-0">Ksh 150/ kg</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                            class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
-                                </div>
-                                <p>available :80kg</p>
-                                <h5>Availability Window</h5>
-                                <p>from :2/06/24 to :11/06/24</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="rounded position-relative fruite-item">
-                            <div class="fruite-img">
-                                <img src="{% static 'img/broccoli-new.jpg' %}" class="img-fluid w-100 rounded-top"
-                                    alt="">
-                            </div>
-                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                style="top: 10px; left: 10px;">Vegetable</div>
-                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                <h4>Broccoli</h4>
-                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold mb-0">Ksh 300 / kg</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                </div>
-                                <p>available :50kg</p>
-                                <h5>Availability Window</h5>
-                                <p>from :4/05/24 to :11/05/24</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="rounded position-relative fruite-item">
-                            <div class="fruite-img">
-                                <img src="{% static 'img/vegetable-item-1.jpg' %}" class="img-fluid w-100 rounded-top"
-                                    alt="">
-                            </div>
-                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                style="top: 10px; left: 10px;">Vegetables</div>
-                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                <h4>Tomatoes</h4>
-                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold mb-0">Ksh 200 / kg</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                </div>
-                                <p>available :50kg</p>
-                                <h5>Availability Window</h5>
-                                <p>from :4/05/24 to :11/05/24</p>
-                            </div>
+                        <div class="bio-row">
+                            <p><span>Category </span>: Farmer</p>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="rounded position-relative fruite-item">
-                            <div class="fruite-img">
-                                <img src="{% static 'img/plantain-new.jpg' %}" class="img-fluid w-100 rounded-top"
-                                    alt="">
-                            </div>
-                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                style="top: 10px; left: 10px;">Vegetables</div>
-                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                <h4>Plantain</h4>
-                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold mb-0">Ksh 200 / kg</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                </div>
-                                <p>available :50kg</p>
-                                <h5>Availability Window</h5>
-                                <p>from :1/12/24 to :01/01/25</p>
-                            </div>
+                        <div class="bio-row">
+                            <p><span>Email </span>: carinamuthoni@gmail.com
+                            </p>
                         </div>
+                        <div class="bio-row">
+                            <p><span>Mobile </span>: 0787652654</p>
+                        </div>
+
                     </div>
                 </div>
-                <!-- Add more images as needed -->
             </div>
         </div>
     </div>
+    <div class="posts">
+        <h1 style="font-family: Arial, Helvetica, sans-serif;">My Products</h1>
+        <div class="image-container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/grapes.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Fruits</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Grapes</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 150 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
+                            </div>
+                            <p>available :50kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :4/05/24 to :11/05/24</p>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript"> </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/fruite-item-3.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Fruits</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Bananas</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 100 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
+                            </div>
+                            <p>available :80kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :2/04/24 to :11/05/24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/fruite-item-1.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Fruits</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Oranges</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh150/ kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
+                            </div>
+                            <p>available :50kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :4/05/24 to :11/05/24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/fruite-item-6.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Fruits</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Apples</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 250 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
+                            </div>
+                            <p>available :150kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :4/05/24 to :11/05/24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/newest-carrots.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Vegetables</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Carrots</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 150/ kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
+                            </div>
+                            <p>available :80kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :2/06/24 to :11/06/24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/broccoli-new.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Vegetable</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Broccoli</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 300 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                            <p>available :50kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :4/05/24 to :11/05/24</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/vegetable-item-1.jpg' %}" class="img-fluid w-100 rounded-top"
+                                alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Vegetables</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Tomatoes</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 200 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                            <p>available :50kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :4/05/24 to :11/05/24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/plantain-new.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Vegetables</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Plantain</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 200 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                            <p>available :50kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :1/12/24 to :01/01/25</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more images as needed -->
+        </div>
+    </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
 
-</body>
 {% endblock %}
