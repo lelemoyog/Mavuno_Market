@@ -419,152 +419,134 @@
     <div class="row">
         <div class="profile-nav col-md-3" style="padding-top: 150px;">
             <div class="panel">
-                <div class="user-heading round">
+                <div class="user-heading round" >
                     <a href="#">
                         <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt>
                     </a>
-                    <h1>Camila Muthoni </h1>
+                    <h1 style="color: #d2e3c3;">Camila Muthoni </h1>
                     <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
                             data-cfemail="e286879b86879ba2968a87a78f838b8ecc818d8f">[email&#160;protected]</a></p>
                 </div>
                 <ul class="nav nav-pills nav-stacked"
-                    style="background-color: #d2e3c3;padding-bottom: 10px; padding-right: 170px;margin-bottom: 10px; display: inline-block;">
-
-                    <li><a href="#"> <i class="fa fa-plus-square-o"></i>
-                            <span>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#myModal">
-                                    Post
-                                </button>
-                            </span>
-
-                            <!-- Modal -->
-                            <div class="modal" id="myModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Enter product details</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <form id="productForm">
-                                                <div class="mb-3">
-                                                    <label for="productName" class="form-label">Product Name</label>
-                                                    <input type="text" class="form-control" id="productName" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="productPrice" class="form-label">Price per
-                                                        kg</label>
-                                                    <input type="number" class="form-control" id="productPrice"
-                                                        required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="productAmount" class="form-label">Available Amount
-                                                        (kg)</label>
-                                                    <input type="number" class="form-control" id="productAmount"
-                                                        required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="availabilityWindowStart" class="form-label">Availability
-                                                        Window Start</label>
-                                                    <input type="date" class="form-control" id="availabilityWindowStart"
-                                                        required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="availabilityWindowEnd" class="form-label">Availability
-                                                        Window End</label>
-                                                    <input type="date" class="form-control" id="availabilityWindowEnd"
-                                                        required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="productImage" class="form-label">Product
-                                                        Image</label>
-                                                    <input type="file" class="form-control" id="productImage"
-                                                        accept="image/*" required>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="submit" form="productForm"
-                                                class="btn btn-primary">Submit</button>
-                                            <button type="button" class="btn btn-danger"
-                                                data-bs-dismiss="modal">Close</button>
-                                        </div>
-
-                                    </div>
+                style="background-color: #d2e3c3; padding: 10px; margin-bottom: 10px; display: flex; gap: 30px; align-items: center; justify-content: flex-start;padding-left: 30px;">
+                <li style="list-style: none;">
+                    <span>
+                        <!-- Button trigger modal -->
+                        <button type="button" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3;"
+                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                            Post
+                        </button>
+                    </span>
+                    <!-- Modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Enter product details</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
-                            </div>
-
-                            <span class="label label-warning pull-right r-activity">9</span>
-                        </a>
-                    </li>
-                    <li><a href="#"> <i class="fa fa-edit"></i>
-                            <span>
-                                <!-- Button to Open the Modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#myModal1">
-                                    Edit Profile
-                                </button>
-                            </span>
-                            <!-- The Modal -->
-                            <div class="modal" id="myModal1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Edit Profile</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form id="productForm">
+                                        <div class="mb-3">
+                                            <label for="productName" class="form-label">Product Name</label>
+                                            <input type="text" class="form-control" id="productName" required>
                                         </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <form id="profileForm">
-                                                <div class="mb-3">
-                                                    <label for="userName" class="form-label">Name</label>
-                                                    <input type="text" class="form-control" id="userName" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="userLocation" class="form-label">Location</label>
-                                                    <input type="text" class="form-control" id="userLocation" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="userCategory" class="form-label">Category</label>
-                                                    <input type="text" class="form-control" id="userCategory" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="userEmail" class="form-label">Email</label>
-                                                    <input type="email" class="form-control" id="userEmail" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="userPhone" class="form-label">Phone Number</label>
-                                                    <input type="tel" class="form-control" id="userPhone" required>
-                                                </div>
-                                            </form>
+                                        <div class="mb-3">
+                                            <label for="productPrice" class="form-label">Price per kg</label>
+                                            <input type="number" class="form-control" id="productPrice" required>
                                         </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="submit" form="profileForm"
-                                                class="btn btn-primary">Submit</button>
-                                            <button type="button" class="btn btn-danger"
-                                                data-bs-dismiss="modal">Close</button>
+                                        <div class="mb-3">
+                                            <label for="productAmount" class="form-label">Available Amount (kg)</label>
+                                            <input type="number" class="form-control" id="productAmount" required>
                                         </div>
-
-                                    </div>
+                                        <div class="mb-3">
+                                            <label for="availabilityWindowStart" class="form-label">Availability Window Start</label>
+                                            <input type="date" class="form-control" id="availabilityWindowStart" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="availabilityWindowEnd" class="form-label">Availability Window End</label>
+                                            <input type="date" class="form-control" id="availabilityWindowEnd" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productImage" class="form-label">Product Image</label>
+                                            <input type="file" class="form-control" id="productImage" accept="image/*" required>
+                                        </div>
+                                    </form>
                                 </div>
+            
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" form="productForm" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+            
                             </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="list-style: none;">
+                    <span>
+                        <!-- Button to Open the Modal -->
+                        <button type="button" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3;"
+                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal1">
+                            Edit Profile
+                        </button>
+                    </span>
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit Profile</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+            
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form id="profileForm">
+                                        <div class="mb-3">
+                                            <label for="userName" class="form-label">Name</label>
+                                            <input type="text" class="form-control" id="userName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userLocation" class="form-label">Location</label>
+                                            <input type="text" class="form-control" id="userLocation" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userCategory" class="form-label">Category</label>
+                                            <input type="text" class="form-control" id="userCategory" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userEmail" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="userEmail" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userPhone" class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="userPhone" required>
+                                        </div>
+                                    </form>
+                                </div>
+            
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" form="profileForm" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+        
 
-                        </a>
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="profile-info col-md-9">
