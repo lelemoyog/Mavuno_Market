@@ -460,8 +460,20 @@
                                             <input type="number" class="form-control" id="productAmount" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="availabilityWindowStart" class="form-label">Availability Window Start</label>
-                                            <input type="date" class="form-control" id="availabilityWindowStart" required>
+                                            <label for="productCategory" class="form-label">Product Category</label>
+                                            <select class="form-control" id="productCategory" required>
+                                                <option value="vegetable">Vegetable</option>
+                                                <option value="fruits">Fruits</option>
+                                                <option value="cereals">Cereals</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productAmount" class="form-label">Description</label>
+                                            <textarea class="form-control" id="productDescription" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="availabilityWindowEnd" class="form-label">Availability Window start</label>
+                                            <input type="date" class="form-control" id="availabilityWindowStrat" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="availabilityWindowEnd" class="form-label">Availability Window End</label>
@@ -469,14 +481,18 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="productImage" class="form-label">Product Image</label>
-                                            <input type="file" class="form-control" id="productImage" accept="image/*" required>
+                                            <input type="file" class="form-control" id="productPhoto" accept="image/*" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="uploadedImage" class="form-label">Uploaded Image</label>
+                                            <img id="uploadedImage" src="https://firebasestorage.googleapis.com/v0/b/mavuno-market-webapp.appspot.com/o/images?alt=media&token=852db831-2fce-464d-ab41-354c920c0033" alt="Uploaded Image" style="max-width: 100%; height: auto;">
                                         </div>
                                     </form>
                                 </div>
 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="submit" form="productForm" class="btn btn-primary">Submit</button>
+                                    <button type="button" id="addProduct" form="productForm" class="btn btn-primary">Submit</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                 </div>
 
