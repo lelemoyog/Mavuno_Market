@@ -42,7 +42,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
       .then((url) => {
         console.log(url);
         document.getElementById("photoUrl").value = url;
-        //add to local storage
+        //add local storage
         localStorage.setItem('photoUrl', url);
         updateUser(url);
       })

@@ -36,33 +36,33 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     $("document").ready(function () {
         var uid = localStorage.getItem('uid');
 
-        //getuser document
-        const userDoc = doc(db, "users", uid);
-        //get the user document
-        getDoc(userDoc).then(docSnap => {
-            let user = docSnap.data();
-            console.log(user);
-            //display the user info in the profile page
-            var jina = getInitials(user.name);
-            $('#userName').text(jina);
-            $('#userN').val(user.name);
-            $('.profileUserName').text(user.name);
-            $('#profileUserEmail').text(user.email);
-            $('#userEmail').val(user.email);
-            $('#profileLocation').text(user.location);
-            $('#userLocation').val(user.location);
-            $('#profileCategory').text(user.accesslevel);
-            $('#userAbout').val(user.about);
-            //add image to image tag in profile page
-            //check if user has an image
-            if (user.imgUrl === "") {
-                $('#img').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
-                $('#img2').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
-            } else {
-                $('#img').attr('src', user.imgUrl);
-                $('#img2').attr('src', user.imgUrl);
-            }
-        });
+//getuser document
+const userDoc = doc(db, "users", uid);
+//get the user document
+getDoc(userDoc).then(docSnap => {
+    let user = docSnap.data();
+    console.log(user);
+    //display the user info in the profile page
+    var jina = getInitials(user.name);
+    $('#userName').text(jina);
+    $('#userN').val(user.name);
+    $('.profileUserName').text(user.name);
+    $('#profileUserEmail').text(user.email);
+    $('#userEmail').val(user.email);
+    $('#profileLocation').text(user.location);
+    $('#userLocation').val(user.location);
+    $('#profileCategory').text(user.accesslevel);
+    $('#userAbout').val(user.about);
+    //add image to image tag in profile page
+    //check if user has an image
+    if(user.imgUrl === ""){
+        $('#img').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
+        $('#img2').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
+    }else{
+    $('#img').attr('src', user.imgUrl);
+    $('#img2').attr('src', user.imgUrl);
+    }
+});
 
 
         //getusers collection
