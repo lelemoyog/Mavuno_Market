@@ -1,6 +1,6 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, setDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User, } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -110,10 +110,9 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
       imgUrl: user.imgUrl
     };
 
+    var docRef = doc(db, "users", user.uid);
 
-
-    addDoc(collection(db, "users"), userObj)
-      .then((docRef) => {
+    setDoc(docRef, userObj).then((docRef) => {
         // showSuccessAlert();
         document.getElementById('error').innerHTML = 'User created successfully';
         document.getElementById('error').style.color = 'green';
