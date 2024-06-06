@@ -144,7 +144,7 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     $('#spinner').addClass('show');
     //prevent the default form submission
     event.preventDefault();
-    //check if the pass and re_pass match 
+    //check if the pass and re_pass match
     var email = document.getElementById('email').value;
     var name = document.getElementById('name').value;
     var pass = document.getElementById('pass').value;
