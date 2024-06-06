@@ -47,17 +47,37 @@ getDocs(collection(db, "users")).then(docSnap => {
     let user = users.find(user => user.uid === uid);
     console.log(user);
     //display the user info in the profile page
-    $('#userName').text(user.name);
-    $('#profileUserName').text(user.name);
+    var jina = getInitials(user.name);
+    $('#userName').text(jina);
+    $('.profileUserName').text(user.name);
     $('#profileUserEmail').text(user.email);
     $('#profileLocation').text(user.location);
     $('#profileCategory').text(user.accesslevel);
+
+   
 
 })
 
 });
 
     
+function getInitials(names) {
+    // Split the names string into an array
+    var nameArray = names.split(' ');
+  
+    // Initialize an empty string for the initials
+    var initials = '';
+  
+    // Loop through the name array
+    for (var i = 0; i < nameArray.length; i++) {
+      // Add the first letter of each name to the initials string
+      initials += nameArray[i].charAt(0).toUpperCase();
+    }
+  
+    // Return the initials
+    return initials;
+  }
+
     // Fixed Navbar
     $(window).scroll(function () {
         if ($(window).width() < 992) {

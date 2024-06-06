@@ -1,6 +1,6 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot,setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User, } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -21,7 +21,6 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const analytics = getAnalytics(app);
- 
 
 
   //to give you context this is the signup.js file that is used to handle the signup form
@@ -84,10 +83,11 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
         //show an error alert
         document.getElementById('error').innerHTML = errorCode;
         document.getElementById('error').style.color = 'red';
-    
+
+        $('#signup2').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
+        $('#signup1').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
+
       });
-
-
   }
 
   function saveUser(uid, name, email) {
@@ -95,8 +95,9 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     // ...
     var accesslevel = $('#account').val();
     var location = $('#location').val();
-    const user = new User(uid, name, email,accesslevel, location);
-   
+    var imgUrl = "";
+    const user = new User(uid, name, email, accesslevel, location, about, imgUrl);
+
 
     //conver to plain js object
     const userObj = {
@@ -104,12 +105,14 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
       name: user.name,
       email: user.email,
       accesslevel: user.accesslevel,
-      location: user.location
+      location: user.location,
+      about: user.about,
+      imgUrl: user.imgUrl
     };
 
-   
 
-    addDoc(collection(db, "users"),userObj)
+
+    addDoc(collection(db, "users"), userObj)
       .then((docRef) => {
         // showSuccessAlert();
         document.getElementById('error').innerHTML = 'User created successfully';
@@ -148,8 +151,8 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     var pass = document.getElementById('pass').value;
     var re_pass = document.getElementById('re_pass').value;
 
-     // check if the email is valid and if the password is at least 6 characters and no field is empty
-     if (email == "" || pass == "" || name == "") {
+    // check if the email is valid and if the password is at least 6 characters and no field is empty
+    if (email == "" || pass == "" || name == "") {
       document.getElementById('error').innerHTML = 'All fields are required';
       document.getElementById('error').style.color = 'red';
       $('#spinner').removeClass('show');
@@ -169,15 +172,22 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
   });
 
 
-$("#vendor").click(function () {
-  var accountType = "vendor";
-  $('#account').val(accountType);
-  $('#vendor').css('background-color', 'lightgray');
-});
-$("#farmer").click(function () {
-  var accountType = "farmer";
-  $('#account').val(accountType);
-  $('#farmer').css('background-color', 'lightgray');
-});
+  var about = ""; // Declare and initialize the 'about' variable
+
+  $("#vendor").click(function () {
+    var accountType = "vendor";
+    about = "I am a vendor at Mavuno Market";
+    $('#account').val(accountType);
+    $('#vendor').css('background-color', 'lightgray');
+    $('#farmer').css('background-color', 'white');
+  });
+
+  $("#farmer").click(function () {
+    var accountType = "farmer";
+    about = "I am a farmer at Mavuno Market";
+    $('#account').val(accountType);
+    $('#farmer').css('background-color', 'lightgray');
+    $('#vendor').css('background-color', 'white');
+  });
 
 })(jQuery);
