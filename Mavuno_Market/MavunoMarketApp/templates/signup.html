@@ -20,12 +20,12 @@
         <!-- Libraries Stylesheet -->
         <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
         <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-        
+
           <!-- FILEPATH: /c:/Users/Administrator/Documents/Comp tech 2.2/Mavuno-Market/Mavuno_Market/MavunoMarketApp/templates/signup.html -->
           <!-- BEGIN: ed8c6549bwf9 -->
           <!-- Add the necessary CSS and JavaScript dependencies for Bootstrap modal -->
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha512-..." crossorigin="anonymous">
-          
+
 
 
         <!-- Customized Bootstrap Stylesheet -->
@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-  
+
     <!-- Sign up form -->
     <section class="signup" id="signup1">
         <div class="container">
@@ -114,34 +114,37 @@
     <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
   </symbol>
 </svg>
-    
+
     <section class="signup" style="display: none;" id="signup2">
       <div class="container">
         <div class="signup-content">
           <div class="">
             <h2 class="form-title">What would you be doing in the plartform?</h2>
-            
+
             <!-- create 3 bootstrap cards with the words, vendor, farmer, and transporter, one word per card -->
             <div class="row">
-              <div class="card col-md-4 mb-3" style="margin:30px;"><style>
+              <div class="card col-md-4 mb-3" id="vendor" style="margin:30px;">
+              <style>
                 .card:hover {
                   background-color: lightgray; /* Change the background color to lightgray on hover */
                 }
               </style>
+
+              <input type="text" id="account" style="display: none;">
               
-                <div class="card-body">
+                <div class="card-body" >
                   <h5 class="card-title">Vendor</h5>
                   <p class="card-text">A person or company offering something for sale, especially a trader in the street.</p>
                 </div>
               </div>
-              <div class="card col-md-4 mb-3" style="margin:30px;">
+              <div class="card col-md-4 mb-3"  id="farmer" style="margin:30px;">
                 <div class="card-body">
                   <h5 class="card-title">Farmer</h5>
                   <p class="card-text">A person who owns or manages a farm.</p>
                 </div>
               </div>
               <h2 class="form-title">What is your location?</h2>
-              <select class="form-control">
+              <select class="form-control" id="location">
                 <option selected>Select County</option>
                 <option>Nairobi</option>
                 <option>Mombasa</option>
@@ -196,12 +199,12 @@
                 <option>Kisumu</option>
                 <option>Narok</option>
               </select>
-              
+
               <div class="form-group form-button">
-                <button type="button" name="signup" id="previous" onclick="showPreviousAlert()" class="form-submit">
+                <button type="button" name="signup" id="previous"  class="form-submit">
                   Previous
                 </button>
-                <button type="button" name="signup" id="next" onclick="showSuccessAlert()" class="form-submit" style="float: right;">
+                <button type="button" name="signup" id="next"  class="form-submit" style="float: right;">
                   Next
                 </button>
               </div>

@@ -1,5 +1,26 @@
+import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { User } from "/static/js/classes.js";
+import { firebaseConfig } from "/static/js/firebaseSDK.js";
+
+//import auth from firebase
+import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 (function ($) {
-    "use strict";
+  "use strict";
+  // Import the functions you need from the SDKs you need
+
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const analytics = getAnalytics(app);
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -10,6 +31,75 @@
     };
     spinner(0);
 
+
+//query sign in user form users collection using id from local storage
+$("document").ready(function () {
+var uid = localStorage.getItem('uid');
+
+//getuser document
+const userDoc = doc(db, "users", uid);
+//get the user document
+getDoc(userDoc).then(docSnap => {
+    let user = docSnap.data();
+    console.log(user);
+    //display the user info in the profile page
+    var jina = getInitials(user.name);
+    $('#userName').text(jina);
+    $('#userN').val(user.name);
+    $('.profileUserName').text(user.name);
+    $('#profileUserEmail').text(user.email);
+    $('#userEmail').val(user.email);
+    $('#profileLocation').text(user.location);
+    $('#userLocation').val(user.location);
+    $('#profileCategory').text(user.accesslevel);
+    $('#userAbout').val(user.about);
+    //add image to image tag in profile page
+    $('#img').attr('src', user.imgUrl);
+    $('#img2').attr('src', user.imgUrl);
+});
+
+
+//getusers collection
+// getDocs(collection(db, "users")).then(docSnap => {
+//     let users = [];
+//     docSnap.forEach(doc => {
+//         users.push(doc.data());
+//     });
+
+//     //get the user with the id from local storage
+//     let user = users.find(user => user.uid === uid);
+//     console.log(user);
+//     //display the user info in the profile page
+//     var jina = getInitials(user.name);
+//     $('#userName').text(jina);
+//     $('.profileUserName').text(user.name);
+//     $('#profileUserEmail').text(user.email);
+//     $('#profileLocation').text(user.location);
+//     $('#profileCategory').text(user.accesslevel);
+
+   
+
+// })
+
+});
+
+    
+function getInitials(names) {
+    // Split the names string into an array
+    var nameArray = names.split(' ');
+  
+    // Initialize an empty string for the initials
+    var initials = '';
+  
+    // Loop through the name array
+    for (var i = 0; i < nameArray.length; i++) {
+      // Add the first letter of each name to the initials string
+      initials += nameArray[i].charAt(0).toUpperCase();
+    }
+  
+    // Return the initials
+    return initials;
+  }
 
     // Fixed Navbar
     $(window).scroll(function () {
@@ -146,7 +236,6 @@
         button.parent().parent().find('input').val(newVal);
     });
 
-    
     // <!--Location Picker Form using google map api and bootstrap modal-->
     // <!--https://www.codecheef.org/article/location-picker-form-using-google-map-api-and-bootstrap-modal-->
     // <!--https://developers.google.com/maps/documentation/javascript/get-api-key-->

@@ -31,6 +31,13 @@ body {
 }
 /*** Spinner End ***/
 
+/* profile photo */
+#img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
 
 /*** Button Start ***/
 .btn {

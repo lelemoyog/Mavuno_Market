@@ -42,6 +42,8 @@ $("#logOut").click(function (event) {
   getAuth().signOut().then(() => {
     // Sign-out successful.
     console.log('Sign-out successful');
+    //remove user from local storage
+    localStorage.removeItem('uid');
     window.location.href = "/signin/";
   }).catch((error) => {
     // An error happened.
