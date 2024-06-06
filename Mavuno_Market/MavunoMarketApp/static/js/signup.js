@@ -84,10 +84,11 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
         //show an error alert
         document.getElementById('error').innerHTML = errorCode;
         document.getElementById('error').style.color = 'red';
+        
+        $('#signup2').hide().css('right', '1000px').fadeOut(2000).animate({ left: '0' }, 800);
+        $('#signup3').hide().css('right', '1000px').fadeIn(2000).animate({ left: '0' }, 800);
     
       });
-
-
   }
 
   function saveUser(uid, name, email) {
