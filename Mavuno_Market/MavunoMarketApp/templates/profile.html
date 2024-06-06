@@ -416,12 +416,12 @@
         <div class="profile-nav col-md-3" style="padding-top: 150px;">
             <div class="panel">
                 <div class="user-heading round" >
-                    <a href="#">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt>
+                    <a>
+                        <img type="file" src="https://bootdey.com/img/Content/avatar/avatar3.png" id="img2">
                     </a>
                     <h1 style="color: #d2e3c3;" class="profileUserName"> </h1>
                     <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                            data-cfemail="e286879b86879ba2968a87a78f838b8ecc818d8f">[email&#160;protected]</a></p>
+                            data-cfemail="e286879b86879ba2968a87a78f838b8ecc818d8f"><input type="file"  class="form-control" class="form-control" id="photo"></a></p>
                 </div>
                 <ul class="nav nav-pills nav-stacked"
                 style="background-color: #d2e3c3; padding: 10px; margin-bottom: 10px; display: flex; gap: 30px; align-items: center; justify-content: flex-start;padding-left: 30px;">
@@ -508,30 +508,30 @@
                                     <form id="profileForm">
                                         <div class="mb-3">
                                             <label for="userName" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="userName" required>
+                                            <input type="text" class="form-control" id="userN" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="userLocation" class="form-label">Location</label>
                                             <input type="text" class="form-control" id="userLocation" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="userCategory" class="form-label">Category</label>
-                                            <input type="text" class="form-control" id="userCategory" required>
-                                        </div>
-                                        <div class="mb-3">
                                             <label for="userEmail" class="form-label">Email</label>
                                             <input type="email" class="form-control" id="userEmail" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="userPhone" class="form-label">Phone Number</label>
-                                            <input type="tel" class="form-control" id="userPhone" required>
+                                            <label for="userPhone" class="form-label">about</label>
+                                            <input type="tel" class="form-control" id="userAbout" required>
+                                        </div>
+                                        <div class="mb-3" style="display: none;">
+                                            <label for="userPhone" class="form-label"></label>
+                                            <input type="tel" class="form-control" id="photoUrl" required>
                                         </div>
                                     </form>
                                 </div>
             
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="submit" form="profileForm" class="btn btn-primary">Submit</button>
+                                    <button type="button" id="updateBtn" form="profileForm" class="btn btn-primary">update</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                 </div>
             

@@ -36,27 +36,50 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
 $("document").ready(function () {
 var uid = localStorage.getItem('uid');
 
-//getusers collection
-getDocs(collection(db, "users")).then(docSnap => {
-    let users = [];
-    docSnap.forEach(doc => {
-        users.push(doc.data());
-    });
-
-    //get the user with the id from local storage
-    let user = users.find(user => user.uid === uid);
+//getuser document
+const userDoc = doc(db, "users", uid);
+//get the user document
+getDoc(userDoc).then(docSnap => {
+    let user = docSnap.data();
     console.log(user);
     //display the user info in the profile page
     var jina = getInitials(user.name);
     $('#userName').text(jina);
+    $('#userN').val(user.name);
     $('.profileUserName').text(user.name);
     $('#profileUserEmail').text(user.email);
+    $('#userEmail').val(user.email);
     $('#profileLocation').text(user.location);
+    $('#userLocation').val(user.location);
     $('#profileCategory').text(user.accesslevel);
+    $('#userAbout').val(user.about);
+    //add image to image tag in profile page
+    $('#img').attr('src', user.imgUrl);
+    $('#img2').attr('src', user.imgUrl);
+});
+
+
+//getusers collection
+// getDocs(collection(db, "users")).then(docSnap => {
+//     let users = [];
+//     docSnap.forEach(doc => {
+//         users.push(doc.data());
+//     });
+
+//     //get the user with the id from local storage
+//     let user = users.find(user => user.uid === uid);
+//     console.log(user);
+//     //display the user info in the profile page
+//     var jina = getInitials(user.name);
+//     $('#userName').text(jina);
+//     $('.profileUserName').text(user.name);
+//     $('#profileUserEmail').text(user.email);
+//     $('#profileLocation').text(user.location);
+//     $('#profileCategory').text(user.accesslevel);
 
    
 
-})
+// })
 
 });
 
