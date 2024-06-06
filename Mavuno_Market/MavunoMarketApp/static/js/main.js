@@ -5,22 +5,22 @@ import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
 //import auth from firebase
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 (function ($) {
-    "use strict";
-    // Import the functions you need from the SDKs you need
+  "use strict";
+  // Import the functions you need from the SDKs you need
 
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const analytics = getAnalytics(app);
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const analytics = getAnalytics(app);
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -32,9 +32,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     spinner(0);
 
 
-    //query sign in user form users collection using id from local storage
-    $("document").ready(function () {
-        var uid = localStorage.getItem('uid');
+//query sign in user form users collection using id from local storage
+$("document").ready(function () {
+var uid = localStorage.getItem('uid');
 
 //getuser document
 const userDoc = doc(db, "users", uid);
@@ -65,47 +65,47 @@ getDoc(userDoc).then(docSnap => {
 });
 
 
-        //getusers collection
-        // getDocs(collection(db, "users")).then(docSnap => {
-        //     let users = [];
-        //     docSnap.forEach(doc => {
-        //         users.push(doc.data());
-        //     });
+//getusers collection
+// getDocs(collection(db, "users")).then(docSnap => {
+//     let users = [];
+//     docSnap.forEach(doc => {
+//         users.push(doc.data());
+//     });
 
-        //     //get the user with the id from local storage
-        //     let user = users.find(user => user.uid === uid);
-        //     console.log(user);
-        //     //display the user info in the profile page
-        //     var jina = getInitials(user.name);
-        //     $('#userName').text(jina);
-        //     $('.profileUserName').text(user.name);
-        //     $('#profileUserEmail').text(user.email);
-        //     $('#profileLocation').text(user.location);
-        //     $('#profileCategory').text(user.accesslevel);
+//     //get the user with the id from local storage
+//     let user = users.find(user => user.uid === uid);
+//     console.log(user);
+//     //display the user info in the profile page
+//     var jina = getInitials(user.name);
+//     $('#userName').text(jina);
+//     $('.profileUserName').text(user.name);
+//     $('#profileUserEmail').text(user.email);
+//     $('#profileLocation').text(user.location);
+//     $('#profileCategory').text(user.accesslevel);
 
+   
 
+// })
 
-        // })
+});
 
-    });
-
-
-    function getInitials(names) {
-        // Split the names string into an array
-        var nameArray = names.split(' ');
-
-        // Initialize an empty string for the initials
-        var initials = '';
-
-        // Loop through the name array
-        for (var i = 0; i < nameArray.length; i++) {
-            // Add the first letter of each name to the initials string
-            initials += nameArray[i].charAt(0).toUpperCase();
-        }
-
-        // Return the initials
-        return initials;
+    
+function getInitials(names) {
+    // Split the names string into an array
+    var nameArray = names.split(' ');
+  
+    // Initialize an empty string for the initials
+    var initials = '';
+  
+    // Loop through the name array
+    for (var i = 0; i < nameArray.length; i++) {
+      // Add the first letter of each name to the initials string
+      initials += nameArray[i].charAt(0).toUpperCase();
     }
+  
+    // Return the initials
+    return initials;
+  }
 
     // Fixed Navbar
     $(window).scroll(function () {
