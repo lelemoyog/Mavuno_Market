@@ -213,7 +213,6 @@ function getInitials(names) {
         button.parent().parent().find('input').val(newVal);
     });
 
-    
     // <!--Location Picker Form using google map api and bootstrap modal-->
     // <!--https://www.codecheef.org/article/location-picker-form-using-google-map-api-and-bootstrap-modal-->
     // <!--https://developers.google.com/maps/documentation/javascript/get-api-key-->

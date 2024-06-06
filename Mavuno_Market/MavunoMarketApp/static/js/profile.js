@@ -22,7 +22,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
   const db = getFirestore(app);
 
 
-//edit user 
+//edit user
 
 
 
