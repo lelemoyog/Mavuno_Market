@@ -42,6 +42,8 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
       .then((url) => {
         console.log(url);
         document.getElementById("photoUrl").value = url;
+        //add local storage
+        localStorage.setItem('photoUrl', url);
         updateUser(url);
       })
       .catch(console.error);
@@ -50,7 +52,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
 
 //update user
 $('#updateBtn').click(function(){
-  var url = $('#photoUrl').val();
+  var url = localStorage.getItem('photoUrl');
     updateUser(url);
     alert('Profile Updated');
 });

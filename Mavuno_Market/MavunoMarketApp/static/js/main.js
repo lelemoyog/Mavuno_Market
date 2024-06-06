@@ -54,8 +54,14 @@ getDoc(userDoc).then(docSnap => {
     $('#profileCategory').text(user.accesslevel);
     $('#userAbout').val(user.about);
     //add image to image tag in profile page
+    //check if user has an image
+    if(user.imgUrl === ""){
+        $('#img').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
+        $('#img2').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
+    }else{
     $('#img').attr('src', user.imgUrl);
     $('#img2').attr('src', user.imgUrl);
+    }
 });
 
 
