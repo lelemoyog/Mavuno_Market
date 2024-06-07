@@ -35,3 +35,5 @@ def profile(request):
 def vendor(request):
     return render(request, 'vendor.html')
 
+def testimonial(request):
+    return render(request, 'testimonial.html')
