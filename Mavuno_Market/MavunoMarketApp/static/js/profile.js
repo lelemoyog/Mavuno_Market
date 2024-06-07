@@ -24,10 +24,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   const db = getFirestore(app);
   const storage = getStorage(app);
 
-  document.getElementById('photo').onchange = function () {
+  $('#photo').change(function () {
     // fire the upload here
     uploadImage();
-  };
+  });
 
   function uploadImage() {
     const storageRef = ref(storage, 'images');
@@ -55,8 +55,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   });
 
   function uploadProductImage() {
-    const storageRef = ref(storage, 'products');
     const file = document.querySelector("#productPhoto").files[0];
+     //get the file name
+    const fileName = file.name;
+     const storageRef = ref(storage, fileName);
     const metadata = {
       contentType: file.type,
     };
