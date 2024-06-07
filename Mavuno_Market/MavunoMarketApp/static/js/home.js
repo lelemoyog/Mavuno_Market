@@ -1,6 +1,6 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -70,7 +70,7 @@ $("#logOut").click(function (event) {
 
 function fetchProducts(){
   clearBox();
-  getDocs(collection(db, "products")).then(docSnap => {
+  getDocs(query(collection(db, "products"), limit(6))).then(docSnap => {
     let Products = [];
     docSnap.forEach((doc) => {
       Products.push({ ...doc.data(), id: doc.id })
@@ -144,11 +144,254 @@ function fetchProducts(){
   });
 }
 
+//create function fetchProducts2 to fetch products from firebase filter by category the product holder id is productHolder2, use the query function to query only products with the category fruits
+
+function fetchProducts2(){
+  //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
+  clearBox();
+
+  getDocs(query(collection(db, "products"),  where("category", "==", "fruits"), limit(6))).then(docSnap => {
+    let Products = [];
+    docSnap.forEach((doc) => {
+      Products.push({ ...doc.data(), id: doc.id })
+    });
+    console.log("Document2 data:", Products);
+    let goods = Products.length;
+    console.log(Products);
+    const veiwGoods = document.querySelector("#productHolder2");
+   
+    for (let i = 0; i < goods; i++) {
+      var name  = Products[i]['name'];
+      var price = Products[i]['price'];
+      var category = Products[i]['category'];
+      var imgUrl = Products[i]['imgUrl'];
+      var id = Products[i]['id'];
+      
+      var product = document.createElement("div");
+      product.className = "col-md-6 col-lg-4 col-xl-3";
+      
+      var fruiteItem = document.createElement("div");
+      fruiteItem.className = "rounded position-relative fruite-item";
+
+      var fruiteImg = document.createElement("div");
+      fruiteImg.className = "fruite-img";
+
+      var img = document.createElement("img");
+      img.src = imgUrl;
+      img.className = "img-fluid w-100 rounded-top";
+      img.alt = name;
+
+      var textWhite = document.createElement("div");
+      textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
+      textWhite.style.top = "10px";
+      textWhite.style.left = "10px";
+      textWhite.innerHTML = category;
+
+      var border = document.createElement("div");
+      border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+
+      var h4 = document.createElement("h4");
+      h4.innerHTML = name;
+
+      var dFlex = document.createElement("div");
+      dFlex.className = "d-flex justify-content-between flex-lg-wrap";
+
+      var p = document.createElement("p");
+      p.className = "text-dark fs-5 fw-bold mb-0";
+      p.innerHTML = `Ksh ${price} / kg`;
+
+      var a = document.createElement("a");
+      a.href = "#";
+      a.className = "btn border border-secondary rounded-pill px-3 text-primary";
+      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+
+      a.addEventListener('click', function(){
+        localStorage.setItem('productId', id);
+        window.location.href = "/product/";
+      });
+
+      veiwGoods.appendChild(product);
+      product.appendChild(fruiteItem);
+      fruiteItem.appendChild(fruiteImg);
+      fruiteImg.appendChild(img);
+      fruiteItem.appendChild(textWhite);
+      fruiteItem.appendChild(border);
+      border.appendChild(h4);
+      border.appendChild(dFlex);
+      dFlex.appendChild(p);
+      dFlex.appendChild(a);
+    }
+  });
+}
+
+function fetchProducts3(){
+  //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
+  clearBox();
+
+  getDocs(query(collection(db, "products"),  where("category", "==", "vegetable"), limit(6))).then(docSnap => {
+    let Products = [];
+    docSnap.forEach((doc) => {
+      Products.push({ ...doc.data(), id: doc.id })
+    });
+    console.log("Document3 data:", Products);
+    let goods = Products.length;
+    console.log(Products);
+    const veiwGoods = document.querySelector("#productHolder3");
+   
+    for (let i = 0; i < goods; i++) {
+      var name  = Products[i]['name'];
+      var price = Products[i]['price'];
+      var category = Products[i]['category'];
+      var imgUrl = Products[i]['imgUrl'];
+      var id = Products[i]['id'];
+      
+      var product = document.createElement("div");
+      product.className = "col-md-6 col-lg-4 col-xl-3";
+      
+      var fruiteItem = document.createElement("div");
+      fruiteItem.className = "rounded position-relative fruite-item";
+
+      var fruiteImg = document.createElement("div");
+      fruiteImg.className = "fruite-img";
+
+      var img = document.createElement("img");
+      img.src = imgUrl;
+      img.className = "img-fluid w-100 rounded-top";
+      img.alt = name;
+
+      var textWhite = document.createElement("div");
+      textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
+      textWhite.style.top = "10px";
+      textWhite.style.left = "10px";
+      textWhite.innerHTML = category;
+
+      var border = document.createElement("div");
+      border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+
+      var h4 = document.createElement("h4");
+      h4.innerHTML = name;
+
+      var dFlex = document.createElement("div");
+      dFlex.className = "d-flex justify-content-between flex-lg-wrap";
+
+      var p = document.createElement("p");
+      p.className = "text-dark fs-5 fw-bold mb-0";
+      p.innerHTML = `Ksh ${price} / kg`;
+
+      var a = document.createElement("a");
+      a.href = "#";
+      a.className = "btn border border-secondary rounded-pill px-3 text-primary";
+      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+
+      a.addEventListener('click', function(){
+        localStorage.setItem('productId', id);
+        window.location.href = "/product/";
+      });
+
+      veiwGoods.appendChild(product);
+      product.appendChild(fruiteItem);
+      fruiteItem.appendChild(fruiteImg);
+      fruiteImg.appendChild(img);
+      fruiteItem.appendChild(textWhite);
+      fruiteItem.appendChild(border);
+      border.appendChild(h4);
+      border.appendChild(dFlex);
+      dFlex.appendChild(p);
+      dFlex.appendChild(a);
+    }
+  });
+}
+
+function fetchProducts4(){
+  //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
+  clearBox();
+
+  getDocs(query(collection(db, "products"),  where("category", "==", "cereals"), limit(6))).then(docSnap => {
+    let Products = [];
+    docSnap.forEach((doc) => {
+      Products.push({ ...doc.data(), id: doc.id })
+    });
+    console.log("Document4 data:", Products);
+    let goods = Products.length;
+    console.log(Products);
+    const veiwGoods = document.querySelector("#productHolder4");
+   
+    for (let i = 0; i < goods; i++) {
+      var name  = Products[i]['name'];
+      var price = Products[i]['price'];
+      var category = Products[i]['category'];
+      var imgUrl = Products[i]['imgUrl'];
+      var id = Products[i]['id'];
+      
+      var product = document.createElement("div");
+      product.className = "col-md-6 col-lg-4 col-xl-3";
+      
+      var fruiteItem = document.createElement("div");
+      fruiteItem.className = "rounded position-relative fruite-item";
+
+      var fruiteImg = document.createElement("div");
+      fruiteImg.className = "fruite-img";
+
+      var img = document.createElement("img");
+      img.src = imgUrl;
+      img.className = "img-fluid w-100 rounded-top";
+      img.alt = name;
+
+      var textWhite = document.createElement("div");
+      textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
+      textWhite.style.top = "10px";
+      textWhite.style.left = "10px";
+      textWhite.innerHTML = category;
+
+      var border = document.createElement("div");
+      border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+
+      var h4 = document.createElement("h4");
+      h4.innerHTML = name;
+
+      var dFlex = document.createElement("div");
+      dFlex.className = "d-flex justify-content-between flex-lg-wrap";
+
+      var p = document.createElement("p");
+      p.className = "text-dark fs-5 fw-bold mb-0";
+      p.innerHTML = `Ksh ${price} / kg`;
+
+      var a = document.createElement("a");
+      a.href = "#";
+      a.className = "btn border border-secondary rounded-pill px-3 text-primary";
+      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+
+      a.addEventListener('click', function(){
+        localStorage.setItem('productId', id);
+        window.location.href = "/product/";
+      });
+
+      veiwGoods.appendChild(product);
+      product.appendChild(fruiteItem);
+      fruiteItem.appendChild(fruiteImg);
+      fruiteImg.appendChild(img);
+      fruiteItem.appendChild(textWhite);
+      fruiteItem.appendChild(border);
+      border.appendChild(h4);
+      border.appendChild(dFlex);
+      dFlex.appendChild(p);
+      dFlex.appendChild(a);
+    }
+  });
+}
+
+
 function clearBox()
 {
   document.getElementById('productHolder').innerHTML = "";
+  document.getElementById('productHolder2').innerHTML = "";
+  document.getElementById('productHolder3').innerHTML = "";
+  document.getElementById('productHolder4').innerHTML = "";
 }
 
 fetchProducts();
+fetchProducts2();
+fetchProducts3();
+fetchProducts4();
 
 })(jQuery);
