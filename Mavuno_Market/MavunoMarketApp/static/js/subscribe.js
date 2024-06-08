@@ -23,34 +23,34 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
   const analytics = getAnalytics(app);
 
 
+  $(document).ready(function() {
+    $('#email-inputBtn').click(function() {
+        var email = $('#email-input').val();
 
-  $('#email-inputBtn').click(function (){
-    const app = initializeApp(firebaseConfig);
+        if (email) {
+            // Create a reference to the collection where you want to add the document
+            const myCollection = db.collection("Emails");
 
-    // Get a reference to the Firestore database
-    const db = getFirestore(app);
+            // Prepare the data for the new document
+            const newDocumentData = {
+                email: email
+            };
 
-    var email = $('email-input').val();
-    
-    // Create a reference to the collection where you want to add the document
-    const myCollection = collection(db, "Emails");
-    
-    // Prepare the data for the new document
-    const newDocumentData = {
-      id: email
-     
-    };
-    
-    // Add the document to the collection
-    addDoc(myCollection, newDocumentData)
-      .then((docRef) => {
-        console.log("Document added with ID:", docRef.id);
-      })
-      .catch((error) => {
-        console.error("Error adding document:", error);
-      }); 
-
-  });
-
-
-})(jQuery);
+            // Add the document to the collection
+            myCollection.add(newDocumentData)
+                .then((docRef) => {
+                    console.log("Document added with ID:", docRef.id);
+                    alert('Subscription successful!');
+                    // Clear the input field
+                    $('#email-input').val('');
+                })
+                .catch((error) => {
+                    console.error("Error adding document:", error);
+                    alert('Error: ' + error.message);
+                });
+        } else {
+            alert('Please enter a valid email address.');
+        }
+    });
+});
+});
