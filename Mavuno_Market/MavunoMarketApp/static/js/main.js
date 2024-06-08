@@ -34,6 +34,15 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
 
 //query sign in user form users collection using id from local storage
 $("document").ready(function () {
+    getAuth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+         
+        } else {
+          // No user is signed in.
+          $('#img').show();
+        }
+      });
 var uid = localStorage.getItem('uid');
 //getuser document
 const userDoc = doc(db, "users", uid);
@@ -73,6 +82,8 @@ getDoc(userDoc).then(docSnap => {
         $('#img2').attr('src', user.imgUrl);
     }
 });
+
+
 
 
 //getusers collection
