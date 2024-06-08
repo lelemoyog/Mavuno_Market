@@ -119,6 +119,7 @@ function fetchProducts(){
 
       var h6 = document.createElement("h6");
       h6.innerHTML = id;
+      h6.style.display = "none";
 
       var dFlex = document.createElement("div");
       dFlex.className = "d-flex justify-content-between flex-lg-wrap";
