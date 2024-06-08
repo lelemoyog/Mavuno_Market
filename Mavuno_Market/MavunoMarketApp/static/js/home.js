@@ -68,9 +68,11 @@ $("#logOut").click(function (event) {
 </div>
 </div> */}
 
+var id;
+
 function fetchProducts(){
   clearBox();
-  getDocs(query(collection(db, "products"), limit(6))).then(docSnap => {
+  getDocs(query(collection(db, "products"), limit(12))).then(docSnap => {
     let Products = [];
     docSnap.forEach((doc) => {
       Products.push({ ...doc.data(), id: doc.id })
@@ -85,7 +87,7 @@ function fetchProducts(){
       var price = Products[i]['price'];
       var category = Products[i]['category'];
       var imgUrl = Products[i]['imgUrl'];
-      var id = Products[i]['id'];
+      id = Products[i]['id'];
       
       var product = document.createElement("div");
       product.className = "col-md-6 col-lg-4 col-xl-3";
@@ -101,6 +103,8 @@ function fetchProducts(){
       img.className = "img-fluid w-100 rounded-top";
       img.alt = name;
 
+      
+
       var textWhite = document.createElement("div");
       textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
       textWhite.style.top = "10px";
@@ -112,6 +116,9 @@ function fetchProducts(){
 
       var h4 = document.createElement("h4");
       h4.innerHTML = name;
+
+      var h6 = document.createElement("h6");
+      h6.innerHTML = id;
 
       var dFlex = document.createElement("div");
       dFlex.className = "d-flex justify-content-between flex-lg-wrap";
@@ -125,10 +132,7 @@ function fetchProducts(){
       a.className = "btn border border-secondary rounded-pill px-3 text-primary";
       a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
 
-      a.addEventListener('click', function(){
-        localStorage.setItem('productId', id);
-        window.location.href = "/product/";
-      });
+      
 
       veiwGoods.appendChild(product);
       product.appendChild(fruiteItem);
@@ -137,9 +141,25 @@ function fetchProducts(){
       fruiteItem.appendChild(textWhite);
       fruiteItem.appendChild(border);
       border.appendChild(h4);
+      border.appendChild(h6);
       border.appendChild(dFlex);
       dFlex.appendChild(p);
       dFlex.appendChild(a);
+
+      // Add event listener to the button
+      for (let i = 0; i < goods; i++) {
+        // ... existing code ...
+
+        (function(id, name) {
+          a.addEventListener('click', function() {
+            localStorage.setItem('productId', id);
+            console.log(name);
+            window.location.href = "/description/";
+          });
+        })(id, name);
+      }
+
+
     }
   });
 }
@@ -205,11 +225,6 @@ function fetchProducts2(){
       a.className = "btn border border-secondary rounded-pill px-3 text-primary";
       a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
 
-      a.addEventListener('click', function(){
-        localStorage.setItem('productId', id);
-        window.location.href = "/product/";
-      });
-
       veiwGoods.appendChild(product);
       product.appendChild(fruiteItem);
       fruiteItem.appendChild(fruiteImg);
@@ -220,6 +235,19 @@ function fetchProducts2(){
       border.appendChild(dFlex);
       dFlex.appendChild(p);
       dFlex.appendChild(a);
+
+      for (let i = 0; i < goods; i++) {
+        // ... existing code ...
+
+        (function(id, name) {
+          a.addEventListener('click', function() {
+            localStorage.setItem('productId', id);
+            console.log(name);
+            window.location.href = "/description/";
+          });
+        })(id, name);
+      }
+
     }
   });
 }
@@ -283,11 +311,6 @@ function fetchProducts3(){
       a.className = "btn border border-secondary rounded-pill px-3 text-primary";
       a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
 
-      a.addEventListener('click', function(){
-        localStorage.setItem('productId', id);
-        window.location.href = "/product/";
-      });
-
       veiwGoods.appendChild(product);
       product.appendChild(fruiteItem);
       fruiteItem.appendChild(fruiteImg);
@@ -298,6 +321,19 @@ function fetchProducts3(){
       border.appendChild(dFlex);
       dFlex.appendChild(p);
       dFlex.appendChild(a);
+
+      for (let i = 0; i < goods; i++) {
+        // ... existing code ...
+
+        (function(id, name) {
+          a.addEventListener('click', function() {
+            localStorage.setItem('productId', id);
+            console.log(name);
+            window.location.href = "/description/";
+          });
+        })(id, name);
+      }
+
     }
   });
 }
@@ -361,10 +397,7 @@ function fetchProducts4(){
       a.className = "btn border border-secondary rounded-pill px-3 text-primary";
       a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
 
-      a.addEventListener('click', function(){
-        localStorage.setItem('productId', id);
-        window.location.href = "/product/";
-      });
+     
 
       veiwGoods.appendChild(product);
       product.appendChild(fruiteItem);
@@ -376,6 +409,18 @@ function fetchProducts4(){
       border.appendChild(dFlex);
       dFlex.appendChild(p);
       dFlex.appendChild(a);
+      for (let i = 0; i < goods; i++) {
+        // ... existing code ...
+
+        (function(id, name) {
+          a.addEventListener('click', function() {
+            localStorage.setItem('productId', id);
+            console.log(name);
+            window.location.href = "/description/";
+          });
+        })(id, name);
+      }
+
     }
   });
 }
@@ -383,10 +428,23 @@ function fetchProducts4(){
 
 function clearBox()
 {
-  document.getElementById('productHolder').innerHTML = "";
-  document.getElementById('productHolder2').innerHTML = "";
-  document.getElementById('productHolder3').innerHTML = "";
-  document.getElementById('productHolder4').innerHTML = "";
+  const productHolder = document.getElementById('productHolder');
+  const productHolder2 = document.getElementById('productHolder2');
+  const productHolder3 = document.getElementById('productHolder3');
+  const productHolder4 = document.getElementById('productHolder4');
+
+  if (productHolder) {
+    productHolder.innerHTML = " ";
+  }
+  if (productHolder2) {
+    productHolder2.innerHTML = " ";
+  }
+  if (productHolder3) {
+    productHolder3.innerHTML = " ";
+  }
+  if (productHolder4) {
+    productHolder4.innerHTML = " ";
+  }
 }
 
 fetchProducts();

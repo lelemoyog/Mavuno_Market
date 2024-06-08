@@ -55,12 +55,17 @@ getDoc(userDoc).then(docSnap => {
     $('#userAbout').val(user.about);
     //add image to image tag in profile page
     //check if user has an image
-    if(user.imgUrl === ""){
-        $('#img').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
+    if (user.imgUrl === "") {
+        //use bootstrap to show the span with the user initials
+        $('#userName').removeClass('d-none');
         $('#img2').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
-    }else{
-    $('#img').attr('src', user.imgUrl);
-    $('#img2').attr('src', user.imgUrl);
+    } else {
+        //hide the default image
+
+        //show the user image using show() method n jquery
+        $('#img').show();
+        $('#img').attr('src', user.imgUrl);
+        $('#img2').attr('src', user.imgUrl);
     }
 });
 

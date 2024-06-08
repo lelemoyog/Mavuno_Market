@@ -106,8 +106,8 @@
                             <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                         </a>
                         <a class="my-auto" id="profile">
-                            <img type="file" src="https://bootdey.com/img/Content/avatar/avatar3.png" id="img">
-                            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="width: 100px; " id="userName">sign-in</span>
+                            <img type="file" src="https://bootdey.com/img/Content/avatar/avatar3.png" id="img" style="display: none;">
+                            <span class="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1 d-none"   id="userName" style="width: 50px; height: 50px;"></span>
                         </a>
                     </div>
                 </div>
@@ -253,5 +253,6 @@
        <script type="module" src="{% static 'js/main.js' %}"></script>
          <script type="module" src="{% static 'js/home.js' %}"></script>
          <script type="module" src="{% static 'js/profile.js' %}"></script>
+            <script type="module" src="{% static 'js/description.js' %}"></script>
 </body>
 </html>

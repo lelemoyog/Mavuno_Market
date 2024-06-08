@@ -30,8 +30,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   });
 
   function uploadImage() {
-    const storageRef = ref(storage, 'images');
     const file = document.querySelector("#photo").files[0];
+    const fileName = file.name;
+    const storageRef = ref(storage, fileName);
     const metadata = {
       contentType: file.type,
     };
