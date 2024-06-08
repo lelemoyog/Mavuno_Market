@@ -106,7 +106,7 @@ function fetchProducts(){
       
 
       var textWhite = document.createElement("div");
-      textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
+      textWhite.className = "text-white bg-success px-3 py-1 rounded position-absolute";
       textWhite.style.top = "10px";
       textWhite.style.left = "10px";
       textWhite.innerHTML = category;
@@ -203,7 +203,7 @@ function fetchProducts2(){
       img.alt = name;
 
       var textWhite = document.createElement("div");
-      textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
+      textWhite.className = "text-white bg-success px-3 py-1 rounded position-absolute";
       textWhite.style.top = "10px";
       textWhite.style.left = "10px";
       textWhite.innerHTML = category;
@@ -289,7 +289,7 @@ function fetchProducts3(){
       img.alt = name;
 
       var textWhite = document.createElement("div");
-      textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
+      textWhite.className = "text-white bg-success px-3 py-1 rounded position-absolute";
       textWhite.style.top = "10px";
       textWhite.style.left = "10px";
       textWhite.innerHTML = category;
