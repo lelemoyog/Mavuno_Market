@@ -429,7 +429,7 @@
                     <span>
                         <!-- Button trigger modal -->
                         <button type="button" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3;"
-                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                            class="btn btn-primary" id="postBtn" data-bs-toggle="modal" data-bs-target="#myModal">
                             Post
                         </button>
                     </span>
@@ -461,7 +461,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="productCategory" class="form-label">Product Category</label>
-                                            <select class="form-control" id="productCategory" required>
+                                            <select class="form-control" id="postProductCategory" required>
+                                                <option value="vegetable" selected>Select product category</option>
                                                 <option value="vegetable">Vegetable</option>
                                                 <option value="fruits">Fruits</option>
                                                 <option value="cereals">Cereals</option>
@@ -565,7 +566,7 @@
 
             <div class="panel" style="margin-top: 150px;">
                 <div class="bio-graph-heading" style="font-size: large ;font-style: normal;font-weight: bolder;">
-                    Farmer Details
+                My Profile
                 </div>
                 <div class="panel-body bio-graph-info" style="font-size: large;">
                     <h1>Bio Graph</h1>
@@ -596,8 +597,9 @@
     <div class="posts">
         <h1 style="font-family: Arial, Helvetica, sans-serif;">My Products</h1>
         <div class="image-container">
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="row g-4" id="productHolder5">
+
+                <!-- <div class="col-md-6 col-lg-4 col-xl-3">
                     <div class="rounded position-relative fruite-item">
                         <div class="fruite-img">
                             <img src="{% static 'img/grapes.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
@@ -759,7 +761,7 @@
                             <p>from :1/12/24 to :01/01/25</p>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <!-- Add more images as needed -->
         </div>

@@ -35,7 +35,6 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
 //query sign in user form users collection using id from local storage
 $("document").ready(function () {
 var uid = localStorage.getItem('uid');
-
 //getuser document
 const userDoc = doc(db, "users", uid);
 //get the user document
@@ -54,6 +53,12 @@ getDoc(userDoc).then(docSnap => {
     $('#profileCategory').text(user.accesslevel);
     $('#userAbout').val(user.about);
     //add image to image tag in profile page
+    //check user category and hide the #postBtn if user is vendor
+    if (user.accesslevel === "vendor") {
+        $('#postBtn').hide();
+    }
+
+
     //check if user has an image
     if (user.imgUrl === "") {
         //use bootstrap to show the span with the user initials
