@@ -16,14 +16,14 @@
                     <div class="col-lg-6">
                         <div class="border rounded">
                             <a href="#">
-                                <img src="{% static 'img/single-item.jpg' %}" class="img-fluid rounded" alt="Image">
+                                <img src="{% static 'img/single-item.jpg' %}" id="productImage" class="img-fluid rounded" alt="Image" style="height: 500px; width: 100%;">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <h4 class="fw-bold mb-3">Brocoli</h4>
-                        <p class="mb-3">Category: Vegetables</p>
-                        <h5 class="fw-bold mb-3">3,35 $</h5>
+                        <h4 class="fw-bold mb-3" id="productName">Brocoli</h4>
+                        <p class="mb-3" id="productCategory">Category: Vegetables</p>
+                        <h5 class="fw-bold mb-3" id="productPrice">3,35 $</h5>
                         <div class="d-flex mb-4">
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star text-secondary"></i>
@@ -31,7 +31,7 @@
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <p class="mb-4">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
+                        <p class="mb-4" id="productDescription">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
                         <p class="mb-4">Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish</p>
                         <div class="input-group quantity mb-5" style="width: 100px;">
                             <div class="input-group-btn">
@@ -58,7 +58,7 @@
                         <div class="account-settings text-center">
                             <div class="user-profile">
                                 <div class="user-avatar">
-                                    <img class="i" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Maxwell Admin">
+                                    <img class="i" src="https://bootdey.com/img/Content/avatar/avatar1.png" id="descriptionFamerImg" alt="Maxwell Admin">
                                 </div>
                                 <style>
                                     .i{
@@ -67,10 +67,10 @@
                                         height: 200px; /* Reduced size */
                                     }
                                 </style>
-                                <h5 class="user-name">John Doe</h5>
+                                <h5 class="user-name" id="descriptionFamerName">John Doe</h5>
                                 <div class="about mt-4">
                                     <h5 class="mb-2 text-primary">About</h5>
-                                    <p>I'm John Doe, a farmer with a passion for growing healthy and organic vegetables.</p>
+                                    <p id="descriptionFamerAbout">I'm John Doe, a farmer with a passion for growing healthy and organic vegetables.</p>
                                 </div>
                             </div>
                         </div>

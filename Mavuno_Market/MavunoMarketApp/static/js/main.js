@@ -34,8 +34,16 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
 
 //query sign in user form users collection using id from local storage
 $("document").ready(function () {
+    getAuth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+         
+        } else {
+          // No user is signed in.
+          $('#img').show();
+        }
+      });
 var uid = localStorage.getItem('uid');
-
 //getuser document
 const userDoc = doc(db, "users", uid);
 //get the user document
@@ -54,15 +62,28 @@ getDoc(userDoc).then(docSnap => {
     $('#profileCategory').text(user.accesslevel);
     $('#userAbout').val(user.about);
     //add image to image tag in profile page
+    //check user category and hide the #postBtn if user is vendor
+    if (user.accesslevel === "vendor") {
+        $('#postBtn').hide();
+    }
+
+
     //check if user has an image
-    if(user.imgUrl === ""){
-        $('#img').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
+    if (user.imgUrl === "") {
+        //use bootstrap to show the span with the user initials
+        $('#userName').removeClass('d-none');
         $('#img2').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
-    }else{
-    $('#img').attr('src', user.imgUrl);
-    $('#img2').attr('src', user.imgUrl);
+    } else {
+        //hide the default image
+
+        //show the user image using show() method n jquery
+        $('#img').show();
+        $('#img').attr('src', user.imgUrl);
+        $('#img2').attr('src', user.imgUrl);
     }
 });
+
+
 
 
 //getusers collection
