@@ -62,8 +62,116 @@ $("#search").click(function (event) {
   var search = document.getElementById('searchInput').value;
   console.log(search);
   clearBox();
+  window.location.href = "#productHolder";
   //use firebase firestore search function to search for products with the name that matches the search input
 
+  getDocs(query(collection(db, "products"), where("name", "==", search), limit(8))).then(docSnap => {
+    let Products = [];
+    docSnap.forEach((doc) => {
+      Products.push({ ...doc.data(), id: doc.id })
+    });
+  
+    console.log("Document data:", Products);
+    let goods = Products.length;
+    console.log(Products);
+    const veiwGoods = document.querySelector("#productHolder");
+     // check if Products is empty
+     if (Products.length == 0) {
+      veiwGoods.innerHTML = "Please enter a valid product name ie Banana, Maize, etc";
+      //make it center and bigger
+      veiwGoods.style.textAlign = "center";
+      veiwGoods.style.fontSize = "3em";
+     }
+    for (let i = 0; i < goods; i++) {
+      var name  = Products[i]['name'];
+      var price = Products[i]['price'];
+      var category = Products[i]['category'];
+      var imgUrl = Products[i]['imgUrl'];
+      id = Products[i]['id'];
+      
+      var product = document.createElement("div");
+      product.className = "col-md-6 col-lg-4 col-xl-3";
+      
+      var fruiteItem = document.createElement("div");
+      fruiteItem.className = "rounded position-relative fruite-item";
+
+      var fruiteImg = document.createElement("div");
+      fruiteImg.className = "fruite-img";
+
+      var img = document.createElement("img");
+      img.src = imgUrl;
+      img.className = "img-fluid w-100 rounded-top";
+      img.alt = name;
+
+      
+
+      var textWhite = document.createElement("div");
+      textWhite.className = "text-white bg-success px-3 py-1 rounded position-absolute";
+      textWhite.style.top = "10px";
+      textWhite.style.left = "10px";
+      textWhite.innerHTML = category;
+
+      var border = document.createElement("div");
+      border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+
+      var h4 = document.createElement("h4");
+      h4.innerHTML = name;
+
+      var h6 = document.createElement("h6");
+      h6.innerHTML = id;
+      h6.style.display = "none";
+
+      var dFlex = document.createElement("div");
+      dFlex.className = "d-flex justify-content-between flex-lg-wrap";
+
+      var p = document.createElement("p");
+      p.className = "text-dark fs-5 fw-bold mb-0";
+      p.innerHTML = `Ksh ${price} / kg`;
+
+      var a = document.createElement("a");
+      a.href = "#";
+      a.className = "btn border border-secondary rounded-pill px-3 text-primary";
+      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+
+      
+
+      veiwGoods.appendChild(product);
+      product.appendChild(fruiteItem);
+      fruiteItem.appendChild(fruiteImg);
+      fruiteImg.appendChild(img);
+      fruiteItem.appendChild(textWhite);
+      fruiteItem.appendChild(border);
+      border.appendChild(h4);
+      border.appendChild(h6);
+      border.appendChild(dFlex);
+      dFlex.appendChild(p);
+      dFlex.appendChild(a);
+
+      // Add event listener to the button
+      for (let i = 0; i < goods; i++) {
+        // ... existing code ...
+
+        (function(id, name) {
+          a.addEventListener('click', function() {
+            localStorage.setItem('productId', id);
+            console.log(name);
+            window.location.href = "/description/";
+          });
+        })(id, name);
+      }
+
+
+    }
+  });
+});
+
+$("#search-icon-1").click(function (event) {
+  event.preventDefault();
+  var search = document.getElementById('modalSearchInput').value;
+  console.log(search);
+  clearBox();
+  //use firebase firestore search function to search for products with the name that matches the search input
+window.location.href = "#productHolder";
   getDocs(query(collection(db, "products"), where("name", "==", search), limit(8))).then(docSnap => {
     let Products = [];
     docSnap.forEach((doc) => {
@@ -73,7 +181,12 @@ $("#search").click(function (event) {
     let goods = Products.length;
     console.log(Products);
     const veiwGoods = document.querySelector("#productHolder");
-   
+    if (Products.length == 0) {
+      veiwGoods.innerHTML = "Please enter a valid product name ie Banana, Maize, etc";
+      //make it center and bigger
+      veiwGoods.style.textAlign = "center";
+      veiwGoods.style.fontSize = "2em";
+     }
     for (let i = 0; i < goods; i++) {
       var name  = Products[i]['name'];
       var price = Products[i]['price'];

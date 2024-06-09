@@ -193,6 +193,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       let goods = Products.length;
       console.log(Products);
       const veiwGoods = document.querySelector("#productHolder5");
+
+      if (Products.length == 0) {
+        veiwGoods.innerHTML = "You have no products yet, add some products";
+        //make it center and bigger
+        veiwGoods.style.textAlign = "center";
+        veiwGoods.style.fontSize = "3em";
+       }
      
       for (let i = 0; i < goods; i++) {
         var name  = Products[i]['name'];
@@ -212,7 +219,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   
         var img = document.createElement("img");
         img.src = imgUrl;
-        img.className = "img-fluid w-100 rounded-top";
+        img.className = "img-fluid w-100 h-40 rounded-top";
         img.alt = name;
   
         var textWhite = document.createElement("div");

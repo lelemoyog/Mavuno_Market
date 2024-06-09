@@ -43,7 +43,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         var name = Users[i].name;
         var about = Users[i].about;
         var location = Users[i].location;
+        //check if the image is available
+        if(Users[i].imgUrl == ""){
+          var image = "https://www.w3schools.com/w3images/avatar2.png";
+        }else{
         var image = Users[i].imgUrl;
+         }
+
         
         // var product = document.createElement("div");
         // product.className = "col-md-6 col-lg-4 col-xl-3";

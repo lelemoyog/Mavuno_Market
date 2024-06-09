@@ -266,6 +266,12 @@ body {
         color: var(--bs-primary);
         display: visible;
     }
+    #logOut1 {
+        font-size: 1em;
+        font-weight: bold;
+        color: var(--bs-primary);
+        display: visible;
+    }
 }
 /*** Hero Header end ***/
 
