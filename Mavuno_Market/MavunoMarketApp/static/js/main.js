@@ -245,6 +245,10 @@ function getInitials(names) {
         })
     });
 
+    //trigger bootstrap modal on hover
+    $('#cartModal').hover(function () {
+        $('#exampleModal').modal('show');
+    });
 
 
     // Product Quantity
