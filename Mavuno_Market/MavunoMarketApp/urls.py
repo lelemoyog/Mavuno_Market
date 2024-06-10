@@ -9,12 +9,14 @@ urlpatterns = [
     path('farmer/', views.farmer,name='farmer' ),
     path('profile/', views.profile, name='profile'),
     path('vendor/', views.vendor,name='vendor' ),
-    path('description/', views.description, name='description'),
+
     path('testimonial/', views.testimonial, name='testimonial'),
+
+    path('description/', views.description, name='description'),
 ]
 
 
-    
+
 
 
 
