@@ -166,6 +166,9 @@ body {
         transition: .5s;
         opacity: 0.5;
     }
+}
+
+@media (min-width: 992px) {
     #title2 {
         font-size: 1em;
         font-weight: bold;

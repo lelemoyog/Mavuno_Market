@@ -61,5 +61,28 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
         });
     }
 
+    $('addCart').click(function () {
+        //get the product id
+        var id = localStorage.getItem('productId');
+        //get the user id
+        var user = localStorage.getItem('userId');
+        //add the product to the cart
+        addProductToCart(id, user);
+    });
+
+    function addProductToCart(productId, userId){
+        //add the product to the cart
+        const cartDoc = doc(db, "carts", userId);
+        addDoc(collection(cartDoc, "products"), {
+            productId: productId
+        }).then(() => {
+            console.log("Document successfully written!");
+        }).catch((error) => {
+            console.error("Error writing document: ", error);
+        });
+    }
+
+    
+
 
 })(jQuery);
