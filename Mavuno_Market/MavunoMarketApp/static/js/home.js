@@ -367,6 +367,8 @@ function fetchProducts(){
   });
 }
 
+
+
 //create function fetchProducts2 to fetch products from firebase filter by category the product holder id is productHolder2, use the query function to query only products with the category fruits
 
 function fetchProducts2(){
@@ -635,6 +637,7 @@ function clearBox()
   const productHolder2 = document.getElementById('productHolder2');
   const productHolder3 = document.getElementById('productHolder3');
   const productHolder4 = document.getElementById('productHolder4');
+  const productHolderc = document.getElementById('productHolderC');
 
   if (productHolder) {
     productHolder.innerHTML = " ";
@@ -648,11 +651,15 @@ function clearBox()
   if (productHolder4) {
     productHolder4.innerHTML = " ";
   }
+  if (productHolderc) {
+    productHolderc.innerHTML = " ";
+  }
 }
 
 fetchProducts();
 fetchProducts2();
 fetchProducts3();
 fetchProducts4();
+
 
 })(jQuery);

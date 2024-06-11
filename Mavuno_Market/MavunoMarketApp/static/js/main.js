@@ -1,6 +1,6 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot,query, limit, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -40,6 +40,9 @@ $("document").ready(function () {
          
         } else {
           // No user is signed in.
+          $('#profile').hover(function () {
+            $('#signupModal').modal('show');
+        });
           $('#img').show();
         }
       });
@@ -154,6 +157,8 @@ function getInitials(names) {
             $('.back-to-top').fadeOut('slow');
         }
     });
+
+    
     $('.back-to-top').click(function () {
         $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
@@ -182,13 +187,10 @@ function getInitials(names) {
                 items: 1
             },
             768: {
-                items: 1
+                items: 2
             },
             992: {
-                items: 2
-            },
-            1200: {
-                items: 2
+                items: 3
             }
         }
     });
@@ -227,9 +229,183 @@ function getInitials(names) {
         }
     });
 
+    // Fetch data from Firebase and populate the carousel
+    function fetchVegetables() {
+        // Replace "your-collection" with the actual collection name in your Firebase database
+        const collectionRef = collection(db, "products");
 
+        // Fetch the documents from the collection
+        getDocs(collectionRef).then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // Access the data of each document
+                const data = doc.data();
+
+                // Create a carousel item using the data
+                const carouselItem = `
+                    <div class="carousel-item">
+                        <img src="${data.imgUrl}" alt="${data.name}">
+                        <h3>${data.name}</h3>
+                        <p>${data.category}</p>
+                    </div>
+                `;
+
+                // Append the carousel item to the vegetable carousel
+                $(".vegetable-carousel").owlCarousel("add", carouselItem);
+            });
+
+            // Refresh the carousel to display the new items
+            $(".vegetable-carousel").owlCarousel("refresh");
+        });
+    }
+
+    // Call the fetchVegetables function to populate the carousel
+    // fetchVegetables();
+
+    function fetchProductsc(){
+        //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
+        clearBox();
+      
+        getDocs(query(collection(db, "products"),  where("category", "==", "fruits"), limit(6))).then(docSnap => {
+          let Products = [];
+          docSnap.forEach((doc) => {
+            Products.push({ ...doc.data(), id: doc.id })
+          });
+          console.log("Documentc data:", Products);
+          let goods = Products.length;
+          console.log(Products);
+          const veiwGoods = document.querySelector("#productHolderC");
+         
+          for (let i = 0; i < goods; i++) {
+            var name  = Products[i]['name'];
+            var price = Products[i]['price'];
+            var category = Products[i]['category'];
+            var imgUrl = Products[i]['imgUrl'];
+            var id = Products[i]['id'];
+            
+        //     <div class="border border-primary rounded position-relative vesitable-item">
+        //     <div class="vesitable-img">
+        //         <img src="{% static 'img/vegetable-item-6.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+        //     </div>
+        //     <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+        //     <div class="p-4 rounded-bottom">
+        //         <h4>Parsely</h4>
+        //         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+        //         <div class="d-flex justify-content-between flex-lg-wrap">
+        //             <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+        //             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+        //         </div>
+        //     </div>
+        // </div> use this
+      
+            // var product = document.createElement("div");
+            // product.className = "col-md-6 col-lg-4 col-xl-3";
+      
+            //add objects to  var carouselContainer = $(".vegetable-carousel");
+            var carouselContainer = $(".vegetable-carousel");
+            
+      
+            var fruiteItem = document.createElement("div");
+            fruiteItem.className = "border border-primary rounded position-relative vesitable-item";
+      
+            var fruiteImg = document.createElement("div");
+            fruiteImg.className = "vesitable-img";
+      
+            var img = document.createElement("img");
+            img.src = imgUrl;
+            img.className = "img-fluid w-100 rounded-top";
+            img.alt = name;
+      
+            var textWhite = document.createElement("div");
+            textWhite.className = "text-white bg-primary px-3 py-1 rounded position-absolute";
+            textWhite.style.top = "10px";
+            textWhite.style.right = "10px";
+            textWhite.innerHTML = category;
+      
+            var border = document.createElement("div");
+            border.className = "p-4 rounded-bottom";
+      
+            var h4 = document.createElement("h4");
+            h4.innerHTML = name;
+      
+            var dFlex = document.createElement("div");
+            dFlex.className = "d-flex justify-content-between flex-lg-wrap";
+      
+            var p = document.createElement("p");
+            p.className = "text-dark fs-5 fw-bold mb-0";
+            p.innerHTML = `Ksh ${price} / kg`;
+      
+            var a = document.createElement("a");
+            a.href = "#";
+            a.className = "btn border border-secondary rounded-pill px-3 text-primary";
+            a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+      
+            veiwGoods.owlCarousel("add", fruiteItem);
+            fruiteItem.appendChild(fruiteImg);
+            fruiteImg.appendChild(img);
+            fruiteItem.appendChild(textWhite);
+            fruiteItem.appendChild(border);
+            border.appendChild(h4);
+            border.appendChild(dFlex);
+            dFlex.appendChild(p);
+            dFlex.appendChild(a);
+      
+            veiwGoods.owlCarousel({
+                autoplay: true,
+                smartSpeed: 1500,
+                center: false,
+                dots: true,
+                loop: true,
+                margin: 25,
+                nav: true,
+                navText: [
+                    '<i class="bi bi-arrow-left"></i>',
+                    '<i class="bi bi-arrow-right"></i>'
+                ],
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    576: {
+                        items: 1
+                    },
+                    768: {
+                        items: 2
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1200: {
+                        items: 4
+                    }
+                }
+            });;
+      
+            for (let i = 0; i < goods; i++) {
+              // ... existing code ...
+      
+              (function(id, name) {
+                a.addEventListener('click', function() {
+                  localStorage.setItem('productId', id);
+                  console.log(name);
+                  window.location.href = "/description/";
+                });
+              })(id, name);
+            }
+      
+          }
+        });
+      }
+
+    function clearBox() {
+        var veiwGoods = document.getElementById('productHolderC');
+        veiwGoods.innerHTML = "";
+    }
+
+      
     // Modal Video
     $(document).ready(function () {
+        fetchProductsc();
         var $videoSrc;
         $('.btn-play').click(function () {
             $videoSrc = $(this).data("src");
@@ -246,9 +422,11 @@ function getInitials(names) {
     });
 
     //trigger bootstrap modal on hover
-    $('#cartModal').hover(function () {
-        $('#exampleModal').modal('show');
-    });
+    // $('#cartModal').hover(function () {
+    //     $('#exampleModal').modal('show');
+    // });
+
+  
 
 
     // Product Quantity
