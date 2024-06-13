@@ -1,26 +1,27 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot,query, limit, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
 //import auth from firebase
-import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 (function ($) {
-  "use strict";
-  // Import the functions you need from the SDKs you need
+    "use strict";
+    // Import the functions you need from the SDKs you need
 
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const analytics = getAnalytics(app);
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const analytics = getAnalytics(app);
+    var id;
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -32,104 +33,141 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
     spinner(0);
 
 
-//query sign in user form users collection using id from local storage
-$("document").ready(function () {
-    getAuth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-         
-        } else {
-          // No user is signed in.
-          $('#profile').hover(function () {
-            $('#signupModal').modal('show');
+    $("#profile").click(function (event) {
+
+        getAuth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                console.log('User is signed in');
+                window.location.href = "/profile/";
+            } else {
+                // No user is signed in.
+                window.location.href = "/signin/";
+                console.log('No user is signed in');
+            }
         });
-          $('#img').show();
+
+    });
+
+    $("#logOut").click(function (event) {
+        getAuth().signOut().then(() => {
+            // Sign-out successful.
+            console.log('Sign-out successful');
+            //remove user from local storage
+            localStorage.removeItem('uid');
+            window.location.href = "/signin/";
+        }).catch((error) => {
+            // An error happened.
+            console.log('An error happened');
+        });
+    });
+
+
+    //query sign in user form users collection using id from local storage
+    $("document").ready(function () {
+        getAuth().onAuthStateChanged(function (user) {
+            if (user) {          
+                // User is signed in.
+                $('#logoutToggle').show();
+            } else {
+                // No user is signed in.
+                $('#addToCartBtn').show();
+                $('#profile').hover(function () {
+                    $('#signupModal').modal('show');
+                });
+                $('#img').show();
+            }
+        });
+        var uid = localStorage.getItem('uid');
+        //getuser document
+        const userDoc = doc(db, "users", uid);
+        //get the user document
+        getDoc(userDoc).then(docSnap => {
+            let user = docSnap.data();
+            console.log(user);
+            //display the user info in the profile page
+            var jina = getInitials(user.name);
+            $('#userName').text(jina);
+            $('#userN').val(user.name);
+            $('.profileUserName').text(user.name);
+            $('#profileUserEmail').text(user.email);
+            $('#userEmail').val(user.email);
+            $('#profileLocation').text(user.location);
+            $('#userLocation').val(user.location);
+            $('#profileCategory').text(user.accesslevel);
+            $('#userAbout').val(user.about);
+            //add image to image tag in profile page
+            //check user category and hide the #postBtn if user is vendor
+            if (user.accesslevel === "vendor") {
+                $('#addToCartBtn').show();
+                fetchCartProducts();
+            }
+            if(user.accesslevel === "farmer"){
+                console.log('farmer');
+                $('#postBtn').show();
+                fetchOrderProducts()
+            }
+
+
+            //check if user has an image
+            if (user.imgUrl === "" || user.imgUrl === null) {
+                //use bootstrap to show the span with the user initials
+                $('#userName').removeClass('d-none');
+                $('#img2').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
+            } else {
+                //hide the default image
+
+                //show the user image using show() method n jquery
+                $('#img').show();
+                $('#img').attr('src', user.imgUrl);
+                $('#img2').attr('src', user.imgUrl);
+            }
+        });
+
+
+
+
+        //getusers collection
+        // getDocs(collection(db, "users")).then(docSnap => {
+        //     let users = [];
+        //     docSnap.forEach(doc => {
+        //         users.push(doc.data());
+        //     });
+
+        //     //get the user with the id from local storage
+        //     let user = users.find(user => user.uid === uid);
+        //     console.log(user);
+        //     //display the user info in the profile page
+        //     var jina = getInitials(user.name);
+        //     $('#userName').text(jina);
+        //     $('.profileUserName').text(user.name);
+        //     $('#profileUserEmail').text(user.email);
+        //     $('#profileLocation').text(user.location);
+        //     $('#profileCategory').text(user.accesslevel);
+
+
+
+        // })
+
+    });
+
+
+    function getInitials(names) {
+        // Split the names string into an array
+        var nameArray = names.split(' ');
+
+        // Initialize an empty string for the initials
+        var initials = '';
+
+        // Loop through the name array
+        for (var i = 0; i < nameArray.length; i++) {
+            // Add the first letter of each name to the initials string
+            initials += nameArray[i].charAt(0).toUpperCase();
         }
-      });
-var uid = localStorage.getItem('uid');
-//getuser document
-const userDoc = doc(db, "users", uid);
-//get the user document
-getDoc(userDoc).then(docSnap => {
-    let user = docSnap.data();
-    console.log(user);
-    //display the user info in the profile page
-    var jina = getInitials(user.name);
-    $('#userName').text(jina);
-    $('#userN').val(user.name);
-    $('.profileUserName').text(user.name);
-    $('#profileUserEmail').text(user.email);
-    $('#userEmail').val(user.email);
-    $('#profileLocation').text(user.location);
-    $('#userLocation').val(user.location);
-    $('#profileCategory').text(user.accesslevel);
-    $('#userAbout').val(user.about);
-    //add image to image tag in profile page
-    //check user category and hide the #postBtn if user is vendor
-    if (user.accesslevel === "vendor") {
-        $('#postBtn').hide();
+
+        // Return the initials
+        return initials;
     }
-
-
-    //check if user has an image
-    if (user.imgUrl === "") {
-        //use bootstrap to show the span with the user initials
-        $('#userName').removeClass('d-none');
-        $('#img2').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
-    } else {
-        //hide the default image
-
-        //show the user image using show() method n jquery
-        $('#img').show();
-        $('#img').attr('src', user.imgUrl);
-        $('#img2').attr('src', user.imgUrl);
-    }
-});
-
-
-
-
-//getusers collection
-// getDocs(collection(db, "users")).then(docSnap => {
-//     let users = [];
-//     docSnap.forEach(doc => {
-//         users.push(doc.data());
-//     });
-
-//     //get the user with the id from local storage
-//     let user = users.find(user => user.uid === uid);
-//     console.log(user);
-//     //display the user info in the profile page
-//     var jina = getInitials(user.name);
-//     $('#userName').text(jina);
-//     $('.profileUserName').text(user.name);
-//     $('#profileUserEmail').text(user.email);
-//     $('#profileLocation').text(user.location);
-//     $('#profileCategory').text(user.accesslevel);
-
-   
-
-// })
-
-});
-
-    
-function getInitials(names) {
-    // Split the names string into an array
-    var nameArray = names.split(' ');
-  
-    // Initialize an empty string for the initials
-    var initials = '';
-  
-    // Loop through the name array
-    for (var i = 0; i < nameArray.length; i++) {
-      // Add the first letter of each name to the initials string
-      initials += nameArray[i].charAt(0).toUpperCase();
-    }
-  
-    // Return the initials
-    return initials;
-  }
 
     // Fixed Navbar
     $(window).scroll(function () {
@@ -158,7 +196,7 @@ function getInitials(names) {
         }
     });
 
-    
+
     $('.back-to-top').click(function () {
         $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
@@ -229,183 +267,11 @@ function getInitials(names) {
         }
     });
 
-    // Fetch data from Firebase and populate the carousel
-    function fetchVegetables() {
-        // Replace "your-collection" with the actual collection name in your Firebase database
-        const collectionRef = collection(db, "products");
 
-        // Fetch the documents from the collection
-        getDocs(collectionRef).then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // Access the data of each document
-                const data = doc.data();
 
-                // Create a carousel item using the data
-                const carouselItem = `
-                    <div class="carousel-item">
-                        <img src="${data.imgUrl}" alt="${data.name}">
-                        <h3>${data.name}</h3>
-                        <p>${data.category}</p>
-                    </div>
-                `;
 
-                // Append the carousel item to the vegetable carousel
-                $(".vegetable-carousel").owlCarousel("add", carouselItem);
-            });
-
-            // Refresh the carousel to display the new items
-            $(".vegetable-carousel").owlCarousel("refresh");
-        });
-    }
-
-    // Call the fetchVegetables function to populate the carousel
-    // fetchVegetables();
-
-    function fetchProductsc(){
-        //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
-        clearBox();
-      
-        getDocs(query(collection(db, "products"),  where("category", "==", "fruits"), limit(6))).then(docSnap => {
-          let Products = [];
-          docSnap.forEach((doc) => {
-            Products.push({ ...doc.data(), id: doc.id })
-          });
-          console.log("Documentc data:", Products);
-          let goods = Products.length;
-          console.log(Products);
-          const veiwGoods = document.querySelector("#productHolderC");
-         
-          for (let i = 0; i < goods; i++) {
-            var name  = Products[i]['name'];
-            var price = Products[i]['price'];
-            var category = Products[i]['category'];
-            var imgUrl = Products[i]['imgUrl'];
-            var id = Products[i]['id'];
-            
-        //     <div class="border border-primary rounded position-relative vesitable-item">
-        //     <div class="vesitable-img">
-        //         <img src="{% static 'img/vegetable-item-6.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
-        //     </div>
-        //     <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-        //     <div class="p-4 rounded-bottom">
-        //         <h4>Parsely</h4>
-        //         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-        //         <div class="d-flex justify-content-between flex-lg-wrap">
-        //             <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-        //             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-        //         </div>
-        //     </div>
-        // </div> use this
-      
-            // var product = document.createElement("div");
-            // product.className = "col-md-6 col-lg-4 col-xl-3";
-      
-            //add objects to  var carouselContainer = $(".vegetable-carousel");
-            var carouselContainer = $(".vegetable-carousel");
-            
-      
-            var fruiteItem = document.createElement("div");
-            fruiteItem.className = "border border-primary rounded position-relative vesitable-item";
-      
-            var fruiteImg = document.createElement("div");
-            fruiteImg.className = "vesitable-img";
-      
-            var img = document.createElement("img");
-            img.src = imgUrl;
-            img.className = "img-fluid w-100 rounded-top";
-            img.alt = name;
-      
-            var textWhite = document.createElement("div");
-            textWhite.className = "text-white bg-primary px-3 py-1 rounded position-absolute";
-            textWhite.style.top = "10px";
-            textWhite.style.right = "10px";
-            textWhite.innerHTML = category;
-      
-            var border = document.createElement("div");
-            border.className = "p-4 rounded-bottom";
-      
-            var h4 = document.createElement("h4");
-            h4.innerHTML = name;
-      
-            var dFlex = document.createElement("div");
-            dFlex.className = "d-flex justify-content-between flex-lg-wrap";
-      
-            var p = document.createElement("p");
-            p.className = "text-dark fs-5 fw-bold mb-0";
-            p.innerHTML = `Ksh ${price} / kg`;
-      
-            var a = document.createElement("a");
-            a.href = "#";
-            a.className = "btn border border-secondary rounded-pill px-3 text-primary";
-            a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
-      
-            veiwGoods.owlCarousel("add", fruiteItem);
-            fruiteItem.appendChild(fruiteImg);
-            fruiteImg.appendChild(img);
-            fruiteItem.appendChild(textWhite);
-            fruiteItem.appendChild(border);
-            border.appendChild(h4);
-            border.appendChild(dFlex);
-            dFlex.appendChild(p);
-            dFlex.appendChild(a);
-      
-            veiwGoods.owlCarousel({
-                autoplay: true,
-                smartSpeed: 1500,
-                center: false,
-                dots: true,
-                loop: true,
-                margin: 25,
-                nav: true,
-                navText: [
-                    '<i class="bi bi-arrow-left"></i>',
-                    '<i class="bi bi-arrow-right"></i>'
-                ],
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    576: {
-                        items: 1
-                    },
-                    768: {
-                        items: 2
-                    },
-                    992: {
-                        items: 3
-                    },
-                    1200: {
-                        items: 4
-                    }
-                }
-            });;
-      
-            for (let i = 0; i < goods; i++) {
-              // ... existing code ...
-      
-              (function(id, name) {
-                a.addEventListener('click', function() {
-                  localStorage.setItem('productId', id);
-                  console.log(name);
-                  window.location.href = "/description/";
-                });
-              })(id, name);
-            }
-      
-          }
-        });
-      }
-
-    function clearBox() {
-        var veiwGoods = document.getElementById('productHolderC');
-        veiwGoods.innerHTML = "";
-    }
-
-      
     // Modal Video
     $(document).ready(function () {
-        fetchProductsc();
         var $videoSrc;
         $('.btn-play').click(function () {
             $videoSrc = $(this).data("src");
@@ -426,7 +292,7 @@ function getInitials(names) {
     //     $('#exampleModal').modal('show');
     // });
 
-  
+
 
 
     // Product Quantity
@@ -444,6 +310,377 @@ function getInitials(names) {
         }
         button.parent().parent().find('input').val(newVal);
     });
+
+
+    //getDocs(collection(db, uid)).then(docSnap => { and display the products
+    {/* <tr>
+                        <th scope="row">
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'img/vegetable-item-3.png' %}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                            </div>
+                        </th>
+                        <td>
+                            <p class="mb-0 mt-4">Big Banana</p>
+                        </td>
+                        <td>
+                            <p class="mb-0 mt-4">2.99 $</p>
+                        </td>
+                        <td>
+                            <div class="input-group quantity mt-4" style="width: 100px;">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                    <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="mb-0 mt-4">2.99 $</p>
+                        </td>
+                        <td>
+                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
+                                <i class="fa fa-times text-danger"></i>
+                            </button>
+                        </td>
+                    
+                    </tr>  */}
+
+
+    function fetchCartProducts() {
+        document.querySelector("#cartHolder").innerHTML = "";
+        //get the user id
+        var uid = localStorage.getItem('uid');
+        //get the cart collection
+        getDocs(query(collection(db, uid))).then(docSnap => {
+            let products = [];
+            docSnap.forEach((doc) => {
+                products.push({ ...doc.data(), id: doc.id })
+            });
+            console.log(products);
+            //display the products in the cart use doe loop let i = o and use js to create the elements
+            for (let i = 0; i < products.length; i++) {
+                //get the product
+                var product = products[i];
+                //create the elements
+                var productRow = document.createElement('tr');
+
+                var th = document.createElement('th');
+                th.scope = "row";
+                var div = document.createElement('div');
+                div.className = "d-flex align-items-center";
+                var img = document.createElement('img');
+                img.src = product.imgUrl;
+                img.className = "img-fluid me-5 rounded-circle";
+                img.style.width = "80px";
+                img.style.height = "80px";
+                img.alt = product.name;
+                div.appendChild(img);
+                th.appendChild(div);
+                productRow.appendChild(th);
+
+                var td1 = document.createElement('td');
+
+                var p1 = document.createElement('p');
+                p1.className = "mb-0 mt-4";
+                p1.innerHTML = product.name;
+                td1.appendChild(p1);
+                productRow.appendChild(td1);
+
+                var td2 = document.createElement('td');
+
+                var p2 = document.createElement('p');
+                p2.className = "mb-0 mt-4";
+                p2.innerHTML = product.price;
+                td2.appendChild(p2);
+                productRow.appendChild(td2);
+
+                var td3 = document.createElement('td');
+
+                var div2 = document.createElement('div');
+                div2.className = "input-group quantity mt-4";
+                div2.style.width = "100px";
+
+                var div3 = document.createElement('div');
+                div3.className = "input-group-btn";
+
+                var button1 = document.createElement('button');
+                button1.className = "btn btn-sm btn-minus rounded-circle bg-light border";
+                button1.innerHTML = '<i class="fa fa-minus"></i>';
+                div3.appendChild(button1);
+
+                div2.appendChild(div3);
+
+                var input = document.createElement('input');
+                input.type = "text";
+                input.className = "form-control form-control-sm text-center border-0";
+                input.value = "1";
+                div2.appendChild(input);
+
+                var div4 = document.createElement('div');
+                div4.className = "input-group-btn";
+
+                var button2 = document.createElement('button');
+                button2.className = "btn btn-sm btn-plus rounded-circle bg-light border";
+                button2.innerHTML = '<i class="fa fa-plus "></i>';
+                div4.appendChild(button2);
+
+                div2.appendChild(div4);
+                td3.appendChild(div2);
+                productRow.appendChild(td3);
+
+                var td4 = document.createElement('td');
+
+                var p3 = document.createElement('p');
+                p3.className = "mb-0 mt-4";
+                p3.innerHTML = product.price;
+                td4.appendChild(p3);
+                productRow.appendChild(td4);
+
+                var td5 = document.createElement('td');
+
+                var button3 = document.createElement('button');
+                button3.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button3.innerHTML = "Make Order";
+                td5.appendChild(button3);
+                productRow.appendChild(td5);
+                //check if status is approved
+                if (product.status === "approved") {
+                    button3.innerHTML = "Pay";
+                }
+                //append the product row to the cart holder
+                document.querySelector("#cartHolder").appendChild(productRow);
+
+                
+
+                var cartCount = products.length
+                document.querySelector("#cartCount").innerHTML = cartCount;
+                id = product.id;
+                // Add event listener to the button
+                button3.addEventListener('click', (function(productId) {
+                    return function() {
+                        //get the product id
+                        //add the product to the cart
+                        alert('Order Made ' + productId);
+                        makeOrder(productId);
+                    };
+                })(id));
+
+            };
+        });
+    };
+    function fetchOrderProducts() {
+        document.querySelector("#cartHolder").innerHTML = "";
+        //get the user id
+        var uid = localStorage.getItem('uid');
+        //get the cart collection
+        getDocs(query(collection(db, uid))).then(docSnap => {
+            let products = [];
+            docSnap.forEach((doc) => {
+                products.push({ ...doc.data(), id: doc.id })
+            });
+            console.log(products);
+            //display the products in the cart use doe loop let i = o and use js to create the elements
+            for (let i = 0; i < products.length; i++) {
+                //get the product
+                var product = products[i];
+                //create the elements
+                var productRow = document.createElement('tr');
+
+                var th = document.createElement('th');
+                th.scope = "row";
+                var div = document.createElement('div');
+                div.className = "d-flex align-items-center";
+                var img = document.createElement('img');
+                img.src = product.imgUrl;
+                img.className = "img-fluid me-5 rounded-circle";
+                img.style.width = "80px";
+                img.style.height = "80px";
+                img.alt = product.name;
+                div.appendChild(img);
+                th.appendChild(div);
+                productRow.appendChild(th);
+
+                var td1 = document.createElement('td');
+
+                var p1 = document.createElement('p');
+                p1.className = "mb-0 mt-4";
+                p1.innerHTML = product.name;
+                td1.appendChild(p1);
+                productRow.appendChild(td1);
+
+                var td2 = document.createElement('td');
+
+                var p2 = document.createElement('p');
+                p2.className = "mb-0 mt-4";
+                p2.innerHTML = product.price;
+                td2.appendChild(p2);
+                productRow.appendChild(td2);
+
+                var td3 = document.createElement('td');
+
+                var div2 = document.createElement('div');
+                div2.className = "input-group quantity mt-4";
+                div2.style.width = "100px";
+
+                var div3 = document.createElement('div');
+                div3.className = "input-group-btn";
+
+                var button1 = document.createElement('button');
+                button1.className = "btn btn-sm btn-minus rounded-circle bg-light border";
+                button1.innerHTML = '<i class="fa fa-minus"></i>';
+                div3.appendChild(button1);
+
+                div2.appendChild(div3);
+
+                var input = document.createElement('input');
+                input.type = "text";
+                input.className = "form-control form-control-sm text-center border-0";
+                input.value = "1";
+                div2.appendChild(input);
+
+                var div4 = document.createElement('div');
+                div4.className = "input-group-btn";
+
+                var button2 = document.createElement('button');
+                button2.className = "btn btn-sm btn-plus rounded-circle bg-light border";
+                button2.innerHTML = '<i class="fa fa-plus "></i>';
+                div4.appendChild(button2);
+
+                div2.appendChild(div4);
+                td3.appendChild(div2);
+                productRow.appendChild(td3);
+
+                var td4 = document.createElement('td');
+
+                var p3 = document.createElement('p');
+                p3.className = "mb-0 mt-4";
+                p3.innerHTML = product.price;
+                td4.appendChild(p3);
+                productRow.appendChild(td4);
+
+                var td5 = document.createElement('td');
+
+                var button3 = document.createElement('button');
+                button3.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button3.innerHTML = "Aprove Order";
+                td5.appendChild(button3);
+                productRow.appendChild(td5);
+
+                //check if status is approved
+                if (product.status === "approved") {
+                    button3.innerHTML = "Pending";
+                }
+                //append the product row to the cart holder
+                document.querySelector("#cartHolder").appendChild(productRow);
+
+                var cartCount = products.length
+                document.querySelector("#cartCount").innerHTML = cartCount;
+                id = product.id;
+                // Add event listener to the button
+                button3.addEventListener('click', (function(productId) {
+                    return function() {
+                        //get the product id
+                        //add the product to the cart
+                        alert('Aproved ' + productId);
+                        updateOrderStatus(productId,product.sellerId,product.buyerId);
+                    };
+                })(id));
+
+            };
+        });
+    };
+
+
+     //update order status
+     
+    function updateOrderStatus(productId, sellerId,buyerId) {
+        //get the product id
+        //get the product document
+        const productDoc = doc(db, sellerId, productId);
+        //get the product document
+        getDoc(productDoc).then((docSnap) => {
+            let product = docSnap.data();
+            //conver to plain js object
+            const productObj = {
+                id: productId,
+                name: product.name,
+                price: product.price,
+                category: product.category,
+                description: product.description,
+                imgUrl: product.imgUrl,
+                sellerId: product.sellerId,
+                buyerId: product.buyerId,
+                quantity: product.quantity || "1", // assign a default value if quantity is undefined
+                status: "approved",
+                availabilityWindowStart: product.availabilityWindowStart,
+                availabilityWindowEnd: product.availabilityWindowEnd,
+            };
+            //add product to the database use setDoc and the document id to the product object
+            //get uid
+            var cartDoc = doc(db, product.buyerId, product.id);
+            var orderDoc = doc(db, product.sellerId, product.id);
+            setDoc(cartDoc, productObj)
+                .then(() => {
+                    console.log("Order successfully written!");
+                })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                });
+             setDoc(orderDoc, productObj)
+                .then(() => {
+                    console.log("Order successfully written!");
+                })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                });    
+        });
+    }
+        //get the product id
+
+    function makeOrder(productId){
+        //get the product id
+
+          var uid = localStorage.getItem('uid');
+          const productDoc = doc(db, uid, productId);
+          //get the product document
+          getDoc(productDoc).then(docSnap => {
+              let product = docSnap.data();
+             
+         
+          //conver to plain js object
+          const productObj = {
+              id: product.id,
+            name: product.name,
+            price: product.price,
+            category: product.category,
+            description: product.description,
+            imgUrl: product.imgUrl,
+            sellerId: product.sellerId,
+            buyerId: uid,
+            quantity: product.quantity,
+            status: "pending",
+            availabilityWindowStart: product.availabilityWindowStart,
+            availabilityWindowEnd: product.availabilityWindowEnd
+          };
+          //add product to the database usee setDoc and and the document id to the product object
+          //get uid
+          var cartDoc = doc(db, product.sellerId, product.id);
+          setDoc(cartDoc, productObj).then(() => {
+              console.log("Order successfully written!");
+              
+             }).catch((error) => {
+              console.error("Error writing document: ", error);
+            });    
+          });    
+          
+        }
+    
 
     // <!--Location Picker Form using google map api and bootstrap modal-->
     // <!--https://www.codecheef.org/article/location-picker-form-using-google-map-api-and-bootstrap-modal-->
