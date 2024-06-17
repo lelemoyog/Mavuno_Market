@@ -678,8 +678,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             .then((docRef) => {
                 //update the product with id2 docRef.id
                 var cartDoc = doc(db, product.sellerId, docRef.id);
+                var productDoc = doc(db, product.buyerId, productId);
                 updateDoc(cartDoc, {
                     id2: docRef.id
+                })
+                //update the product status
+                updateDoc(productDoc, {
+                    status: "pending"
                 })
                 console.log("Order successfully written!");
             })
