@@ -250,6 +250,18 @@ body {
     .page-header {
         margin-top: 152px !important;
     }
+    #title {
+        font-size: 1em;
+        font-weight: bold;
+        color: var(--bs-primary);
+        display: visible;
+    }
+    #title2 {
+        font-size: 1em;
+        font-weight: bold;
+        color: var(--bs-primary);
+        display: none;
+    }
 }
 
 @media (max-width: 992px) {

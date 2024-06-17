@@ -154,7 +154,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       imgUrl: product.imgUrl,
       sellerId: product.sellerId,
       availabilityWindowStart: product.availabilityWindowStart,
-      availabilityWindowEnd: product.availabilityWindowEnd
+      availabilityWindowEnd: product.availabilityWindowEnd,
+      amountAvailable: product.amountAvailable
     };
     //add product to the database usee setDoc and and the document id to the product object
     addDoc(collection(db, "products"), productObj).then((docRef) => {
@@ -169,15 +170,12 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         console.error("Error updating document: ", error);
       });
     })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
     
   }
 
   $("document").ready(function () {
     fetchProducts5();
-  });
+  })
 
 
   function fetchProducts5(){

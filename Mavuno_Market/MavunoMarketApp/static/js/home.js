@@ -22,34 +22,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
   const db = getFirestore(app);
   const analytics = getAnalytics(app);
 
-  $("#profile").click(function (event) {
 
-  getAuth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      console.log('User is signed in');
-      window.location.href = "/profile/";
-    } else {
-      // No user is signed in.
-      window.location.href = "/signin/";
-      console.log('No user is signed in');
-    }
-  });
-
-});
-
-$("#logOut").click(function (event) {
-  getAuth().signOut().then(() => {
-    // Sign-out successful.
-    console.log('Sign-out successful');
-    //remove user from local storage
-    localStorage.removeItem('uid');
-    window.location.href = "/signin/";
-  }).catch((error) => {
-    // An error happened.
-    console.log('An error happened');
-  });
-});
 
 
 
@@ -352,7 +325,6 @@ function fetchProducts(){
       // Add event listener to the button
       for (let i = 0; i < goods; i++) {
         // ... existing code ...
-
         (function(id, name) {
           a.addEventListener('click', function() {
             localStorage.setItem('productId', id);
