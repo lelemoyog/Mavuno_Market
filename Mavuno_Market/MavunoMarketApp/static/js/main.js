@@ -1,6 +1,6 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -453,6 +453,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 if (product.status === "approved") {
                     button3.innerHTML = "Pay";
                 }
+                if (product.status === "pending") {
+                    button3.innerHTML = "Pending";
+                }
                 //append the product row to the cart holder
                 document.querySelector("#cartHolder").appendChild(productRow);
 
@@ -588,7 +591,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                         //get the product id
                         //add the product to the cart
                         alert('Aproved ' + productId);
-                        updateOrderStatus(productId,product.sellerId,product.buyerId);
+                        updateOrderStatus(productId,product.sellerId);
                     };
                 })(id));
 
@@ -599,7 +602,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
      //update order status
      
-    function updateOrderStatus(productId, sellerId,buyerId) {
+    function updateOrderStatus(productId, sellerId) {
         //get the product id
         //get the product document
         const productDoc = doc(db, sellerId, productId);
@@ -624,7 +627,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             //add product to the database use setDoc and the document id to the product object
             //get uid
             var cartDoc = doc(db, product.buyerId, product.id);
-            var orderDoc = doc(db, product.sellerId, product.id);
+            var orderDoc = doc(db, product.sellerId, product.id2);
             setDoc(cartDoc, productObj)
                 .then(() => {
                     console.log("Order successfully written!");
@@ -670,16 +673,23 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
           };
           //add product to the database usee setDoc and and the document id to the product object
           //get uid
-          var cartDoc = doc(db, product.sellerId, product.id);
-          setDoc(cartDoc, productObj).then(() => {
-              console.log("Order successfully written!");
-              
-             }).catch((error) => {
-              console.error("Error writing document: ", error);
-            });    
-          });    
+        var cartCollection = collection(db, product.sellerId);
+        addDoc(cartCollection, productObj)
+            .then((docRef) => {
+                //update the product with id2 docRef.id
+                var cartDoc = doc(db, product.sellerId, docRef.id);
+                updateDoc(cartDoc, {
+                    id2: docRef.id
+                })
+                console.log("Order successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
           
-        }
+        });
+
+    }
     
 
     // <!--Location Picker Form using google map api and bootstrap modal-->

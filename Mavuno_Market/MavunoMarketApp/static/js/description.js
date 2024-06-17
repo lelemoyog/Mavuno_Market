@@ -48,41 +48,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
 
 //get user
 
-    function makeOrder(id){
-        //get the product id
-
-          var uid = localStorage.getItem('uid');
-          const productDoc = doc(db, "products", id);
-          //get the product document
-          getDoc(productDoc).then(docSnap => {
-              let product = docSnap.data();
-             
-         
-          //conver to plain js object
-          const productObj = {
-              id: product.id,
-            name: product.name,
-            price: product.price,
-            category: product.category,
-            description: product.description,
-            imgUrl: product.imgUrl,
-            sellerId: product.sellerId,
-            buyerId: uid,
-            availabilityWindowStart: product.availabilityWindowStart,
-            availabilityWindowEnd: product.availabilityWindowEnd
-          };
-          //add product to the database usee setDoc and and the document id to the product object
-          //get uid
-          var cartDoc = doc(db, product.sellerId, product.id);
-          setDoc(cartDoc, productObj).then(() => {
-              console.log("Document successfully written!");
-              fetchCartProducts();
-             }).catch((error) => {
-              console.error("Error writing document: ", error);
-            });    
-          });    
-          
-        }
+   
 
     function getUser(uid){
         const userDoc = doc(db, "users", uid);
@@ -151,7 +117,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
           sellerId: product.sellerId,
           buyerId: uid,
           quantity: quantity,
-          status: "pending",
+          status: "cartItem",
           availabilityWindowStart: product.availabilityWindowStart,
           availabilityWindowEnd: product.availabilityWindowEnd
         };
@@ -161,6 +127,8 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
         setDoc(cartDoc, productObj).then(() => {
             console.log("Document successfully written!");
             fetchCartProducts();
+            //reload the page
+            location.reload();
            }).catch((error) => {
             console.error("Error writing document: ", error);
           });    
