@@ -52,6 +52,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
   //click event to add product image
   $('#productPhoto').change(function () {
+    $('#spinner').addClass('show');
     uploadProductImage();
   });
 
@@ -103,6 +104,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       console.log("Document successfully updated!");
       //redirect to profile page
       window.location.href = "/profile/";
+      $('#spinner').removeClass('show');
     }).catch((error) => {
       // The document probably doesn't exist.
       console.error("Error updating document: ", error);
