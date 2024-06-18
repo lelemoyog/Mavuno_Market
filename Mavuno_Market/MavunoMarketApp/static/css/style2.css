@@ -253,7 +253,7 @@ body {
   margin-bottom: 150px; }
 
 .signup-content {
-  padding: 75px; }
+  padding: 0; }
 
 .signup-form, .signup-image, .signin-form, .signin-image {
   width: 50%;
