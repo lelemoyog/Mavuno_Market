@@ -114,7 +114,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   //use the product class to upload product and  create a product object
   $('#addProduct').click(function () {
     addProduct();
-    alert('Product Added');
   });
 
   //create a product object
@@ -164,10 +163,17 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       updateDoc(doc(db, "products", docRef.id), {
         id: docRef.id
       }).then(() => {
-        console.log("Document successfully updated!");
+        $("#myAlert").fadeTo(2000, 500).slideUp(500, function () {
+          $("#myAlert").slideUp(500);
+          window.location.href = "/profile/";
+        });
       }).catch((error) => {
         // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
+        $("#myAlert").fadeTo(2000, 500).slideUp(500, function () {
+          $("#myAlert").innerHTML = error.code;
+          $("#myAlert").slideUp(500);
+         
+        });
       });
     })
     

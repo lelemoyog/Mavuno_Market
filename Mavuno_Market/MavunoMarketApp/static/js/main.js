@@ -445,34 +445,56 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var td5 = document.createElement('td');
 
                 var button3 = document.createElement('button');
+                var button4 = document.createElement('button');
+                var button5 = document.createElement('button');
                 button3.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button4.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button5.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button3.innerHTML = "Make Order";
+                button4.innerHTML = "pay";
+                button5.innerHTML = 'pending';
                 td5.appendChild(button3);
+                td5.appendChild(button4);
+                td5.appendChild(button5);
                 productRow.appendChild(td5);
                 //check if status is approved
                 if (product.status === "approved") {
                     button3.innerHTML = "Pay";
+                    button3.style.display = "none";
+                    button5.style.display = "none";
                 }
                 if (product.status === "pending") {
-                    button3.innerHTML = "Pending";
+                    button3.style.display = "none";
+                    button4.style.display = "none";
+                }
+                if (product.status === "cartItem") {
+                    button4.style.display = "none";
+                    button5.style.display = "none";
                 }
                 //append the product row to the cart holder
                 document.querySelector("#cartHolder").appendChild(productRow);
 
-                
-
-                var cartCount = products.length
+                var cartCount = products.length;
                 document.querySelector("#cartCount").innerHTML = cartCount;
-                id = product.id;
+                var productId = product.id;
                 // Add event listener to the button
-                button3.addEventListener('click', (function(productId) {
-                    return function() {
-                        //get the product id
-                        //add the product to the cart
-                        alert('Order Made ' + productId);
-                        makeOrder(productId);
-                    };
-                })(id));
+                button3.addEventListener('click', function() {
+                    //get the product id
+                  makeOrder(productId);
+                  //re
+                });
+                button4.addEventListener('click', function() {
+                    //get the product id
+                    //add the product to the cart
+                    alert('Pay ' + productId + '\n' +'Price: ' + product.price);
+                    window.location.href = "https://flutterwave.com/pay/wsws9l0lhrx8";
+                });
+                button5.addEventListener('click', function() {
+                    //get the product id
+                    //add the product to the cart
+                    alert('Product Details ' + productId + '\n' + "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status);
+
+                });
 
             };
         });

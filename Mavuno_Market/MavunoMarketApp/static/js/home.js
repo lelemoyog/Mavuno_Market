@@ -347,7 +347,7 @@ function fetchProducts2(){
   //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
   clearBox();
 
-  getDocs(query(collection(db, "products"),  where("category", "==", "fruits"), limit(6))).then(docSnap => {
+  getDocs(query(collection(db, "products"),  where("category", "==", "fruits"), limit(12))).then(docSnap => {
     let Products = [];
     docSnap.forEach((doc) => {
       Products.push({ ...doc.data(), id: doc.id })
@@ -433,7 +433,7 @@ function fetchProducts3(){
   //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
   clearBox();
 
-  getDocs(query(collection(db, "products"),  where("category", "==", "vegetable"), limit(6))).then(docSnap => {
+  getDocs(query(collection(db, "products"),  where("category", "==", "vegetable"), limit(12))).then(docSnap => {
     let Products = [];
     docSnap.forEach((doc) => {
       Products.push({ ...doc.data(), id: doc.id })
@@ -519,7 +519,7 @@ function fetchProducts4(){
   //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
   clearBox();
 
-  getDocs(query(collection(db, "products"),  where("category", "==", "cereals"), limit(6))).then(docSnap => {
+  getDocs(query(collection(db, "products"),  where("category", "==", "cereals"), limit(12))).then(docSnap => {
     let Products = [];
     docSnap.forEach((doc) => {
       Products.push({ ...doc.data(), id: doc.id })
