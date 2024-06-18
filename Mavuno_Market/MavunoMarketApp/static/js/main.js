@@ -527,7 +527,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         //get the user id
         var uid = localStorage.getItem('uid');
         //get the cart collection
-        getDocs(query(collection(db, uid))).then(docSnap => {
+        getDocs(query(collection(db, "products"))).then(docSnap => {
             let products = [];
             docSnap.forEach((doc) => {
                 products.push({ ...doc.data(), id: doc.id })
@@ -542,8 +542,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 caroselItem.className = "carousel-item rounded";
                 if (i === 0) caroselItem.classList.add('active');
                 var img = document.createElement('img');
+                img.style.height = "400px";
                 img.src = product.imgUrl;
-                img.className = "img-fluid w-100 h-100 bg-secondary rounded";
+                img.className = "img-fluid w-100 bg-secondary rounded";
                 img.alt = product.name;
                 caroselItem.appendChild(img);
                 var a = document.createElement('a');
