@@ -68,7 +68,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         img.alt = name;
 
         var textWhite = document.createElement("div");
-        textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
+        textWhite.className = "text-white bg-success px-3 py-1 rounded position-absolute";
         textWhite.style.top = "10px";
         textWhite.style.left = "10px";
         textWhite.innerHTML = location;
@@ -87,9 +87,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         p.innerHTML = about;
 
         var a = document.createElement("a");
-        a.href = "#";
         a.className = "btn border border-secondary rounded-pill px-3 text-primary";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Products`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Completed Orders`;
 
         farmerHolder.appendChild(farmer);
         farmer.appendChild(farmerItem);
@@ -104,7 +103,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         (function(name) {
           a.addEventListener('click', function() {
             localStorage.setItem('farmerName', name);
-            window.location.href = "/products/";
           });
         })(name);
 
