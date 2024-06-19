@@ -26,7 +26,11 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
   $('#photo').change(function () {
     // fire the upload here
+    $('#spinner').addClass('show');
     uploadImage();
+    setTimeout(function() {
+      $('#spinner').removeClass('show');
+    }, 2500);
   });
 
   function uploadImage() {
@@ -54,6 +58,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   $('#productPhoto').change(function () {
     $('#spinner').addClass('show');
     uploadProductImage();
+    setTimeout(function() {
+      $('#spinner').removeClass('show');
+    }, 2000);
   });
 
   function uploadProductImage() {
@@ -86,7 +93,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   $('#updateBtn').click(function () {
     var url = localStorage.getItem('photoUrl');
     updateUser(url);
-    alert('Profile Updated');
   });
 
 
@@ -102,9 +108,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       imgUrl: url
     }).then(() => {
       console.log("Document successfully updated!");
+      $("#myAlert6").fadeTo(2000, 500).slideUp(500, function () {
+        $("#myAlert6").slideUp(500);
+      });
       //redirect to profile page
-      window.location.href = "/profile/";
-      $('#spinner').removeClass('show');
+      setTimeout(function() {
+        window.location.href = "/profile/";
+      }, 1000);
     }).catch((error) => {
       // The document probably doesn't exist.
       console.error("Error updating document: ", error);
