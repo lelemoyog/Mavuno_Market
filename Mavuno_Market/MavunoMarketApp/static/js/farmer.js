@@ -51,67 +51,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
          }
 
         
-        // var product = document.createElement("div");
-        // product.className = "col-md-6 col-lg-4 col-xl-3";
-        
-        // var fruiteItem = document.createElement("div");
-        // fruiteItem.className = "rounded position-relative fruite-item";
-  
-        // var fruiteImg = document.createElement("div");
-        // fruiteImg.className = "fruite-img";
-  
-        // var img = document.createElement("img");
-        // img.src = imgUrl;
-        // img.className = "img-fluid w-100 rounded-top";
-        // img.alt = name;
-  
-        // var textWhite = document.createElement("div");
-        // textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
-        // textWhite.style.top = "10px";
-        // textWhite.style.left = "10px";
-        // textWhite.innerHTML = category;
-  
-        // var border = document.createElement("div");
-        // border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
-  
-        // var h4 = document.createElement("h4");
-        // h4.innerHTML = name;
-  
-        // var dFlex = document.createElement("div");
-        // dFlex.className = "d-flex justify-content-between flex-lg-wrap";
-  
-        // var p = document.createElement("p");
-        // p.className = "text-dark fs-5 fw-bold mb-0";
-        // p.innerHTML = `Ksh ${price} / kg`;
-  
-        // var a = document.createElement("a");
-        // a.href = "#";
-        // a.className = "btn border border-secondary rounded-pill px-3 text-primary";
-        // a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
-  
-       
-  
-        // veiwGoods.appendChild(product);
-        // product.appendChild(fruiteItem);
-        // fruiteItem.appendChild(fruiteImg);
-        // fruiteImg.appendChild(img);
-        // fruiteItem.appendChild(textWhite);
-        // fruiteItem.appendChild(border);
-        // border.appendChild(h4);
-        // border.appendChild(dFlex);
-        // dFlex.appendChild(p);
-        // dFlex.appendChild(a);
-        // for (let i = 0; i < goods; i++) {
-        //   // ... existing code ...
-  
-        //   (function(id, name) {
-        //     a.addEventListener('click', function() {
-        //       localStorage.setItem('productId', id);
-        //       console.log(name);
-        //       window.location.href = "/description/";
-        //     });
-        //   })(id, name);
-        // } use the above code in the for loop below us js
 
         var farmer = document.createElement("div");
         farmer.className = "col-md-6 col-lg-4 col-xl-3";

@@ -457,6 +457,17 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 td5.appendChild(button3);
                 td5.appendChild(button4);
                 td5.appendChild(button5);
+
+                // Add Bootstrap popover on click
+                var Details = "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status + '\n' ;
+                Details = Details.replace(/\n/g, '<br>');
+                $(button5).popover({
+                    title: 'Order Details',
+                    content: Details,
+                    trigger: 'focus',
+                    placement: 'top',
+                    html: true
+                });
                 productRow.appendChild(td5);
                 //check if status is approved
                 if (product.status === "approved") {
@@ -503,7 +514,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 button5.addEventListener('click', function() {
                     //get the product id
                     //add the product to the cart
-                    alert('Product Details ' + productId + '\n' + "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status);
+                    // alert('Product Details ' + productId + '\n' + "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status);
 
                 });
 

@@ -46,10 +46,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
         });
     });
 
-//get user
-
-   
-
+    
     function getUser(uid){
         const userDoc = doc(db, "users", uid);
         getDoc(userDoc).then(docSnap => {
@@ -261,6 +258,5 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
             };
         });
     };
-
 
 })(jQuery);
