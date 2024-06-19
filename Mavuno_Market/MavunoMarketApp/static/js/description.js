@@ -126,10 +126,18 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
         var cartDoc = doc(db, uid, product.id);
         setDoc(cartDoc, productObj).then(() => {
             console.log("Document successfully written!");
+            $("#myAlert2").fadeTo(2000, 500).slideUp(500, function () {
+                $("#myAlert2").slideUp(1000);
+              });
+              window.location.href = "/description/";
             fetchCartProducts();
             //reload the page
             location.reload();
            }).catch((error) => {
+            $("#myAlert2").fadeTo(2000, 500).slideUp(500, function () {
+                $("#myAlert2").innerHTML = error.code;
+                $("#myAlert2").slideUp(500);
+              });
             console.error("Error writing document: ", error);
           });    
         });    

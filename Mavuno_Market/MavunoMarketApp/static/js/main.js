@@ -266,6 +266,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             }
         }
     });
+    
 
 
 
@@ -445,38 +446,133 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var td5 = document.createElement('td');
 
                 var button3 = document.createElement('button');
+                var button4 = document.createElement('button');
+                var button5 = document.createElement('button');
                 button3.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button4.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button5.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button3.innerHTML = "Make Order";
+                button4.innerHTML = "pay";
+                button5.innerHTML = 'pending';
                 td5.appendChild(button3);
+                td5.appendChild(button4);
+                td5.appendChild(button5);
                 productRow.appendChild(td5);
                 //check if status is approved
                 if (product.status === "approved") {
                     button3.innerHTML = "Pay";
+                    button3.style.display = "none";
+                    button5.style.display = "none";
                 }
                 if (product.status === "pending") {
-                    button3.innerHTML = "Pending";
+                    button3.style.display = "none";
+                    button4.style.display = "none";
+                }
+                if (product.status === "cartItem") {
+                    button4.style.display = "none";
+                    button5.style.display = "none";
                 }
                 //append the product row to the cart holder
                 document.querySelector("#cartHolder").appendChild(productRow);
 
-                
-
-                var cartCount = products.length
+                var cartCount = products.length;
                 document.querySelector("#cartCount").innerHTML = cartCount;
-                id = product.id;
+
+
+                
+                var productId = product.id;
                 // Add event listener to the button
-                button3.addEventListener('click', (function(productId) {
-                    return function() {
-                        //get the product id
-                        //add the product to the cart
-                        alert('Order Made ' + productId);
-                        makeOrder(productId);
-                    };
-                })(id));
+                button3.addEventListener('click', function() {
+                    //get the product id
+                  makeOrder(productId);
+                  //reload the page
+                  $("#myAlert3").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#myAlert3").slideUp(1000);
+                  });
+                    setTimeout(function() {
+                        fetchCartProducts();
+                    }, 5000);
+                   
+                });
+                button4.addEventListener('click', function() {
+                    //get the product id
+                    //add the product to the cart
+                    alert('Pay ' + productId + '\n' +'Price: ' + product.price);
+                    window.location.href = "https://flutterwave.com/pay/wsws9l0lhrx8";
+                });
+                button5.addEventListener('click', function() {
+                    //get the product id
+                    //add the product to the cart
+                    alert('Product Details ' + productId + '\n' + "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status);
+
+                });
+
+                //populate the carosel with the products
+                // <div class="carousel-item active rounded">
+                //             <img src="{% static 'img/hero-img-1.png' %}" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                //             <a href="#" class="btn px-4 py-2 text-white rounded">Fruits</a>
+                //         </div> use this code to create the elements and the div holder id is caroselHolder
+
+               
+
+
+
 
             };
         });
     };
+
+    function fetchCaroselProducts() {
+        document.querySelector("#cartHolder").innerHTML = "";
+        //get the user id
+        var uid = localStorage.getItem('uid');
+        //get the cart collection
+        getDocs(query(collection(db, "products"))).then(docSnap => {
+            let products = [];
+            docSnap.forEach((doc) => {
+                products.push({ ...doc.data(), id: doc.id })
+            });
+            console.log(products);
+            //display the products in the cart use doe loop let i = o and use js to create the elements
+            for (let i = 0; i < products.length; i++) {
+                //get the product
+                var product = products[i];
+                //create the elements
+                var caroselItem = document.createElement('div');
+                caroselItem.className = "carousel-item rounded";
+                if (i === 0) caroselItem.classList.add('active');
+                var img = document.createElement('img');
+                img.style.height = "400px";
+                img.src = product.imgUrl;
+                img.className = "img-fluid w-100 bg-secondary rounded";
+                img.alt = product.name;
+                caroselItem.appendChild(img);
+                var a = document.createElement('a');
+                a.className = "btn px-4 py-2 text-white rounded";
+                a.innerHTML = product.category;
+                caroselItem.appendChild(a);
+                document.querySelector("#caroselHolder").appendChild(caroselItem);
+                console.log(product.category);
+
+                let goods = products.length;
+                var id = product.id;
+                for (let i = 0; i < goods; i++) {
+                    // ... existing code ...
+            
+                    (function(id) {
+                      a.addEventListener('click', function() {
+                        localStorage.setItem('productId', id);
+                        console.log(id);
+                        window.location.href = "/description/";
+                      });
+                    })(id);
+                  }
+
+
+            };
+        });
+    };
+    fetchCaroselProducts();
     function fetchOrderProducts() {
         document.querySelector("#cartHolder").innerHTML = "";
         //get the user id
