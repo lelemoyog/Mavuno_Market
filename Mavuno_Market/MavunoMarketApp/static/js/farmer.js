@@ -170,7 +170,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
   
-    getDocs(query(collection(db, "users"), where("accesslevel", "==", "farmer"), limit(6))).then(docSnap => {
+    getDocs(query(collection(db, "users"), where("accesslevel", "==", "farmer"), limit(12))).then(docSnap => {
       let Users = [];
       docSnap.forEach((doc) => {
         Users.push({ ...doc.data(), id: doc.id })
@@ -264,7 +264,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   function fetchProducts5(uid) {
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
    document.getElementById('productHolderf').innerHTML = "";
-    getDocs(query(collection(db, "products"), where("sellerId", "==", uid), limit(6))).then(docSnap => {
+    getDocs(query(collection(db, "products"), where("sellerId", "==", uid), limit(12))).then(docSnap => {
       let Products = [];
       docSnap.forEach((doc) => {
         Products.push({ ...doc.data(), id: doc.id })

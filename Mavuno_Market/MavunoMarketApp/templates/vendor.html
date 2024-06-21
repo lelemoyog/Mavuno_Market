@@ -34,6 +34,47 @@
   </div>
 </div>
 <!-- Single Page Content End -->
+<!-- Modal Start -->
+<div class="modal fade" id="vendorOrderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="orderModalLabel">My Completed Orders <span id="modalVendorName"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <!-- Cart Page Start -->
+ <div class="container-fluid py-0 px-0">
+  <div class="container py-0 px-0">
+      <div class="table-responsive">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Products</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody id="cartHolderVendor">
+                 
+              </tbody>
+          </table>
+      </div>
+     
+  </div>
+</div>
+<!-- Cart Page End -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal End -->
 
 <script type="module" src="{% static 'js/vendor.js' %}"></script>
 
