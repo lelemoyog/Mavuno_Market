@@ -100,11 +100,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             //check user category and hide the #postBtn if user is vendor
             if (user.accesslevel === "vendor") {
                 $('#addToCartBtn').show();
+                document.getElementById('exampleModalLabel1').innerHTML = "My Cart";
                 fetchCartProducts();
             }
             if(user.accesslevel === "farmer"){
                 console.log('farmer');
                 $('#postBtn').show();
+                document.getElementById('exampleModalLabel1').innerHTML = "My Orders";
                 fetchOrderProducts()
             }
 
@@ -457,6 +459,17 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 td5.appendChild(button3);
                 td5.appendChild(button4);
                 td5.appendChild(button5);
+
+                // Add Bootstrap popover on click
+                var Details = "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status + '\n' ;
+                Details = Details.replace(/\n/g, '<br>');
+                $(button5).popover({
+                    title: 'Order Details',
+                    content: Details,
+                    trigger: 'focus',
+                    placement: 'top',
+                    html: true
+                });
                 productRow.appendChild(td5);
                 //check if status is approved
                 if (product.status === "approved") {
@@ -503,7 +516,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 button5.addEventListener('click', function() {
                     //get the product id
                     //add the product to the cart
-                    alert('Product Details ' + productId + '\n' + "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status);
+                    // alert('Product Details ' + productId + '\n' + "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status);
 
                 });
 
@@ -666,14 +679,32 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var td5 = document.createElement('td');
 
                 var button3 = document.createElement('button');
+                var button4 = document.createElement('button');
                 button3.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button4.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button3.innerHTML = "Aprove Order";
+                button4.innerHTML = "Pending";
                 td5.appendChild(button3);
+                td5.appendChild(button4);
                 productRow.appendChild(td5);
+
+                var Details = "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status + '\n' ;
+                Details = Details.replace(/\n/g, '<br>');
+
+                $(button4).popover({
+                    title: 'Order Details',
+                    content: Details,
+                    trigger: 'focus',
+                    placement: 'top',
+                    html: true
+                });
 
                 //check if status is approved
                 if (product.status === "approved") {
-                    button3.innerHTML = "Pending";
+                    button3.style.display = "none";
+                }
+                if (product.status === "pending") {
+                    button4.style.display = "none";
                 }
                 //append the product row to the cart holder
                 document.querySelector("#cartHolder").appendChild(productRow);
@@ -684,12 +715,19 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 // Add event listener to the button
                 button3.addEventListener('click', (function(productId) {
                     return function() {
-                        //get the product id
-                        //add the product to the cart
-                        alert('Aproved ' + productId);
                         updateOrderStatus(productId,product.sellerId);
+                        $("#myAlert4").fadeTo(2000, 500).slideUp(500, function () {
+                            $("#myAlert4").slideUp(500);
+                            $('#spinner').addClass('show');
+                            fetchOrderProducts();
+                            setTimeout(function() {
+                                $('#spinner').removeClass('show');
+                              }, 2000);
+                          });
                     };
                 })(id));
+
+                
 
             };
         });

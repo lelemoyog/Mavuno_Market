@@ -211,7 +211,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         img.alt = name;
 
         var textWhite = document.createElement("div");
-        textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
+        textWhite.className = "text-white bg-success px-3 py-1 rounded position-absolute";
         textWhite.style.top = "10px";
         textWhite.style.left = "10px";
         textWhite.innerHTML = location;
@@ -275,7 +275,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       const veiwGoods = document.querySelector("#productHolderf");
 
       if (Products.length == 0) {
-        veiwGoods.innerHTML = "You have no products yet, add some products";
+        veiwGoods.innerHTML = "Farmers products are not available at the moment. Please check again later.";
         //make it center and bigger
         veiwGoods.style.textAlign = "center";
         veiwGoods.style.fontSize = "3em";
@@ -301,6 +301,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         img.src = imgUrl;
         img.className = "img-fluid w-100 h-40 rounded-top";
         img.alt = name;
+        img.style.height = "200px";
 
         var textWhite = document.createElement("div");
         textWhite.className = "text-white bg-success px-3 py-1 rounded position-absolute";
