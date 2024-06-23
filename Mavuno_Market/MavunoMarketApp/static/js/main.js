@@ -99,15 +99,26 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             //add image to image tag in profile page
             //check user category and hide the #postBtn if user is vendor
             if (user.accesslevel === "vendor") {
+                //add accesslevel to the local storage
+                localStorage.setItem('accesslevel', user.accesslevel);
                 $('#addToCartBtn').show();
                 document.getElementById('exampleModalLabel1').innerHTML = "My Cart";
                 fetchCartProducts();
+                fetchProfileOrderProducts()
             }
-            if(user.accesslevel === "farmer"){
+            if (user.accesslevel === "farmer") {
+                //add accesslevel to the local storage
+                localStorage.setItem('accesslevel', user.accesslevel);
                 console.log('farmer');
                 $('#postBtn').show();
                 document.getElementById('exampleModalLabel1').innerHTML = "My Orders";
                 fetchOrderProducts()
+                fetchProducts5()
+                var posts1Element = document.querySelector("#posts1");
+                if (posts1Element) {
+                    posts1Element.innerHTML = "";
+                }
+                
             }
 
 
@@ -733,7 +744,241 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         });
     };
 
+    function fetchProfileOrderProducts() {
+        document.querySelector("#cartHolder1").innerHTML = "";
+        document.querySelector("#posts").innerHTML = "";
+        //get the user id
+        var uid = localStorage.getItem('uid');
+        //get the cart collection
+        getDocs(query(collection(db, uid))).then(docSnap => {
+            let products = [];
+            docSnap.forEach((doc) => {
+                products.push({ ...doc.data(), id: doc.id })
+            });
+            console.log(products);
+            //display the products in the cart use doe loop let i = o and use js to create the elements
+            for (let i = 0; i < products.length; i++) {
+                //get the product
+                var product = products[i];
+                //create the elements
+                var productRow = document.createElement('tr');
+    
+                var th = document.createElement('th');
+                th.scope = "row";
+                var div = document.createElement('div');
+                div.className = "d-flex align-items-center";
+                var img = document.createElement('img');
+                img.src = product.imgUrl;
+                img.className = "img-fluid me-5 rounded-circle";
+                img.style.width = "80px";
+                img.style.height = "80px";
+                img.alt = product.name;
+                div.appendChild(img);
+                th.appendChild(div);
+                productRow.appendChild(th);
+    
+                var td1 = document.createElement('td');
+    
+                var p1 = document.createElement('p');
+                p1.className = "mb-0 mt-4";
+                p1.innerHTML = product.name;
+                td1.appendChild(p1);
+                productRow.appendChild(td1);
+    
+                var td2 = document.createElement('td');
+    
+                var p2 = document.createElement('p');
+                p2.className = "mb-0 mt-4";
+                p2.innerHTML = product.price;
+                td2.appendChild(p2);
+                productRow.appendChild(td2);
+    
+                var td3 = document.createElement('td');
+    
+                var div2 = document.createElement('div');
+                div2.className = "input-group quantity mt-4";
+                div2.style.width = "100px";
+    
+                var div3 = document.createElement('div');
+                div3.className = "input-group-btn";
+    
+                var button1 = document.createElement('button');
+                button1.className = "btn btn-sm btn-minus rounded-circle bg-light border";
+                button1.innerHTML = '<i class="fa fa-minus"></i>';
+                // div3.appendChild(button1);
+    
+                div2.appendChild(div3);
+    
+                var input = document.createElement('p');
+                input.className = "mb-0 mt-0";
+                input.innerHTML = "1";
+                div2.appendChild(input);
+    
+                var div4 = document.createElement('div');
+                div4.className = "input-group-btn";
+    
+                var button2 = document.createElement('button');
+                button2.className = "btn btn-sm btn-plus rounded-circle bg-light border";
+                button2.innerHTML = '<i class="fa fa-plus "></i>';
+                // div4.appendChild(button2);
+    
+                div2.appendChild(div4);
+                td3.appendChild(div2);
+                productRow.appendChild(td3);
+    
+                var td4 = document.createElement('td');
+    
+                var p3 = document.createElement('p');
+                p3.className = "mb-0 mt-4";
+                p3.innerHTML = product.price;
+                td4.appendChild(p3);
+                productRow.appendChild(td4);
+    
+                var td5 = document.createElement('td');
+    
+                var button3 = document.createElement('button');
+                var button4 = document.createElement('button');
+                button3.className = "btn btn-md rounded-circle bg-light border mt-2";
+                button4.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button3.innerHTML = "<i class='fa fa-times text-danger'></i>";
+                button4.innerHTML = "Pending";
+                td5.appendChild(button3);
+                productRow.appendChild(td5);
+    
+                var Details = "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status + '\n' ;
+                Details = Details.replace(/\n/g, '<br>');
+    
+                $(button4).popover({
+                    title: 'Order Details',
+                    content: Details,
+                    trigger: 'focus',
+                    placement: 'top',
+                    html: true
+                });
+    
+                //check if status is approved
+                if (product.status === "approved") {
+                    button3.style.display = "none";
+                }
+                if (product.status === "pending") {
+                    button4.style.display = "none";
+                }
+                //append the product row to the cart holder
+                document.querySelector("#cartHolder1").appendChild(productRow);
+    
+                var cartCount = products.length
+                document.querySelector("#cartCount").innerHTML = cartCount;
+                id = product.id;
+                // Add event listener to the button
+                button3.addEventListener('click', (function(productId) {
+                    return function() {
+                        //delete the product
+                        deleteProduct(productId);
+                        //remove the product from the cart
+                        this.parentElement.parentElement.remove();
+                    };
+                })(id));
+    
+                
+    
+            };
+        });
+    };
 
+
+    function fetchProducts5(){
+        //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
+        clearBox();
+        var uid = localStorage.getItem('uid');
+        getDocs(query(collection(db, "products"),  where("sellerId", "==", uid), limit(6))).then(docSnap => {
+          let Products = [];
+          docSnap.forEach((doc) => {
+            Products.push({ ...doc.data(), id: doc.id })
+          });
+          console.log("Document5 data:", Products);
+          let goods = Products.length;
+          console.log(Products);
+          const veiwGoods = document.querySelector("#productHolder5");
+    
+          if (Products.length == 0) {
+            veiwGoods.innerHTML = "You have no products yet, add some products";
+            //make it center and bigger
+            veiwGoods.style.textAlign = "center";
+            veiwGoods.style.fontSize = "3em";
+           }
+         
+          for (let i = 0; i < goods; i++) {
+            var name  = Products[i]['name'];
+            var price = Products[i]['price'];
+            var category = Products[i]['category'];
+            var imgUrl = Products[i]['imgUrl'];
+            var id = Products[i]['id'];
+            
+            var product = document.createElement("div");
+            product.className = "col-md-6 col-lg-4 col-xl-3";
+            
+            var fruiteItem = document.createElement("div");
+            fruiteItem.className = "rounded position-relative fruite-item";
+      
+            var fruiteImg = document.createElement("div");
+            fruiteImg.className = "fruite-img";
+      
+            var img = document.createElement("img");
+            img.src = imgUrl;
+            img.className = "img-fluid w-100 h-40 rounded-top";
+            img.alt = name;
+            img.style.height = "200px";
+      
+            var textWhite = document.createElement("div");
+            textWhite.className = "text-white bg-success px-3 py-1 rounded position-absolute";
+            textWhite.style.top = "10px";
+            textWhite.style.left = "10px";
+            textWhite.innerHTML = category;
+      
+            var border = document.createElement("div");
+            border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+      
+            var h4 = document.createElement("h4");
+            h4.innerHTML = name;
+      
+            var dFlex = document.createElement("div");
+            dFlex.className = "d-flex justify-content-between flex-lg-wrap";
+      
+            var p = document.createElement("p");
+            p.className = "text-dark fs-5 fw-bold mb-0";
+            p.innerHTML = `Ksh ${price} / kg`;
+      
+            var a = document.createElement("a");
+            a.href = "#";
+            a.className = "btn border border-secondary rounded-pill px-3 text-primary";
+            a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+      
+            veiwGoods.appendChild(product);
+            product.appendChild(fruiteItem);
+            fruiteItem.appendChild(fruiteImg);
+            fruiteImg.appendChild(img);
+            fruiteItem.appendChild(textWhite);
+            fruiteItem.appendChild(border);
+            border.appendChild(h4);
+            border.appendChild(dFlex);
+            dFlex.appendChild(p);
+            dFlex.appendChild(a);
+      
+            for (let i = 0; i < goods; i++) {
+              // ... existing code ...
+      
+              (function(id, name) {
+                a.addEventListener('click', function() {
+                  localStorage.setItem('productId', id);
+                  console.log(name);
+                  window.location.href = "/description/";
+                });
+              })(id, name);
+            }
+      
+          }
+        });
+      }
      //update order status
      
     function updateOrderStatus(productId, sellerId) {
@@ -828,6 +1073,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
           
         });
 
+    }
+
+    function clearBox() {
+        var productHolder = document.getElementById('productHolder5');
+        if (productHolder) {
+            productHolder.innerHTML = "";
+        }
     }
     
 
