@@ -6,14 +6,16 @@ export class User {
     location;
     about;
     imgUrl;
-    constructor(uid, name, email,accesslevel, location, about, imgUrl) {
+    phone;
+    constructor(uid, name, email,accesslevel, location, about, imgUrl, phone) {
         this.uid = uid;
         this.name = name;
         this.email = email;
         this.location = location;
         this.accesslevel = accesslevel;
         this.imgUrl = imgUrl;
-        this.about = about
+        this.about = about;
+        this.phone = phone;
     }
 }
 

@@ -106,6 +106,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       email: $('#userEmail').val(),
       location: $('#userLocation').val(),
       about: $('#userAbout').val(),
+      phone: $('#userPhone').val(),
       imgUrl: url
     }).then(() => {
       console.log("Document successfully updated!");

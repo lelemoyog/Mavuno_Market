@@ -96,6 +96,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             $('#userLocation').val(user.location);
             $('#profileCategory').text(user.accesslevel);
             $('#userAbout').val(user.about);
+            $('#userPhone').val(user.phone);
+            $('#profileUserPhone').text(user.phone);
             //add image to image tag in profile page
             //check user category and hide the #postBtn if user is vendor
             if (user.accesslevel === "vendor") {
