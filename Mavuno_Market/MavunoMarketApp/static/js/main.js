@@ -109,6 +109,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             if (user.accesslevel === "farmer") {
                 //add accesslevel to the local storage
                 localStorage.setItem('accesslevel', user.accesslevel);
+                localStorage.setItem('notificationStatus', 'on');
                 console.log('farmer');
                 $('#postBtn').show();
                 document.getElementById('exampleModalLabel1').innerHTML = "My Orders";
@@ -125,6 +126,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             //check if user has an image
             if (user.imgUrl === "" || user.imgUrl === null) {
                 //use bootstrap to show the span with the user initials
+                localStorage.setItem('notificationStatus', 'off');
                 $('#userName').removeClass('d-none');
                 $('#img2').attr('src', "https://bootdey.com/img/Content/avatar/avatar3.png");
             } else {
@@ -290,9 +292,10 @@ onSnapshot(query(collection(db, uid)), (snapshot) => {
             console.log("Modified city: ", change.doc.data());
             
             var accessLevel = localStorage.getItem('accesslevel');
-            if (accessLevel === "farmer") {
+            var notificationStatus = localStorage.getItem('notificationStatus');
+            if (accessLevel === "farmer" && notificationStatus === "on") {
             createPushNotification()
-            }else if(accessLevel === "vendor"){
+            }else if(accessLevel === "vendor" && notificationStatus === "on"){
                 createPushNotification1()
             }
         }
@@ -553,12 +556,14 @@ function createPushNotification1() {
                 button3.addEventListener('click', (function(id) {
                     return function() {
                         makeOrder(id);
+                        
                         //reload the page
                         $("#myAlert3").fadeTo(2000, 500).slideUp(500, function () {
                           $("#myAlert3").slideUp(1000);
                         });
                           setTimeout(function() {
                               fetchCartProducts();
+                              localStorage.setItem('notificationStatus', 'on');
                           }, 5000);
                     };
                 })(id));
@@ -774,6 +779,7 @@ function createPushNotification1() {
                 button3.addEventListener('click', (function(productId) {
                     return function() {
                         updateOrderStatus(productId,product.sellerId);
+                        localStorage.setItem('notificationStatus', 'off');
                         $("#myAlert4").fadeTo(2000, 500).slideUp(500, function () {
                             $("#myAlert4").slideUp(500);
                             $('#spinner').addClass('show');
