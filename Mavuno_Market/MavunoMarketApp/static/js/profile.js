@@ -211,15 +211,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
  
 
-function deleteProduct(productId) {
-  //delete the product from the cart
-  var uid = localStorage.getItem('uid');
-  deleteDoc(doc(db, uid, productId)).then(() => {
-      console.log("Document successfully deleted!");
-  }).catch((error) => {
-      console.error("Error removing document: ", error);
-  });
-}
+
 
   
 
