@@ -1,5 +1,4 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where, setDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
@@ -20,7 +19,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const analytics = getAnalytics(app);
     var id;
     // Spinner
     var spinner = function () {
@@ -535,20 +533,21 @@ function createPushNotification() {
 
 
                 
-                var productId = product.id;
+                id = product.id;
                 // Add event listener to the button
-                button3.addEventListener('click', function() {
-                    //get the product id
-                  makeOrder(productId);
-                  //reload the page
-                  $("#myAlert3").fadeTo(2000, 500).slideUp(500, function () {
-                    $("#myAlert3").slideUp(1000);
-                  });
-                    setTimeout(function() {
-                        fetchCartProducts();
-                    }, 5000);
-                   
-                });
+                button3.addEventListener('click', (function(id) {
+                    return function() {
+                        makeOrder(id);
+                        alert('Order Made Successfully' + id);
+                        //reload the page
+                        $("#myAlert3").fadeTo(2000, 500).slideUp(500, function () {
+                          $("#myAlert3").slideUp(1000);
+                        });
+                          setTimeout(function() {
+                              fetchCartProducts();
+                          }, 5000);
+                    };
+                })(id));
                 button4.addEventListener('click', function() {
                     //get the product id
                     //add the product to the cart
@@ -897,7 +896,7 @@ function createPushNotification() {
     
                 //check if status is approved
                 if (product.status === "approved") {
-                    button3.style.display = "none";
+                   
                 }
                 if (product.status === "pending") {
                     button4.style.display = "none";
