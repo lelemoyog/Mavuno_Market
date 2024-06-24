@@ -1,6 +1,6 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,setDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where, setDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -284,7 +284,35 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     });
     
 
+//listen for change in database using onSnapshot when field is updated in the database when the status field is updated in the database
+var uid = localStorage.getItem('uid');
+onSnapshot(query(collection(db, uid)), (snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+        if (change.type === "modified") {
+            console.log("Modified city: ", change.doc.data());
+            
+            var accessLevel = localStorage.getItem('accesslevel');
+            if (accessLevel === "farmer") {
+            createPushNotification()
+            }
+        }
+    });
 
+});
+//create push notification
+Notification.requestPermission();
+function createPushNotification() {
+    //get permission from the user
+    Notification.requestPermission().then(function (result) {
+        if (result === 'granted') {
+            fetchOrderProducts();
+           new Notification('Order Status', {
+                body: 'you have a new order',
+                icon: '/static/img/logo.png',
+           });
+        }
+    });
+}
 
 
     // Modal Video
@@ -578,7 +606,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 a.className = "btn px-4 py-2 text-white rounded";
                 a.innerHTML = product.category;
                 caroselItem.appendChild(a);
-                document.querySelector("#caroselHolder").appendChild(caroselItem);
+                var caroselHolder = document.querySelector("#caroselHolder");
+                if (caroselHolder) {
+                    caroselHolder.appendChild(caroselItem);
+                }
                 console.log(product.category);
 
                 let goods = products.length;
@@ -871,9 +902,12 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 if (product.status === "pending") {
                     button4.style.display = "none";
                 }
-                //append the product row to the cart holder
-                document.querySelector("#cartHolder1").appendChild(productRow);
-    
+                // Check if the cart holder element exists before appending the product row
+                var cartHolder = document.querySelector("#cartHolder1");
+                if (cartHolder) {
+                    cartHolder.appendChild(productRow);
+                }
+
                 var cartCount = products.length
                 document.querySelector("#cartCount").innerHTML = cartCount;
                 id = product.id;
@@ -961,7 +995,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             a.className = "btn border border-secondary rounded-pill px-3 text-primary";
             a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
       
-            veiwGoods.appendChild(product);
+            if (veiwGoods) {
+                veiwGoods.appendChild(product);
+            }
             product.appendChild(fruiteItem);
             fruiteItem.appendChild(fruiteImg);
             fruiteImg.appendChild(img);
@@ -1082,6 +1118,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         });
 
     }
+
+    //send push notification to seller
 
     function deleteProduct(productId) {
         //delete the product from the cart
