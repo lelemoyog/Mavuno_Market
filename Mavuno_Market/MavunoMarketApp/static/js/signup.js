@@ -95,8 +95,9 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     // ...
     var accesslevel = $('#account').val();
     var location = $('#location').val();
+    var phone = $('#phone').val();
     var imgUrl = "";
-    const user = new User(uid, name, email, accesslevel, location, about, imgUrl);
+    const user = new User(uid, name, email, accesslevel, location, about, imgUrl, phone);
 
 
     //conver to plain js object
@@ -107,7 +108,8 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
       accesslevel: user.accesslevel,
       location: user.location,
       about: user.about,
-      imgUrl: user.imgUrl
+      imgUrl: user.imgUrl,
+      phone: user.phone
     };
 
     var docRef = doc(db, "users", user.uid);
@@ -147,6 +149,7 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
     //check if the pass and re_pass match
     var email = document.getElementById('email').value;
     var name = document.getElementById('name').value;
+    var phone = document.getElementById('phone').value;
     var pass = document.getElementById('pass').value;
     var re_pass = document.getElementById('re_pass').value;
 
