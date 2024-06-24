@@ -14,14 +14,6 @@
             style="position: absolute; right: 0; top: 0; height: 50px; border-top-left-radius: 0; border-bottom-left-radius: 0;">SEARCH</button>
   </div>
 </div>
-
-
-
-
-
-
-
-
 <!-- Single Page Header End -->
 
 <!-- Single Page Content Start -->
@@ -43,6 +35,28 @@
 </div>
 <!-- Single Page Content End -->
 
+<!-- Product Modal Start -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productModalLabel">Products by <span id="modalFarmerName"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="productHolderf" class="row g-4"> 
+          <!-- Products will be dynamically inserted here -->
+        </div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Product Modal End -->
+
+<script type="module" src="{% static 'js/farmer.js' %}"></script>
 
 
 

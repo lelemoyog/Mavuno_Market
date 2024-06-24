@@ -411,6 +411,24 @@
         /* Optional padding between images */
     }
 </style>
+
+ <!-- //create middle center bootstrap transluscent toast -->
+ <div class="toast top-50 start-50 translate-middle" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong class="me-auto">Mavuno Market</strong>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //create middle center bootstrap transluscent toast  -->
+
 <div class="container bootstrap snippets bootdey">
     <div class="row">
         <div class="profile-nav col-md-3" style="padding-top: 150px;">
@@ -428,7 +446,7 @@
                 <li style="list-style: none;">
                     <span>
                         <!-- Button trigger modal -->
-                        <button type="button" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3;"
+                        <button type="button" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3; display: none;"
                             class="btn btn-primary" id="postBtn" data-bs-toggle="modal" data-bs-target="#myModal">
                             Post
                         </button>
@@ -445,6 +463,7 @@
                                 </div>
 
                                 <!-- Modal body -->
+                                
                                 <div class="modal-body">
                                     <form id="productForm">
                                         <div class="mb-3">
@@ -490,7 +509,14 @@
                                         </div>
                                     </form>
                                 </div>
-
+                                <div style="display:none;" id="myAlert">
+                                    <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
+                                      <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                                      <div>
+                                        Product Added successfully
+                                      </div>
+                                    </div>
+                                  </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
                                     <button type="button" id="addProduct" form="productForm" class="btn btn-primary">Submit</button>
@@ -545,7 +571,14 @@
                                         </div>
                                     </form>
                                 </div>
-            
+                                <div style="display:none;" id="myAlert6">
+                                    <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
+                                      <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                                      <div>
+                                        Profile updated successfully
+                                      </div>
+                                    </div>
+                                  </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
                                     <button type="button" id="updateBtn" form="profileForm" class="btn btn-primary">update</button>
@@ -768,7 +801,6 @@
     </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript"> </script>
@@ -776,5 +808,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
-
+<script type="module" src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

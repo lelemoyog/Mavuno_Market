@@ -22,34 +22,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
   const db = getFirestore(app);
   const analytics = getAnalytics(app);
 
-  $("#profile").click(function (event) {
 
-  getAuth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      console.log('User is signed in');
-      window.location.href = "/profile/";
-    } else {
-      // No user is signed in.
-      window.location.href = "/signin/";
-      console.log('No user is signed in');
-    }
-  });
-
-});
-
-$("#logOut").click(function (event) {
-  getAuth().signOut().then(() => {
-    // Sign-out successful.
-    console.log('Sign-out successful');
-    //remove user from local storage
-    localStorage.removeItem('uid');
-    window.location.href = "/signin/";
-  }).catch((error) => {
-    // An error happened.
-    console.log('An error happened');
-  });
-});
 
 
 
@@ -352,7 +325,6 @@ function fetchProducts(){
       // Add event listener to the button
       for (let i = 0; i < goods; i++) {
         // ... existing code ...
-
         (function(id, name) {
           a.addEventListener('click', function() {
             localStorage.setItem('productId', id);
@@ -375,7 +347,7 @@ function fetchProducts2(){
   //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
   clearBox();
 
-  getDocs(query(collection(db, "products"),  where("category", "==", "fruits"), limit(6))).then(docSnap => {
+  getDocs(query(collection(db, "products"),  where("category", "==", "fruits"), limit(12))).then(docSnap => {
     let Products = [];
     docSnap.forEach((doc) => {
       Products.push({ ...doc.data(), id: doc.id })
@@ -461,7 +433,7 @@ function fetchProducts3(){
   //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
   clearBox();
 
-  getDocs(query(collection(db, "products"),  where("category", "==", "vegetable"), limit(6))).then(docSnap => {
+  getDocs(query(collection(db, "products"),  where("category", "==", "vegetable"), limit(12))).then(docSnap => {
     let Products = [];
     docSnap.forEach((doc) => {
       Products.push({ ...doc.data(), id: doc.id })
@@ -547,7 +519,7 @@ function fetchProducts4(){
   //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
   clearBox();
 
-  getDocs(query(collection(db, "products"),  where("category", "==", "cereals"), limit(6))).then(docSnap => {
+  getDocs(query(collection(db, "products"),  where("category", "==", "cereals"), limit(12))).then(docSnap => {
     let Products = [];
     docSnap.forEach((doc) => {
       Products.push({ ...doc.data(), id: doc.id })

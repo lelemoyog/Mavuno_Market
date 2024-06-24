@@ -26,7 +26,11 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
   $('#photo').change(function () {
     // fire the upload here
+    $('#spinner').addClass('show');
     uploadImage();
+    setTimeout(function() {
+      $('#spinner').removeClass('show');
+    }, 2500);
   });
 
   function uploadImage() {
@@ -52,7 +56,11 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
   //click event to add product image
   $('#productPhoto').change(function () {
+    $('#spinner').addClass('show');
     uploadProductImage();
+    setTimeout(function() {
+      $('#spinner').removeClass('show');
+    }, 2000);
   });
 
   function uploadProductImage() {
@@ -85,7 +93,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   $('#updateBtn').click(function () {
     var url = localStorage.getItem('photoUrl');
     updateUser(url);
-    alert('Profile Updated');
   });
 
 
@@ -101,8 +108,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       imgUrl: url
     }).then(() => {
       console.log("Document successfully updated!");
+      $("#myAlert6").fadeTo(2000, 500).slideUp(500, function () {
+        $("#myAlert6").slideUp(500);
+      });
       //redirect to profile page
-      window.location.href = "/profile/";
+      setTimeout(function() {
+        window.location.href = "/profile/";
+      }, 1000);
     }).catch((error) => {
       // The document probably doesn't exist.
       console.error("Error updating document: ", error);
@@ -114,7 +126,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   //use the product class to upload product and  create a product object
   $('#addProduct').click(function () {
     addProduct();
-    alert('Product Added');
   });
 
   //create a product object
@@ -154,7 +165,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       imgUrl: product.imgUrl,
       sellerId: product.sellerId,
       availabilityWindowStart: product.availabilityWindowStart,
-      availabilityWindowEnd: product.availabilityWindowEnd
+      availabilityWindowEnd: product.availabilityWindowEnd,
+      amountAvailable: product.amountAvailable
     };
     //add product to the database usee setDoc and and the document id to the product object
     addDoc(collection(db, "products"), productObj).then((docRef) => {
@@ -163,21 +175,25 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       updateDoc(doc(db, "products", docRef.id), {
         id: docRef.id
       }).then(() => {
-        console.log("Document successfully updated!");
+        $("#myAlert").fadeTo(2000, 500).slideUp(500, function () {
+          $("#myAlert").slideUp(500);
+          window.location.href = "/profile/";
+        });
       }).catch((error) => {
         // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
+        $("#myAlert").fadeTo(2000, 500).slideUp(500, function () {
+          $("#myAlert").innerHTML = error.code;
+          $("#myAlert").slideUp(500);
+         
+        });
       });
     })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
     
   }
 
   $("document").ready(function () {
     fetchProducts5();
-  });
+  })
 
 
   function fetchProducts5(){
