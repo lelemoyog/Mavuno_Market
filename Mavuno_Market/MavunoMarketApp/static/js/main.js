@@ -748,8 +748,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     };
 
     function fetchProfileOrderProducts() {
-        document.querySelector("#cartHolder1").innerHTML = "";
-        document.querySelector("#posts").innerHTML = "";
+        const cartHolder1 = document.querySelector("#cartHolder1");
+        const posts = document.querySelector("#posts");
+
+        if (cartHolder1 && posts) {
+            cartHolder1.innerHTML = "";
+            posts.innerHTML = "";
+        }
         //get the user id
         var uid = localStorage.getItem('uid');
         //get the cart collection
