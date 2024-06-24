@@ -292,6 +292,8 @@ onSnapshot(query(collection(db, uid)), (snapshot) => {
             var accessLevel = localStorage.getItem('accesslevel');
             if (accessLevel === "farmer") {
             createPushNotification()
+            }else if(accessLevel === "vendor"){
+                createPushNotification1()
             }
         }
     });
@@ -306,6 +308,19 @@ function createPushNotification() {
             fetchOrderProducts();
            new Notification('Order Status', {
                 body: 'you have a new order',
+                icon: '/static/img/logo.png',
+           });
+        }
+    });
+}
+
+function createPushNotification1() {
+    //get permission from the user
+    Notification.requestPermission().then(function (result) {
+        if (result === 'granted') {
+            fetchCartProducts();
+           new Notification('Order Status', {
+                body: 'order Approved',
                 icon: '/static/img/logo.png',
            });
         }
@@ -538,7 +553,6 @@ function createPushNotification() {
                 button3.addEventListener('click', (function(id) {
                     return function() {
                         makeOrder(id);
-                        alert('Order Made Successfully' + id);
                         //reload the page
                         $("#myAlert3").fadeTo(2000, 500).slideUp(500, function () {
                           $("#myAlert3").slideUp(1000);
