@@ -136,6 +136,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 $('#img').show();
                 $('#img').attr('src', user.imgUrl);
                 $('#img2').attr('src', user.imgUrl);
+                localStorage.setItem('productPhotoUrl', user.imgUrl);
             }
         });
 
