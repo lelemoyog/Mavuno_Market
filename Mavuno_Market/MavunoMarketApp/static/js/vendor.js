@@ -22,6 +22,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  var id;
 
 
 
@@ -90,6 +91,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         p.innerHTML = about;
 
         var a = document.createElement("a");
+        a.href = "#";
         a.className = "btn border border-secondary rounded-pill px-3 text-primary";
         a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Products`;
         a.setAttribute("data-bs-toggle", "modal");
@@ -106,12 +108,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         dFlex.appendChild(p);
         dFlex.appendChild(a);
        
-        (function(uid) {
-          a.addEventListener('click', function() {
-            localStorage.setItem('farmerName', name);
-            window.location.href = "/products/";
-          });
-        })(uid);
+        id= uid;
+
+        a.addEventListener('click', (function(id) {
+          return function() {
+            fetchCompletedOrders(id);                                       
+           };
+        })(id));
     }
     });
 
@@ -120,15 +123,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     function fetchCompletedOrders(uid) {
       
       document.querySelector("#cartHolderVendor").innerHTML = "";
-      //get the user id
-      var uid = localStorage.getItem('uid');
+      console.log("fetching orders" + uid);
       //get the cart collection
       getDocs(query(collection(db, uid))).then(docSnap => {
           let products = [];
           docSnap.forEach((doc) => {
               products.push({ ...doc.data(), id: doc.id })
           });
-          console.log(products);
+          console.log("docs" + products);
           //display the products in the cart use doe loop let i = o and use js to create the elements
           for (let i = 0; i < products.length; i++) {
               //get the product
@@ -219,9 +221,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
               button3.innerHTML = "Make Order";
               button4.innerHTML = "pay";
               button5.innerHTML = 'pending';
-              td5.appendChild(button3);
-              td5.appendChild(button4);
-              td5.appendChild(button5);
+              // td5.appendChild(button3);
+              // td5.appendChild(button4);
+              // td5.appendChild(button5);
               productRow.appendChild(td5);
               //check if status is approved
               if (product.status === "approved") {
