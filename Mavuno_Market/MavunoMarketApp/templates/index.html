@@ -439,8 +439,18 @@
                     <div class="subscribe-container">
                         <input id="email-input" class="subscribe-input" type="email" placeholder="Your Email">
                         <button id="email-inputBtn" type="submit" class="subscribe-button"
-                            onclick="subscribe()">Subscribe Now</button>
+                            onclick="sendEmail()">Subscribe Now</button>
                     </div>
+                    <script>
+                        function sendEmail() {
+                            var email = document.getElementById("email-input").value;
+                            var subject = "New Email Subscription";
+                            var body = "A new user has subscribed to your mailing list.\n\nEmail: " + email;
+                            var mailtoLink = "mailto:gitaur72@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+                            window.open(mailtoLink);
+                            document.getElementById("email-input").value = "";
+                        }
+                    </script>
                     <style>
                         .subscribe-container {
                             display: flex;
