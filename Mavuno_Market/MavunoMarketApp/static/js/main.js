@@ -309,6 +309,8 @@ function createPushNotification() {
     Notification.requestPermission().then(function (result) {
         if (result === 'granted') {
             fetchOrderProducts();
+            const audio = document.getElementById('notificationSound');
+            audio.play();
            new Notification('Order Status', {
                 body: 'you have a new order',
                 icon: '/static/img/logo.png',
@@ -322,6 +324,8 @@ function createPushNotification1() {
     Notification.requestPermission().then(function (result) {
         if (result === 'granted') {
             fetchCartProducts();
+            const audio = document.getElementById('notificationSound');
+            audio.play();
            new Notification('Order Status', {
                 body: 'order Approved',
                 icon: '/static/img/logo.png',
