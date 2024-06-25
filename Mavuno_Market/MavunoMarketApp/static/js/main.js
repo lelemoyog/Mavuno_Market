@@ -567,12 +567,16 @@ function createPushNotification1() {
                           }, 5000);
                     };
                 })(id));
-                button4.addEventListener('click', function() {
-                    //get the product id
-                    //add the product to the cart
-                    alert('Pay ' + productId + '\n' +'Price: ' + product.price);
-                    window.location.href = "https://flutterwave.com/pay/wsws9l0lhrx8";
-                });
+
+                button4.addEventListener('click', (function(id) {
+                    return function() {
+                        alert('Pay ' + id + '\n' +'Price: ' + product.price);
+                        window.location.href = "https://flutterwave.com/pay/wsws9l0lhrx8";
+                      
+                    };
+                })(id));
+               
+
                 button5.addEventListener('click', function() {
                     //get the product id
                     //add the product to the cart
@@ -587,9 +591,6 @@ function createPushNotification1() {
                 //         </div> use this code to create the elements and the div holder id is caroselHolder
 
                
-
-
-
 
             };
         });
