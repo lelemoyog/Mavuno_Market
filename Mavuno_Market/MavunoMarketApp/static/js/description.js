@@ -57,9 +57,23 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
             console.log(user.imgUrl);
             $('#descriptionFamerName').text(user.name);
             $('#descriptionFamerAbout').text(user.about);
+            $('#descriptionFamerLocation').text(user.location);
+            $('#descriptionFamerPhone').text(user.phone);
 
         });
     }
+
+    $('#tel').click(function () {
+        //get the phone number
+        var phone = $('#descriptionFamerPhone').text();
+        //remove the 0 and add 254
+        phone = phone.substring(1);
+        //remove spaces
+        phone = phone.replace(/\s/g, '');
+        phone = '254' + phone;
+        //whatsapp the phone number
+        window.open('https://wa.me/' + phone, '_blank');
+    });
 
     $('#addToCartBtn').click(function () {
         //get the product id
