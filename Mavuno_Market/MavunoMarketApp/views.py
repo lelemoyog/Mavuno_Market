@@ -37,3 +37,6 @@ def vendor(request):
 
 def testimonial(request):
     return render(request, 'testimonial.html')
+
+def dashboard(request):
+    return render(request, 'dashboard.html')

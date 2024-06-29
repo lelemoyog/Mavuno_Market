@@ -63,6 +63,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
     //query sign in user form users collection using id from local storage
     $("document").ready(function () {
+        fetchCaroselProducts()
         getAuth().onAuthStateChanged(function (user) {
             if (user) {          
                 // User is signed in.
@@ -119,6 +120,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 if (posts1Element) {
                     posts1Element.innerHTML = "";
                 }
+                document.getElementById('dash').style.display = "inline";
                 
             }
 
@@ -142,28 +144,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
 
 
-
-        //getusers collection
-        // getDocs(collection(db, "users")).then(docSnap => {
-        //     let users = [];
-        //     docSnap.forEach(doc => {
-        //         users.push(doc.data());
-        //     });
-
-        //     //get the user with the id from local storage
-        //     let user = users.find(user => user.uid === uid);
-        //     console.log(user);
-        //     //display the user info in the profile page
-        //     var jina = getInitials(user.name);
-        //     $('#userName').text(jina);
-        //     $('.profileUserName').text(user.name);
-        //     $('#profileUserEmail').text(user.email);
-        //     $('#profileLocation').text(user.location);
-        //     $('#profileCategory').text(user.accesslevel);
-
-
-
-        // })
 
     });
 
@@ -602,15 +582,14 @@ function createPushNotification1() {
 
     function fetchCaroselProducts() {
         document.querySelector("#cartHolder").innerHTML = "";
-        //get the user id
-        var uid = localStorage.getItem('uid');
+        
         //get the cart collection
         getDocs(query(collection(db, "products"))).then(docSnap => {
             let products = [];
             docSnap.forEach((doc) => {
                 products.push({ ...doc.data(), id: doc.id })
             });
-            console.log(products);
+            console.log("this: "+products);
             //display the products in the cart use doe loop let i = o and use js to create the elements
             for (let i = 0; i < products.length; i++) {
                 //get the product
