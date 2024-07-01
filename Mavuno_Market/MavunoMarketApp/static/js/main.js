@@ -492,6 +492,8 @@ function createPushNotification1() {
                 var button3 = document.createElement('button');
                 var button4 = document.createElement('button');
                 var button5 = document.createElement('button');
+                button4.setAttribute('data-bs-toggle', 'modal');
+                button4.setAttribute('data-bs-target', '#exampleModalToggle');
                 button3.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button4.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button5.className = "btn btn-md rounded-circle bg-light border mt-4";
@@ -536,6 +538,11 @@ function createPushNotification1() {
 
                 
                 id = product.id;
+                var price =product.price
+                var quantity = product.quantity;
+                var name = product.name;
+                var sellerId = product.sellerId;
+                var buyerId = product.buyerId;
                 // Add event listener to the button
                 button3.addEventListener('click', (function(id) {
                     return function() {
@@ -552,13 +559,40 @@ function createPushNotification1() {
                     };
                 })(id));
 
-                button4.addEventListener('click', (function(id) {
+                button4.addEventListener('click', (function(id, price, quantity, name, sellerId, buyerId) {
                     return function() {
-                        alert('Pay ' + id + '\n' +'Price: ' + product.price);
-                        window.location.href = "https://flutterwave.com/pay/wsws9l0lhrx8";
-                      
+                        // alert('Pay ' + id + '\n' +'Price: ' + price);
+                        document.querySelector("#OrderID").innerHTML = id;
+                        document.querySelector("#pPrice").innerHTML = price;
+                        document.querySelector("#pQuantity").innerHTML = quantity;
+                        document.querySelector("#pName").innerHTML = name;
+                        document.querySelector("#total").innerHTML = price * quantity + " Ksh";
+                        
+
+                        //get user doc using the sellerId
+                        const userDoc = doc(db, "users", sellerId);
+                        const userDoc1 = doc(db, "users", buyerId);
+                        //get the user document
+                        getDoc(userDoc).then(docSnap => {
+                            let user = docSnap.data();
+                            console.log(user);
+                            //display the user info in the profile page
+                           document.querySelector("#fName").innerHTML = user.name;
+                           //remove the starting zero and replace with 254 from user.phone
+                            var phone = user.phone;
+                            phone = phone.replace(/^0+/, "254");
+                           $('#phone2').val(phone);
+                        });
+                        getDoc(userDoc1).then(docSnap => {
+                            let user = docSnap.data();
+                            console.log(user);
+                            // document.querySelector("#phone").innerHTML = user.phone;
+                            var phone = user.phone;
+                            phone = phone.replace(/^0+/, "254");
+                            $('#phone').val(phone);
+                        });
                     };
-                })(id));
+                })(id, price, quantity, name, sellerId, buyerId));
                
 
                 button5.addEventListener('click', function() {
@@ -579,6 +613,7 @@ function createPushNotification1() {
             };
         });
     };
+    
 
     function fetchCaroselProducts() {
         document.querySelector("#cartHolder").innerHTML = "";

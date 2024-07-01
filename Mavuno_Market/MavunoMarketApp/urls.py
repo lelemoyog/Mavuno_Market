@@ -15,6 +15,12 @@ urlpatterns = [
     path('testimonial/', views.testimonial, name='testimonial'),
 
     path('description/', views.description, name='description'),
+
+    path('accesstoken/', views.genrateAcesstoken.get_access_token, name='get_access_token'),
+    path('initiate/', views.stkPush.initiate_stk_push, name='initiate_stk_push'),
+    path('callback/', views.callback.process_stk_callback, name='process_stk_callback'),
+    path('query/', views.query.query_stk_status, name='query_stk_status'),
+    path('b2c/', views.B2C.initiate_b2c, name='initiate_b2c_payment'),
 ]
 
 
