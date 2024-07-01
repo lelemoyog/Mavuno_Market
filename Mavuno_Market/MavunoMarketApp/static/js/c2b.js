@@ -27,7 +27,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
 //redirect to query page
 setTimeout(function() {
     window.location.href = "/query/";
-}, 10000);
+}, 15000);
 
   });
 

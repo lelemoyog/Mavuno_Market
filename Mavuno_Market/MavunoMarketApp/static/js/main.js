@@ -357,46 +357,6 @@ function createPushNotification1() {
     });
 
 
-    //getDocs(collection(db, uid)).then(docSnap => { and display the products
-    {/* <tr>
-                        <th scope="row">
-                            <div class="d-flex align-items-center">
-                                <img src="{% static 'img/vegetable-item-3.png' %}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
-                            </div>
-                        </th>
-                        <td>
-                            <p class="mb-0 mt-4">Big Banana</p>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                    <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
-                        </td>
-                    
-                    </tr>  */}
-
-
     function fetchCartProducts() {
         document.querySelector("#cartHolder").innerHTML = "";
         //get the user id
@@ -492,17 +452,21 @@ function createPushNotification1() {
                 var button3 = document.createElement('button');
                 var button4 = document.createElement('button');
                 var button5 = document.createElement('button');
+                var button6 = document.createElement('button');
                 button4.setAttribute('data-bs-toggle', 'modal');
                 button4.setAttribute('data-bs-target', '#exampleModalToggle');
                 button3.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button4.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button5.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button6.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button3.innerHTML = "Make Order";
                 button4.innerHTML = "pay";
                 button5.innerHTML = 'pending';
+                button6.innerHTML = 'Confirm your have received produce';
                 td5.appendChild(button3);
                 td5.appendChild(button4);
                 td5.appendChild(button5);
+                td5.appendChild(button6);
 
                 // Add Bootstrap popover on click
                 var Details = "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status + '\n' ;
@@ -520,14 +484,22 @@ function createPushNotification1() {
                     button3.innerHTML = "Pay";
                     button3.style.display = "none";
                     button5.style.display = "none";
+                    button6.style.display = "none";
                 }
                 if (product.status === "pending") {
                     button3.style.display = "none";
                     button4.style.display = "none";
+                    button6.style.display = "none";
                 }
                 if (product.status === "cartItem") {
                     button4.style.display = "none";
                     button5.style.display = "none";
+                    button6.style.display = "none";
+                }
+                if (product.status === "paid") {
+                    button4.style.display = "none";
+                    button5.style.display = "none";
+                    button3.style.display = "none";
                 }
                 //append the product row to the cart holder
                 document.querySelector("#cartHolder").appendChild(productRow);
@@ -568,6 +540,9 @@ function createPushNotification1() {
                         document.querySelector("#pName").innerHTML = name;
                         document.querySelector("#total").innerHTML = price * quantity + " Ksh";
                         
+                        //add product id and sellerId to the local storage
+                        localStorage.setItem('productId', id);
+                        localStorage.setItem('buyerId', buyerId);
 
                         //get user doc using the sellerId
                         const userDoc = doc(db, "users", sellerId);
@@ -594,13 +569,11 @@ function createPushNotification1() {
                     };
                 })(id, price, quantity, name, sellerId, buyerId));
                
-
-                button5.addEventListener('click', function() {
-                    //get the product id
-                    //add the product to the cart
-                    // alert('Product Details ' + productId + '\n' + "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status);
-
-                });
+                button6.addEventListener('click', (function(id) {
+                    return function() {
+                        window.location.href = "/b2c/";
+                    }
+                })(id));
 
                 //populate the carosel with the products
                 // <div class="carousel-item active rounded">
@@ -667,7 +640,9 @@ function createPushNotification1() {
             };
         });
     };
+
     fetchCaroselProducts();
+    
     function fetchOrderProducts() {
         document.querySelector("#cartHolder").innerHTML = "";
         //get the user id
@@ -762,12 +737,16 @@ function createPushNotification1() {
 
                 var button3 = document.createElement('button');
                 var button4 = document.createElement('button');
+                var button5 = document.createElement('button');
                 button3.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button4.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button5.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button3.innerHTML = "Aprove Order";
                 button4.innerHTML = "Pending";
+                button5.innerHTML = "Paid, waiting release";
                 td5.appendChild(button3);
                 td5.appendChild(button4);
+                td5.appendChild(button5);
                 productRow.appendChild(td5);
 
                 var Details = "Name: " +product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status + '\n' ;
@@ -780,13 +759,26 @@ function createPushNotification1() {
                     placement: 'top',
                     html: true
                 });
+                $(button5).popover({
+                    title: 'Order Details',
+                    content: Details,
+                    trigger: 'focus',
+                    placement: 'top',
+                    html: true
+                });
 
                 //check if status is approved
                 if (product.status === "approved") {
                     button3.style.display = "none";
+                    button5.style.display = "none";
                 }
                 if (product.status === "pending") {
                     button4.style.display = "none";
+                    button5.style.display = "none";
+                }
+                if (product.status === "paid") {
+                    button4.style.display = "none";
+                    button3.style.display = "none";
                 }
                 //append the product row to the cart holder
                 document.querySelector("#cartHolder").appendChild(productRow);

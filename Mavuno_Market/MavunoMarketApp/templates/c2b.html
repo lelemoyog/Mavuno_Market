@@ -7,7 +7,8 @@
     <div class="row mt-5">
         <div class="col-md-12 mt-5">
             <h1>{{message}}</h1>
+            <h1 id="resultCode" style="display: none;">{{result_code}}</h1>
         </div>
     </div>
-
+    <script type="module" src="{% static 'js/c2bCallback.js' %}"></script>
 {% endblock %}
