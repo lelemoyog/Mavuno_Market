@@ -50,19 +50,26 @@ def query_stk_status(request):
                     result_code = response_data['ResultCode']
                     if result_code == '1037':
                         message = "Timeout in completing transaction"
+                         #return JsonResponse({'message': message})  # Return JSON response
+                        return render(request, 'c2b.html',{'message': message,'result_code': result_code})
                     elif result_code == '1032':
                         message = "Transaction canceled"
+                         #return JsonResponse({'message': message})  # Return JSON response
+                        return render(request, 'c2b.html',{'message': message,'result_code': result_code})
                     elif result_code == '1':
                         message = "The balance is insufficient for the transaction"
+                         #return JsonResponse({'message': message})  # Return JSON response
+                        return render(request, 'c2b.html',{'message': message,'result_code': result_code})
                     elif result_code == '0':
                         message = "The transaction successful"
+                         #return JsonResponse({'message': message})  # Return JSON response
+                        return render(request, 'c2b.html',{'message': message,'result_code': result_code})
                     else:
                         message = "Unknown result code: " + result_code
                 else:
                     message = "Error in response"
 
-                #return JsonResponse({'message': message})  # Return JSON response
-                return render(request, 'c2b.html',{'message': message,'result_code': result_code})
+               
             except requests.exceptions.RequestException as e:
                 return render(request, 'c2b.html',{'message': message,'result_code': result_code}) # Return JSON response for network error
             except json.JSONDecodeError as e:

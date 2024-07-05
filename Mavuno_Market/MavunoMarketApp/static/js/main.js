@@ -442,9 +442,19 @@ function createPushNotification1() {
                 var td4 = document.createElement('td');
 
                 var p3 = document.createElement('p');
+                var p4 = document.createElement('p');
+                var p5 = document.createElement('p');
                 p3.className = "mb-0 mt-4";
+                p4.className = "mb-0 mt-4";
+                p5.className = "mb-0 mt-4";
+                // p4.style.display = "none";
+                // p5.style.display = "none";
+                p4.id = "phone";
+                p5.id = "amount";
                 p3.innerHTML = product.price;
                 td4.appendChild(p3);
+                td4.appendChild(p4);
+                td4.appendChild(p5);
                 productRow.appendChild(td4);
 
                 var td5 = document.createElement('td');
@@ -453,6 +463,8 @@ function createPushNotification1() {
                 var button4 = document.createElement('button');
                 var button5 = document.createElement('button');
                 var button6 = document.createElement('button');
+                button6.setAttribute('data-bs-toggle', 'modal');
+                button6.setAttribute('data-bs-target', '#exampleModalTogg');
                 button4.setAttribute('data-bs-toggle', 'modal');
                 button4.setAttribute('data-bs-target', '#exampleModalToggle');
                 button3.className = "btn btn-md rounded-circle bg-light border mt-4";
@@ -462,7 +474,7 @@ function createPushNotification1() {
                 button3.innerHTML = "Make Order";
                 button4.innerHTML = "pay";
                 button5.innerHTML = 'pending';
-                button6.innerHTML = 'Confirm your have received produce';
+                button6.innerHTML = 'Confirm';
                 td5.appendChild(button3);
                 td5.appendChild(button4);
                 td5.appendChild(button5);
@@ -515,6 +527,10 @@ function createPushNotification1() {
                 var name = product.name;
                 var sellerId = product.sellerId;
                 var buyerId = product.buyerId;
+
+          
+               
+                
                 // Add event listener to the button
                 button3.addEventListener('click', (function(id) {
                     return function() {
@@ -556,24 +572,39 @@ function createPushNotification1() {
                            //remove the starting zero and replace with 254 from user.phone
                             var phone = user.phone;
                             phone = phone.replace(/^0+/, "254");
-                           $('#phone2').val(phone);
+                        //    $('#phone2').val(phone);
                         });
-                        getDoc(userDoc1).then(docSnap => {
+                        getDoc(userDoc).then(docSnap => {
                             let user = docSnap.data();
                             console.log(user);
-                            // document.querySelector("#phone").innerHTML = user.phone;
                             var phone = user.phone;
                             phone = phone.replace(/^0+/, "254");
-                            $('#phone').val(phone);
+                            $('#phone1').val(phone);
+                            $('#amount1').val(price);
                         });
                     };
                 })(id, price, quantity, name, sellerId, buyerId));
                
-                button6.addEventListener('click', (function(id) {
+                button6.addEventListener('click', (function(sellerId,price) {
                     return function() {
-                        window.location.href = "/b2c/";
+                        
+                                const userDoc = doc(db, "users", sellerId);
+                                //get the user document
+                                getDoc(userDoc).then(docSnap => {
+                                    let user = docSnap.data();
+                                    console.log(user);
+                                    //display the user info in the profile page
+                                    var phone = user.phone;
+                                    phone = phone.replace(/^0+/, "254");
+                                    $('#phone3').val(phone);
+                                    $('#amount3').val(price);
+                                    // window.location.href = "/b2c/";
+                                   //remove the starting zero and replace with 254 from user.phone
+                                   
+                                });
+                          
                     }
-                })(id));
+                })(sellerId,price));
 
                 //populate the carosel with the products
                 // <div class="carousel-item active rounded">
