@@ -116,6 +116,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 document.getElementById('exampleModalLabel1').innerHTML = "My Orders";
                 fetchOrderProducts()
                 fetchProducts5()
+                fetchDashOrderProducts()
                 var posts1Element = document.querySelector("#posts1");
                 if (posts1Element) {
                     posts1Element.innerHTML = "";
@@ -1090,6 +1091,155 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 }
                 // Check if the cart holder element exists before appending the product row
                 var cartHolder = document.querySelector("#cartHolder1");
+                if (cartHolder) {
+                    cartHolder.appendChild(productRow);
+                }
+                id = product.id;
+                // Add event listener to the button
+                button3.addEventListener('click', (function (productId) {
+                    return function () {
+                        //delete the product
+                        deleteProduct(productId);
+                        //remove the product from the cart
+                        this.parentElement.parentElement.remove();
+                    };
+                })(id));
+
+
+
+            };
+        });
+    };
+
+    function fetchDashOrderProducts() {
+        const cartHolder1 = document.querySelector("#cartHolder2");
+        const posts = document.querySelector("#posts");
+
+       
+        //get the user id
+        var uid = localStorage.getItem('uid');
+        //get the cart collection
+        getDocs(query(collection(db, uid))).then(docSnap => {
+            let products = [];
+            docSnap.forEach((doc) => {
+                products.push({ ...doc.data(), id: doc.id })
+            });
+            console.log(products);
+            //display the products in the cart use doe loop let i = o and use js to create the elements
+            for (let i = 0; i < products.length; i++) {
+                //get the product
+                var product = products[i];
+                //create the elements
+                var productRow = document.createElement('tr');
+
+                var th = document.createElement('th');
+                th.scope = "row";
+                var div = document.createElement('div');
+                div.className = "d-flex align-items-center";
+                var img = document.createElement('img');
+                img.src = product.imgUrl;
+                img.className = "img-fluid me-5 rounded-circle";
+                img.style.width = "80px";
+                img.style.height = "80px";
+                img.alt = product.name;
+                div.appendChild(img);
+                th.appendChild(div);
+                productRow.appendChild(th);
+
+                var td1 = document.createElement('td');
+
+                var p1 = document.createElement('p');
+                p1.className = "mb-0 mt-4";
+                p1.innerHTML = product.name;
+                td1.appendChild(p1);
+                productRow.appendChild(td1);
+
+                var td2 = document.createElement('td');
+
+                var p2 = document.createElement('p');
+                p2.className = "mt-4";
+                p2.innerHTML = product.price;
+                td2.appendChild(p2);
+                productRow.appendChild(td2);
+
+                var td3 = document.createElement('td');
+
+                var div2 = document.createElement('div');
+                div2.className = "input-group quantity mt-4";
+                // div2.style.width = "100px";
+
+                var div3 = document.createElement('div');
+                div3.className = "input-group-btn";
+
+                var button1 = document.createElement('button');
+                button1.className = "btn btn-sm btn-minus rounded-circle bg-light border";
+                button1.innerHTML = '<i class="fa fa-minus"></i>';
+                // div3.appendChild(button1);
+
+                div2.appendChild(div3);
+
+                var input = document.createElement('p');
+                input.className = "mb-0 mt-0";
+                input.innerHTML = product.quantity;
+                div2.appendChild(input);
+
+                var div4 = document.createElement('div');
+                div4.className = "input-group-btn";
+
+                var button2 = document.createElement('button');
+                button2.className = "btn btn-sm btn-plus rounded-circle bg-light border";
+                button2.innerHTML = '<i class="fa fa-plus "></i>';
+                // div4.appendChild(button2);
+
+                div2.appendChild(div4);
+                td3.appendChild(div2);
+                productRow.appendChild(td3);
+
+                var td4 = document.createElement('td');
+                var td5 = document.createElement('td');
+
+                var p3 = document.createElement('p');
+                var p4 = document.createElement('p');
+                p3.className = "mb-0 mt-4";
+                p4.className = "mb-0 mt-4";
+                p3.innerHTML = product.price;
+                p4.innerHTML = product.status;
+                td4.appendChild(p3);
+                td5.appendChild(p4);
+                productRow.appendChild(td4);
+                productRow.appendChild(td5);
+
+                var td5 = document.createElement('td');
+
+                var button3 = document.createElement('button');
+                var button4 = document.createElement('button');
+                button3.className = "btn btn-md rounded-circle bg-light border mt-2";
+                button4.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button3.innerHTML = "<i class='fa fa-times text-danger'></i>";
+                button4.innerHTML = "Pending";
+                td5.appendChild(button3);
+                productRow.appendChild(td5);
+
+                var Details = "Name: " + product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status + '\n';
+                Details = Details.replace(/\n/g, '<br>');
+
+                $(button4).popover({
+                    title: 'Order Details',
+                    content: Details,
+                    trigger: 'focus',
+                    placement: 'top',
+                    html: true
+                });
+
+                //check if status is approved
+                if (product.status === "approved") {
+
+                }
+                if (product.status === "pending") {
+                    button4.style.display = "none";
+                }
+                // Check if the cart holder element exists before appending the product row
+                var cartHolder = document.querySelector("#cartHolder2");
                 if (cartHolder) {
                     cartHolder.appendChild(productRow);
                 }
