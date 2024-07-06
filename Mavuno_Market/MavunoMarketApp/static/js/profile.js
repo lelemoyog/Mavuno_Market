@@ -154,7 +154,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     var description = $('#productDescription').val();
     var imgUrl = localStorage.getItem('productPhotoUrl');
     var sellerId = localStorage.getItem('uid');
-    var availabilityWindowStart = String($('#availabilityWindowStart').val());
+    var availabilityWindowStart = $($('#availabilityWindowStart').val());
     var availabilityWindowEnd = $('#availabilityWindowEnd').val();
     //create a product object
     const product = new Product('', name, price, category, description, imgUrl, sellerId, availabilityWindowStart, availabilityWindowEnd, amountAvailable);
