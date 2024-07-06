@@ -66,11 +66,15 @@ def query_stk_status(request):
                         return render(request, 'c2b.html',{'message': message,'result_code': result_code})
                     else:
                         message = "Unknown result code: " + result_code
+                        return render(request, 'c2b.html',{'message': message,'result_code': result_code})
                 else:
                     message = "Error in response"
+                    return render(request, 'c2b.html',{'message': message,'result_code': result_code})
 
                
             except requests.exceptions.RequestException as e:
+                message = "please check your internet connection"
+                result_code = "1"
                 return render(request, 'c2b.html',{'message': message,'result_code': result_code}) # Return JSON response for network error
             except json.JSONDecodeError as e:
                 return JsonResponse({'error': 'Error decoding JSON: ' + str(e)})  # Return JSON response for JSON decoding error

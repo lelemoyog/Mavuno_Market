@@ -1,6 +1,6 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where, setDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,  updateDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 //import https://cdn.jsdelivr.net/npm/apexcharts
@@ -34,6 +34,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
 
         var resultCode = document.getElementById('resultCode').innerHTML;
+        var spinner = document.getElementById('spinnercle');
 
         if (resultCode == "0") {
             console.log('Transaction was successful');
@@ -47,6 +48,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
             //update order status
             updateOrderStatus(productId, buyerId);
+        }
+        if (resultCode == "1") {
+          //reload in 1000
+          spinner.style.display = "block";
+            setTimeout(function () {
+                window.location.reload();
+            }, 4000);
         }
 
     });
@@ -67,31 +75,21 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             console.log(product);
             if (product) {
                 const productObj = {
-                    id: productId,
-                    name: product.name,
-                    price: product.price,
-                    category: product.category,
-                    description: product.description,
-                    imgUrl: product.imgUrl,
-                    sellerId: product.sellerId,
-                    buyerId: product.buyerId,
-                    quantity: product.quantity || "1", // assign a default value if quantity is undefined
+                    // assign a default value if quantity is undefined
                     status: "paid",
-                    availabilityWindowStart: product.availabilityWindowStart,
-                    availabilityWindowEnd: product.availabilityWindowEnd,
                 };
                 //add product to the database use setDoc and the document id to the product object
                 //get uid
                 var cartDoc = doc(db, product.buyerId, productId);
-                var orderDoc = doc(db, product.sellerId, product.id);
-                setDoc(cartDoc, productObj)
+                var orderDoc = doc(db, product.sellerId, product.orderId);
+                updateDoc(cartDoc, productObj)
                     .then(() => {
                         console.log("Order successfully written!");
                     })
                     .catch((error) => {
                         console.error("Error writing document: ", error);
                     });
-                setDoc(orderDoc, productObj)
+                    updateDoc(orderDoc, productObj)
                     .then(() => {
                         console.log("Order successfully written!");
                         setTimeout(function () {

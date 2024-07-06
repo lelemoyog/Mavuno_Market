@@ -40,7 +40,10 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
             $('#productPrice').text(product.price);
             $('#productCategory').text(product.category);
             $('#productDescription').text(product.description);
+            $("#available").text(product.amountAvailable);
             $('#productImage').attr('src', product.imgUrl);
+            $("#planting").text(product.availabilityWindowStart);
+            $("#havesting").text( product.availabilityWindowEnd);
             var uid = product.sellerId;
             getUser(uid)
         });
@@ -53,7 +56,13 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
             let user = docSnap.data();
             console.log(user);
             //display the famer image
-            $('#descriptionFamerImg').attr('src', user.imgUrl);
+            
+            if(user.imgUrl == ""){
+                var image = "https://www.w3schools.com/w3images/avatar2.png";
+                $('#descriptionFamerImg').attr('src', image);
+              }else{
+                $('#descriptionFamerImg').attr('src', user.imgUrl);
+               }
             console.log(user.imgUrl);
             $('#descriptionFamerName').text(user.name);
             $('#descriptionFamerAbout').text(user.about);
@@ -77,7 +86,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
 
     $('#addToCartBtn').click(function () {
         //get the product id
-       
+        document.querySelector("#spin").style.display = "block";
         var id = localStorage.getItem('productId');
         //get the user id
         //add the product to the cart
@@ -137,13 +146,14 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
         var cartDoc = doc(db, uid, product.id);
         setDoc(cartDoc, productObj).then(() => {
             console.log("Document successfully written!");
+            document.querySelector("#spin").style.display = "none";
             $("#myAlert2").fadeTo(2000, 500).slideUp(500, function () {
                 $("#myAlert2").slideUp(1000);
               });
-              window.location.href = "/description/";
-            fetchCartProducts();
+            //   window.location.href = "/description/";
+            window.fetchCartProducts();
             //reload the page
-            location.reload();
+            // location.reload();
            }).catch((error) => {
             $("#myAlert2").fadeTo(2000, 500).slideUp(500, function () {
                 $("#myAlert2").innerHTML = error.code;
@@ -155,122 +165,5 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
         
       }
 
-      function fetchCartProducts() {
-        document.querySelector("#cartHolder").innerHTML = "";
-        //get the user id
-        var uid = localStorage.getItem('uid');
-        //get the cart collection
-        getDocs(query(collection(db, uid))).then(docSnap => {
-            let products = [];
-            docSnap.forEach((doc) => {
-                products.push({ ...doc.data(), id: doc.id })
-            });
-            console.log(products);
-            //display the products in the cart use doe loop let i = o and use js to create the elements
-            for (let i = 0; i < products.length; i++) {
-                //get the product
-                var product = products[i];
-                //create the elements
-                var productRow = document.createElement('tr');
-
-                var th = document.createElement('th');
-                th.scope = "row";
-                var div = document.createElement('div');
-                div.className = "d-flex align-items-center";
-                var img = document.createElement('img');
-                img.src = product.imgUrl;
-                img.className = "img-fluid me-5 rounded-circle";
-                img.style.width = "80px";
-                img.style.height = "80px";
-                img.alt = product.name;
-                div.appendChild(img);
-                th.appendChild(div);
-                productRow.appendChild(th);
-
-                var td1 = document.createElement('td');
-
-                var p1 = document.createElement('p');
-                p1.className = "mb-0 mt-4";
-                p1.innerHTML = product.name;
-                td1.appendChild(p1);
-                productRow.appendChild(td1);
-
-                var td2 = document.createElement('td');
-
-                var p2 = document.createElement('p');
-                p2.className = "mb-0 mt-4";
-                p2.innerHTML = product.price;
-                td2.appendChild(p2);
-                productRow.appendChild(td2);
-
-                var td3 = document.createElement('td');
-
-                var div2 = document.createElement('div');
-                div2.className = "input-group quantity mt-4";
-                div2.style.width = "100px";
-
-                var div3 = document.createElement('div');
-                div3.className = "input-group-btn";
-
-                var button1 = document.createElement('button');
-                button1.className = "btn btn-sm btn-minus rounded-circle bg-light border";
-                button1.innerHTML = '<i class="fa fa-minus"></i>';
-                div3.appendChild(button1);
-
-                div2.appendChild(div3);
-
-                var input = document.createElement('input');
-                input.type = "text";
-                input.className = "form-control form-control-sm text-center border-0";
-                input.value = "1";
-                div2.appendChild(input);
-
-                var div4 = document.createElement('div');
-                div4.className = "input-group-btn";
-
-                var button2 = document.createElement('button');
-                button2.className = "btn btn-sm btn-plus rounded-circle bg-light border";
-                button2.innerHTML = '<i class="fa fa-plus "></i>';
-                div4.appendChild(button2);
-
-                div2.appendChild(div4);
-                td3.appendChild(div2);
-                productRow.appendChild(td3);
-
-                var td4 = document.createElement('td');
-
-                var p3 = document.createElement('p');
-                p3.className = "mb-0 mt-4";
-                p3.innerHTML = product.price;
-                td4.appendChild(p3);
-                productRow.appendChild(td4);
-
-                var td5 = document.createElement('td');
-
-                var button3 = document.createElement('button');
-                button3.className = "btn btn-md rounded-circle bg-light border mt-4";
-                button3.innerHTML = "Make Order";
-                td5.appendChild(button3);
-                productRow.appendChild(td5);
-
-                //append the product row to the cart holder
-                document.querySelector("#cartHolder").appendChild(productRow);
-
-                var cartCount = products.length
-                document.querySelector("#cartCount").innerHTML = cartCount;
-                id = product.id;
-                // Add event listener to the button
-                button3.addEventListener('click', (function(productId) {
-                    return function() {
-                        //get the product id
-                        //add the product to the cart
-                        alert('Order Made ' + productId);
-                        makeOrder(productId);
-                    };
-                })(id));
-
-            };
-        });
-    };
 
 })(jQuery);

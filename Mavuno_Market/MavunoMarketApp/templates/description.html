@@ -93,14 +93,7 @@
             </ol> -->
         </div>
         <!-- Single Page Header End -->
-        <div style="display:none;" id="myAlert2">
-            <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
-              <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-              <div>
-                Added to cart successfully
-              </div>
-            </div>
-          </div>
+       
 
         <!-- Single Product Start -->
         <div class="container-fluid py-5 mt-5">
@@ -118,6 +111,7 @@
                             <div class="col-lg-6">
                                 <h4 class="fw-bold mb-3" id="productName">Brocoli</h4>
                                 <p class="mb-3" id="productCategory">Category: Vegetables</p>
+                                <p class="mb-3" >Available quantity: <span id="available"></span> kg</p>
                                 <h5 class="fw-bold mb-3" id="productPrice">3,35 $</h5>
                                 <div class="d-flex mb-4">
                                     <i class="fa fa-star text-secondary"></i>
@@ -126,8 +120,12 @@
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <p class="mb-4" id="productDescription">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
-                                <p class="mb-4">Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish</p>
+                               
+                               
+                                <p class="mb-4">Planting Date:  </p>
+                                <p class="mb-4" id="planting"> </p>
+                                <p class="mb-4" >Harvesting Date:  </p>
+                                <p class="mb-4" id="havesting"> </p>
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
@@ -141,6 +139,19 @@
                                         </button>
                                     </div>
                                 </div>
+                                <div style="display:none;" id="myAlert2">
+                                    <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
+                                      <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                                      <div>
+                                        Added to cart successfully
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" id="spin" style="display: none;" role="status">
+                                      <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                  </div>
                                 <a id="addToCartBtn" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" style="display: none;"><i class="fa fa-shopping-bag me-2 text-primary"></i>Add to cart</a>
                             </div>
                             <div class="col-lg-12">
@@ -156,10 +167,7 @@
                                 </nav>
                                 <div class="tab-content mb-5">
                                     <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                        <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. 
-                                            Susp endisse ultricies nisi vel quam suscipit </p>
-                                        <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic 
-                                            icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray sweeper.</p>
+                                        <p class="mb-4" id="productDescription">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
                                         <!-- <div class="px-2">
                                             <div class="row g-4">
                                                 <div class="col-6">
@@ -209,7 +217,7 @@
                                     </div>
                                     <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
                                         <div class="d-flex">
-                                            <img src="" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
                                             <div class="">
                                                 <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
                                                 <div class="d-flex justify-content-between">
@@ -227,7 +235,7 @@
                                             </div>
                                         </div>
                                         <div class="d-flex">
-                                            <img src="" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                            <img src="https://www.w3schools.com/w3images/avatar2.png" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
                                             <div class="">
                                                 <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
                                                 <div class="d-flex justify-content-between">
