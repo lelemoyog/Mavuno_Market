@@ -70,7 +70,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 $('#logoutToggle').show();
             } else {
                 // No user is signed in.
-                $('#addToCartBtn').show();
+                document.getElementById("addToCartBtn1").style.display = "block";
                 $('#profile').hover(function () {
                     $('#signupModal').modal('show');
                 });
@@ -102,7 +102,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             if (user.accesslevel === "vendor") {
                 //add accesslevel to the local storage
                 localStorage.setItem('accesslevel', user.accesslevel);
-                $('#addToCartBtn').show();
+                document.getElementById("addToCartBtn1").style.display = "block";
                 document.getElementById('exampleModalLabel1').innerHTML = "My Cart";
                 fetchCartProducts();
                 fetchProfileOrderProducts()

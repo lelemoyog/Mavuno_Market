@@ -50,10 +50,21 @@ function updateOrderStatus(productId, buyerId) {
     //get the product id
     //get the product document
     const productDoc = doc(db, buyerId, productId);
+    const prod = doc(db, "products", productId);
+    var availableQuantity
+    getDoc(prod).then((docSnap) => {
+        let product = docSnap.data();
+        console.log(product);
+        if (product) {
+            availableQuantity = product.amountAvailable;
+        }
+    });
     //get the product document
     getDoc(productDoc).then((docSnap) => {
         let product = docSnap.data();
         //conver to plain js object
+        var quantity = product.quantity;
+        var remainingQuantity = availableQuantity - quantity;
         console.log(product);
         if (product) {
             const productObj = {
@@ -65,6 +76,10 @@ function updateOrderStatus(productId, buyerId) {
             //get uid
             var cartDoc = doc(db, product.buyerId, productId);
             var orderDoc = doc(db, product.sellerId, product.orderId);
+            var productDoc = doc(db, "products", productId);
+            updateDoc(productDoc, {
+                amountAvailable: remainingQuantity
+            })
             updateDoc(cartDoc, productObj)
                 .then(() => {
                     console.log("Order successfully written!");
