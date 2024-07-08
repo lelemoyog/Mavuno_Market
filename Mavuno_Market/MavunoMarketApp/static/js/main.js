@@ -104,7 +104,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 localStorage.setItem('accesslevel', user.accesslevel);
                 var btn = document.getElementById("addToCartBtn1");
                 if (btn) {
-                    btn.style.display = "none";
+                    btn.style.display = "block";
                 }
                 document.getElementById('exampleModalLabel1').innerHTML = "My Cart";
                 fetchCartProducts();
