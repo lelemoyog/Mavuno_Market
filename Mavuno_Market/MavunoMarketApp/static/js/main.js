@@ -102,7 +102,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             if (user.accesslevel === "vendor") {
                 //add accesslevel to the local storage
                 localStorage.setItem('accesslevel', user.accesslevel);
-                document.getElementById("addToCartBtn1").style.display = "block";
+                var btn = document.getElementById("addToCartBtn1");
+                if (btn) {
+                    btn.style.display = "none";
+                }
                 document.getElementById('exampleModalLabel1').innerHTML = "My Cart";
                 fetchCartProducts();
                 fetchProfileOrderProducts()
