@@ -857,14 +857,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var button1 = document.createElement('button');
                 button1.className = "btn btn-sm btn-minus rounded-circle bg-light border";
                 button1.innerHTML = '<i class="fa fa-minus"></i>';
-                div3.appendChild(button1);
+                // div3.appendChild(button1);
 
                 div2.appendChild(div3);
 
                 var input = document.createElement('input');
                 input.type = "text";
                 input.className = "form-control form-control-sm text-center border-0";
-                input.value = "1";
+                input.value = product.quantity;
                 div2.appendChild(input);
 
                 var div4 = document.createElement('div');
@@ -873,7 +873,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var button2 = document.createElement('button');
                 button2.className = "btn btn-sm btn-plus rounded-circle bg-light border";
                 button2.innerHTML = '<i class="fa fa-plus "></i>';
-                div4.appendChild(button2);
+                // div4.appendChild(button2);
 
                 div2.appendChild(div4);
                 td3.appendChild(div2);

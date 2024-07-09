@@ -57,7 +57,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
             console.log(user);
             //display the famer image
             
-            if(user.imgUrl == ""){
+            if(user.imgUrl == "" || user.imgUrl == null){
                 var image = "https://www.w3schools.com/w3images/avatar2.png";
                 $('#descriptionFamerImg').attr('src', image);
               }else{

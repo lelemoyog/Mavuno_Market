@@ -14,8 +14,8 @@ def initiate_stk_push(request):
         access_token_json = json.loads(access_token)
         access_token = access_token_json.get('access_token')
         if access_token:
-            amount = 1
-            phone = "254717521766"
+            amount = 1 #int(request.POST.get('amount1'))
+            phone =request.POST.get('phone1')
             process_request_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
             callback_url = 'https://37c6-105-163-157-12.ngrok-free.app/query/'
             passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
