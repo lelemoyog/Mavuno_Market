@@ -107,7 +107,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       location: $('#userLocation').val(),
       about: $('#userAbout').val(),
       phone: $('#userPhone').val(),
-      imgUrl: url
     }).then(() => {
       console.log("Document successfully updated!");
       $("#myAlert6").fadeTo(2000, 500).slideUp(500, function () {
