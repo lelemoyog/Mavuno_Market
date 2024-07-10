@@ -26,10 +26,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     $(document).ready(function () {
 
 
-
-
-
-
         var resultCode = document.getElementById('resultCode').innerHTML;
 
 

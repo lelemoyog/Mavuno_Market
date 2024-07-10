@@ -70,7 +70,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 $('#logoutToggle').show();
             } else {
                 // No user is signed in.
-                document.getElementById("addToCartBtn1").style.display = "block";
+                var cartBtn =  document.getElementById("addToCartBtn1");
+                if (cartBtn) {
+                    cartBtn.style.display = "none";
+                }
                 $('#profile').hover(function () {
                     $('#signupModal').modal('show');
                 });
