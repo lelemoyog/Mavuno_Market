@@ -477,6 +477,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 input.style.backgroundColor = "transparent";
                 input.className = "form-control form-control-sm text-center border-0";
                 input.value = product.quantity;
+                input.id = "cartInput";
                 div2.appendChild(input);
 
                 var div4 = document.createElement('div');
@@ -572,6 +573,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     button5.style.display = "none";
                     button6.style.display = "none";
                     button7.style.display = "none";
+                    input.disabled = false;
                 }
                 if (product.status === "paid") {
                     button4.style.display = "none";
@@ -604,11 +606,15 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
 
 
-
+                
+                //pick the value from the html input
                 // Add event listener to the button
                 button3.addEventListener('click', (function (id) {
                     return function () {
-                        makeOrder(id);
+                        //get the input value from the html from the target element and store it in a varviable called cartQuantity use this.parentElement.value or something simialr this an i dea am giving you
+                        var cartQuantity = this.parentElement.parentElement.querySelector("input").value;
+                        
+                        makeOrder(id,cartQuantity);
 
                         //reload the page
                         $("#myAlert3").fadeTo(2000, 500).slideUp(500, function () {
@@ -803,6 +809,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         document.querySelector("#cartHolder").innerHTML = "";
         //get the user id
         var uid = localStorage.getItem('uid');
+        
         //get the cart collection
         getDocs(query(collection(db, uid))).then(docSnap => {
             let products = [];
@@ -886,7 +893,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
                 var p3 = document.createElement('p');
                 p3.className = "mb-0 mt-4";
-                p3.innerHTML = product.price;
+                p3.innerHTML = product.price * product.quantity;
                 td4.appendChild(p3);
                 productRow.appendChild(td4);
 
@@ -946,7 +953,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 // Add event listener to the button
                 button3.addEventListener('click', (function (productId) {
                     return function () {
-                        updateOrderStatus(productId, product.sellerId);
+                        var cartQuantity = this.parentElement.parentElement.querySelector("input").value;
+                        updateOrderStatus(productId, product.sellerId, cartQuantity);
                         localStorage.setItem('notificationStatus', 'off');
                         $("#myAlert4").fadeTo(2000, 500).slideUp(500, function () {
                             $("#myAlert4").slideUp(500);
@@ -1364,7 +1372,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     }
     //update order status
 
-    function updateOrderStatus(productId, sellerId) {
+    function updateOrderStatus(productId, sellerId,cartQuantity) {
         //get the product id
         //get the product document
         const productDoc = doc(db, sellerId, productId);
@@ -1375,6 +1383,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             const productObj = {
               // assign a default value if quantity is undefined
                 status: "approved",
+                quantity: cartQuantity,
                
             };
             //add product to the database use setDoc and the document id to the product object
@@ -1400,7 +1409,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
     //get the product id
 
-    function makeOrder(productId) {
+    function makeOrder(productId, cartQuantity) {
         //get the product id
 
         var uid = localStorage.getItem('uid');
@@ -1420,7 +1429,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 imgUrl: product.imgUrl,
                 sellerId: product.sellerId,
                 buyerId: uid,
-                quantity: product.quantity,
+                quantity: cartQuantity,
                 status: "pending",
                 availabilityWindowStart: product.availabilityWindowStart,
                 availabilityWindowEnd: product.availabilityWindowEnd
@@ -1434,12 +1443,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     var cartDoc = doc(db, product.sellerId, docRef.id);
                     var productDoc = doc(db, product.buyerId, productId);
                     updateDoc(cartDoc, {
-                        orderId: docRef.id
+                        orderId: docRef.id,
+                        quantity: cartQuantity,
                     }).then(() => {
                         //update the product status
                         updateDoc(productDoc, {
                             status: "pending",
-                            orderId: docRef.id
+                            orderId: docRef.id,
+                            quantity: cartQuantity,
                         }).then(() => {
                             console.log("Order successfully written!");
                         })
