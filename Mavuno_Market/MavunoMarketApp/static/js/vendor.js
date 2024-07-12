@@ -78,7 +78,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         textWhite.innerHTML = location;
 
         var border = document.createElement("div");
-        border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+        border.className = "p-4 border border-success border-top-0 rounded-bottom";
 
         var h4 = document.createElement("h4");
         h4.innerHTML = name;
@@ -92,8 +92,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
         var a = document.createElement("a");
         a.href = "#";
-        a.className = "btn border border-secondary rounded-pill px-3 text-primary";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View completed Orders`;
+        a.className = "btn btn-outline-success";
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2"></i> View completed Orders`;
         a.setAttribute("data-bs-toggle", "modal");
         a.setAttribute("data-bs-target", "#vendorOrderModal");
 

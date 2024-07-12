@@ -28,6 +28,7 @@ body {
     justify-content: center;
     transition: 0.5s;
     z-index: 99;
+    border-radius: 50%;
 }
 /*** Spinner End ***/
 
@@ -81,7 +82,7 @@ body {
 }
 
 .btn.border-secondary:hover {
-    background: var(--bs-secondary) !important;
+    background: var(--bs-success) !important;
     color: var(--bs-white) !important;
 }
 
@@ -118,12 +119,15 @@ body {
 }
 
 .topbar .top-link a small:hover {
-    color: var(--bs-secondary) !important;
+    color: var(--bs-success) !important;
+    background: var(--bs-light) !important;
+    border-radius: 10px;
+    padding: 5px 10px;
     transition: 0.5s;
 }
 
 .topbar .top-link a small:hover i {
-    color: var(--bs-primary) !important;
+    color: var(--bs-success) !important;
 }
 /*** Topbar End ***/
 
@@ -143,7 +147,15 @@ body {
 .navbar .navbar-nav .nav-link.active,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link:hover,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link.active {
-    color: var(--bs-primary);
+    color: var(--bs-light);
+    background: var(--bs-success);
+    border-radius: 10px;
+}
+
+/* make .navbar .navbar-nav .nav-link.active, remain active on click  */
+.navbar .navbar-nav .nav-link.active {
+    background: var(--bs-success);
+    border-radius: 10px;
 }
 
 .navbar .dropdown-toggle::after {
@@ -178,8 +190,8 @@ body {
 }
 
 .dropdown .dropdown-menu a:hover {
-    background: var(--bs-secondary);
-    color: var(--bs-primary);
+    background: var(--bs-success);
+    color: var(--bs-white) !important;
 }
 
 .navbar .nav-item:hover .dropdown-menu {
@@ -214,7 +226,9 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 25px;
-    background: linear-gradient(rgba(255, 181, 36, 0.7), rgba(255, 181, 36, 0.7));
+    background: linear-gradient(rgba(112, 111, 110, 0.7), rgba(112, 111, 110, 0.7));
+    /* text color */
+    color: var(--bs-light);
 }
 
 .carousel-control-next,
@@ -223,7 +237,7 @@ body {
     height: 48px;
     border-radius: 48px;
     border: 1px solid var(--bs-white);
-    background: var(--bs-primary);
+    background: var(--bs-success);
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -340,7 +354,7 @@ body {
 
 /*** Fruits Start ***/
 .fruite .tab-class .nav-item a.active {
-    background: var(--bs-secondary) !important;
+    background: var(--bs-success) !important;
 }
 
 .fruite .tab-class .nav-item a.active span {
@@ -356,7 +370,7 @@ body {
 }
 
 .fruite .fruite-categorie .fruite-name a:hover {
-    color: var(--bs-secondary);
+    color: var(--bs-success);
 }
 
 .fruite .fruite-item {
@@ -468,7 +482,7 @@ body {
 }
 
 .counter h4 {
-    color: var(--bs-primary);
+    color: var(--bs-success);
     letter-spacing: 1px;
     text-transform: uppercase;
 }

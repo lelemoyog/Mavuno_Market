@@ -288,7 +288,7 @@ function fetchProducts(){
       textWhite.innerHTML = category;
 
       var border = document.createElement("div");
-      border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+      border.className = "p-4 border border-success border-top-0 rounded-bottom";
 
       var h4 = document.createElement("h4");
       h4.innerHTML = name;
@@ -306,8 +306,8 @@ function fetchProducts(){
 
       var a = document.createElement("a");
       a.href = "#";
-      a.className = "btn border border-secondary rounded-pill px-3 text-primary";
-      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+      a.className = "btn btn-outline-success";
+      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
 
       
 
@@ -386,7 +386,7 @@ function fetchProducts2(){
       textWhite.innerHTML = category;
 
       var border = document.createElement("div");
-      border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+      border.className = "p-4 border border-success border-top-0 rounded-bottom";
 
       var h4 = document.createElement("h4");
       h4.innerHTML = name;
@@ -400,8 +400,8 @@ function fetchProducts2(){
 
       var a = document.createElement("a");
       a.href = "#";
-      a.className = "btn border border-secondary rounded-pill px-3 text-primary";
-      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+      a.className = "btn btn-outline-success";
+      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
 
       veiwGoods.appendChild(product);
       product.appendChild(fruiteItem);
@@ -472,7 +472,7 @@ function fetchProducts3(){
       textWhite.innerHTML = category;
 
       var border = document.createElement("div");
-      border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+      border.className = "p-4 border border-success border-top-0 rounded-bottom";
 
       var h4 = document.createElement("h4");
       h4.innerHTML = name;
@@ -486,8 +486,8 @@ function fetchProducts3(){
 
       var a = document.createElement("a");
       a.href = "#";
-      a.className = "btn border border-secondary rounded-pill px-3 text-primary";
-      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+      a.className = "btn btn-outline-success";
+      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
 
       veiwGoods.appendChild(product);
       product.appendChild(fruiteItem);
@@ -558,7 +558,7 @@ function fetchProducts4(){
       textWhite.innerHTML = category;
 
       var border = document.createElement("div");
-      border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+      border.className = "p-4 border border-success border-top-0 rounded-bottom";
 
       var h4 = document.createElement("h4");
       h4.innerHTML = name;
@@ -572,8 +572,8 @@ function fetchProducts4(){
 
       var a = document.createElement("a");
       a.href = "#";
-      a.className = "btn border border-secondary rounded-pill px-3 text-primary";
-      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+      a.className = "btn btn-outline-success";
+      a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
 
      
 

@@ -205,6 +205,21 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         return false;
     });
 
+    // make nav links active on click after reload
+    $(document).ready(function () {
+        var url = window.location;
+        console.log(url);
+       //check if the url.pathname is equal to the href of the nav link and add the active class
+       var navHref = document.querySelectorAll('.nav-link');
+       //loop through the nav links and check if the href is equal to the url.pathname
+         for (let i = 0; i < navHref.length; i++) {
+              if (navHref[i].href === url.href) {
+                navHref[i].classList.add('active');
+              }
+         }
+    });
+
+
 
     // Testimonial carousel
     $(".testimonial-carousel").owlCarousel({
@@ -802,11 +817,11 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var img = document.createElement('img');
                 img.style.height = "400px";
                 img.src = product.imgUrl;
-                img.className = "img-fluid w-100 bg-secondary rounded";
+                img.className = "img-fluid w-100 bg-success rounded";
                 img.alt = product.name;
                 caroselItem.appendChild(img);
                 var a = document.createElement('a');
-                a.className = "btn px-4 py-2 text-white rounded";
+                a.className = "btn btn-outline-success";
                 a.innerHTML = product.category;
                 caroselItem.appendChild(a);
                 var caroselHolder = document.querySelector("#caroselHolder");
@@ -1427,7 +1442,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 textWhite.innerHTML = category;
 
                 var border = document.createElement("div");
-                border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
+                border.className = "p-4 border border-success border-top-0 rounded-bottom";
 
                 var h4 = document.createElement("h4");
                 h4.innerHTML = name;
@@ -1441,8 +1456,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
                 var a = document.createElement("a");
                 a.href = "#";
-                a.className = "btn border border-secondary rounded-pill px-3 text-primary";
-                a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+                a.className = "btn btn-outline-success";
+                a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
 
                 if (veiwGoods) {
                     veiwGoods.appendChild(product);
