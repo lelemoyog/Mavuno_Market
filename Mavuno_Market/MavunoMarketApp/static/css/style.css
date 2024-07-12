@@ -287,6 +287,18 @@ body {
         color: var(--bs-primary);
         display: visible;
     }
+    .mytable {
+        font-size: 0.8em;
+        width: 60%;
+    }
+    .img{
+        width: 40px;
+        height: 40px;
+    }
+    .tr{
+        font-size: 1em;
+        display: flex;
+    }
 }
 /*** Hero Header end ***/
 

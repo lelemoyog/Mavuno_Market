@@ -504,7 +504,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 // p5.style.display = "none";
                 p4.id = "phone";
                 p5.id = "amount";
-                p3.innerHTML = product.price;
+                p3.innerHTML = product.price * product.quantity;
                 td4.appendChild(p3);
                 td4.appendChild(p4);
                 td4.appendChild(p5);
@@ -554,6 +554,37 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     html: true
                 });
                 productRow.appendChild(td5);
+
+
+                if(window.matchMedia("(max-width: 768px)").matches){
+                    img.style.width = "40px";
+                    img.style.height = "40px";
+                    img.className = "img-fluid me-2 rounded-circle img mt-2";
+                    td1.style.fontSize = "1.1em";
+                    td2.style.fontSize = "1.1em";
+                    td3.style.fontSize = "1.1em";
+                    td4.style.fontSize = "1.1em";
+                    td5.style.fontSize = "1.1em";
+                    input.style.fontSize = "1.1em";
+                    input.style.width = "1px !important";
+                    input.style.margin = "0";
+                    div2.style.width = "40px";
+                    div2.className = "input-group quantity mt-3 ms-2";
+                    td5.style.display = "flex";
+                    button3.innerHTML = "<i class='fa fa-check'></i>";
+                    button3.className = "btn btn-sm rounded-circle bg-light border mt-1";
+                    button4.innerHTML = "<i class='fa fa-clock'></i>";
+                    button4.className = "btn btn-sm rounded-circle bg-light border mt-1";
+                    button5.innerHTML = "paid";
+                    button5.className = "btn btn-sm rounded-circle bg-light border mt-1";
+                    button6.innerHTML = "...";
+                    button6.className = "btn btn-sm rounded-circle bg-light border mt-1 ms-1";
+                    button7.className = "btn btn-sm rounded-circle bg-light border mt-1 ms-1";
+                    button8.className = "btn btn-sm rounded-circle bg-light border mt-1 ms-1";
+                    productRow.style.display = "flex";
+                }
+
+
                 //check if status is approved
                 if (product.status === "approved") {
                     button3.innerHTML = "Pay";
@@ -831,9 +862,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 div.className = "d-flex align-items-center";
                 var img = document.createElement('img');
                 img.src = product.imgUrl;
-                img.className = "img-fluid me-5 rounded-circle";
+                img.className = "img-fluid me-5 rounded-circle img";
                 img.style.width = "80px";
                 img.style.height = "80px";
+                //create a meadia query at max width of 768px and set the width to 40px
                 img.alt = product.name;
                 div.appendChild(img);
                 th.appendChild(div);
@@ -874,6 +906,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var input = document.createElement('input');
                 input.type = "text";
                 input.className = "form-control form-control-sm text-center border-0";
+                input.style.backgroundColor = "transparent";
                 input.value = product.quantity;
                 div2.appendChild(input);
 
@@ -902,16 +935,48 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var button3 = document.createElement('button');
                 var button4 = document.createElement('button');
                 var button5 = document.createElement('button');
+                var button6 = document.createElement('button');
                 button3.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button4.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button5.className = "btn btn-md rounded-circle bg-light border mt-4";
+                button6.className = "btn btn-md rounded-circle bg-light border mt-4 ms-2";
+                button6.setAttribute('data-bs-toggle', 'modal');
+                button6.setAttribute('data-bs-target', '#exampleModalT');
                 button3.innerHTML = "Aprove Order";
                 button4.innerHTML = "Pending";
                 button5.innerHTML = "Paid, waiting release";
+                button6.innerHTML = "...";
                 td5.appendChild(button3);
                 td5.appendChild(button4);
                 td5.appendChild(button5);
+                td5.appendChild(button6);
                 productRow.appendChild(td5);
+
+                if(window.matchMedia("(max-width: 768px)").matches){
+                    img.style.width = "40px";
+                    img.style.height = "40px";
+                    img.className = "img-fluid me-2 rounded-circle img mt-2";
+                    td1.style.fontSize = "1.1em";
+                    td2.style.fontSize = "1.1em";
+                    td3.style.fontSize = "1.1em";
+                    td4.style.fontSize = "1.1em";
+                    td5.style.fontSize = "1.1em";
+                    input.style.fontSize = "1.1em";
+                    input.style.width = "1px !important";
+                    input.style.margin = "0";
+                    div2.style.width = "40px";
+                    div2.className = "input-group quantity mt-3 ms-2";
+                    td5.style.display = "flex";
+                    button3.innerHTML = "<i class='fa fa-check'></i>";
+                    button3.className = "btn btn-sm rounded-circle bg-light border mt-1";
+                    button4.innerHTML = "<i class='fa fa-clock'></i>";
+                    button4.className = "btn btn-sm rounded-circle bg-light border mt-1";
+                    button5.innerHTML = "paid";
+                    button5.className = "btn btn-sm rounded-circle bg-light border mt-1";
+                    button6.innerHTML = "...";
+                    button6.className = "btn btn-sm rounded-circle bg-light border mt-1 ms-1";
+                    productRow.style.display = "flex";
+                }
 
                 var Details = "Name: " + product.name + '\n' + "Price: " + product.price + '\n' + "Quantity: " + product.quantity + '\n' + "Status: " + product.status + '\n';
                 Details = Details.replace(/\n/g, '<br>');
@@ -935,14 +1000,17 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 if (product.status === "approved") {
                     button3.style.display = "none";
                     button5.style.display = "none";
+                    input.disabled = true;
                 }
                 if (product.status === "pending") {
                     button4.style.display = "none";
                     button5.style.display = "none";
+                    
                 }
                 if (product.status === "paid") {
                     button4.style.display = "none";
                     button3.style.display = "none";
+                    input.disabled = true;
                 }
                 //append the product row to the cart holder
                 document.querySelector("#cartHolder").appendChild(productRow);
@@ -950,6 +1018,11 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var cartCount = products.length
                 document.querySelector("#cartCount").innerHTML = cartCount;
                 id = product.id;
+                var price = product.price
+                var quantity = product.quantity;
+                var name = product.name;
+                var sellerId = product.sellerId;
+                var buyerId = product.buyerId;
                 // Add event listener to the button
                 button3.addEventListener('click', (function (productId) {
                     return function () {
@@ -967,7 +1040,36 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     };
                 })(id));
 
+                button6.addEventListener('click', (function (id, price, quantity, name, sellerId, buyerId) {
+                    return function () {
+                        const userDoc = doc(db, "users", buyerId);
+                        //get the user document
+                        getDoc(userDoc).then(docSnap => {
+                            let user = docSnap.data();
+                            console.log(user);
+                            //display the user info in the profile page
+                            var phone = user.phone;
+                            var img;
+                            var location = user.location;
+                            var username = user.name;
+                            if (user.imgUrl == "") {
+                                var img = "https://www.w3schools.com/w3images/avatar2.png";
+                            } else {
+                                var img = user.imgUrl;
+                            }
+                            document.querySelector("#dFName").innerHTML = username;
+                            document.querySelector("#nm").innerHTML = phone;
+                            document.querySelector("#dFLocation").innerHTML = location;
+                            document.querySelector("#dFImg").src = img;
+                            document.querySelector("#dpName").innerHTML = name;
+                            document.querySelector("#dpPrice").innerHTML = price;
+                            document.querySelector("#dpQuantity").innerHTML = quantity;
+                            // window.location.href = "/b2c/";
+                            //remove the starting zero and replace with 254 from user.phone
 
+                        });
+                    }
+                })(id, price, quantity, name, sellerId, buyerId));
 
             };
         });
