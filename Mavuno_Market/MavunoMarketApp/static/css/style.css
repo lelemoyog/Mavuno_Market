@@ -276,6 +276,9 @@ body {
         color: var(--bs-primary);
         display: none;
     }
+    #logoutToggle2 {
+      display: block;
+    }
 }
 
 @media (max-width: 992px) {

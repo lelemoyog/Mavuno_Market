@@ -572,6 +572,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
 
                 if(window.matchMedia("(max-width: 768px)").matches){
+                    $('#logoutToggle2').show();
                     img.style.width = "40px";
                     img.style.height = "40px";
                     img.className = "img-fluid me-2 rounded-circle img mt-2";
