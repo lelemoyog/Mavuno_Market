@@ -70,6 +70,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 $('#logoutToggle').show();
             } else {
                 // No user is signed in.
+                document.querySelector('.dropdown-menu').style.display = "none";
                 var cartBtn =  document.getElementById("addToCartBtn1");
                 if (cartBtn) {
                     cartBtn.style.display = "block";
@@ -78,6 +79,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     $('#signupModal').modal('show');
                 });
                 $('#img').show();
+                $('img').addClass('mt-2');
             }
         });
         var uid = localStorage.getItem('uid');
