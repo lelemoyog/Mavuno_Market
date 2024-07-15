@@ -72,7 +72,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 // No user is signed in.
                 var cartBtn =  document.getElementById("addToCartBtn1");
                 if (cartBtn) {
-                    cartBtn.style.display = "none";
+                    cartBtn.style.display = "block";
                 }
                 $('#profile').hover(function () {
                     $('#signupModal').modal('show');
@@ -801,7 +801,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         document.querySelector("#cartHolder").innerHTML = "";
 
         //get the cart collection
-        getDocs(query(collection(db, "products"))).then(docSnap => {
+        getDocs(query(collection(db, "products"), limit(12))).then(docSnap => {
             let products = [];
             docSnap.forEach((doc) => {
                 products.push({ ...doc.data(), id: doc.id })
