@@ -215,7 +215,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
        var navHref = document.querySelectorAll('.nav-link');
        //loop through the nav links and check if the href is equal to the url.pathname
          for (let i = 0; i < navHref.length; i++) {
-              if (navHref[i].href === url.href) {
+              if (navHref[i].href === url.href || navHref[i].href === "#product" || navHref[i].href === "#footer") {
                 navHref[i].classList.add('active');
               }
          }
