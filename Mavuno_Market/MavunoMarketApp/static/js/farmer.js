@@ -25,151 +25,11 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
 
 
-  // function getFarmers() {
-  //   //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
-  //   clearBox();
 
-  //   getDocs(query(collection(db, "users"), where("accesslevel", "==", "farmer"), limit(6))).then(docSnap => {
-  //     let Users = [];
-  //     docSnap.forEach((doc) => {
-  //       Users.push({ ...doc.data(), id: doc.id })
-  //     });
-  //     console.log("Document6 data:", Users);
-  //     let farmers = Users.length;
-  //     const farmerHolder = document.querySelector("#farmerHolder");
-
-
-  //     for (let i = 0; i < farmers; i++) {
-  //       var name = Users[i].name;
-  //       var about = Users[i].about;
-  //       var location = Users[i].location;
-  //       //check if the image is available
-  //       if (Users[i].imgUrl == "") {
-  //         var image = "https://www.w3schools.com/w3images/avatar2.png";
-  //       } else {
-  //         var image = Users[i].imgUrl;
-  //       }
-
-  //       var modal = document.createElement("div");
-  //       modal.className = "modal fade";
-  //       modal.id = "`productModal-${i}";
-  //       modal.tabIndex = "-1";
-  //       modal.role = "dialog";
-  //       modal.setAttribute("aria-labelledby", "productModalLabel");
-  //       modal.setAttribute("aria-hidden", "true");
-
-  //       var modalDialog = document.createElement("div");
-  //       modalDialog.className = "modal-dialog modal-dialog-centered";
-  //       modalDialog.role = "document";
-
-  //       var modalContent = document.createElement("div");
-  //       modalContent.className = "modal-content";
-
-  //       var modalHeader = document.createElement("div");
-  //       modalHeader.className = "modal-header";
-
-  //       var modalTitle = document.createElement("h5");
-  //       modalTitle.className = "modal-title";
-  //       modalTitle.id = "productModalLabel";
-  //       modalTitle.innerHTML = name;
-
-  //       var modalCloseButton = document.createElement("button");
-  //       modalCloseButton.type = "button";
-  //       modalCloseButton.className = "close";
-  //       modalCloseButton.setAttribute("data-dismiss", "modal");
-  //       modalCloseButton.setAttribute("aria-label", "Close");
-
-  //       var modalCloseIcon = document.createElement("span");
-  //       modalCloseIcon.setAttribute("aria-hidden", "true");
-  //       modalCloseIcon.innerHTML = "&times;";
-
-  //       modalCloseButton.appendChild(modalCloseIcon);
-  //       modalHeader.appendChild(modalTitle);
-  //       modalHeader.appendChild(modalCloseButton);
-
-  //       var modalBody = document.createElement("div");
-  //       modalBody.className = "modal-body";
-  //       modalBody.innerHTML = "Produce: " + produce + "<br>Farmer: " + farmer;
-
-  //       modalContent.appendChild(modalHeader);
-  //       modalContent.appendChild(modalBody);
-  //       modalDialog.appendChild(modalContent);
-  //       modal.appendChild(modalDialog);
-
-  //       farmerHolder.appendChild(modal);
-
-
-  //       var farmer = document.createElement("div");
-  //       farmer.className = "col-md-6 col-lg-4 col-xl-3";
-  //       farmer.style = "margin-bottom: 20px;";
-
-  //       var farmerItem = document.createElement("div");
-  //       farmerItem.className = "rounded position-relative fruite-item";
-
-  //       var farmerImg = document.createElement("div");
-  //       farmerImg.className = "fruite-img";
-
-  //       var img = document.createElement("img");
-  //       img.style.height = "300px";
-  //       img.src = image;
-  //       img.className = "img-fluid w-100 rounded-top";
-  //       img.alt = name;
-
-  //       var textWhite = document.createElement("div");
-  //       textWhite.className = "text-white bg-secondary px-3 py-1 rounded position-absolute";
-  //       textWhite.style.top = "10px";
-  //       textWhite.style.left = "10px";
-  //       textWhite.innerHTML = location;
-
-  //       var border = document.createElement("div");
-  //       border.className = "p-4 border border-secondary border-top-0 rounded-bottom";
-
-  //       var h4 = document.createElement("h4");
-  //       h4.innerHTML = name;
-
-  //       var dFlex = document.createElement("div");
-  //       dFlex.className = "d-flex justify-content-between flex-lg-wrap";
-
-  //       var p = document.createElement("p");
-  //       p.className = "text-dark fs-5 fw-bold mb-0";
-  //       p.innerHTML = about;
-
-  //       var a = document.createElement("a");
-  //       a.href = "#";
-  //       a.className = "btn border border-secondary rounded-pill px-3 text-primary";
-  //       a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Products`;
-  //       a.setAttribute("data-bs-toggle", "modal");
-  //       a.setAttribute("data-bs-target", "#productModalf");
-
-  //       farmerHolder.appendChild(farmer);
-  //       farmer.appendChild(farmerItem);
-  //       farmerItem.appendChild(farmerImg);
-  //       farmerImg.appendChild(img);
-  //       farmerItem.appendChild(textWhite);
-  //       farmerItem.appendChild(border);
-  //       border.appendChild(h4);
-  //       border.appendChild(dFlex);
-  //       dFlex.appendChild(p);
-  //       dFlex.appendChild(a);
-  //       (function (name) {
-  //         a.addEventListener('click', function () {
-  //           localStorage.setItem('farmerName', name);
-  //           fetchProducts5(Users[i].uid);
-  //         });
-  //       })(name);
-
-
-
-
-  //     }
-  //   });
-
-  // };
-
-  function getFarmers(){
+  function getFarmers() {
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
-  
+
     getDocs(query(collection(db, "users"), where("accesslevel", "==", "farmer"), limit(12))).then(docSnap => {
       let Users = [];
       docSnap.forEach((doc) => {
@@ -179,21 +39,21 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       let farmers = Users.length;
       const farmerHolder = document.querySelector("#farmerHolder");
 
-    
-    for(let i = 0; i < farmers; i++){
+
+      for (let i = 0; i < farmers; i++) {
         var name = Users[i].name;
         var about = Users[i].about;
         var location = Users[i].location;
         //check if the image is available
-      
-          var image = Users[i].imgUrl ? Users[i].imgUrl : "https://www.w3schools.com/w3images/avatar2.png";
-    
 
-      
+        var image = Users[i].imgUrl ? Users[i].imgUrl : "https://www.w3schools.com/w3images/avatar2.png";
+
+
+
         var farmer = document.createElement("div");
         farmer.className = "col-md-6 col-lg-4 col-xl-3";
         farmer.style = "margin-bottom: 20px;";
-        
+
         var farmerItem = document.createElement("div");
         farmerItem.className = "rounded position-relative fruite-item";
 
@@ -242,8 +102,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         border.appendChild(dFlex);
         dFlex.appendChild(p);
         dFlex.appendChild(a);
-        (function(name) {
-          a.addEventListener('click', function() {
+        (function (name) {
+          a.addEventListener('click', function () {
             $('#modalFarmerName').html(name);
             fetchProducts5(Users[i].uid);
           });
@@ -251,15 +111,15 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
 
 
-        
-    }
+
+      }
     });
 
-    };
-  
+  };
+
   function fetchProducts5(uid) {
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
-   document.getElementById('productHolderf').innerHTML = "";
+    document.getElementById('productHolderf').innerHTML = "";
     getDocs(query(collection(db, "products"), where("sellerId", "==", uid), limit(12))).then(docSnap => {
       let Products = [];
       docSnap.forEach((doc) => {
@@ -349,6 +209,192 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       }
     });
   }
+
+  function searchFarmer() {
+    var search = document.getElementById('searchInput').value;
+    clearBox();
+    getDocs(query(collection(db, "users"), where("name", "==", search), limit(12))).then(docSnap => {
+      let Users = [];
+      docSnap.forEach((doc) => {
+        Users.push({ ...doc.data(), id: doc.id })
+      });
+      console.log("Document6 data:", Users);
+      let farmers = Users.length;
+      const farmerHolder = document.querySelector("#farmerHolder");
+
+
+      for (let i = 0; i < farmers; i++) {
+        var name = Users[i].name;
+        var about = Users[i].about;
+        var location = Users[i].location;
+        //check if the image is available
+
+        var image = Users[i].imgUrl ? Users[i].imgUrl : "https://www.w3schools.com/w3images/avatar2.png";
+
+
+
+        var farmer = document.createElement("div");
+        farmer.className = "col-md-6 col-lg-4 col-xl-3";
+        farmer.style = "margin-bottom: 20px;";
+
+        var farmerItem = document.createElement("div");
+        farmerItem.className = "rounded position-relative fruite-item";
+
+        var farmerImg = document.createElement("div");
+        farmerImg.className = "fruite-img";
+
+        var img = document.createElement("img");
+        img.style.height = "300px";
+        img.src = image;
+        img.className = "img-fluid w-100 rounded-top";
+        img.alt = name;
+
+        var textWhite = document.createElement("div");
+        textWhite.className = "text-white bg-success px-3 py-1 rounded position-absolute";
+        textWhite.style.top = "10px";
+        textWhite.style.left = "10px";
+        textWhite.innerHTML = location;
+
+        var border = document.createElement("div");
+        border.className = "p-4 border border-success border-top-0 rounded-bottom";
+
+        var h4 = document.createElement("h4");
+        h4.innerHTML = name;
+
+        var dFlex = document.createElement("div");
+        dFlex.className = "d-flex justify-content-between flex-lg-wrap";
+
+        var p = document.createElement("p");
+        p.className = "text-dark fs-5 fw-bold mb-0";
+        p.innerHTML = about;
+
+        var a = document.createElement("a");
+        a.href = "#";
+        a.className = "btn btn-outline-success";
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2"></i>View Products`;
+        a.setAttribute("data-bs-toggle", "modal");
+        a.setAttribute("data-bs-target", "#productModal");
+
+        farmerHolder.appendChild(farmer);
+        farmer.appendChild(farmerItem);
+        farmerItem.appendChild(farmerImg);
+        farmerImg.appendChild(img);
+        farmerItem.appendChild(textWhite);
+        farmerItem.appendChild(border);
+        border.appendChild(h4);
+        border.appendChild(dFlex);
+        dFlex.appendChild(p);
+        dFlex.appendChild(a);
+        (function (name) {
+          a.addEventListener('click', function () {
+            $('#modalFarmerName').html(name);
+            fetchProducts5(Users[i].uid);
+          });
+        })(name);
+
+
+
+
+      }
+    });
+
+  };
+
+
+  $('#search').on('click', function () {
+    searchFarmer();
+  });
+
+  let users = [];
+  getDocs(collection(db, "users")).then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      users.push({ ...doc.data(), id: doc.id });
+    });
+
+    let words = [];
+    for (let i = 0; i < users.length; i++) {
+      words.push(users[i].name);
+    }
+
+    var input = document.getElementById('searchInput');
+    var suggestion = document.getElementById('suggestion');
+    //Enter key code
+    const enterKey = 13;
+    window.onload = () => {
+      input.value = "";
+      clearSuggestion();
+    };
+    const clearSuggestion = () => {
+      suggestion.innerHTML = "";
+    };
+    const caseCheck = (word) => {
+      //Array of characters
+      word = word.split("");
+      let inp = input.value;
+      //loop through every character in ino
+      for (let i in inp) {
+        //if input character matches with character in word no need to change
+        if (inp[i] == word[i]) {
+          continue;
+        } else if (inp[i].toUpperCase() == word[i]) {
+          //if inp[i] when converted to uppercase matches word[i] it means word[i] needs to be lowercase
+          word.splice(i, 1, word[i].toUpperCase());
+        } else {
+          //word[i] needs to be uppercase
+          word.splice(i, 1, word[i].toLowerCase());
+        }
+      }
+      //array to string
+      return word.join("");
+    };
+    //Execute function on input
+    input.addEventListener("input", (e) => {
+      clearSuggestion();
+      //Convert input value to regex since string.startsWith() is case sensitive
+      let regex = new RegExp("^" + input.value, "i");
+      //loop through words array
+      for (let i in words) {
+        //check if input matches with any word in words array
+        if (regex.test(words[i]) && input.value != "") {
+          //Change case of word in words array according to user input
+          words[i] = caseCheck(words[i]);
+          //display suggestion
+          suggestion.innerHTML = words[i];
+          break;
+        }
+      }
+    });
+    //Complete predictive text on enter key
+    input.addEventListener("keydown", (e) => {
+      //When user presses enter and suggestion exists
+      if (e.keyCode == enterKey && suggestion.innerText != "") {
+        e.preventDefault();
+        input.value = suggestion.innerText;
+        //clear the suggestion
+        clearSuggestion();
+      }
+    });
+    
+  });
+    
+    
+    
+    
+    var input = document.getElementById('searchInput');
+    var suggestion = document.getElementById('suggestion');
+    
+    suggestion.addEventListener("click", function (event) {
+      event.preventDefault();
+      input.value = suggestion.innerText;
+      suggestion.innerHTML = "";
+    });
+
+
+
+
+  
+
+
 
   //clear the farmerHolder
   function clearBox() {
