@@ -1,0 +1,896 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}profile{% endblock %}
+{% block content %}
+
+<style type="text/css">
+    body {
+        color: #797979;
+        background: #b7cca6;
+        font-family: 'Open Sans', sans-serif;
+        padding: 0px !important;
+        margin: 0px !important;
+        font-size: 13px;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-font-smoothing: antialiased;
+    }
+
+    .profile-nav,
+    .profile-info {
+        margin-top: 30px;
+    }
+
+    .profile-nav .user-heading {
+        background: #00806c;
+        color: #d2e3c3;
+        border-radius: 4px 4px 0 0;
+        -webkit-border-radius: 4px 4px 0 0;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .profile-nav .user-heading.round a {
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border: 10px solid rgba(255, 255, 255, 0.3);
+        display: inline-block;
+    }
+
+    .profile-nav .user-heading a img {
+        width: 112px;
+        height: 112px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+    }
+
+    .profile-nav .user-heading h1 {
+        font-size: 22px;
+        font-weight: 300;
+        margin-bottom: 5px;
+    }
+
+    .profile-nav .user-heading p {
+        font-size: 12px;
+    }
+
+    .profile-nav ul {
+        margin-top: 1px;
+    }
+
+    .profile-nav ul>li {
+        border-bottom: 1px solid #ebeae6;
+        margin-top: 0;
+        line-height: 30px;
+    }
+
+    .profile-nav ul>li:last-child {
+        border-bottom: none;
+    }
+
+    .profile-nav ul>li>a {
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        color: #89817f;
+        border-left: 5px solid #fff;
+    }
+
+    .profile-nav ul>li>a:hover,
+    .profile-nav ul>li>a:focus,
+    .profile-nav ul li.active a {
+        background: #f8f7f5 !important;
+        border-left: 5px solid #00806c;
+        color: #89817f !important;
+    }
+
+    .profile-nav ul>li:last-child>a:last-child {
+        border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+    }
+
+    .profile-nav ul>li>a>i {
+        font-size: 16px;
+        padding-right: 10px;
+        color: #bcb3aa;
+    }
+
+    .r-activity {
+        margin: 6px 0 0;
+        font-size: 12px;
+    }
+
+
+    .p-text-area,
+    .p-text-area:focus {
+        border: none;
+        font-weight: 300;
+        box-shadow: none;
+        color: #c3c3c3;
+        font-size: 16px;
+    }
+
+    .profile-info .panel-footer {
+        background-color: #d2e3c3;
+        border-top: 1px solid #e7ebee;
+    }
+
+    .profile-info .panel-footer ul li a {
+        color: #7a7a7a;
+    }
+
+    .bio-graph-heading {
+        background: #00806c;
+        color: #d2e3c3;
+        text-align: center;
+        font-style: italic;
+        padding: 40px 110px;
+        border-radius: 4px 4px 0 0;
+        -webkit-border-radius: 4px 4px 0 0;
+        font-size: 16px;
+        font-weight: 300;
+    }
+
+    .bio-graph-info {
+        background-color: #d2e3c3;
+        color: #89817e;
+        border-bottom: 1px;
+    }
+
+    .bio-graph-info h1 {
+        font-size: 22px;
+        font-weight: 300;
+        margin: 0 0 20px;
+    }
+
+    .bio-row {
+        width: 50%;
+        float: left;
+        margin-bottom: 10px;
+        padding: 0 15px;
+    }
+
+    .bio-row p span {
+        width: 100px;
+        display: inline-block;
+    }
+
+    .bio-chart,
+    .bio-desk {
+        float: left;
+    }
+
+    .bio-chart {
+        width: 40%;
+    }
+
+    .bio-desk {
+        width: 60%;
+    }
+
+    .bio-desk h4 {
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .bio-desk h4.terques {
+        color: #4CC5CD;
+    }
+
+    .bio-desk h4.red {
+        color: #e26b7f;
+    }
+
+    .bio-desk h4.green {
+        color: #97be4b;
+    }
+
+    .bio-desk h4.purple {
+        color: #caa3da;
+    }
+
+    .file-pos {
+        margin: 6px 0 10px 0;
+    }
+
+    .profile-activity h5 {
+        font-weight: 300;
+        margin-top: 0;
+        color: #c3c3c3;
+    }
+
+    .summary-head {
+        background: #ee7272;
+        color: #d2e3c3;
+        text-align: center;
+        border-bottom: 1px solid #ee7272;
+    }
+
+    .summary-head h4 {
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
+
+    .summary-head p {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    ul.summary-list {
+        display: inline-block;
+        padding-left: 0;
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    ul.summary-list>li {
+        display: inline-block;
+        width: 19.5%;
+        text-align: center;
+    }
+
+    ul.summary-list>li>a>i {
+        display: block;
+        font-size: 18px;
+        padding-bottom: 5px;
+    }
+
+    ul.summary-list>li>a {
+        padding: 10px 0;
+        display: inline-block;
+        color: #818181;
+    }
+
+    ul.summary-list>li {
+        border-right: 1px solid #eaeaea;
+    }
+
+    ul.summary-list>li:last-child {
+        border-right: none;
+    }
+
+    .activity {
+        width: 100%;
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    .activity.alt {
+        width: 100%;
+        float: right;
+        margin-bottom: 10px;
+    }
+
+    .activity span {
+        float: left;
+    }
+
+    .activity.alt span {
+        float: right;
+    }
+
+    .activity span,
+    .activity.alt span {
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        background: #eee;
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+    }
+
+    .activity.terques span {
+        background: #8dd7d6;
+    }
+
+    .activity.terques h4 {
+        color: #8dd7d6;
+    }
+
+    .activity.purple span {
+        background: #b984dc;
+    }
+
+    .activity.purple h4 {
+        color: #b984dc;
+    }
+
+    .activity.blue span {
+        background: #90b4e6;
+    }
+
+    .activity.blue h4 {
+        color: #90b4e6;
+    }
+
+    .activity.green span {
+        background: #aec785;
+    }
+
+    .activity.green h4 {
+        color: #aec785;
+    }
+
+    .activity h4 {
+        margin-top: 0;
+        font-size: 16px;
+    }
+
+    .activity p {
+        margin-bottom: 0;
+        font-size: 13px;
+    }
+
+    .activity .activity-desk i,
+    .activity.alt .activity-desk i {
+        float: left;
+        font-size: 18px;
+        margin-right: 10px;
+        color: #bebebe;
+    }
+
+    .activity .activity-desk {
+        margin-left: 70px;
+        position: relative;
+    }
+
+    .activity.alt .activity-desk {
+        margin-right: 70px;
+        position: relative;
+    }
+
+    .activity.alt .activity-desk .panel {
+        float: right;
+        position: relative;
+    }
+
+    .activity-desk .panel {
+        background: #d2e3c3;
+        display: inline-block;
+    }
+
+
+    .activity .activity-desk .arrow {
+        border-right: 8px solid #F4F4F4 !important;
+    }
+
+    .activity .activity-desk .arrow {
+        border-bottom: 8px solid transparent;
+        border-top: 8px solid transparent;
+        display: block;
+        height: 0;
+        left: -7px;
+        position: absolute;
+        top: 13px;
+        width: 0;
+    }
+
+    .activity-desk .arrow-alt {
+        border-left: 8px solid #F4F4F4 !important;
+    }
+
+    .activity-desk .arrow-alt {
+        border-bottom: 8px solid transparent;
+        border-top: 8px solid transparent;
+        display: block;
+        height: 0;
+        right: -7px;
+        position: absolute;
+        top: 13px;
+        width: 0;
+    }
+
+    .activity-desk .album {
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .activity-desk .album a {
+        margin-right: 10px;
+    }
+
+    .activity-desk .album a:last-child {
+        margin-right: 0px;
+    }
+
+    .image-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .image-container img {
+        max-width: 100%;
+        height: auto;
+        flex: 1 0 25%;
+        /* This ensures each image takes up 25% of the container width, allowing 4 images per row */
+        box-sizing: border-box;
+        /* Box-sizing includes padding and border in the element's total width and height */
+        padding: 5px;
+        /* Optional padding between images */
+    }
+</style>
+
+ <!-- //create middle center bootstrap transluscent toast -->
+ <div class="toast top-50 start-50 translate-middle" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong class="me-auto">Mavuno Market</strong>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //create middle center bootstrap transluscent toast  -->
+
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="profile-nav col-md-3" style="padding-top: 150px;">
+            <div class="panel">
+                <div class="user-heading round" >
+                    <a>
+                        <img type="file" src="https://bootdey.com/img/Content/avatar/avatar3.png" id="img2">
+                    </a>
+                    <h1 style="color: #d2e3c3;" class="profileUserName"> </h1>
+                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                            data-cfemail="e286879b86879ba2968a87a78f838b8ecc818d8f"><input type="file"  class="form-control" class="form-control" id="photo"></a></p>
+                </div>
+                <ul class="nav nav-pills nav-stacked"
+                style="background-color: #d2e3c3; padding: 10px; margin-bottom: 10px; display: flex; gap: 30px; align-items: center; justify-content: flex-start;padding-left: 30px;">
+                <li style="list-style: none;">
+                    <span>
+                        <!-- Button trigger modal -->
+                        <button type="button" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3; display: none;"
+                            class="btn btn-primary" id="postBtn" data-bs-toggle="modal" data-bs-target="#myModal">
+                            Post
+                        </button>
+                       
+                    </span>
+                    <!-- Modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Enter product details</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                
+                                <div class="modal-body">
+                                    <form id="productForm">
+                                        <div class="mb-3">
+                                            <label for="productName" class="form-label">Product Name</label>
+                                            <input type="text" class="form-control" id="productName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productPrice" class="form-label">Price per kg</label>
+                                            <input type="number" class="form-control" id="productPrice" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productAmount" class="form-label">Available Amount (kg)</label>
+                                            <input type="number" class="form-control" id="productAmount" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productCategory" class="form-label">Product Category</label>
+                                            <select class="form-control" id="postProductCategory" required>
+                                                <option value="vegetable" selected>Select product category</option>
+                                                <option value="vegetable">Vegetable</option>
+                                                <option value="fruits">Fruits</option>
+                                                <option value="cereals">Cereals</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productAmount" class="form-label">Description</label>
+                                            <textarea class="form-control" id="productDescription" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="availabilityWindowEnd" class="form-label">Availability Window start</label>
+                                            <input type="date" class="form-control" id="availabilityWindowStrat" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="availabilityWindowEnd" class="form-label">Availability Window End</label>
+                                            <input type="date" class="form-control" id="availabilityWindowEnd" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productImage" class="form-label">Product Image</label>
+                                            <input type="file" class="form-control" id="productPhoto" accept="image/*" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="uploadedImage" class="form-label">Uploaded Image</label>
+                                            <img id="uploadedImage" src="https://firebasestorage.googleapis.com/v0/b/mavuno-market-webapp.appspot.com/o/banana.jpg?alt=media&token=d186f239-d1d0-4982-bff1-9fbcb04ce55f" alt="Uploaded Image" style="max-width: 100%; height: auto;">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div style="display:none;" id="myAlert">
+                                    <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
+                                      <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                                      <div>
+                                        Product Added successfully
+                                      </div>
+                                    </div>
+                                  </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" id="addProduct" form="productForm" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="list-style: none;">
+                    <span>
+                        <!-- Button to Open the Modal -->
+                        <button type="button" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3;"
+                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal1">
+                            Edit Profile
+                        </button>
+                        <button type="button" id="logOut1" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3;"
+                        class="btn btn-primary">
+                        logout
+                    </button>
+                    </span>
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit Profile</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+            
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form id="profileForm">
+                                        <div class="mb-3">
+                                            <label for="userName" class="form-label">Name</label>
+                                            <input type="text" class="form-control" id="userN" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userLocation" class="form-label">Location</label>
+                                            <input type="text" class="form-control" id="userLocation" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userEmail" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="userEmail" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userPhone" class="form-label">about</label>
+                                            <input type="text" class="form-control" id="userAbout" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userPhone" class="form-label">Phone number</label>
+                                            <input type="tel" class="form-control" id="userPhone" required>
+                                        </div>
+                                        <div class="mb-3" style="display: none;">
+                                            <label for="userPhone" class="form-label"></label>
+                                            <input type="tel" class="form-control" id="photoUrl" required>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div style="display:none;" id="myAlert6">
+                                    <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
+                                      <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                                      <div>
+                                        Profile updated successfully
+                                      </div>
+                                    </div>
+                                  </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" id="updateBtn" form="profileForm" class="btn btn-primary">update</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+        
+
+            </div>
+        </div>
+        <!-- <div class="profile-info col-md-9">
+
+            <div class="panel" style="margin-top: 150px;">
+                <div class="bio-graph-heading" style="font-size: large ;font-style: normal;font-weight: bolder;">
+                My Profile
+                </div>
+                <div class="panel-body bio-graph-info" style="font-size: large;">
+                    <h1>Bio Graph</h1>
+                    <div class="row">
+                        <div class="bio-row">
+                            <p ><span>Name </span>: <span class="profileUserName"></span></p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Location </span>: <span id="profileLocation"></span></p>
+                        </div>
+
+                        <div class="bio-row">
+                            <p><span>Category </span>: <span id="profileCategory"></span></p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Email </span>: <span id="profileUserEmail"></span>
+                            </p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Mobile </span>: <span id="profileUserPhone"></span></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="profile-info col-md-9">
+
+            <div class="panel" style="margin-top: 150px;">
+                <div class="bio-graph-heading" style="font-size: large ;font-style: normal;font-weight: bolder;">
+                My Profile
+                </div>
+                <div  style="font-size: large; background-color: #d2e3c3; text-align: center;" >
+                    <h1>Bio Graph</h1>
+                    <div >
+                        <div >
+                            <p ><span>Name </span>: <span class="profileUserName"></span></p>
+                        </div>
+                        <div >
+                            <p><span>Location </span>: <span id="profileLocation"></span></p>
+                        </div>
+
+                        <div>
+                            <p><span>Category </span>: <span id="profileCategory"></span></p>
+                        </div>
+                        <div >
+                            <p><span>Email </span>: <span id="profileUserEmail"></span>
+                            </p>
+                        </div>
+                        <div >
+                            <p><span>Mobile </span>:<span id="profileUserPhone"></span></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="posts" id="posts">
+        <h1 style="font-family: Arial, Helvetica, sans-serif;">My Products</h1>
+        <div class="image-container">
+            <div class="row g-4" id="productHolder5">
+
+                <!-- <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/grapes.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Fruits</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Grapes</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 150 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
+                            </div>
+                            <p>available :50kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :4/05/24 to :11/05/24</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/fruite-item-3.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Fruits</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Bananas</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 100 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
+                            </div>
+                            <p>available :80kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :2/04/24 to :11/05/24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/fruite-item-1.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Fruits</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Oranges</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh150/ kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
+                            </div>
+                            <p>available :50kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :4/05/24 to :11/05/24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/fruite-item-6.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Fruits</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Apples</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 250 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
+                            </div>
+                            <p>available :150kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :4/05/24 to :11/05/24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/newest-carrots.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Vegetables</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Carrots</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 150/ kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
+                            </div>
+                            <p>available :80kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :2/06/24 to :11/06/24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/broccoli-new.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Vegetable</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Broccoli</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 300 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                            <p>available :50kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :4/05/24 to :11/05/24</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/vegetable-item-1.jpg' %}" class="img-fluid w-100 rounded-top"
+                                alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Vegetables</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Tomatoes</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 200 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                            <p>available :50kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :4/05/24 to :11/05/24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                            <img src="{% static 'img/plantain-new.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; left: 10px;">Vegetables</div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <h4>Plantain</h4>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 200 / kg</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                            <p>available :50kg</p>
+                            <h5>Availability Window</h5>
+                            <p>from :1/12/24 to :01/01/25</p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <!-- Add more images as needed -->
+        </div>
+    </div>
+
+     <!-- Cart Page Start -->
+     <div class="container-fluid py-0 px-0">
+        <div class="container py-0 px-0">
+            <div style="display:none;" id="myAlert3">
+                <div class="alert alert-success d-flex align-items-center collapse" role="alert"
+                    style=" float: right;">
+                    <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img"
+                        aria-label="Success:">
+                        <use xlink:href="#check-circle-fill" />
+                    </svg>
+                    <div id="succ">
+                        Order successfully placed
+                    </div>
+                </div>
+            </div>
+            <div style="display:none;" id="myAlert4">
+                <div class="alert alert-success d-flex align-items-center collapse" role="alert"
+                    style=" float: right;">
+                    <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img"
+                        aria-label="Success:">
+                        <use xlink:href="#check-circle-fill" />
+                    </svg>
+                    <div>
+                        Product successfully Aproved
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive" style="color: #00806c;" id="posts1">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Products</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartHolder1">
+                        
+                    </tbody>
+                </table>
+            </div>
+           
+        </div>
+    </div>
+    <!-- Cart Page End -->
+</div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="module" src="{% static 'js/profile.js' %}"></script>
+{% endblock %}
