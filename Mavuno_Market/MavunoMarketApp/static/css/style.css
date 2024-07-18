@@ -184,7 +184,7 @@ body {
     #title2 {
         font-size: 1em;
         font-weight: bold;
-        color: var(--bs-primary);
+        color: var(--bs-success);
         display: none;
     }
 }
@@ -267,13 +267,13 @@ body {
     #title {
         font-size: 1em;
         font-weight: bold;
-        color: var(--bs-primary);
+        color: var(--bs-success);
         display: visible;
     }
     #title2 {
         font-size: 1em;
         font-weight: bold;
-        color: var(--bs-primary);
+        color: var(--bs-success);
         display: none;
     }
     #logoutToggle2 {
@@ -289,19 +289,19 @@ body {
     #title {
         font-size: 1em;
         font-weight: bold;
-        color: var(--bs-primary);
+        color: var(--bs-success);
         display: none;
     }
     #title2 {
         font-size: 1em;
         font-weight: bold;
-        color: var(--bs-primary);
+        color: var(--bs-success);
         display: visible;
     }
     #logOut1 {
         font-size: 1em;
         font-weight: bold;
-        color: var(--bs-primary);
+        color: var(--bs-success);
         display: visible;
     }
     .mytable {
@@ -331,12 +331,12 @@ body {
     content: "";
     width: 35px;
     height: 35px;
-    background: var(--bs-secondary);
+    background: var(--bs-success);
     position: absolute;
     bottom: -10px;
     transform: translate(-50%);
     transform: rotate(45deg);
-    background: var(--bs-secondary);
+    background: var(--bs-success);
     
 }
 /*** featurs End ***/
@@ -541,20 +541,20 @@ body {
     padding: 10px 16px;
     text-decoration: none;
     transition: 0.5s;
-    border: 1px solid var(--bs-secondary);
+    border: 1px solid var(--bs-success);
     margin: 0 4px;
 }
   
 .pagination a.active {
-    background-color: var(--bs-primary);
+    background-color: var(--bs-success);
     color: var(--bs-light);
-    border: 1px solid var(--bs-secondary);
+    border: 1px solid var(--bs-white);
 }
   
-.pagination a:hover:not(.active) {background-color: var(--bs-primary)}
+.pagination a:hover:not(.active) {background-color: var(--bs-success)}
 
 .nav.nav-tabs .nav-link.active {
-    border-bottom: 2px solid var(--bs-secondary) !important;
+    border-bottom: 2px solid var(--bs-success) !important;
 }
 /*** Single Page End ***/
 
@@ -567,7 +567,7 @@ body {
 }
 
 .footer .footer-item .btn-link:hover {
-    color: var(--bs-secondary) !important;
+    color: var(--bs-success) !important;
 }
 
 .footer .footer-item p.mb-4 {

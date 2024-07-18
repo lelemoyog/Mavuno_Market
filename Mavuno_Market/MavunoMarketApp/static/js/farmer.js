@@ -197,13 +197,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         for (let i = 0; i < goods; i++) {
           // ... existing code ...
 
-          (function (id, name) {
+          (function (id, name, category) {
             a.addEventListener('click', function () {
               localStorage.setItem('productId', id);
+              localStorage.setItem('category', category);
               console.log(name);
               window.location.href = "/description/";
             });
-          })(id, name);
+          })(id, name, category);
         }
 
       }

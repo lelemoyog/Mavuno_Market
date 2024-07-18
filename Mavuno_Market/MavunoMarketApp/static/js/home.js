@@ -141,7 +141,60 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
   //create a function that takes in an array called products and a string productName then loop through the array and return the product with the name that matches the first letter of the productName
 
+  function fetchCaroselProducts() {
+    document.querySelector("#cartHolder").innerHTML = "";
 
+    //get the cart collection
+    getDocs(query(collection(db, "products"), limit(12))).then(docSnap => {
+        let products = [];
+        docSnap.forEach((doc) => {
+            products.push({ ...doc.data(), id: doc.id })
+        });
+        console.log("this: " + products);
+        //display the products in the cart use doe loop let i = o and use js to create the elements
+        for (let i = 0; i < products.length; i++) {
+            //get the product
+            var product = products[i];
+            //create the elements
+            var caroselItem = document.createElement('div');
+            caroselItem.className = "carousel-item rounded";
+            if (i === 0) caroselItem.classList.add('active');
+            var img = document.createElement('img');
+            img.style.height = "400px";
+            img.src = product.imgUrl;
+            img.className = "img-fluid w-100 bg-success rounded";
+            img.alt = product.name;
+            caroselItem.appendChild(img);
+            var a = document.createElement('a');
+            a.className = "btn btn-outline-success";
+            a.innerHTML = product.category;
+            caroselItem.appendChild(a);
+            var caroselHolder = document.querySelector("#caroselHolder");
+            if (caroselHolder) {
+                caroselHolder.appendChild(caroselItem);
+            }
+            console.log(product.category);
+
+            let goods = products.length;
+            var id = product.id;
+            for (let i = 0; i < goods; i++) {
+                // ... existing code ...
+
+                (function (id) {
+                    a.addEventListener('click', function () {
+                        localStorage.setItem('productId', id);
+                        console.log(id);
+                        window.location.href = "/description/";
+                    });
+                })(id);
+            }
+
+
+        };
+    });
+};
+
+fetchCaroselProducts();
 
 
   //get all products from firebase
@@ -424,13 +477,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         // Add event listener to the button
         for (let i = 0; i < goods; i++) {
           // ... existing code ...
-          (function (id, name) {
+          (function (id, name, category) {
             a.addEventListener('click', function () {
               localStorage.setItem('productId', id);
+              localStorage.setItem('category', category);
               console.log(name);
               window.location.href = "/description/";
             });
-          })(id, name);
+          })(id, name, category);
         }
 
 
@@ -515,13 +569,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         for (let i = 0; i < goods; i++) {
           // ... existing code ...
 
-          (function (id, name) {
+          (function (id, name, category) {
             a.addEventListener('click', function () {
               localStorage.setItem('productId', id);
+              localStorage.setItem('category', category);
               console.log(name);
               window.location.href = "/description/";
             });
-          })(id, name);
+          })(id, name, category);
         }
 
       }
@@ -601,13 +656,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         for (let i = 0; i < goods; i++) {
           // ... existing code ...
 
-          (function (id, name) {
+          (function (id, name, category) {
             a.addEventListener('click', function () {
               localStorage.setItem('productId', id);
+              localStorage.setItem('category', category);
               console.log(name);
               window.location.href = "/description/";
             });
-          })(id, name);
+          })(id, name, category);
         }
 
       }
@@ -688,13 +744,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         for (let i = 0; i < goods; i++) {
           // ... existing code ...
 
-          (function (id, name) {
+          (function (id, name, category) {
             a.addEventListener('click', function () {
               localStorage.setItem('productId', id);
+              localStorage.setItem('category', category);
               console.log(name);
               window.location.href = "/description/";
             });
-          })(id, name);
+          })(id, name, category);
         }
 
       }
@@ -731,6 +788,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   fetchProducts2();
   fetchProducts3();
   fetchProducts4();
+  fetchCaroselProducts();
 
 
 })(jQuery);
