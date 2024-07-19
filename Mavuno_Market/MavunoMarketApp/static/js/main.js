@@ -70,7 +70,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             } else {
                 // No user is signed in.
                 document.querySelector('.dropdown-menu').style.display = "none";
-                var cartBtn =  document.getElementById("addToCartBtn1");
+                var cartBtn = document.getElementById("addToCartBtn1");
                 if (cartBtn) {
                     cartBtn.style.display = "block";
                 }
@@ -210,14 +210,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     $(document).ready(function () {
         var url = window.location;
         console.log(url);
-       //check if the url.pathname is equal to the href of the nav link and add the active class
-       var navHref = document.querySelectorAll('.nav-link');
-       //loop through the nav links and check if the href is equal to the url.pathname
-         for (let i = 0; i < navHref.length; i++) {
-              if (navHref[i].href === url.href || navHref[i].href === "#product" || navHref[i].href === "#footer") {
+        //check if the url.pathname is equal to the href of the nav link and add the active class
+        var navHref = document.querySelectorAll('.nav-link');
+        //loop through the nav links and check if the href is equal to the url.pathname
+        for (let i = 0; i < navHref.length; i++) {
+            if (navHref[i].href === url.href || navHref[i].href === "#product" || navHref[i].href === "#footer") {
                 navHref[i].classList.add('active');
-              }
-         }
+            }
+        }
     });
 
 
@@ -293,8 +293,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         snapshot.docChanges().forEach((change) => {
             if (change.type === "modified") {
                 console.log("Modified city: ", change.doc.data());
-                 var data = change.doc.data();
-                 var status = data.status;
+                var data = change.doc.data();
+                var status = data.status;
                 var accessLevel = localStorage.getItem('accesslevel');
                 var notificationStatus = localStorage.getItem('notificationStatus');
                 if (accessLevel === "farmer" && status === "pending") {
@@ -330,7 +330,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         });
     }
 
-    
+
     function createPushNotification1() {
         //get permission from the user
         Notification.requestPermission().then(function (result) {
@@ -432,7 +432,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 products = products.filter(product => product.status !== "completed");
             });
             console.log(products);
-            if(products.length === 0){
+            if (products.length === 0) {
                 document.getElementById('cartModal').style.display = "none";
             }
             //display the products in the cart use doe loop let i = o and use js to create the elements
@@ -575,7 +575,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 productRow.appendChild(td5);
 
 
-                if(window.matchMedia("(max-width: 768px)").matches){
+                if (window.matchMedia("(max-width: 768px)").matches) {
                     $('#logoutToggle2').show();
                     img.style.width = "40px";
                     img.style.height = "40px";
@@ -639,6 +639,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     button6.style.display = "none";
                     button7.style.display = "none";
                 }
+                if (product.status === "cancelled") {
+                    button5.innerHTML = "Cancelled";
+                    button3.style.display = "none";
+                    button4.style.display = "none";
+                    button6.style.display = "none";
+                    button7.style.display = "none";
+                }
                 //append the product row to the cart holder
                 document.querySelector("#cartHolder").appendChild(productRow);
 
@@ -657,15 +664,15 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
 
 
-                
+
                 //pick the value from the html input
                 // Add event listener to the button
                 button3.addEventListener('click', (function (id) {
                     return function () {
                         //get the input value from the html from the target element and store it in a varviable called cartQuantity use this.parentElement.value or something simialr this an i dea am giving you
                         var cartQuantity = this.parentElement.parentElement.querySelector("input").value;
-                        
-                        makeOrder(id,cartQuantity);
+
+                        makeOrder(id, cartQuantity);
 
                         //reload the page
                         $("#myAlert3").fadeTo(2000, 500).slideUp(500, function () {
@@ -716,6 +723,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             phone = phone.replace(/^0+/, "254");
                             $('#phone1').val(phone);
                             $('#amount1').val(total);
+                            localStorage.setItem('type', "1");
                         });
                     };
                 })(id, price, quantity, name, sellerId, buyerId));
@@ -748,9 +756,11 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     }
                 })(sellerId, price, id, buyerId, quantity));
 
-                button7.addEventListener('click', (function (id, price, quantity, name, sellerId, buyerId) {
+                var status = product.status;
+                button7.addEventListener('click', (function (id, price, quantity, name, sellerId, buyerId, status) {
                     return function () {
                         const userDoc = doc(db, "users", sellerId);
+                        const userDoc1 = doc(db, "users", buyerId);
                         //get the user document
                         getDoc(userDoc).then(docSnap => {
                             let user = docSnap.data();
@@ -772,12 +782,31 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             document.querySelector("#dpName").innerHTML = name;
                             document.querySelector("#dpPrice").innerHTML = price;
                             document.querySelector("#dpQuantity").innerHTML = quantity;
+                            document.querySelector("#dpTotal").innerHTML = price * quantity;
+
+                            $('#amountz').val(price * quantity);
+                            localStorage.setItem('type', "0");
+                            //add product id and sellerId to the local storage
+                            localStorage.setItem('productId', id);
+                            localStorage.setItem('buyerId', buyerId);
                             // window.location.href = "/b2c/";
                             //remove the starting zero and replace with 254 from user.phone
 
                         });
+                        getDoc(userDoc1).then(docSnap => {
+                            let user = docSnap.data();
+                            console.log(user);
+                            var phone = user.phone;
+                            phone = phone.replace(/^0+/, "254");
+                            $('#phonez').val(phone);
+                        });
+
+                        if (status === 'paid') {
+                            document.getElementById('1').style.display = "inline";
+                            document.getElementById('0').style.display = "none";
+                        }
                     }
-                })(id, price, quantity, name, sellerId, buyerId));
+                })(id, price, quantity, name, sellerId, buyerId, status));
 
                 button8.addEventListener('click', (function (productId) {
                     return function () {
@@ -801,13 +830,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     };
 
 
-   
+
 
     function fetchOrderProducts() {
         document.querySelector("#cartHolder").innerHTML = "";
         //get the user id
         var uid = localStorage.getItem('uid');
-        
+
         //get the cart collection
         getDocs(query(collection(db, uid))).then(docSnap => {
             let products = [];
@@ -817,7 +846,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             });
             console.log(products);
             //display the products in the cart use doe loop let i = o and use js to create the elements
-            if(products.length === 0){
+            if (products.length === 0) {
                 document.getElementById('cartModal').style.display = "none";
             }
             for (let i = 0; i < products.length; i++) {
@@ -906,23 +935,27 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var button4 = document.createElement('button');
                 var button5 = document.createElement('button');
                 var button6 = document.createElement('button');
+                var button7 = document.createElement('button');
                 button3.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button4.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button5.className = "btn btn-md rounded-circle bg-light border mt-4";
                 button6.className = "btn btn-md rounded-circle bg-light border mt-4 ms-2";
+                button7.className = "btn btn-md rounded-circle bg-light border mt-4 ms-2";
                 button6.setAttribute('data-bs-toggle', 'modal');
                 button6.setAttribute('data-bs-target', '#exampleModalT');
                 button3.innerHTML = "Aprove Order";
                 button4.innerHTML = "Pending";
                 button5.innerHTML = "Paid, waiting release";
                 button6.innerHTML = "...";
+                button7.innerHTML = "<i class='fa fa-times text-danger'></i>";
                 td5.appendChild(button3);
                 td5.appendChild(button4);
                 td5.appendChild(button5);
                 td5.appendChild(button6);
+                td5.appendChild(button7);
                 productRow.appendChild(td5);
 
-                if(window.matchMedia("(max-width: 768px)").matches){
+                if (window.matchMedia("(max-width: 768px)").matches) {
                     img.style.width = "40px";
                     img.style.height = "40px";
                     img.className = "img-fluid me-2 rounded-circle img mt-2";
@@ -970,17 +1003,26 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 if (product.status === "approved") {
                     button3.style.display = "none";
                     button5.style.display = "none";
+                    button7.style.display = "none";
                     input.disabled = true;
                 }
                 if (product.status === "pending") {
                     button4.style.display = "none";
                     button5.style.display = "none";
-                    
+                    button7.style.display = "none";
+
                 }
                 if (product.status === "paid") {
                     button4.style.display = "none";
                     button3.style.display = "none";
+                    button7.style.display = "none";
                     input.disabled = true;
+                }
+                if (product.status === "cancelled") {
+                    button5.innerHTML = "Cancelled";
+                    button3.style.display = "none";
+                    button4.style.display = "none";
+                    button6.style.display = "none";
                 }
                 //append the product row to the cart holder
                 document.querySelector("#cartHolder").appendChild(productRow);
@@ -993,6 +1035,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var name = product.name;
                 var sellerId = product.sellerId;
                 var buyerId = product.buyerId;
+                var status = product.status;
                 // Add event listener to the button
                 button3.addEventListener('click', (function (productId) {
                     return function () {
@@ -1010,7 +1053,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     };
                 })(id));
 
-                button6.addEventListener('click', (function (id, price, quantity, name, sellerId, buyerId) {
+                var productid = product.orderId;
+
+                button6.addEventListener('click', (function (productid, price, quantity, name, buyerId) {
                     return function () {
                         const userDoc = doc(db, "users", buyerId);
                         //get the user document
@@ -1034,16 +1079,108 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             document.querySelector("#dpName").innerHTML = name;
                             document.querySelector("#dpPrice").innerHTML = price;
                             document.querySelector("#dpQuantity").innerHTML = quantity;
+                            
+
+
+                            // window.location.href = "/b2c/";
+                            //remove the starting zero and replace with 254 from user.phone
+
+                            document.querySelector("#dpTotal").innerHTML = price * quantity;
+
+                            $('#amountz').val(price * quantity);
+                            localStorage.setItem('type', "0");
+                            //add product id and sellerId to the local storage
+                            console.log(productid);
+                            localStorage.setItem('productId', productid);
+                            localStorage.setItem('buyerId', buyerId);
+                            var phone = user.phone;
+                            phone = phone.replace(/^0+/, "254");
+                            $('#phonez').val(phone);
                             // window.location.href = "/b2c/";
                             //remove the starting zero and replace with 254 from user.phone
 
                         });
-                    }
-                })(id, price, quantity, name, sellerId, buyerId));
 
+                        if (status === 'paid') {
+                            document.getElementById('1').style.display = "inline";
+                            document.getElementById('0').style.display = "none";
+                        }
+                       
+                    }
+                })(productid, price, quantity, name, buyerId));
+
+                button7.addEventListener('click', (function (productId) {
+                    return function () {
+                        //delete the product
+                        deleteProduct(productId);
+                        //remove the product from the cart
+                        this.parentElement.parentElement.remove();
+                    };
+                })(id));
             };
         });
     };
+
+    //cancel order
+
+
+    document.getElementById('0').addEventListener('click', function () {
+        console.log(localStorage.getItem('productId'));
+        console.log(localStorage.getItem('buyerId'));
+        cancelOrder(localStorage.getItem('productId'), localStorage.getItem('buyerId'));
+        fetchCartProducts();
+    });
+
+    function cancelOrder(productId, buyerId) {
+        //get the product id
+        //get the product document
+        const productDoc = doc(db, buyerId, productId);
+
+        const prod = doc(db, "products", productId);
+        var availableQuantity
+        getDoc(prod).then((docSnap) => {
+            let product = docSnap.data();
+            console.log(product);
+            if (product) {
+                availableQuantity = product.amountAvailable;
+            }
+        });
+
+
+        //get the product document
+        getDoc(productDoc).then((docSnap) => {
+            let product = docSnap.data();
+            console.log(product);
+            var quantity = product.quantity;
+            var remainingQuantity = availableQuantity + quantity;
+            //conver to plain js object
+            const productObj = {
+                status: "cancelled",
+            };
+            //add product to the database use setDoc and the document id to the product object
+            //get uid
+            var cartDoc = doc(db, buyerId, productId);
+            var orderDoc = doc(db, product.sellerId, product.orderId);
+            var productDoc = doc(db, "products", productId);
+            updateDoc(productDoc, {
+                amountAvailable: remainingQuantity
+            })
+            updateDoc(cartDoc, productObj)
+                .then(() => {
+                    console.log("Order successfully written!");
+                })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                });
+            updateDoc(orderDoc, productObj)
+                .then(() => {
+                    console.log("Order successfully written!");
+                })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                });
+        });
+    }
 
     function fetchProfileOrderProducts() {
         const cartHolder1 = document.querySelector("#cartHolder1");
@@ -1201,7 +1338,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         const cartHolder1 = document.querySelector("#cartHolder2");
         const posts = document.querySelector("#posts");
 
-       
+
         //get the user id
         var uid = localStorage.getItem('uid');
         //get the cart collection
@@ -1445,7 +1582,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     }
     //update order status
 
-    function updateOrderStatus(productId, sellerId,cartQuantity) {
+    function updateOrderStatus(productId, sellerId, cartQuantity) {
         //get the product id
         //get the product document
         const productDoc = doc(db, sellerId, productId);
@@ -1454,10 +1591,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             let product = docSnap.data();
             //conver to plain js object
             const productObj = {
-              // assign a default value if quantity is undefined
+                // assign a default value if quantity is undefined
                 status: "approved",
                 quantity: cartQuantity,
-               
+
             };
             //add product to the database use setDoc and the document id to the product object
             //get uid
@@ -1470,7 +1607,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 .catch((error) => {
                     console.error("Error writing document: ", error);
                 });
-                updateDoc(orderDoc, productObj)
+            updateDoc(orderDoc, productObj)
                 .then(() => {
                     console.log("Order successfully written!");
                 })
@@ -1479,6 +1616,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 });
         });
     }
+
+
 
     //get the product id
 
@@ -1516,7 +1655,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     var cartDoc = doc(db, product.sellerId, docRef.id);
                     var productDoc = doc(db, product.buyerId, productId);
                     updateDoc(cartDoc, {
-                        orderId: docRef.id,
+                        orderId: productId,
                         quantity: cartQuantity,
                     }).then(() => {
                         //update the product status

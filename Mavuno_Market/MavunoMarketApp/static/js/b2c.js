@@ -35,14 +35,74 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
         console.log(productId);
         console.log(buyerId);
 
-        //update order status
-        updateOrderStatus(productId, buyerId);
+        var type = localStorage.getItem('type');
+       
+        if (type == '1') {
+            //update order status
+            updateOrderStatus(productId, buyerId);
+        }else if(type == '0'){
+            console.log(type);
+            //update wallet balance
+            cancelOrder(productId, buyerId);
+        }
+       
     }
 
 });
 
 // //reload after 5000
 
+  //cancel order
+
+  function cancelOrder(productId, buyerId) {
+    //get the product id
+    //get the product document
+    const productDoc = doc(db, buyerId, productId);
+
+    const prod = doc(db, "products", productId);
+    var availableQuantity
+    getDoc(prod).then((docSnap) => {
+        let product = docSnap.data();
+        console.log(product);
+        if (product) {
+            availableQuantity = product.amountAvailable;
+        }
+    });
+
+    
+    //get the product document
+    getDoc(productDoc).then((docSnap) => {
+        let product = docSnap.data();
+        var quantity = product.quantity;
+        var remainingQuantity = availableQuantity + quantity;
+        //conver to plain js object
+        const productObj = {
+            status: "cancelled",
+        };
+        //add product to the database use setDoc and the document id to the product object
+        //get uid
+        var cartDoc = doc(db, buyerId, productId);
+        var orderDoc = doc(db, product.sellerId, product.orderId);
+        var productDoc = doc(db, "products", productId);
+            updateDoc(productDoc, {
+                amountAvailable: remainingQuantity
+            })
+        updateDoc(cartDoc, productObj)
+            .then(() => {
+                console.log("Order successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+            updateDoc(orderDoc, productObj)
+            .then(() => {
+                console.log("Order successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+    });
+}
 
 //update order status
 

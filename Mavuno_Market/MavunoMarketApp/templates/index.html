@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="container px-0" style="color:#f3c430">
-            <nav class="navbar navbar-light  navbar-expand-xl"  style="background-color: #d2e3c3;">
+            <nav class="navbar navbar-light  navbar-expand-xl" style="background-color: #d2e3c3;">
                 <a href="index.html" class="navbar-brand">
                     <img src="{% static 'img/logo4.png' %}" alt="MavunoLogo" class="mavuno-logo"
                         style="margin-bottom: 30px;">
@@ -97,7 +97,7 @@
                     data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse"  style="background-color: #d2e3c3;">
+                <div class="collapse navbar-collapse" id="navbarCollapse" style="background-color: #d2e3c3;">
                     <div class="navbar-nav mx-auto">
                         <a href="/home/" class="nav-item nav-link">Home</a>
                         <a href="/dashboard/" class="nav-item nav-link" id="dash" style="display: none;">Dashboard</a>
@@ -108,33 +108,33 @@
                     <div class="d-flex m-3 me-0">
                         <button
                             class="btn-search btn border border-success btn-md-square rounded-circle bg-white me-4 mt-3"
-                            data-bs-toggle="modal" data-bs-target="#searchModal"><i
-                                class="fas fa-search"></i></button>
+                            data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
                         <a href="" id="cartModal" class="position-relative me-4 my-auto mt-4" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
                             <i class="fa fa-shopping-bag fa-2x"></i>
                             <span
                                 class="position-absolute bg-light rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                                 style="top: -5px; left: 15px; height: 20px; min-width: 20px;" id="cartCount">0</span>
-                        </a>  
-                           
-                        
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link" data-bs-toggle="dropdown" id="logoutToggle"
-                                    style="display: none;">
-                                    
-                                    <a class="my-auto" id="profile">                                    <span
-                                        class="bg-success rounded-circle d-flex align-items-center justify-content-center text-light px-1 d-none"
-                                        id="userName" style="width: 50px; height: 50px;"></span><img type="file" src="https://bootdey.com/img/Content/avatar/avatar3.png" id="img"
-                                    style="display: none;"></a>
+                        </a>
 
-                                </a>
-                                <div class="dropdown-menu m-0 bg-success rounded-0">
-                                    <a href="/profile/" class="dropdown-item">Profile</a>
-                                    <a class="dropdown-item" id="logOut">log out</a>
-                                </div>
+
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link" data-bs-toggle="dropdown" id="logoutToggle"
+                                style="display: none;">
+
+                                <a class="my-auto" id="profile"> <span
+                                        class="bg-success rounded-circle d-flex align-items-center justify-content-center text-light px-1 d-none"
+                                        id="userName" style="width: 50px; height: 50px;"></span><img type="file"
+                                        src="https://bootdey.com/img/Content/avatar/avatar3.png" id="img"
+                                        style="display: none;"></a>
+
+                            </a>
+                            <div class="dropdown-menu m-0 bg-success rounded-0">
+                                <a href="/profile/" class="dropdown-item">Profile</a>
+                                <a class="dropdown-item" id="logOut">log out</a>
                             </div>
-                        
+                        </div>
+
                     </div>
                 </div>
             </nav>
@@ -614,8 +614,9 @@
                                     <p class="mb-0 pe-4" id="ptotal">$99.00</p>
                                 </div>
                                 <button
-                                    class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
-                                    data-bs-dismiss="modal" type="button">Proceed Checkout</button>
+                                    class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
+                                    data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal"
+                                    type="button">Proceed Checkout</button>
 
                             </div>
                         </div>
@@ -626,29 +627,29 @@
         </div>
     </div>
     <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-    data-bs-dismiss="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalToggleLabel">Mavuno Market Payment</h5>
-                <button type="button" class="btn-close" data-bs-target="#exampleModal" data-bs-toggle="modal"
-                data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row g-4 justify-content-center">
-                    <h5 class="mb-4">Select payment<span class="fw-normal"> method.</span></h5>
-
+        data-bs-dismiss="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel">Mavuno Market Payment</h5>
+                    <button type="button" class="btn-close" data-bs-target="#exampleModal" data-bs-toggle="modal"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-success" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal"
-                    data-bs-dismiss="modal">M-pesa</button>
-                <button class="btn btn" style="background-color: red;" data-bs-target="#exampleModalToggle3"
-                    data-bs-toggle="modal" data-bs-dismiss="modal">Airtel Money</button>
+                <div class="modal-body">
+                    <div class="row g-4 justify-content-center">
+                        <h5 class="mb-4">Select payment<span class="fw-normal"> method.</span></h5>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">M-pesa</button>
+                    <button class="btn btn" style="background-color: red;" data-bs-target="#exampleModalToggle3"
+                        data-bs-toggle="modal" data-bs-dismiss="modal">Airtel Money</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
     <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -656,15 +657,15 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalToggleLabel2">M-pesa</h5>
                     <button type="button" class="btn-close" data-bs-target="#exampleModal" data-bs-toggle="modal"
-                        data-bs-dismiss="modal" ></button>
+                        data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <!--  -->
                     <div class="col-md-6 offset-md-3">
-                        <form method="POST"  action="/initiate/">
+                        <form method="POST" action="/initiate/">
                             {% csrf_token %}
                             <!-- two inputs phone number and amount which is not enditable  -->
-                            
+
                             <label for="phone">Phone Number</label>
                             <input type="text" name="phone1" id="phone1" class="form-control" required>
                             <!-- <input type="text" name="phone" id="phone2" class="form-control" readonly> -->
@@ -673,93 +674,111 @@
 
                             <button type="submit" class="btn btn-primary">Pay</button>
                         </form>
-                    </div>        
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="modal fade" id="exampleModalTogg" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-    data-bs-dismiss="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalToggleLabel">Mavuno Market Payment</h5>
-                <button type="button" class="btn-close" data-bs-target="#exampleModal" data-bs-toggle="modal"
-                data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="col-md-6 offset-md-3">
-                    <form method="POST"  action="/b2c/">
-                        {% csrf_token %}
-                         <!-- two inputs phone number and amount which is not enditable  -->
-                         <p>confirm that you have received your quality produce</p>
-                        <label for="phone">Phone Number</label>
-                        <input type="text" name="phone3" id="phone3" class="form-control" readonly>
-                        <label for="amount">Amount</label>
-                        <input type="number" name="amount3" id="amount3" class="form-control mb-2" value="1" readonly>
+        data-bs-dismiss="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel">Mavuno Market Payment</h5>
+                    <button type="button" class="btn-close" data-bs-target="#exampleModal" data-bs-toggle="modal"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-6 offset-md-3">
+                        <form method="POST" action="/b2c/">
+                            {% csrf_token %}
+                            <!-- two inputs phone number and amount which is not enditable  -->
+                            <p>confirm that you have received your quality produce</p>
+                            <label for="phone">Phone Number</label>
+                            <input type="text" name="phone3" id="phone3" class="form-control" readonly>
+                            <label for="amount">Amount</label>
+                            <input type="number" name="amount3" id="amount3" class="form-control mb-2" value="1"
+                                readonly>
 
-                        <button type="submit" class="btn btn-primary">confirm</button>
-                    </form>
+                            <button type="submit" class="btn btn-primary">confirm</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
- <div class="modal fade" id="exampleModalT" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-    data-bs-dismiss="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalToggleLabel">Order details</h5>
-                <button type="button" class="btn-close" data-bs-target="#exampleModal" data-bs-toggle="modal"
-                data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                        <div class="account-settings text-center">
-                            <div class="user-profile">
-                                <div class="user-avatar">
-                                    <img class="i" src="https://bootdey.com/img/Content/avatar/avatar1.png" id="dFImg" alt="Maxwell Admin">
-                                </div>
-                                <style>
-                                    .i{
-                                        border-radius: 50%;
-                                         width: 200px; /* Reduced size */
-                                        height: 200px; /* Reduced size */
-                                    }
-                                </style>
-                                <h5 class="user-name" id="dFName">John Doe</h5>
-                                <div class="about mt-4">
-                                    <div class="d-flex justify-content-center">
-                                        <div style="margin-right: 20px;">
-                                    <i class="fas fa-map-marker-alt" style="font-size: 3em;"></i>
-                                    <p id="dFLocation"></p>
-                                </div>
-                                    <div id="tl">
-                                        <i class="fab fa-whatsapp" style="font-size: 3em;"></i>
-                                        <p  id="nm" >0797 106 717 </p>
-                                        </div>
-                                    </div>   
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <h5 class="mb-0 me-4">Product: </h5>
-                                        <div class="">
-                                            <p class="mb-0" id="dpName">Maize</p>
-                                        </div>
+    <div class="modal fade" id="exampleModalT" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        data-bs-dismiss="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel">Order details</h5>
+                    <button type="button" class="btn-close" data-bs-target="#exampleModal" data-bs-toggle="modal"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <div class="account-settings text-center">
+                                <div class="user-profile">
+                                    <div class="user-avatar">
+                                        <img class="i" src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                            id="dFImg" alt="Maxwell Admin">
                                     </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <h5 class="mb-0 me-4">Quantity: </h5>
-                                        <p class="mb-0" id="dpQuantity">200 kg</p>
+                                    <style>
+                                        .i {
+                                            border-radius: 50%;
+                                            width: 200px;
+                                            /* Reduced size */
+                                            height: 200px;
+                                            /* Reduced size */
+                                        }
+                                    </style>
+                                    <h5 class="user-name" id="dFName">John Doe</h5>
+                                    <div class="about mt-4">
+                                        <form method="POST" action="/b2c/">
+                                            {% csrf_token %}
+                                            <div class="d-flex justify-content-center">
+                                                <div style="margin-right: 20px;">
+                                                    <i class="fas fa-map-marker-alt" style="font-size: 3em;"></i>
+                                                    <p id="dFLocation"></p>
+                                                </div>
+                                                <div id="tl">
+                                                    <i class="fab fa-whatsapp" style="font-size: 3em;"></i>
+                                                    <p id="nm">0797 106 717 </p>
+                                                    <input type="text" name="phone3" id="phonez" style="display: none;" class="form-control" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <h5 class="mb-0 me-4">Product: </h5>
+                                                <div class="">
+                                                    <p class="mb-0" id="dpName">Maize</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <h5 class="mb-0 me-4">Quantity: </h5>
+                                                <p class="mb-0" id="dpQuantity">200 kg</p>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <h5 class="mb-0 me-4">Price: </h5>
+                                                <div class="">
+                                                    <p class="mb-0" id="dpPrice">$200.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <h5 class="mb-0 me-4">Total: </h5>
+                                                <div class="">
+                                                    <p class="mb-0" id="dpTotal">$200.00</p>
+                                                    <input type="number" name="amount3" id="amountz" style="display: none;" class="form-control mb-2" readonly>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" id="1" style="display: none;">cancel order</button>
+                                        </form>
+                                        <button type="submit" class="btn btn-primary" id="0">cancel order</button>
                                     </div>
-                                    <div class="d-flex justify-content-between">
-                                        <h5 class="mb-0 me-4">Price: </h5>
-                                        <div class="">
-                                            <p class="mb-0" id="dpPrice">$200.00</p>
-                                        </div>
-                                    </div>
+                                   
                                 </div>
-                                <button type="submit" class="btn btn-primary">cancel order</button>
                             </div>
                         </div>
                     </div>
@@ -767,7 +786,6 @@
             </div>
         </div>
     </div>
-</div>
     <!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModal" role="button">Open first modal</a> -->
 
     <!-- Back to Top -->
