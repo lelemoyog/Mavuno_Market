@@ -65,7 +65,7 @@ def query_stk_status(request):
                          #return JsonResponse({'message': message})  # Return JSON response
                         return render(request, 'c2b.html',{'message': message,'result_code': result_code})
                     else:
-                        message = "Unknown result code: " + result_code
+                        message = "wrong pin, result code: " + result_code
                         return render(request, 'c2b.html',{'message': message,'result_code': result_code})
                 else:
                     message = "Error in response"

@@ -73,6 +73,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
     //get the product document
     getDoc(productDoc).then((docSnap) => {
         let product = docSnap.data();
+        console.log(product);
         var quantity = product.quantity;
         var remainingQuantity = availableQuantity + quantity;
         //conver to plain js object
@@ -82,7 +83,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
         //add product to the database use setDoc and the document id to the product object
         //get uid
         var cartDoc = doc(db, buyerId, productId);
-        var orderDoc = doc(db, product.sellerId, product.orderId);
+        var orderDoc = doc(db, product.sellerId, productId);
         var productDoc = doc(db, "products", productId);
             updateDoc(productDoc, {
                 amountAvailable: remainingQuantity
@@ -97,6 +98,8 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
             updateDoc(orderDoc, productObj)
             .then(() => {
                 console.log("Order successfully written!");
+                var message = "Confirm you have receive payment from mavuno market for the product you sold. thank you for your hardwork.";
+                sendEmailToUser(product.sellerId,message,product.orderId,product.price,quantity);
             })
             .catch((error) => {
                 console.error("Error writing document: ", error);
@@ -135,7 +138,7 @@ function updateOrderStatus(productId, buyerId) {
             //add product to the database use setDoc and the document id to the product object
             //get uid
             var cartDoc = doc(db, product.buyerId, productId);
-            var orderDoc = doc(db, product.sellerId, product.orderId);
+            var orderDoc = doc(db, product.sellerId, productId);
             var productDoc = doc(db, "products", productId);
             updateDoc(productDoc, {
                 amountAvailable: remainingQuantity
@@ -150,16 +153,53 @@ function updateOrderStatus(productId, buyerId) {
                 updateDoc(orderDoc, productObj)
                 .then(() => {
                     console.log("Order successfully written!");
+                    var message = "Confirm you have receive payment from mavuno market for the product you sold. thank you for your hardwork.";
+                    sendEmailToUser(product.sellerId,message,product.orderId,product.price,quantity);
                     setTimeout(function () {
                         window.location.href = "/home/";
                     }, 5000);
                 })
                 .catch((error) => {
                     console.error("Error writing document: ", error);
+                    setTimeout(function () {
+                        window.location.href = "/home/";
+                    }, 5000);
                 });
         }
     });
 }
 
+function sendEmailToUser(uid, message, orderId, price, quantity) {
+    //get the user id
 
+    //get the user document
+    const userDoc = doc(db, "users", uid);
+    getDoc(userDoc).then(docSnap => {
+        let user = docSnap.data();
+
+        //get the user email
+        var email = user.email;
+        var name = user.name;
+        console.log(email);
+
+
+        emailjs.send("service_pfpj96r", "template_9ya4sl5", {
+            subject: "Mavuno Market",
+            to_email: email,
+            to_name: name,
+            message: message,
+            orderId: orderId,
+            productName: name,
+            productPrice: price,
+            productQuantity: quantity,
+            productTotal: price * quantity,
+        })
+            .then(function (response) {
+                console.log("SUCCESS!", response.status, response.text);
+            }, function (error) {
+                console.error("FAILED...", error);
+            });
+
+    });
+}
 })(jQuery);

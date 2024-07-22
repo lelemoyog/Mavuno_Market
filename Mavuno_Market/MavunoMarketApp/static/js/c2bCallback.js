@@ -77,7 +77,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 //add product to the database use setDoc and the document id to the product object
                 //get uid
                 var cartDoc = doc(db, product.buyerId, productId);
-                var orderDoc = doc(db, product.sellerId, product.orderId);
+                var orderDoc = doc(db, product.sellerId, productId);
                 updateDoc(cartDoc, productObj)
                     .then(() => {
                         console.log("Order successfully written!");
@@ -88,6 +88,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     updateDoc(orderDoc, productObj)
                     .then(() => {
                         console.log("Order successfully written!");
+                        var message = "Your order has been paid for successfully. You will receive the payment once the product has been delivered. We will notify you once the buyer confirms delivery.";
+                        sendEmailToUser(product.sellerId,message,product.orderId,product.price,product.quantity);
                         setTimeout(function () {
                             window.location.href = "/home/";
                         }, 5000);
@@ -99,6 +101,38 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         });
     }
 
+    function sendEmailToUser(uid, message, orderId, price, quantity) {
+        //get the user id
 
+        //get the user document
+        const userDoc = doc(db, "users", uid);
+        getDoc(userDoc).then(docSnap => {
+            let user = docSnap.data();
+
+            //get the user email
+            var email = user.email;
+            var name = user.name;
+            console.log(email);
+
+
+            emailjs.send("service_pfpj96r", "template_9ya4sl5", {
+                subject: "Mavuno Market",
+                to_email: email,
+                to_name: name,
+                message: message,
+                orderId: orderId,
+                productName: name,
+                productPrice: price,
+                productQuantity: quantity,
+                productTotal: price * quantity,
+            })
+                .then(function (response) {
+                    console.log("SUCCESS!", response.status, response.text);
+                }, function (error) {
+                    console.error("FAILED...", error);
+                });
+
+        });
+    }
 
 })(jQuery);

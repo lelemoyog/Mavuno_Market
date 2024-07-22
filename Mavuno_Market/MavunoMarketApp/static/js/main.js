@@ -308,6 +308,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     var quantity = data.quantity;
                     var total = price * quantity;
                     createPushNotification3(total)
+                } else if (status === "cancelled") {
+                    cancelledPushNotification();
                 }
             }
         });
@@ -319,6 +321,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         //get permission from the user
         Notification.requestPermission().then(function (result) {
             if (result === 'granted') {
+                document.getElementById('cartModal').style.display = "block";
                 fetchOrderProducts();
                 const audio = document.getElementById('notificationSound');
                 audio.play();
@@ -330,6 +333,61 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         });
     }
 
+    function sendEmailToUser(uid, message, orderId, price, quantity) {
+
+        //get the user id
+
+        //get the user document
+        const userDoc = doc(db, "users", uid);
+        getDoc(userDoc).then(docSnap => {
+            let user = docSnap.data();
+
+            //get the user email
+            var email = user.email;
+            var name = user.name;
+            console.log(email);
+
+
+            emailjs.send("service_pfpj96r", "template_9ya4sl5", {
+                subject: "Mavuno Market",
+                to_email: email,
+                to_name: name,
+                message: message,
+                orderId: orderId,
+                productName: name,
+                productPrice: price,
+                productQuantity: quantity,
+                productTotal: price * quantity,
+            })
+                .then(function (response) {
+                    console.log("SUCCESS!", response.status, response.text);
+                }, function (error) {
+                    console.error("FAILED...", error);
+                });
+
+        });
+    }
+
+    function cancelledPushNotification() {
+        //get permission from the user
+        Notification.requestPermission().then(function (result) {
+            if (result === 'granted') {
+                document.getElementById('cartModal').style.display = "block";
+                var accessLevel = localStorage.getItem('accesslevel');
+                if (accessLevel === "farmer") {
+                    fetchOrderProducts();
+                } else if (accessLevel === "vendor") {
+                    fetchCartProducts()
+                }
+                const audio = document.getElementById('notificationSound');
+                audio.play();
+                new Notification('Order Status', {
+                    body: 'Order cancelled',
+                    icon: '/static/img/logo.png',
+                });
+            }
+        });
+    }
 
     function createPushNotification1() {
         //get permission from the user
@@ -434,6 +492,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             console.log(products);
             if (products.length === 0) {
                 document.getElementById('cartModal').style.display = "none";
+            } else if (products.length != 0) {
+                document.getElementById('cartModal').style.display = "block";
             }
             //display the products in the cart use doe loop let i = o and use js to create the elements
             for (let i = 0; i < products.length; i++) {
@@ -1037,10 +1097,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var buyerId = product.buyerId;
                 var status = product.status;
                 // Add event listener to the button
-                button3.addEventListener('click', (function (productId) {
+                button3.addEventListener('click', (function (id, buyerId) {
                     return function () {
                         var cartQuantity = this.parentElement.parentElement.querySelector("input").value;
-                        updateOrderStatus(productId, product.sellerId, cartQuantity);
+                        updateOrderStatus(id, buyerId, cartQuantity);
                         localStorage.setItem('notificationStatus', 'off');
                         $("#myAlert4").fadeTo(2000, 500).slideUp(500, function () {
                             $("#myAlert4").slideUp(500);
@@ -1051,7 +1111,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             }, 2000);
                         });
                     };
-                })(id));
+                })(id, buyerId));
 
                 var productid = product.orderId;
 
@@ -1079,7 +1139,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             document.querySelector("#dpName").innerHTML = name;
                             document.querySelector("#dpPrice").innerHTML = price;
                             document.querySelector("#dpQuantity").innerHTML = quantity;
-                            
+
 
 
                             // window.location.href = "/b2c/";
@@ -1105,7 +1165,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             document.getElementById('1').style.display = "inline";
                             document.getElementById('0').style.display = "none";
                         }
-                       
+
                     }
                 })(productid, price, quantity, name, buyerId));
 
@@ -1160,7 +1220,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             //add product to the database use setDoc and the document id to the product object
             //get uid
             var cartDoc = doc(db, buyerId, productId);
-            var orderDoc = doc(db, product.sellerId, product.orderId);
+            var orderDoc = doc(db, product.sellerId, productId);
             var productDoc = doc(db, "products", productId);
             updateDoc(productDoc, {
                 amountAvailable: remainingQuantity
@@ -1175,6 +1235,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             updateDoc(orderDoc, productObj)
                 .then(() => {
                     console.log("Order successfully written!");
+                    var message = "Your order has been cancelled";
+                    sendEmailToUser(product.buyerId,message,product.orderId,product.price,quantity);
                 })
                 .catch((error) => {
                     console.error("Error writing document: ", error);
@@ -1582,10 +1644,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     }
     //update order status
 
-    function updateOrderStatus(productId, sellerId, cartQuantity) {
+    function updateOrderStatus(productId, buyerId, cartQuantity) {
         //get the product id
         //get the product document
-        const productDoc = doc(db, sellerId, productId);
+        const productDoc = doc(db, buyerId, productId);
         //get the product document
         getDoc(productDoc).then((docSnap) => {
             let product = docSnap.data();
@@ -1599,13 +1661,15 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             //add product to the database use setDoc and the document id to the product object
             //get uid
             var cartDoc = doc(db, product.buyerId, product.id);
-            var orderDoc = doc(db, product.sellerId, product.orderId);
+            var orderDoc = doc(db, product.sellerId, product.id);
             updateDoc(cartDoc, productObj)
                 .then(() => {
                     console.log("Order successfully written!");
+                    var message = "Your order has been approved";
+                    sendEmailToUser(product.buyerId,message,product.orderId,product.price,cartQuantity);
                 })
                 .catch((error) => {
-                    console.error("Error writing document: ", error);
+                    console.error("Error writing document: ", error);    
                 });
             updateDoc(orderDoc, productObj)
                 .then(() => {
@@ -1653,18 +1717,33 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 .then((docRef) => {
                     //update the product with id2 docRef.id
                     var cartDoc = doc(db, product.sellerId, docRef.id);
-                    var productDoc = doc(db, product.buyerId, productId);
+                    var productDoc = doc(db, product.buyerId, docRef.id);
                     updateDoc(cartDoc, {
                         orderId: productId,
                         quantity: cartQuantity,
                     }).then(() => {
                         //update the product status
-                        updateDoc(productDoc, {
+                        setDoc(productDoc, {
+                            id:docRef.id,
                             status: "pending",
-                            orderId: docRef.id,
+                            orderId: productId,
+                            quantity: cartQuantity,  name: product.name,
+                            price: product.price,
+                            category: product.category,
+                            description: product.description,
+                            imgUrl: product.imgUrl,
+                            sellerId: product.sellerId,
+                            buyerId: uid,
+                            orderId: productId,
                             quantity: cartQuantity,
+                            status: "pending",
+                            availabilityWindowStart: product.availabilityWindowStart,
+                            availabilityWindowEnd: product.availabilityWindowEnd
                         }).then(() => {
                             console.log("Order successfully written!");
+                            var message = "You have new order of " + product.name + "Quantity: " + cartQuantity;
+                            sendEmailToUser(product.sellerId,message,docRef.id,product.price,cartQuantity);
+                            deleteProduct(productId) 
                         })
                     })
 
