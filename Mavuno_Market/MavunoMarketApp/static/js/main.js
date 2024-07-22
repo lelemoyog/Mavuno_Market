@@ -1221,7 +1221,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             //get uid
             var cartDoc = doc(db, buyerId, productId);
             var orderDoc = doc(db, product.sellerId, productId);
-            var productDoc = doc(db, "products", productId);
+            var productDoc = doc(db, "products", product.orderId);
             updateDoc(productDoc, {
                 amountAvailable: remainingQuantity
             })

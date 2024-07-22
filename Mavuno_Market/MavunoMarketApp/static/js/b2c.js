@@ -50,7 +50,6 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
 
 });
 
-// //reload after 5000
 
   //cancel order
 
@@ -84,7 +83,7 @@ import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/fire
         //get uid
         var cartDoc = doc(db, buyerId, productId);
         var orderDoc = doc(db, product.sellerId, productId);
-        var productDoc = doc(db, "products", productId);
+        var productDoc = doc(db, "products", product.orderId);
             updateDoc(productDoc, {
                 amountAvailable: remainingQuantity
             })
@@ -121,7 +120,7 @@ function updateOrderStatus(productId, buyerId) {
         if (product) {
             availableQuantity = product.amountAvailable;
         }
-    });
+
     //get the product document
     getDoc(productDoc).then((docSnap) => {
         let product = docSnap.data();
@@ -139,7 +138,7 @@ function updateOrderStatus(productId, buyerId) {
             //get uid
             var cartDoc = doc(db, product.buyerId, productId);
             var orderDoc = doc(db, product.sellerId, productId);
-            var productDoc = doc(db, "products", productId);
+            var productDoc = doc(db, "products", product.orderId);
             updateDoc(productDoc, {
                 amountAvailable: remainingQuantity
             })
@@ -167,6 +166,8 @@ function updateOrderStatus(productId, buyerId) {
                 });
         }
     });
+
+}); 
 }
 
 function sendEmailToUser(uid, message, orderId, price, quantity) {
@@ -202,4 +203,5 @@ function sendEmailToUser(uid, message, orderId, price, quantity) {
 
     });
 }
+
 })(jQuery);
