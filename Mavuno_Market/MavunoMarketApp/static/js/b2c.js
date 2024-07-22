@@ -31,15 +31,17 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
             //get the product id and seller id from local storage
             var productId = localStorage.getItem('productId');
+            var orderId = localStorage.getItem('orderId');
             var buyerId = localStorage.getItem('buyerId');
             console.log(productId);
             console.log(buyerId);
+            console.log(orderId);
 
             var type = localStorage.getItem('type');
 
             if (type == '1') {
                 //update order status
-                updateOrderStatus(productId, buyerId);
+                updateOrderStatus(productId, buyerId, orderId);
             } else if (type == '0') {
                 console.log(type);
                 //update wallet balance
@@ -108,25 +110,24 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
     //update order status
 
-    function updateOrderStatus(productId, buyerId) {
+    function updateOrderStatus(productId, buyerId, orderId) {
         //get the product id
         //get the product document
         const productDoc = doc(db, buyerId, productId);
-        const prod = doc(db, "products", productId);
-        var availableQuantity
+        const prod = doc(db, "products", orderId);
         getDoc(prod).then((docSnap) => {
             let product = docSnap.data();
             console.log(product);
             if (product) {
-                availableQuantity = product.amountAvailable;
-            }
+                var availableQuantity = product.amountAvailable;
+          
 
             //get the product document
             getDoc(productDoc).then((docSnap) => {
                 let product = docSnap.data();
                 //conver to plain js object
                 var quantity = product.quantity;
-                var remainingQuantity = availableQuantity - quantity;
+                var remainingQuantity = parseInt(availableQuantity) - parseInt(quantity);
                 console.log(product);
                 if (product) {
                     const productObj = {
@@ -166,6 +167,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                         });
                 }
             });
+        }
 
         });
     }

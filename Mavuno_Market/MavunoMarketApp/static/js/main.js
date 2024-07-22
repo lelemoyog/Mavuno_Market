@@ -721,6 +721,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var name = product.name;
                 var sellerId = product.sellerId;
                 var buyerId = product.buyerId;
+                var orderId = product.orderId;
 
 
 
@@ -788,11 +789,12 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     };
                 })(id, price, quantity, name, sellerId, buyerId));
 
-                button6.addEventListener('click', (function (sellerId, price, id, buyerId, quantity) {
+                button6.addEventListener('click', (function (sellerId, price, id, buyerId, quantity,orderId) {
                     return function () {
                         //add buyerId to the local storage  
                         localStorage.setItem('buyerId', buyerId);
                         localStorage.setItem('productId', id);
+                        localStorage.setItem('orderId', orderId);
                         const userDoc = doc(db, "users", sellerId);
                         //get the user document
                         getDoc(userDoc).then(docSnap => {
