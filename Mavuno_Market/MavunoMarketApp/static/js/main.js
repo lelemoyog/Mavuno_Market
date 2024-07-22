@@ -1573,6 +1573,11 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var category = Products[i]['category'];
                 var imgUrl = Products[i]['imgUrl'];
                 var id = Products[i]['id'];
+                var description = Products[i]['description'];
+                var availabilityWindowStart = Products[i]['availabilityWindowStart'];
+                var availabilityWindowEnd = Products[i]['availabilityWindowEnd'];
+                var amountAvailable = Products[i]['amountAvailable'];
+                
 
                 var product = document.createElement("div");
                 product.className = "col-md-6 col-lg-4 col-xl-3";
@@ -1615,6 +1620,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 a.href = "#";
                 a.className = "btn btn-outline-success ms-2";
                 a2.className = "btn btn-outline-success";
+                a2.setAttribute('data-bs-toggle', 'modal');
+                a2.setAttribute('data-bs-target', '#myModalEdit');
                 a3.className = "btn btn-outline-success";
                 //delete icon
                 a3.innerHTML = `<i class="fa fa-trash"></i>`;
@@ -1649,6 +1656,32 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                         });
                     })(id, name, category);
 
+                    (function (id, name, price, category, description, imgUrl, availabilityWindowStart, availabilityWindowEnd, amountAvailable) {
+                        a2.addEventListener('click', function () {
+                            localStorage.setItem('productId', id);
+                            console.log(id);
+                            $('#productNameEdit').val(name);
+                            $('#productPriceEdit').val(price);
+                            //check category and selete the optiop that matches
+                            if(category === "fruits"){
+                                document.getElementById('postProductCategoryEdit').selectedIndex = 2;
+                            }else if(category === "vegetables"){
+                                document.getElementById('postProductCategoryEdit').selectedIndex = 1;
+                            }else if(category === "cereals"){
+                                document.getElementById('postProductCategoryEdit').selectedIndex = 3;
+                            }
+                            
+                            $('#productDescriptionEdit').val(description);
+                            $('#productAmountEdit').val(amountAvailable);
+                            document.getElementById('uploadedImageEdit').src = imgUrl;
+                            document.getElementById('productPhotoEdit2').value = imgUrl;
+                            $('#availabilityWindowStratEdit').val(availabilityWindowStart);
+                            $('#availabilityWindowEndEdit').val(availabilityWindowEnd);
+                            //edit product
+                       
+                        });
+                    })(id, name, price, category, description, imgUrl, availabilityWindowStart, availabilityWindowEnd, amountAvailable);
+
                     (function (id) {
                         a3.addEventListener('click', function () {
                             localStorage.setItem('productId', id);
@@ -1667,6 +1700,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             }
         });
     }
+
+
+
     //update order status
 
     function updateOrderStatus(productId, buyerId, cartQuantity) {

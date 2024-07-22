@@ -604,37 +604,7 @@
 
             </div>
         </div>
-        <!-- <div class="profile-info col-md-9">
-
-            <div class="panel" style="margin-top: 150px;">
-                <div class="bio-graph-heading" style="font-size: large ;font-style: normal;font-weight: bolder;">
-                My Profile
-                </div>
-                <div class="panel-body bio-graph-info" style="font-size: large;">
-                    <h1>Bio Graph</h1>
-                    <div class="row">
-                        <div class="bio-row">
-                            <p ><span>Name </span>: <span class="profileUserName"></span></p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Location </span>: <span id="profileLocation"></span></p>
-                        </div>
-
-                        <div class="bio-row">
-                            <p><span>Category </span>: <span id="profileCategory"></span></p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Email </span>: <span id="profileUserEmail"></span>
-                            </p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Mobile </span>: <span id="profileUserPhone"></span></p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div> -->
+       
         <div class="profile-info col-md-9">
 
             <div class="panel" style="margin-top: 150px;">
@@ -727,6 +697,86 @@
         </div>
     </div>
     <!-- Cart Page End -->
+
+
+
+ <!-- Modal -->
+ <div class="modal" id="myModalEdit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Edit product details</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- edit product Modal body -->
+            
+            <div class="modal-body">
+                <form id="productForm">
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="productNameEdit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Price per kg</label>
+                        <input type="number" class="form-control" id="productPriceEdit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productAmount" class="form-label">Available Amount (kg)</label>
+                        <input type="number" class="form-control" id="productAmountEdit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productCategory" class="form-label">Product Category</label>
+                        <select class="form-control" id="postProductCategoryEdit" required>
+                            <option value="vegetable" selected>Select product category</option>
+                            <option value="vegetable">Vegetable</option>
+                            <option value="fruits">Fruits</option>
+                            <option value="cereals">Cereals</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productAmount" class="form-label">Description</label>
+                        <textarea class="form-control" id="productDescriptionEdit" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="availabilityWindowEnd" class="form-label">Availability Window start</label>
+                        <input type="date" class="form-control" id="availabilityWindowStratEdit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="availabilityWindowEnd" class="form-label">Availability Window End</label>
+                        <input type="date" class="form-control" id="availabilityWindowEndEdit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productImage" class="form-label">Product Image</label>
+                        <input type="file" class="form-control" id="productPhotoEdit" accept="image/*" required>
+                        <input type="text" class="form-control" id="productPhotoEdit2" style="display: none;" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="uploadedImage" class="form-label">Uploaded Image</label>
+                        <img id="uploadedImageEdit" style="max-width: 100%; height: auto;">
+                    </div>
+                </form>
+            </div>
+            <div style="display:none;" id="myAlertEdit">
+                <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
+                  <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                  <div>
+                    Product upadated successfully
+                  </div>
+                </div>
+              </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" id="editProduct" form="productForm" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
