@@ -1576,6 +1576,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
                 var product = document.createElement("div");
                 product.className = "col-md-6 col-lg-4 col-xl-3";
+                product.style.width = "100%";
 
                 var fruiteItem = document.createElement("div");
                 fruiteItem.className = "rounded position-relative fruite-item";
@@ -1609,9 +1610,18 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 p.innerHTML = `Ksh ${price} / kg`;
 
                 var a = document.createElement("a");
+                var a2 = document.createElement("a");
+                var a3 = document.createElement("a");
                 a.href = "#";
-                a.className = "btn btn-outline-success";
-                a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
+                a.className = "btn btn-outline-success ms-2";
+                a2.className = "btn btn-outline-success";
+                a3.className = "btn btn-outline-success";
+                //delete icon
+                a3.innerHTML = `<i class="fa fa-trash"></i>`;
+                //edit icon
+                a2.innerHTML = `<i class="fa fa-edit"></i>`;
+                //eye icon
+                a.innerHTML = `<i class="fa fa-eye"></i>`;
 
                 if (veiwGoods) {
                     veiwGoods.appendChild(product);
@@ -1625,9 +1635,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 border.appendChild(dFlex);
                 dFlex.appendChild(p);
                 dFlex.appendChild(a);
+                dFlex.appendChild(a2);
+                dFlex.appendChild(a3);
 
-                for (let i = 0; i < goods; i++) {
-                    // ... existing code ...
+             
 
                     (function (id, name, category) {
                         a.addEventListener('click', function () {
@@ -1637,7 +1648,21 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             window.location.href = "/description/";
                         });
                     })(id, name, category);
-                }
+
+                    (function (id) {
+                        a3.addEventListener('click', function () {
+                            localStorage.setItem('productId', id);
+                            console.log(id);
+                            deleteDoc(doc(db, "products", id)).then(() => {
+                                console.log("Document successfully deleted!");
+                                fetchProducts5();
+
+                            }).catch((error) => {
+                                console.error("Error removing document: ", error);
+                            });
+                        });
+                    })(id);
+                
 
             }
         });
