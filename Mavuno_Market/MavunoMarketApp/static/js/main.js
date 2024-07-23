@@ -795,6 +795,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                         localStorage.setItem('buyerId', buyerId);
                         localStorage.setItem('productId', id);
                         localStorage.setItem('orderId', orderId);
+                        localStorage.setItem('type', "1");
                         const userDoc = doc(db, "users", sellerId);
                         //get the user document
                         getDoc(userDoc).then(docSnap => {
@@ -816,13 +817,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                         });
 
                     }
-                })(sellerId, price, id, buyerId, quantity));
+                })(sellerId, price, id, buyerId, quantity, orderId));
 
                 var status = product.status;
-                button7.addEventListener('click', (function (id, price, quantity, name, sellerId, buyerId, status) {
+                button7.addEventListener('click', (function (id, price, quantity, name, sellerId, buyerId, status, orderId) {
                     return function () {
                         const userDoc = doc(db, "users", sellerId);
                         const userDoc1 = doc(db, "users", buyerId);
+                       
                         //get the user document
                         getDoc(userDoc).then(docSnap => {
                             let user = docSnap.data();
@@ -851,6 +853,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             //add product id and sellerId to the local storage
                             localStorage.setItem('productId', id);
                             localStorage.setItem('buyerId', buyerId);
+                            localStorage.setItem('orderId', orderId);
+                            console.log('orderId', orderId);
                             // window.location.href = "/b2c/";
                             //remove the starting zero and replace with 254 from user.phone
 
@@ -868,7 +872,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             document.getElementById('0').style.display = "none";
                         }
                     }
-                })(id, price, quantity, name, sellerId, buyerId, status));
+                })(id, price, quantity, name, sellerId, buyerId, status, orderId));
 
                 button8.addEventListener('click', (function (productId) {
                     return function () {
@@ -1198,15 +1202,15 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         //get the product document
         const productDoc = doc(db, buyerId, productId);
 
-        const prod = doc(db, "products", productId);
-        var availableQuantity
-        getDoc(prod).then((docSnap) => {
-            let product = docSnap.data();
-            console.log(product);
-            if (product) {
-                availableQuantity = product.amountAvailable;
-            }
-        });
+        // const prod = doc(db, "products", productId);
+        // var availableQuantity
+        // getDoc(prod).then((docSnap) => {
+        //     let product = docSnap.data();
+        //     console.log(product);
+        //     if (product) {
+        //         availableQuantity = product.amountAvailable;
+        //     }
+        // });
 
 
         //get the product document
@@ -1214,7 +1218,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             let product = docSnap.data();
             console.log(product);
             var quantity = product.quantity;
-            var remainingQuantity = availableQuantity + quantity;
+            // var remainingQuantity = availableQuantity + quantity;
             //conver to plain js object
             const productObj = {
                 status: "cancelled",
@@ -1224,9 +1228,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             var cartDoc = doc(db, buyerId, productId);
             var orderDoc = doc(db, product.sellerId, productId);
             var productDoc = doc(db, "products", product.orderId);
-            updateDoc(productDoc, {
-                amountAvailable: remainingQuantity
-            })
+            // updateDoc(productDoc, {
+            //     amountAvailable: remainingQuantity
+            // })
             updateDoc(cartDoc, productObj)
                 .then(() => {
                     console.log("Order successfully written!");
