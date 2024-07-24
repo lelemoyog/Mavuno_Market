@@ -1586,11 +1586,12 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 
 
                 var product = document.createElement("div");
-                product.className = "col-md-6 col-lg-4 col-xl-3";
-                product.style.width = "100%";
+                product.className = "col";
+            
 
                 var fruiteItem = document.createElement("div");
                 fruiteItem.className = "rounded position-relative fruite-item";
+
 
                 var fruiteImg = document.createElement("div");
                 fruiteImg.className = "fruite-img";
