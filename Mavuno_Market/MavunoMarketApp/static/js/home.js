@@ -177,16 +177,18 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
             let goods = products.length;
             var id = product.id;
+            var category = product.category; 
             for (let i = 0; i < goods; i++) {
                 // ... existing code ...
 
-                (function (id) {
+                (function (id, category) {
                     a.addEventListener('click', function () {
                         localStorage.setItem('productId', id);
+                        localStorage.setItem('category', category);
                         console.log(id);
                         window.location.href = "/description/";
                     });
-                })(id);
+                })(id, category);
             }
 
 
