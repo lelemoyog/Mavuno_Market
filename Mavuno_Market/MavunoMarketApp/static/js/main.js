@@ -790,7 +790,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
                 button6.addEventListener('click', (function (sellerId, price, id, buyerId, quantity) {
                     return function () {
-                        //add buyerId to the local storage  
+                        //add buyerId to the local storage
                         localStorage.setItem('buyerId', buyerId);
                         localStorage.setItem('productId', id);
                         const userDoc = doc(db, "users", sellerId);
@@ -1611,7 +1611,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var a = document.createElement("a");
                 a.href = "#";
                 a.className = "btn btn-outline-success";
-                a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
+                a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> Purchase`;
 
                 if (veiwGoods) {
                     veiwGoods.appendChild(product);
