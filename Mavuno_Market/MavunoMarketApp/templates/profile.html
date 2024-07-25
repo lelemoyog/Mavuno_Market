@@ -412,8 +412,8 @@
     }
 </style>
 
- <!-- //create middle center bootstrap transluscent toast -->
- <div class="toast top-50 start-50 translate-middle" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+<!-- //create middle center bootstrap transluscent toast -->
+<div class="toast top-50 start-50 translate-middle" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
         <strong class="me-auto">Mavuno Market</strong>
         <small>Just now</small>
@@ -433,232 +433,224 @@
     <div class="row">
         <div class="profile-nav col-md-3" style="padding-top: 150px;">
             <div class="panel">
-                <div class="user-heading round" >
+                <div class="user-heading round">
                     <a>
                         <img type="file" src="https://bootdey.com/img/Content/avatar/avatar3.png" id="img2">
                     </a>
                     <h1 style="color: #d2e3c3;" class="profileUserName"> </h1>
                     <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                            data-cfemail="e286879b86879ba2968a87a78f838b8ecc818d8f"><input type="file"  class="form-control" class="form-control" id="photo"></a></p>
+                            data-cfemail="e286879b86879ba2968a87a78f838b8ecc818d8f"><input type="file"
+                                class="form-control" class="form-control" id="photo"></a></p>
                 </div>
                 <ul class="nav nav-pills nav-stacked"
-                style="background-color: #d2e3c3; padding: 10px; margin-bottom: 10px; display: flex; gap: 30px; align-items: center; justify-content: flex-start;padding-left: 30px;">
-                <li style="list-style: none;">
-                    <span>
-                        <!-- Button trigger modal -->
-                        <button type="button" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3; display: none;"
-                            class="btn btn-primary" id="postBtn" data-bs-toggle="modal" data-bs-target="#myModal">
-                            Post
-                        </button>
-                       
-                    </span>
-                    <!-- Modal -->
-                    <div class="modal" id="myModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
+                    style="background-color: #d2e3c3; padding: 10px; margin-bottom: 10px; display: flex; gap: 30px; align-items: center; justify-content: flex-start;padding-left: 30px;">
+                    <li style="list-style: none;">
+                        <span>
+                            <!-- Button trigger modal -->
+                            <button type="button"
+                                style="background-color: #00806c; border-color: #00806c; color: #d2e3c3; display: none;"
+                                class="btn btn-primary" id="postBtn" data-bs-toggle="modal" data-bs-target="#myModal">
+                                Post
+                            </button>
 
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Enter product details</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
+                        </span>
+                        <!-- Modal -->
+                        <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
 
-                                <!-- Modal body -->
-                                
-                                <div class="modal-body">
-                                    <form id="productForm">
-                                        <div class="mb-3">
-                                            <label for="productName" class="form-label">Product Name</label>
-                                            <input type="text" class="form-control" id="productName" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="productPrice" class="form-label">Price per kg</label>
-                                            <input type="number" class="form-control" id="productPrice" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="productAmount" class="form-label">Available Amount (kg)</label>
-                                            <input type="number" class="form-control" id="productAmount" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="productCategory" class="form-label">Product Category</label>
-                                            <select class="form-control" id="postProductCategory" required>
-                                                <option value="vegetable" selected>Select product category</option>
-                                                <option value="vegetable">Vegetable</option>
-                                                <option value="fruits">Fruits</option>
-                                                <option value="cereals">Cereals</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="productAmount" class="form-label">Description</label>
-                                            <textarea class="form-control" id="productDescription" required></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="availabilityWindowEnd" class="form-label">Availability Window start</label>
-                                            <input type="date" class="form-control" id="availabilityWindowStrat" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="availabilityWindowEnd" class="form-label">Availability Window End</label>
-                                            <input type="date" class="form-control" id="availabilityWindowEnd" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="productImage" class="form-label">Product Image</label>
-                                            <input type="file" class="form-control" id="productPhoto" accept="image/*" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="uploadedImage" class="form-label">Uploaded Image</label>
-                                            <img id="uploadedImage" src="https://firebasestorage.googleapis.com/v0/b/mavuno-market-webapp.appspot.com/o/banana.jpg?alt=media&token=d186f239-d1d0-4982-bff1-9fbcb04ce55f" alt="Uploaded Image" style="max-width: 100%; height: auto;">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div style="display:none;" id="myAlert">
-                                    <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
-                                      <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                                      <div>
-                                        Product Added successfully
-                                      </div>
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Enter product details</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
-                                  </div>
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button type="button" id="addProduct" form="productForm" class="btn btn-primary">Submit</button>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                </div>
 
+                                    <!-- Modal body -->
+
+                                    <div class="modal-body">
+                                        <form id="productForm">
+                                            <div class="mb-3">
+                                                <label for="productName" class="form-label">Product Name</label>
+                                                <input type="text" class="form-control" id="productName" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productPrice" class="form-label">Price per kg</label>
+                                                <input type="number" class="form-control" id="productPrice" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productAmount" class="form-label">Available Amount
+                                                    (kg)</label>
+                                                <input type="number" class="form-control" id="productAmount" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productCategory" class="form-label">Product Category</label>
+                                                <select class="form-control" id="postProductCategory" required>
+                                                    <option value="vegetable" selected>Select product category</option>
+                                                    <option value="vegetable">Vegetable</option>
+                                                    <option value="fruits">Fruits</option>
+                                                    <option value="cereals">Cereals</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productAmount" class="form-label">Description</label>
+                                                <textarea class="form-control" id="productDescription"
+                                                    required></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="availabilityWindowEnd" class="form-label">Availability
+                                                    Window start</label>
+                                                <input type="date" class="form-control" id="availabilityWindowStrat"
+                                                    required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="availabilityWindowEnd" class="form-label">Availability
+                                                    Window End</label>
+                                                <input type="date" class="form-control" id="availabilityWindowEnd"
+                                                    required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productImage" class="form-label">Product Image</label>
+                                                <input type="file" class="form-control" id="productPhoto"
+                                                    accept="image/*" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="uploadedImage" class="form-label">Uploaded Image</label>
+                                                <img id="uploadedImage"
+                                                    src="https://firebasestorage.googleapis.com/v0/b/mavuno-market-webapp.appspot.com/o/banana.jpg?alt=media&token=d186f239-d1d0-4982-bff1-9fbcb04ce55f"
+                                                    alt="Uploaded Image" style="max-width: 100%; height: auto;">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div style="display:none;" id="myAlert">
+                                        <div class="alert alert-success d-flex align-items-center collapse" role="alert"
+                                            style=" float: right;">
+                                            <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img"
+                                                aria-label="Success:">
+                                                <use xlink:href="#check-circle-fill" />
+                                            </svg>
+                                            <div>
+                                                Product Added successfully
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" id="addProduct" form="productForm"
+                                            class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                <li style="list-style: none;">
-                    <span>
-                        <!-- Button to Open the Modal -->
-                        <button type="button" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3;"
-                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal1">
-                            Edit Profile
-                        </button>
-                        <button type="button" id="logOut1" style="background-color: #00806c; border-color: #00806c; color: #d2e3c3;"
-                        class="btn btn-primary">
-                        logout
-                    </button>
-                    </span>
-                    <!-- The Modal -->
-                    <div class="modal" id="myModal1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-            
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Edit Profile</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-            
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <form id="profileForm">
-                                        <div class="mb-3">
-                                            <label for="userName" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="userN" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="userLocation" class="form-label">Location</label>
-                                            <input type="text" class="form-control" id="userLocation" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="userEmail" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="userEmail" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="userPhone" class="form-label">about</label>
-                                            <input type="text" class="form-control" id="userAbout" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="userPhone" class="form-label">Phone number</label>
-                                            <input type="tel" class="form-control" id="userPhone" required>
-                                        </div>
-                                        <div class="mb-3" style="display: none;">
-                                            <label for="userPhone" class="form-label"></label>
-                                            <input type="tel" class="form-control" id="photoUrl" required>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div style="display:none;" id="myAlert6">
-                                    <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
-                                      <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                                      <div>
-                                        Profile updated successfully
-                                      </div>
+                    </li>
+                    <li style="list-style: none;">
+                        <span>
+                            <!-- Button to Open the Modal -->
+                            <button type="button"
+                                style="background-color: #00806c; border-color: #00806c; color: #d2e3c3;"
+                                class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal1">
+                                Edit Profile
+                            </button>
+                            <button type="button" id="logOut1"
+                                style="background-color: #00806c; border-color: #00806c; color: #d2e3c3;"
+                                class="btn btn-primary">
+                                logout
+                            </button>
+                        </span>
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Edit Profile</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
-                                  </div>
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button type="button" id="updateBtn" form="profileForm" class="btn btn-primary">update</button>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <form id="profileForm">
+                                            <div class="mb-3">
+                                                <label for="userName" class="form-label">Name</label>
+                                                <input type="text" class="form-control" id="userN" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="userLocation" class="form-label">Location</label>
+                                                <input type="text" class="form-control" id="userLocation" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="userEmail" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="userEmail" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="userPhone" class="form-label">about</label>
+                                                <input type="text" class="form-control" id="userAbout" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="userPhone" class="form-label">Phone number</label>
+                                                <input type="tel" class="form-control" id="userPhone" required>
+                                            </div>
+                                            <div class="mb-3" style="display: none;">
+                                                <label for="userPhone" class="form-label"></label>
+                                                <input type="tel" class="form-control" id="photoUrl" required>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div style="display:none;" id="myAlert6">
+                                        <div class="alert alert-success d-flex align-items-center collapse" role="alert"
+                                            style=" float: right;">
+                                            <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img"
+                                                aria-label="Success:">
+                                                <use xlink:href="#check-circle-fill" />
+                                            </svg>
+                                            <div>
+                                                Profile updated successfully
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" id="updateBtn" form="profileForm"
+                                            class="btn btn-primary">update</button>
+                                        <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+
                                 </div>
-            
                             </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
-            
-        
-
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- <div class="profile-info col-md-9">
 
-            <div class="panel" style="margin-top: 150px;">
-                <div class="bio-graph-heading" style="font-size: large ;font-style: normal;font-weight: bolder;">
-                My Profile
-                </div>
-                <div class="panel-body bio-graph-info" style="font-size: large;">
-                    <h1>Bio Graph</h1>
-                    <div class="row">
-                        <div class="bio-row">
-                            <p ><span>Name </span>: <span class="profileUserName"></span></p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Location </span>: <span id="profileLocation"></span></p>
-                        </div>
-
-                        <div class="bio-row">
-                            <p><span>Category </span>: <span id="profileCategory"></span></p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Email </span>: <span id="profileUserEmail"></span>
-                            </p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Mobile </span>: <span id="profileUserPhone"></span></p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="profile-info col-md-9">
 
             <div class="panel" style="margin-top: 150px;">
                 <div class="bio-graph-heading" style="font-size: large ;font-style: normal;font-weight: bolder;">
-                My Profile
+                    My Profile
                 </div>
-                <div  style="font-size: large; background-color: #d2e3c3; text-align: center;" >
+                <div style="font-size: large; background-color: #d2e3c3; text-align: center;">
                     <h1>Bio Graph</h1>
-                    <div >
-                        <div >
-                            <p ><span>Name </span>: <span class="profileUserName"></span></p>
+                    <div>
+                        <div>
+                            <p><span>Name </span>: <span class="profileUserName"></span></p>
                         </div>
-                        <div >
+                        <div>
                             <p><span>Location </span>: <span id="profileLocation"></span></p>
                         </div>
 
                         <div>
                             <p><span>Category </span>: <span id="profileCategory"></span></p>
                         </div>
-                        <div >
+                        <div>
                             <p><span>Email </span>: <span id="profileUserEmail"></span>
                             </p>
                         </div>
-                        <div >
+                        <div>
                             <p><span>Mobile </span>:<span id="profileUserPhone"></span></p>
                         </div>
 
@@ -666,188 +658,26 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="posts" id="posts">
-        <h1 style="font-family: Arial, Helvetica, sans-serif;">My Products</h1>
-        <div class="image-container">
-            <div class="row g-4" id="productHolder5">
-
-                <!-- <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                            <img src="{% static 'img/grapes.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
-                        </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                            style="top: 10px; left: 10px;">Fruits</div>
-                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Grapes</h4>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 150 / kg</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
-                            </div>
-                            <p>available :50kg</p>
-                            <h5>Availability Window</h5>
-                            <p>from :4/05/24 to :11/05/24</p>
-
-                        </div>
-                    </div>
+        <div class="posts" id="posts">
+            <h1 style="font-family: Arial, Helvetica, sans-serif;">My Products</h1>
+            <div class="image-container">
+                <div class="row g-4" id="productHolder5">
+                 
+                    <!-- Add more product columns as needed -->
                 </div>
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                            <img src="{% static 'img/fruite-item-3.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
-                        </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                            style="top: 10px; left: 10px;">Fruits</div>
-                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Bananas</h4>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 100 / kg</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
-                            </div>
-                            <p>available :80kg</p>
-                            <h5>Availability Window</h5>
-                            <p>from :2/04/24 to :11/05/24</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                            <img src="{% static 'img/fruite-item-1.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
-                        </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                            style="top: 10px; left: 10px;">Fruits</div>
-                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Oranges</h4>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">Ksh150/ kg</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
-                            </div>
-                            <p>available :50kg</p>
-                            <h5>Availability Window</h5>
-                            <p>from :4/05/24 to :11/05/24</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                            <img src="{% static 'img/fruite-item-6.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
-                        </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                            style="top: 10px; left: 10px;">Fruits</div>
-                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Apples</h4>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 250 / kg</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
-                            </div>
-                            <p>available :150kg</p>
-                            <h5>Availability Window</h5>
-                            <p>from :4/05/24 to :11/05/24</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                            <img src="{% static 'img/newest-carrots.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
-                        </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                            style="top: 10px; left: 10px;">Vegetables</div>
-                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Carrots</h4>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 150/ kg</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> View Description</a>
-                            </div>
-                            <p>available :80kg</p>
-                            <h5>Availability Window</h5>
-                            <p>from :2/06/24 to :11/06/24</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                            <img src="{% static 'img/broccoli-new.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
-                        </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                            style="top: 10px; left: 10px;">Vegetable</div>
-                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Broccoli</h4>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 300 / kg</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                            </div>
-                            <p>available :50kg</p>
-                            <h5>Availability Window</h5>
-                            <p>from :4/05/24 to :11/05/24</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                            <img src="{% static 'img/vegetable-item-1.jpg' %}" class="img-fluid w-100 rounded-top"
-                                alt="">
-                        </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                            style="top: 10px; left: 10px;">Vegetables</div>
-                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Tomatoes</h4>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 200 / kg</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                            </div>
-                            <p>available :50kg</p>
-                            <h5>Availability Window</h5>
-                            <p>from :4/05/24 to :11/05/24</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                            <img src="{% static 'img/plantain-new.jpg' %}" class="img-fluid w-100 rounded-top" alt="">
-                        </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                            style="top: 10px; left: 10px;">Vegetables</div>
-                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>Plantain</h4>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">Ksh 200 / kg</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                            </div>
-                            <p>available :50kg</p>
-                            <h5>Availability Window</h5>
-                            <p>from :1/12/24 to :01/01/25</p>
-                        </div>
-                    </div>
-                </div> -->
             </div>
-            <!-- Add more images as needed -->
+                <!-- Add more images as needed -->
+            </div>
         </div>
+    
     </div>
-
-     <!-- Cart Page Start -->
-     <div class="container-fluid py-0 px-0">
+  
+    <!-- Cart Page Start -->
+    <div class="container-fluid py-0 px-0">
         <div class="container py-0 px-0">
             <div style="display:none;" id="myAlert3">
-                <div class="alert alert-success d-flex align-items-center collapse" role="alert"
-                    style=" float: right;">
-                    <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img"
-                        aria-label="Success:">
+                <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
+                    <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:">
                         <use xlink:href="#check-circle-fill" />
                     </svg>
                     <div id="succ">
@@ -856,10 +686,8 @@
                 </div>
             </div>
             <div style="display:none;" id="myAlert4">
-                <div class="alert alert-success d-flex align-items-center collapse" role="alert"
-                    style=" float: right;">
-                    <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img"
-                        aria-label="Success:">
+                <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
+                    <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:">
                         <use xlink:href="#check-circle-fill" />
                     </svg>
                     <div>
@@ -881,14 +709,98 @@
                         </tr>
                     </thead>
                     <tbody id="cartHolder1">
-                        
+
                     </tbody>
                 </table>
             </div>
-           
+
         </div>
     </div>
     <!-- Cart Page End -->
+
+
+
+    <!-- Modal -->
+    <div class="modal" id="myModalEdit">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit product details</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- edit product Modal body -->
+
+                <div class="modal-body">
+                    <form id="productForm">
+                        <div class="mb-3">
+                            <label for="productName" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="productNameEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productPrice" class="form-label">Price per kg</label>
+                            <input type="number" class="form-control" id="productPriceEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productAmount" class="form-label">Available Amount (kg)</label>
+                            <input type="number" class="form-control" id="productAmountEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productCategory" class="form-label">Product Category</label>
+                            <select class="form-control" id="postProductCategoryEdit" required>
+                                <option value="vegetable" selected>Select product category</option>
+                                <option value="vegetable">Vegetable</option>
+                                <option value="fruits">Fruits</option>
+                                <option value="cereals">Cereals</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productAmount" class="form-label">Description</label>
+                            <textarea class="form-control" id="productDescriptionEdit" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="availabilityWindowEnd" class="form-label">Availability Window start</label>
+                            <input type="date" class="form-control" id="availabilityWindowStratEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="availabilityWindowEnd" class="form-label">Availability Window End</label>
+                            <input type="date" class="form-control" id="availabilityWindowEndEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productImage" class="form-label">Product Image</label>
+                            <input type="file" class="form-control" id="productPhotoEdit" accept="image/*" required>
+                            <input type="text" class="form-control" id="productPhotoEdit2" style="display: none;"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="uploadedImage" class="form-label">Uploaded Image</label>
+                            <img id="uploadedImageEdit" style="max-width: 100%; height: auto;">
+                        </div>
+                    </form>
+                </div>
+                <div style="display:none;" id="myAlertEdit">
+                    <div class="alert alert-success d-flex align-items-center collapse" role="alert"
+                        style=" float: right;">
+                        <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:">
+                            <use xlink:href="#check-circle-fill" />
+                        </svg>
+                        <div>
+                            Product upadated successfully
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="editProduct" form="productForm" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

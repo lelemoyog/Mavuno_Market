@@ -53,7 +53,7 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://37c6-105-163-157-12.ngrok-free.app',
+    'https://ce6b-41-204-187-5.ngrok-free.app',
 ]
 
 ROOT_URLCONF = 'Mavuno_Market.urls'

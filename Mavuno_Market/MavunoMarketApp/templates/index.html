@@ -76,9 +76,9 @@
                             class="text-white">info.jhub@jkuat.com</a></small>
                 </div>
                 <div class="top-link pe-2" style="color: #00806c">
-                    <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                    <a href="/terms_condition/#privacy-policy" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
+                    <a href="/terms_condition/#terms-of-use" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
+                    <a href="/terms_condition/#sales-refunds" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
                 </div>
             </div>
         </div>
@@ -494,16 +494,18 @@
 
                     <div class="col-lg-3">
                         <div class="d-flex justify-content-end pt-3">
-                            <a class="btn  btn-outline-success me-2 btn-md-square rounded-circle"
-                                href="https://x.com/JHUBAfrica?t=wDtcJ58mfHj2KEaPBrIgzQ&s=08"><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-success me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-success me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-success btn-md-square rounded-circle"
-                                href="https://www.linkedin.com/company/jhubafrica/"><i
-                                    class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-success me-2 btn-md-square rounded-circle" href="https://x.com/JHUBAfrica?t=wDtcJ58mfHj2KEaPBrIgzQ&s=08">
+                                <i class="fab fa-twitter" style="color: white;"></i>
+                            </a>
+                            <a class="btn btn-outline-success me-2 btn-md-square rounded-circle" href="">
+                                <i class="fab fa-facebook-f" style="color: white;"></i>
+                            </a>
+                            <a class="btn btn-outline-success me-2 btn-md-square rounded-circle" href="">
+                                <i class="fab fa-youtube" style="color: white;"></i>
+                            </a>
+                            <a class="btn btn-outline-success btn-md-square rounded-circle" href="https://www.linkedin.com/company/jhubafrica/">
+                                <i class="fab fa-linkedin-in" style="color: white;"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -790,6 +792,62 @@
 
     <!-- Back to Top -->
     <a class="btn btn-outline-success back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+    <!-- product review modal -->
+    <div class="modal fade" id="reviewProduct" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        data-bs-dismiss="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel">product review</h5>
+                    <button type="button" class="btn-close" data-bs-target="#reviewProduct" data-bs-toggle="modal"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-6 offset-md-3">
+                          <form>
+                        <h4 class="mb-5 fw-bold">Leave a Reply</h4>
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="border-bottom rounded">
+                                    <input type="text" class="form-control border-0 me-4" placeholder="Your Name *">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="border-bottom rounded">
+                                    <input type="email" class="form-control border-0" placeholder="Your Email *">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="border-bottom rounded my-4">
+                                    <textarea name="" id="" class="form-control border-0" cols="30" rows="8"
+                                        placeholder="Your Review *" spellcheck="false"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="d-flex justify-content-between py-3 mb-5">
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0 me-3">Please rate:</p>
+                                        <div class="d-flex align-items-center" style="font-size: 12px;">
+                                            <i class="fa fa-star text-muted"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3">
+                                        Post Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- JavaScript Libraries -->

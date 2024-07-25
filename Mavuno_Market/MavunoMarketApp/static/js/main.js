@@ -458,6 +458,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     // });
 
 
+    //show reviewProduct modal
+  
 
 
     // Product Quantity
@@ -721,6 +723,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var name = product.name;
                 var sellerId = product.sellerId;
                 var buyerId = product.buyerId;
+                var orderId = product.orderId;
 
 
 
@@ -788,11 +791,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     };
                 })(id, price, quantity, name, sellerId, buyerId));
 
-                button6.addEventListener('click', (function (sellerId, price, id, buyerId, quantity) {
+                button6.addEventListener('click', (function (sellerId, price, id, buyerId, quantity,orderId) {
                     return function () {
                         //add buyerId to the local storage
                         localStorage.setItem('buyerId', buyerId);
                         localStorage.setItem('productId', id);
+                        localStorage.setItem('orderId', orderId);
+                        localStorage.setItem('type', "1");
                         const userDoc = doc(db, "users", sellerId);
                         //get the user document
                         getDoc(userDoc).then(docSnap => {
@@ -814,13 +819,14 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                         });
 
                     }
-                })(sellerId, price, id, buyerId, quantity));
+                })(sellerId, price, id, buyerId, quantity, orderId));
 
                 var status = product.status;
-                button7.addEventListener('click', (function (id, price, quantity, name, sellerId, buyerId, status) {
+                button7.addEventListener('click', (function (id, price, quantity, name, sellerId, buyerId, status, orderId) {
                     return function () {
                         const userDoc = doc(db, "users", sellerId);
                         const userDoc1 = doc(db, "users", buyerId);
+                       
                         //get the user document
                         getDoc(userDoc).then(docSnap => {
                             let user = docSnap.data();
@@ -849,6 +855,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             //add product id and sellerId to the local storage
                             localStorage.setItem('productId', id);
                             localStorage.setItem('buyerId', buyerId);
+                            localStorage.setItem('orderId', orderId);
+                            console.log('orderId', orderId);
                             // window.location.href = "/b2c/";
                             //remove the starting zero and replace with 254 from user.phone
 
@@ -866,7 +874,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             document.getElementById('0').style.display = "none";
                         }
                     }
-                })(id, price, quantity, name, sellerId, buyerId, status));
+                })(id, price, quantity, name, sellerId, buyerId, status, orderId));
 
                 button8.addEventListener('click', (function (productId) {
                     return function () {
@@ -1196,15 +1204,15 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         //get the product document
         const productDoc = doc(db, buyerId, productId);
 
-        const prod = doc(db, "products", productId);
-        var availableQuantity
-        getDoc(prod).then((docSnap) => {
-            let product = docSnap.data();
-            console.log(product);
-            if (product) {
-                availableQuantity = product.amountAvailable;
-            }
-        });
+        // const prod = doc(db, "products", productId);
+        // var availableQuantity
+        // getDoc(prod).then((docSnap) => {
+        //     let product = docSnap.data();
+        //     console.log(product);
+        //     if (product) {
+        //         availableQuantity = product.amountAvailable;
+        //     }
+        // });
 
 
         //get the product document
@@ -1212,7 +1220,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             let product = docSnap.data();
             console.log(product);
             var quantity = product.quantity;
-            var remainingQuantity = availableQuantity + quantity;
+            // var remainingQuantity = availableQuantity + quantity;
             //conver to plain js object
             const productObj = {
                 status: "cancelled",
@@ -1221,10 +1229,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             //get uid
             var cartDoc = doc(db, buyerId, productId);
             var orderDoc = doc(db, product.sellerId, productId);
-            var productDoc = doc(db, "products", productId);
-            updateDoc(productDoc, {
-                amountAvailable: remainingQuantity
-            })
+            var productDoc = doc(db, "products", product.orderId);
+            // updateDoc(productDoc, {
+            //     amountAvailable: remainingQuantity
+            // })
             updateDoc(cartDoc, productObj)
                 .then(() => {
                     console.log("Order successfully written!");
@@ -1573,12 +1581,19 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var category = Products[i]['category'];
                 var imgUrl = Products[i]['imgUrl'];
                 var id = Products[i]['id'];
+                var description = Products[i]['description'];
+                var availabilityWindowStart = Products[i]['availabilityWindowStart'];
+                var availabilityWindowEnd = Products[i]['availabilityWindowEnd'];
+                var amountAvailable = Products[i]['amountAvailable'];
+                
 
                 var product = document.createElement("div");
-                product.className = "col-md-6 col-lg-4 col-xl-3";
+                product.className = "col";
+            
 
                 var fruiteItem = document.createElement("div");
                 fruiteItem.className = "rounded position-relative fruite-item";
+
 
                 var fruiteImg = document.createElement("div");
                 fruiteImg.className = "fruite-img";
@@ -1609,9 +1624,25 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 p.innerHTML = `Ksh ${price} / kg`;
 
                 var a = document.createElement("a");
+                var a2 = document.createElement("a");
+                var a3 = document.createElement("a");
                 a.href = "#";
+<<<<<<< HEAD
                 a.className = "btn btn-outline-success";
                 a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> Purchase`;
+=======
+                a.className = "btn btn-outline-success ms-2";
+                a2.className = "btn btn-outline-success";
+                a2.setAttribute('data-bs-toggle', 'modal');
+                a2.setAttribute('data-bs-target', '#myModalEdit');
+                a3.className = "btn btn-outline-success";
+                //delete icon
+                a3.innerHTML = `<i class="fa fa-trash"></i>`;
+                //edit icon
+                a2.innerHTML = `<i class="fa fa-edit"></i>`;
+                //eye icon
+                a.innerHTML = `<i class="fa fa-eye"></i>`;
+>>>>>>> aee3833932d80588d7ece4d692e4edc6b96c4a74
 
                 if (veiwGoods) {
                     veiwGoods.appendChild(product);
@@ -1625,9 +1656,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 border.appendChild(dFlex);
                 dFlex.appendChild(p);
                 dFlex.appendChild(a);
+                dFlex.appendChild(a2);
+                dFlex.appendChild(a3);
 
-                for (let i = 0; i < goods; i++) {
-                    // ... existing code ...
+             
 
                     (function (id, name, category) {
                         a.addEventListener('click', function () {
@@ -1637,11 +1669,54 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             window.location.href = "/description/";
                         });
                     })(id, name, category);
-                }
+
+                    (function (id, name, price, category, description, imgUrl, availabilityWindowStart, availabilityWindowEnd, amountAvailable) {
+                        a2.addEventListener('click', function () {
+                            localStorage.setItem('productId', id);
+                            console.log(id);
+                            $('#productNameEdit').val(name);
+                            $('#productPriceEdit').val(price);
+                            //check category and selete the optiop that matches
+                            if(category === "fruits"){
+                                document.getElementById('postProductCategoryEdit').selectedIndex = 2;
+                            }else if(category === "vegetables"){
+                                document.getElementById('postProductCategoryEdit').selectedIndex = 1;
+                            }else if(category === "cereals"){
+                                document.getElementById('postProductCategoryEdit').selectedIndex = 3;
+                            }
+                            
+                            $('#productDescriptionEdit').val(description);
+                            $('#productAmountEdit').val(amountAvailable);
+                            document.getElementById('uploadedImageEdit').src = imgUrl;
+                            document.getElementById('productPhotoEdit2').value = imgUrl;
+                            $('#availabilityWindowStratEdit').val(availabilityWindowStart);
+                            $('#availabilityWindowEndEdit').val(availabilityWindowEnd);
+                            //edit product
+                       
+                        });
+                    })(id, name, price, category, description, imgUrl, availabilityWindowStart, availabilityWindowEnd, amountAvailable);
+
+                    (function (id) {
+                        a3.addEventListener('click', function () {
+                            localStorage.setItem('productId', id);
+                            console.log(id);
+                            deleteDoc(doc(db, "products", id)).then(() => {
+                                console.log("Document successfully deleted!");
+                                fetchProducts5();
+
+                            }).catch((error) => {
+                                console.error("Error removing document: ", error);
+                            });
+                        });
+                    })(id);
+                
 
             }
         });
     }
+
+
+
     //update order status
 
     function updateOrderStatus(productId, buyerId, cartQuantity) {

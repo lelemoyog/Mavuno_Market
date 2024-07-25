@@ -122,11 +122,52 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     });
   }
 
+   //fuction to edit products
+ function editProduct(productId){
+  //get the product document
+  getDoc(doc(db, "products", productId)).then((docSnap) => {
+    let product = docSnap.data();
+    //conver to plain js object
+
+    const productObjEdit = {
+      name: $('#productNameEdit').val(),
+      price: $('#productPriceEdit').val(),
+      category: $('#postProductCategoryEdit').val(),
+      description: $('#productDescriptionEdit').val(),
+      imgUrl: $('#productPhotoEdit2').val(),
+      sellerId: product.sellerId,
+      availabilityWindowStart: $('#availabilityWindowStratEdit').val(),
+      availabilityWindowEnd: $('#availabilityWindowEndEdit').val(),
+      amountAvailable: $('#productAmountEdit').val()
+      };
+    //add product to the database use setDoc and the document id to the product object
+    //get uid
+    var productDoc = doc(db, "products", productId);
+    updateDoc(productDoc, productObjEdit)
+      .then(() => {
+        console.log("Product successfully updated!");
+        $("#myAlertEdit").fadeTo(2000, 500).slideUp(500, function () {
+          $("#myAlertEdit").slideUp(500);
+          window.location.href = "/profile/";
+        });
+      })
+      .catch((error) => {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+  });
+}
+
 
 
   //use the product class to upload product and  create a product object
   $('#addProduct').click(function () {
     addProduct();
+  });
+
+  $('#editProduct').click(function () {
+    var productId = localStorage.getItem('productId');
+    editProduct(productId);
   });
 
   //create a product object
@@ -191,6 +232,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     })
     
   }
+
+ 
 
   // $("document").ready(function () {
   //   //get the user access level from local storage

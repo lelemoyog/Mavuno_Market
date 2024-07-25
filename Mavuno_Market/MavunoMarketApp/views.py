@@ -44,3 +44,7 @@ def testimonial(request):
 
 def dashboard(request):
     return render(request, 'dashboard.html')
+def terms_conditions(request):
+    return render(request, 'terms_conditions.html')
+def terms_condition(request):
+    return render(request, 'terms_condition.html')

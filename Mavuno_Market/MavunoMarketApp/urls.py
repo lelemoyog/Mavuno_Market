@@ -11,6 +11,9 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('vendor/', views.vendor,name='vendor' ),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('terms_condition/', views.terms_condition, name='terms_condition.html'),
+    
+
 
     path('testimonial/', views.testimonial, name='testimonial'),
 
@@ -21,6 +24,9 @@ urlpatterns = [
     path('callback/', views.callback.process_stk_callback, name='process_stk_callback'),
     path('query/', views.query.query_stk_status, name='query_stk_status'),
     path('b2c/', views.B2C.initiate_b2c, name='initiate_b2c_payment'),
+
+
+    
 ]
 
 
