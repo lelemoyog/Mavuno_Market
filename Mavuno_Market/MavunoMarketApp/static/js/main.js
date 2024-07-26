@@ -1711,7 +1711,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     }
 
 
-
     //update order status
 
     function updateOrderStatus(productId, buyerId, cartQuantity) {
@@ -1789,6 +1788,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     var cartDoc = doc(db, product.sellerId, docRef.id);
                     var productDoc = doc(db, product.buyerId, docRef.id);
                     updateDoc(cartDoc, {
+                        id:docRef.id,
                         orderId: productId,
                         quantity: cartQuantity,
                     }).then(() => {

@@ -1,6 +1,6 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,updateDoc,orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 //import https://cdn.jsdelivr.net/npm/apexcharts
@@ -401,10 +401,12 @@ fetchCaroselProducts();
 
   function fetchProducts() {
     clearBox();
-    getDocs(query(collection(db, "products"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "products"),orderBy("rating","desc") ,limit(12))).then(docSnap => {
       let Products = [];
       docSnap.forEach((doc) => {
         Products.push({ ...doc.data(), id: doc.id })
+        //sort using rating in desending order
+        Products.sort((a, b) => b.rating - a.rating);
       });
       console.log("Document data:", Products);
       let goods = Products.length;
@@ -502,10 +504,11 @@ fetchCaroselProducts();
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
 
-    getDocs(query(collection(db, "products"), where("category", "==", "fruits"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "products"), orderBy("rating","desc"), where("category", "==", "fruits"),  limit(12))).then(docSnap => {
       let Products = [];
       docSnap.forEach((doc) => {
         Products.push({ ...doc.data(), id: doc.id })
+        Products.sort((a, b) => b.rating - a.rating);
       });
       console.log("Document2 data:", Products);
       let goods = Products.length;
@@ -589,10 +592,12 @@ fetchCaroselProducts();
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
 
-    getDocs(query(collection(db, "products"), where("category", "==", "vegetable"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "products"),orderBy("rating","desc"), where("category", "==", "vegetable"), limit(12))).then(docSnap => {
       let Products = [];
       docSnap.forEach((doc) => {
         Products.push({ ...doc.data(), id: doc.id })
+        Products.sort((a, b) => b.rating - a.rating);
+
       });
       console.log("Document3 data:", Products);
       let goods = Products.length;
@@ -676,10 +681,11 @@ fetchCaroselProducts();
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
 
-    getDocs(query(collection(db, "products"), where("category", "==", "cereals"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "products"), orderBy("rating","desc"), where("category", "==", "cereals"), limit(12))).then(docSnap => {
       let Products = [];
       docSnap.forEach((doc) => {
         Products.push({ ...doc.data(), id: doc.id })
+        Products.sort((a, b) => b.rating - a.rating);
       });
       console.log("Document4 data:", Products);
       let goods = Products.length;

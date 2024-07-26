@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where, updateDoc,orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { Product } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -30,10 +30,11 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
 
-    getDocs(query(collection(db, "users"), where("accesslevel", "==", "farmer"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "users"),orderBy("rating","desc"), where("accesslevel", "==", "farmer"), limit(12))).then(docSnap => {
       let Users = [];
       docSnap.forEach((doc) => {
         Users.push({ ...doc.data(), id: doc.id })
+        Users.sort((a, b) => b.rating - a.rating);
       });
       console.log("Document6 data:", Users);
       let farmers = Users.length;
@@ -44,6 +45,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         var name = Users[i].name;
         var about = Users[i].about;
         var location = Users[i].location;
+        var id = Users[i].uid;
         //check if the image is available
 
         var image = Users[i].imgUrl ? Users[i].imgUrl : "https://www.w3schools.com/w3images/avatar2.png";
@@ -110,7 +112,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         })(name);
 
 
-
+       
 
       }
     });

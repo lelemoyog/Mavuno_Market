@@ -105,7 +105,7 @@ var id;
         type: 'donut'
       },
       labels: ['Electronic', 'Sports', 'Decor', 'Fashion'],
-      series: [85, 15, 50, 50],
+      series: [20, 15, 50, 50],
       colors: ["#f77e53", "#d1d1d1"],
       stroke: {
         width: 5,

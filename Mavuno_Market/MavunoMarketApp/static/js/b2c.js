@@ -146,6 +146,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     updateDoc(cartDoc, productObj)
                         .then(() => {
                             console.log("Order successfully written!");
+                            updateUserRating(buyerId, "1");
                         })
                         .catch((error) => {
                             console.error("Error writing document: ", error);
@@ -203,6 +204,31 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     console.error("FAILED...", error);
                 });
 
+        });
+    }
+
+    //update user rating
+    function updateUserRating(buyerId, rating) {
+        //get the user document
+        const userDoc = doc(db, "users", sellerId);
+        //get the user document
+        getDoc(userDoc).then(docSnap => {
+            let user = docSnap.data();
+            //get the user rating
+            var userRating = user.rating;
+
+            //update the user rating
+            var newUserRating = parseInt(userRating) + parseInt(rating);
+            //update the user rating
+            updateDoc(userDoc, {
+                rating: newUserRating.toString(),
+            }).then(() => {
+                console.log("Document successfully updated!");
+                //reload the page
+                location.reload();
+            }).catch((error) => {
+                console.error("Error updating document: ", error);
+            });
         });
     }
 

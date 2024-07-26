@@ -256,28 +256,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         });
 
 
-        //get comments
-        //     <div class="d-flex">
-        //     <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-        //         class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;"
-        //         alt="">
-        //     <div class="">
-        //         <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-        //         <div class="d-flex justify-content-between">
-        //             <h5>Jason Smith</h5>
-        //             <div class="d-flex mb-3">
-        //                 <i class="fa fa-star text-secondary"></i>
-        //                 <i class="fa fa-star text-secondary"></i>
-        //                 <i class="fa fa-star text-secondary"></i>
-        //                 <i class="fa fa-star text-secondary"></i>
-        //                 <i class="fa fa-star"></i>
-        //             </div>
-        //         </div>
-        //         <p>The generated Lorem Ipsum is therefore always free from repetition injected
-        //             humour, or non-characteristic
-        //             words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-        //     </div>
-        // </div>
+        
         var id = localStorage.getItem('productId');
         getDocs(query(collection(db, "comments"), where("productId", "==", id))).then(docSnap => {
             let comments = [];
@@ -364,7 +343,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 console.log(newRating.toFixed(0));
 
                 var starHolder = document.querySelector("#starholder");
-                for (let i = 0; i < comment.rating - 1; i++) {
+                for (let i = 0; i < comment.rating; i++) {
                     var iz = document.createElement('i');
                     iz.className = "fa fa-star ms-2 text-success";
                     starHolder.appendChild(iz);
@@ -405,7 +384,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         addDoc(collection(db, "comments"), commentObj).then(() => {
             console.log("Document successfully written!");
             //reload the page
-            location.reload();
+            updateRating(commentObj.productId, commentObj.rating);
         }).catch((error) => {
             console.error("Error writing document: ", error);
         });
@@ -420,18 +399,18 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         //get the product document
         getDoc(productDoc).then(docSnap => {
             let product = docSnap.data();
+            var sellerId = product.sellerId;
             //get the product rating
             var productRating = product.rating;
-            //get the number of ratings
-            var numberOfRatings = product.numberOfRatings;
             //calculate the new rating
-            var newRating = ((productRating * numberOfRatings) + rating) / (numberOfRatings + 1);
+            var newRating = parseInt(productRating) + parseInt(rating);
             //update the product rating
             updateDoc(productDoc, {
-                rating: newRating,
-                numberOfRatings: numberOfRatings + 1
+                rating: newRating.toString(),
             }).then(() => {
                 console.log("Document successfully updated!");
+                //update the user rating
+                updateUserRating(sellerId, rating);
             }).catch((error) => {
                 console.error("Error updating document: ", error);
             });
@@ -440,6 +419,29 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
 
 
+    function updateUserRating(sellerId, rating) {
+        //get the user document
+        const userDoc = doc(db, "users", sellerId);
+        //get the user document
+        getDoc(userDoc).then(docSnap => {
+            let user = docSnap.data();
+            //get the user rating
+            var userRating = user.rating;
+
+            //update the user rating
+            var newUserRating = parseInt(userRating) + parseInt(rating);
+            //update the user rating
+            updateDoc(userDoc, {
+                rating: newUserRating.toString(),
+            }).then(() => {
+                console.log("Document successfully updated!");
+                //reload the page
+                location.reload();
+            }).catch((error) => {
+                console.error("Error updating document: ", error);
+            });
+        });
+    }
 
 
     function addProduct(id) {
