@@ -793,7 +793,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
                 button6.addEventListener('click', (function (sellerId, price, id, buyerId, quantity,orderId) {
                     return function () {
-                        //add buyerId to the local storage  
+                        //add buyerId to the local storage
                         localStorage.setItem('buyerId', buyerId);
                         localStorage.setItem('productId', id);
                         localStorage.setItem('orderId', orderId);
@@ -1627,6 +1627,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var a2 = document.createElement("a");
                 var a3 = document.createElement("a");
                 a.href = "#";
+<<<<<<< HEAD
+                a.className = "btn btn-outline-success";
+                a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> Purchase`;
+=======
                 a.className = "btn btn-outline-success ms-2";
                 a2.className = "btn btn-outline-success";
                 a2.setAttribute('data-bs-toggle', 'modal');
@@ -1638,6 +1642,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 a2.innerHTML = `<i class="fa fa-edit"></i>`;
                 //eye icon
                 a.innerHTML = `<i class="fa fa-eye"></i>`;
+>>>>>>> aee3833932d80588d7ece4d692e4edc6b96c4a74
 
                 if (veiwGoods) {
                     veiwGoods.appendChild(product);

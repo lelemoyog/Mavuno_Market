@@ -105,7 +105,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2"></i> Purchase`;
 
 
 
@@ -363,7 +363,7 @@ fetchCaroselProducts();
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> `;
 
 
 
@@ -462,7 +462,7 @@ fetchCaroselProducts();
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i>Purchase `;
 
 
 
@@ -558,7 +558,7 @@ fetchCaroselProducts();
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> Purchase`;
 
         veiwGoods.appendChild(product);
         product.appendChild(fruiteItem);
@@ -647,7 +647,7 @@ fetchCaroselProducts();
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> Purchase`;
 
         veiwGoods.appendChild(product);
         product.appendChild(fruiteItem);
@@ -735,7 +735,7 @@ fetchCaroselProducts();
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> Purchase`;
 
 
 
