@@ -177,15 +177,15 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         }
       ],
       chart: {
-        height: 300,
+        height: 500,
         stacked: true,
         type: 'bar',
-        toolbar: { show: false }
+        toolbar: { show: true }
       },
       plotOptions: {
         bar: {
-          horizontal: false,
-          columnWidth: '33%',
+          horizontal: true,
+          columnWidth: '100%',
           borderRadius: 12,
           startingShape: 'rounded',
           endingShape: 'rounded'
@@ -641,7 +641,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       document.getElementById("compltorders").innerHTML = products.length;
       //set total revenue
       orderChartConfig.plotOptions.pie.donut.labels.total.formatter = function (w) {
-        return total;
+        return total + " Ksh";
       };
       document.getElementById("totalMoney").innerHTML = total + " Ksh";
       //set the series for the order statistics chart
