@@ -1627,10 +1627,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 var a2 = document.createElement("a");
                 var a3 = document.createElement("a");
                 a.href = "#";
-<<<<<<< HEAD
-                a.className = "btn btn-outline-success";
-                a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> Purchase`;
-=======
                 a.className = "btn btn-outline-success ms-2";
                 a2.className = "btn btn-outline-success";
                 a2.setAttribute('data-bs-toggle', 'modal');
@@ -1642,7 +1638,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 a2.innerHTML = `<i class="fa fa-edit"></i>`;
                 //eye icon
                 a.innerHTML = `<i class="fa fa-eye"></i>`;
->>>>>>> aee3833932d80588d7ece4d692e4edc6b96c4a74
 
                 if (veiwGoods) {
                     veiwGoods.appendChild(product);
@@ -1767,7 +1762,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         //get the product document
         getDoc(productDoc).then(docSnap => {
             let product = docSnap.data();
-
+            var date = new Date().toLocaleString();
 
             //conver to plain js object
             const productObj = {
@@ -1782,7 +1777,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 quantity: cartQuantity,
                 status: "pending",
                 availabilityWindowStart: product.availabilityWindowStart,
-                availabilityWindowEnd: product.availabilityWindowEnd
+                availabilityWindowEnd: product.availabilityWindowEnd,
+                date: date
             };
             //add product to the database usee setDoc and and the document id to the product object
             //get uid
@@ -1813,7 +1809,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                             quantity: cartQuantity,
                             status: "pending",
                             availabilityWindowStart: product.availabilityWindowStart,
-                            availabilityWindowEnd: product.availabilityWindowEnd
+                            availabilityWindowEnd: product.availabilityWindowEnd,
+                            date: date
                         }).then(() => {
                             console.log("Order successfully written!");
                             var message = "You have new order of " + product.name + "Quantity: " + cartQuantity;

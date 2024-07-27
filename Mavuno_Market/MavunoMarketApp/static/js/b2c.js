@@ -146,7 +146,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     updateDoc(cartDoc, productObj)
                         .then(() => {
                             console.log("Order successfully written!");
-                            updateUserRating(buyerId, "1");
+                            updateUserRating(product.buyerId, "1");
                         })
                         .catch((error) => {
                             console.error("Error writing document: ", error);
@@ -208,7 +208,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     }
 
     //update user rating
-    function updateUserRating(buyerId, rating) {
+    function updateUserRating(sellerId, rating) {
         //get the user document
         const userDoc = doc(db, "users", sellerId);
         //get the user document

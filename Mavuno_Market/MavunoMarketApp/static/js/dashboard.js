@@ -167,18 +167,20 @@ var id;
 
 
     // Total Revenue Report Chart - Bar Chart
+    let totalArray1 = [];
+    console.log("totalArray1"+totalArray1);
   // --------------------------------------------------------------------
   const totalRevenueChartEl = document.querySelector('#totalRevenueChart'),
     totalRevenueChartOptions = {
       series: [
         {
-          name: '2021',
-          data: [18, 7, 15, 29, 18, 12, 9]
+          name: 'sales',
+          data: totalArray1
         },
-        {
-          name: '2020',
-          data: [-13, -18, -9, -14, -5, -17, -15]
-        }
+        // {
+        //   name: '2020',
+        //   data: [-13, -18, -9, -14, -5, -17, -15]
+        // }
       ],
       chart: {
         height: 300,
@@ -232,7 +234,7 @@ var id;
         }
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         labels: {
           style: {
             fontSize: '13px',
@@ -423,10 +425,101 @@ var id;
         }
       }
     };
-  if (typeof totalRevenueChartEl !== undefined && totalRevenueChartEl !== null) {
-    const totalRevenueChart = new ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
-    totalRevenueChart.render();
+  // if (typeof totalRevenueChartEl !== undefined && totalRevenueChartEl !== null) {
+  //   const totalRevenueChart = new ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
+  //   totalRevenueChart.render();
+  // }
+
+  //get all complete orders and add it to the total revenue chart
+
+
+  $(document).ready(function () {
+   var uid = localStorage.getItem('uid');
+  //get all orders status to be completed
+  const ordersRef = collection(db, uid);
+  const q = query(ordersRef, where("status", "==", "completed"));
+  const querySnapshot = getDocs(q);
+  
+  querySnapshot.then((querySnapshot) => {
+    var products = [];
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      products.push({ ...doc.data(), id: doc.id })
+    });
+ 
+console.log(products);
+var length = products.length;
+console.log(length);
+var total1 = 0;
+var total2 = 0;
+var total3 = 0;
+var total4 = 0;
+var total5 = 0;
+var total6 = 0;
+var total7 = 0;
+var total8 = 0;
+var total9 = 0;
+var total10 = 0;
+var total11 = 0;
+var total12 = 0;
+ for (let i = 0; i < products.length; i++) {
+    //get the product id
+    const product = products[i];
+   
+      var quantity = product.quantity;
+      var price = product.price;
+      var total = quantity * price;
+      //separete the totals into mothly totals by checking the date
+      var date = product.date;
+      var month = date.split("/")[0];
+      console.log(month.toString());
+    
+     
+      
+
+      (function (total) {
+        if (month == "1") {
+          total1 += total;
+        } else if (month == "2") {
+          total2 += total;
+        } else if (month == "3") {
+          total3 += total;
+        } else if (month == "4") {
+          total4 += total;
+        } else if (month == "5") {
+          total5 += total;
+        } else if (month == "6") {
+          total6 += total;
+        } else if (month == "7") {
+          total7 += total;
+        } else if (month == "8") {
+          total8 += total;
+        } else if (month == "9") {
+          total9 += total;
+        } else if (month == "10") {
+          total10 += total;
+        } else if (month == "11") {
+          total11 += total;
+        } else if (month == "12") {
+          total12 += total;
+        }
+       
+    })(total);
+  
   }
+  //add product to the database use setDoc and the document id to the product object
+ 
+  let totalArray = [total1, total2, total3, total4, total5, total6, total7, total8, total9, total10, total11, total12];
+  //loop through the total array and push to totalArray
+  for (let i = 0; i < 12; i++) {
+    totalArray1.push(totalArray[i]);
+  }
+  console.log("total"+totalArray);
+  const totalRevenueChart = new ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
+  totalRevenueChart.render();
+
+});
+});
 
   // Growth Chart - Radial Bar Chart
   // --------------------------------------------------------------------

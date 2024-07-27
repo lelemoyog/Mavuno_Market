@@ -343,11 +343,13 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 console.log(newRating.toFixed(0));
 
                 var starHolder = document.querySelector("#starholder");
-                for (let i = 0; i < comment.rating; i++) {
+                if(comments.length != 0){
+                for (let i = 0; i < newRating.toFixed(0); i++) {
                     var iz = document.createElement('i');
                     iz.className = "fa fa-star ms-2 text-success";
                     starHolder.appendChild(iz);
                 }
+            }
             });
 
 
