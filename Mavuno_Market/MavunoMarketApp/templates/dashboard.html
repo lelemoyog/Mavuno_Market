@@ -20,11 +20,11 @@
             <div class="col-12 mb-4">
                 <div class="card">
                     <div class="row row-bordered g-0">
-                        <div class="col-md-8">
+                        <div class="col">
                             <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
                             <div id="totalRevenueChart" class="px-2"></div>
                         </div>
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <div class="card-body">
                                 <div class="text-center">
                                     <div class="dropdown">
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div id="growthChart"></div>
-                            <div class="text-center fw-semibold pt-3 mb-2">62% Farmer Growth</div>
+                            <div class="text-center fw-semibold pt-3 mb-2">Farmer Growth</div>
 
                             <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
                                 <div class="d-flex">
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -78,7 +78,6 @@
                     <div class="card-header d-flex align-items-center justify-content-between pb-0">
                         <div class="card-title mb-0">
                             <h5 class="m-0 me-2">Order Statistics</h5>
-                            <small class="text-muted">42.82k Total Sales</small>
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown"
@@ -95,8 +94,8 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div class="d-flex flex-column align-items-center gap-1">
-                                <h2 class="mb-2">8,258</h2>
-                                <span>Total Orders</span>
+                                <h2 class="mb-2" id="compltorders">8</h2>
+                                <span>Total completed Orders</span>
                             </div>
                             <div id="orderStatisticsChart"></div>
                         </div>
@@ -109,10 +108,10 @@
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <h6 class="mb-0">Vegetables</h6>
-                                        <small class="text-muted">Tomatoes, Kales, onions</small>
+                                        <small class="text-muted" id="vegys">Tomatoes, Kales, onions</small>
                                     </div>
                                     <div class="user-progress">
-                                        <small class="fw-semibold">82.5k</small>
+                                        <small class="fw-semibold" id="pvegys">82.5k</small>
                                     </div>
                                 </div>
                             </li>
@@ -124,10 +123,10 @@
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <h6 class="mb-0">Fruits</h6>
-                                        <small class="text-muted">Oranges, Mangoes, Bannas</small>
+                                        <small class="text-muted" id="fruty">Oranges, Mangoes, Bannas</small>
                                     </div>
                                     <div class="user-progress">
-                                        <small class="fw-semibold">23.8k</small>
+                                        <small class="fw-semibold" id="pfruty">23.8k</small> 
                                     </div>
                                 </div>
                             </li>
@@ -139,10 +138,10 @@
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <h6 class="mb-0">Cereals</h6>
-                                        <small class="text-muted">Maize, Beans</small>
+                                        <small class="text-muted" id="cerealy">Maize, Beans</small>
                                     </div>
                                     <div class="user-progress">
-                                        <small class="fw-semibold">849k</small>
+                                        <small class="fw-semibold" id="pcereraly">849k</small>
                                     </div>
                                 </div>
                             </li>
@@ -158,24 +157,19 @@
                 </div>
             </div>
             <!--/ Order Statistics -->
-            <div class="col-lg-6 col-md-12 col-6 mb-4">
+            <div class="col">
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                         
                                 <div class="card-title">
                                     <h5 class="text-nowrap mb-2">Profile Engagement</h5>
-                                    <span class="badge bg-label-warning rounded-pill">Year 2021</span>
+                                    <!-- <span class="badge bg-label-warning rounded-pill">Year 2021</span> -->
                                 </div>
-                                <div class="mt-sm-auto">
-
-                                    <h3 class="mb-0"><small class="text-success text-nowrap fw-semibold"><i
-                                                class="bx bx-chevron-up"></i>
-                                            68.2%</small></h3>
-                                </div>
+                               
                             </div>
                             <div id="profileReportChart"></div>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="card">
@@ -197,10 +191,10 @@
                                 </div>
                             </div>
                             <span>Sales</span>
-                            <h3 class="card-title text-nowrap mb-1">$15,455</h3>
-                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                            <h3 class="card-title text-nowrap mb-1" id="totalMoney">$15,455</h3>
+                            <!-- <small class="text-success fw-semibold" id="growthnumber"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> -->
                         </div>
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="avatar flex-shrink-0">
                                     <img src="{% static 'img/bank-card.png' %}" alt="Credit Card" class="rounded" />
@@ -219,7 +213,7 @@
                             <span>Sales</span>
                             <h3 class="card-title text-nowrap mb-1">$4,679</h3>
                             <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

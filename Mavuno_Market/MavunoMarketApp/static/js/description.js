@@ -45,6 +45,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             $("#planting").text(product.availabilityWindowStart);
             $("#havesting").text(product.availabilityWindowEnd);
             var uid = product.sellerId;
+            localStorage.setItem('productSellerId', uid);
             getUser(uid)
         });
     });
@@ -360,6 +361,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     $('#commentBtn').click(function () {
         //get the user id
         var uid = localStorage.getItem('uid');
+        //get productSellerId
+        var productSellerId = localStorage.getItem('productSellerId');
         //get the product id
         var id = localStorage.getItem('productId');
         //get the comment
@@ -375,7 +378,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             productId: id,
             comment: comment,
             rating: rating,
-            date: date
+            date: date,
+            sellerId: productSellerId
         };
         //add the comment to the database
         addComment(commentObj);
