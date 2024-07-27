@@ -109,7 +109,8 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
       location: user.location,
       about: user.about,
       imgUrl: user.imgUrl,
-      phone: user.phone
+      phone: user.phone,
+      rating: "0",
     };
 
     var docRef = doc(db, "users", user.uid);
