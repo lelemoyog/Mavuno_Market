@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where, updateDoc,orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { Product } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -30,10 +30,11 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
 
-    getDocs(query(collection(db, "users"), where("accesslevel", "==", "vendor"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "users"),orderBy("rating","desc"), where("accesslevel", "==", "vendor"), limit(12))).then(docSnap => {
       let Users = [];
       docSnap.forEach((doc) => {
         Users.push({ ...doc.data(), id: doc.id })
+        Users.sort((a, b) => b.rating - a.rating);
       });
       console.log("Document7 data:", Users);
       let vendors = Users.length;

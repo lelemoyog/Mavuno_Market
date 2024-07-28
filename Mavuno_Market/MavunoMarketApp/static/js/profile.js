@@ -208,7 +208,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       sellerId: product.sellerId,
       availabilityWindowStart: product.availabilityWindowStart,
       availabilityWindowEnd: product.availabilityWindowEnd,
-      amountAvailable: product.amountAvailable
+      amountAvailable: product.amountAvailable,
+      rating: "0"
     };
     //add product to the database usee setDoc and and the document id to the product object
     addDoc(collection(db, "products"), productObj).then((docRef) => {

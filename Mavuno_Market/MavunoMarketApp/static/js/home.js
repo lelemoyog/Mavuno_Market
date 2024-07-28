@@ -1,6 +1,6 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,updateDoc,orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 //import https://cdn.jsdelivr.net/npm/apexcharts
@@ -105,7 +105,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2"></i> Purchase`;
 
 
 
@@ -177,16 +177,18 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
             let goods = products.length;
             var id = product.id;
+            var category = product.category; 
             for (let i = 0; i < goods; i++) {
                 // ... existing code ...
 
-                (function (id) {
+                (function (id, category) {
                     a.addEventListener('click', function () {
                         localStorage.setItem('productId', id);
+                        localStorage.setItem('category', category);
                         console.log(id);
                         window.location.href = "/description/";
                     });
-                })(id);
+                })(id, category);
             }
 
 
@@ -361,7 +363,7 @@ fetchCaroselProducts();
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-primary"></i> `;
 
 
 
@@ -399,10 +401,12 @@ fetchCaroselProducts();
 
   function fetchProducts() {
     clearBox();
-    getDocs(query(collection(db, "products"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "products"),orderBy("rating","desc") ,limit(12))).then(docSnap => {
       let Products = [];
       docSnap.forEach((doc) => {
         Products.push({ ...doc.data(), id: doc.id })
+        //sort using rating in desending order
+        Products.sort((a, b) => b.rating - a.rating);
       });
       console.log("Document data:", Products);
       let goods = Products.length;
@@ -458,7 +462,7 @@ fetchCaroselProducts();
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i>Purchase `;
 
 
 
@@ -500,10 +504,11 @@ fetchCaroselProducts();
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
 
-    getDocs(query(collection(db, "products"), where("category", "==", "fruits"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "products"), orderBy("rating","desc"), where("category", "==", "fruits"),  limit(12))).then(docSnap => {
       let Products = [];
       docSnap.forEach((doc) => {
         Products.push({ ...doc.data(), id: doc.id })
+        Products.sort((a, b) => b.rating - a.rating);
       });
       console.log("Document2 data:", Products);
       let goods = Products.length;
@@ -553,7 +558,7 @@ fetchCaroselProducts();
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> Purchase`;
 
         veiwGoods.appendChild(product);
         product.appendChild(fruiteItem);
@@ -587,10 +592,12 @@ fetchCaroselProducts();
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
 
-    getDocs(query(collection(db, "products"), where("category", "==", "vegetable"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "products"),orderBy("rating","desc"), where("category", "==", "vegetable"), limit(12))).then(docSnap => {
       let Products = [];
       docSnap.forEach((doc) => {
         Products.push({ ...doc.data(), id: doc.id })
+        Products.sort((a, b) => b.rating - a.rating);
+
       });
       console.log("Document3 data:", Products);
       let goods = Products.length;
@@ -640,7 +647,7 @@ fetchCaroselProducts();
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> Purchase`;
 
         veiwGoods.appendChild(product);
         product.appendChild(fruiteItem);
@@ -674,10 +681,11 @@ fetchCaroselProducts();
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
 
-    getDocs(query(collection(db, "products"), where("category", "==", "cereals"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "products"), orderBy("rating","desc"), where("category", "==", "cereals"), limit(12))).then(docSnap => {
       let Products = [];
       docSnap.forEach((doc) => {
         Products.push({ ...doc.data(), id: doc.id })
+        Products.sort((a, b) => b.rating - a.rating);
       });
       console.log("Document4 data:", Products);
       let goods = Products.length;
@@ -727,7 +735,7 @@ fetchCaroselProducts();
         var a = document.createElement("a");
         a.href = "#";
         a.className = "btn btn-outline-success";
-        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> View Description`;
+        a.innerHTML = `<i class="fa fa-shopping-bag me-2 text-success"></i> Purchase`;
 
 
 

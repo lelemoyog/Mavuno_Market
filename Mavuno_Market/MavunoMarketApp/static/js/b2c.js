@@ -35,7 +35,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             var buyerId = localStorage.getItem('buyerId');
             console.log(productId);
             console.log(buyerId);
-            console.log(orderId);
+            // console.log(orderId);
 
             var type = localStorage.getItem('type');
 
@@ -60,15 +60,15 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         //get the product document
         const productDoc = doc(db, buyerId, productId);
 
-        const prod = doc(db, "products", productId);
-        var availableQuantity
-        getDoc(prod).then((docSnap) => {
-            let product = docSnap.data();
-            console.log(product);
-            if (product) {
-                availableQuantity = product.amountAvailable;
-            }
-        });
+        // const prod = doc(db, "products", orderId);
+        // var availableQuantity
+        // getDoc(prod).then((docSnap) => {
+        //     let product = docSnap.data();
+        //     console.log(product);
+        //     if (product) {
+        //         availableQuantity = product.amountAvailable;
+        //     }
+        // });
 
 
         //get the product document
@@ -76,7 +76,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             let product = docSnap.data();
             console.log(product);
             var quantity = product.quantity;
-            var remainingQuantity = availableQuantity + quantity;
+            // var remainingQuantity = parseInt(availableQuantity) + parseInt(quantity);
             //conver to plain js object
             const productObj = {
                 status: "cancelled",
@@ -86,9 +86,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             var cartDoc = doc(db, buyerId, productId);
             var orderDoc = doc(db, product.sellerId, productId);
             var productDoc = doc(db, "products", product.orderId);
-            updateDoc(productDoc, {
-                amountAvailable: remainingQuantity
-            })
+            // updateDoc(productDoc, {
+            //     amountAvailable: remainingQuantity
+            // })
             updateDoc(cartDoc, productObj)
                 .then(() => {
                     console.log("Order successfully written!");
@@ -127,7 +127,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 let product = docSnap.data();
                 //conver to plain js object
                 var quantity = product.quantity;
-                var remainingQuantity = parseInt(availableQuantity) - parseInt(quantity);
+                var remainingQuantity = availableQuantity - quantity;
                 console.log(product);
                 if (product) {
                     const productObj = {
@@ -146,6 +146,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     updateDoc(cartDoc, productObj)
                         .then(() => {
                             console.log("Order successfully written!");
+                            updateUserRating(product.buyerId, "1");
                         })
                         .catch((error) => {
                             console.error("Error writing document: ", error);
@@ -203,6 +204,31 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     console.error("FAILED...", error);
                 });
 
+        });
+    }
+
+    //update user rating
+    function updateUserRating(sellerId, rating) {
+        //get the user document
+        const userDoc = doc(db, "users", sellerId);
+        //get the user document
+        getDoc(userDoc).then(docSnap => {
+            let user = docSnap.data();
+            //get the user rating
+            var userRating = user.rating;
+
+            //update the user rating
+            var newUserRating = parseInt(userRating) + parseInt(rating);
+            //update the user rating
+            updateDoc(userDoc, {
+                rating: newUserRating.toString(),
+            }).then(() => {
+                console.log("Document successfully updated!");
+                //reload the page
+                location.reload();
+            }).catch((error) => {
+                console.error("Error updating document: ", error);
+            });
         });
     }
 
