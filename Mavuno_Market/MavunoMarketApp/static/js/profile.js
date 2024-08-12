@@ -34,6 +34,15 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     }, 2500);
   });
 
+  $('#video').change(function () {
+    // fire the upload here
+    $('#spinner').addClass('show');
+    uploadVideo();
+    setTimeout(function() {
+      $('#spinner').removeClass('show');
+    }, 2500);
+  });
+
   function uploadImage() {
     const file = document.querySelector("#photo").files[0];
     const fileName = file.name;
@@ -53,6 +62,70 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         updateUser(url);
       })
       .catch(console.error);
+  }
+
+  function uploadVideo() {
+    const file = document.querySelector("#video").files[0];
+    const fileName = file.name;
+    const storageRef = ref(storage, fileName);
+    const metadata = {
+      contentType: file.type,
+    };
+    const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+
+    uploadTask.on("state_changed", (snapshot) => {
+      // Get upload progress
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      const progressBar = document.querySelector(".progress-bar");
+      const counter = document.querySelector("#counter");
+      const iframe = document.querySelector("#iframe");
+      progressBar.style.width = progress + "%";
+      counter.innerHTML = progress.toFixed(0) + "%";
+      console.log("Upload progress: " + progress + "%");
+    }, (error) => {
+      console.error("Error uploading file: ", error);
+    }, () => {
+      // Upload completed
+      uploadTask
+        .then((snapshot) => getDownloadURL(snapshot.ref))
+        .then((url) => {
+          console.log(url);
+          document.getElementById("photoUrl").value = url;
+          iframe.src = url;
+          //add local storage
+          localStorage.setItem('photoUrl', url);
+          createVideo(url);
+        })
+        .catch(console.error);
+    });
+  }
+
+  //add video link to videos in firebase firestore
+
+  function createVideo(url) { 
+    var video = {
+      uid: localStorage.getItem('uid'),
+      url: url
+    };
+    addDoc(collection(db, "videos"), video)
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        //update the product id with the doc ref id
+        updateDoc(doc(db, "videos", docRef.id), {
+          id: docRef.id
+        }).then(() => {
+          console.log("Document successfully updated!");
+          $("#myAlert").fadeTo(2000, 500).slideUp(500, function () {
+            $("#myAlert").slideUp(500);
+          });
+        }).catch((error) => {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
   }
 
   //click event to add product image

@@ -653,7 +653,9 @@
                         <div>
                             <p><span>Mobile </span>:<span id="profileUserPhone"></span></p>
                         </div>
-
+                        <div>
+                            <p><span> <a class="btn btn-outline-success mb-2" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Get verified</a> </span></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -800,6 +802,62 @@
             </div>
         </div>
     </div>
+
+
+
+
+    <!-- verification modal -->
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Documentary</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Create a documentary showing your farm and products. Method of farming, seeds used for your product and type of firtilizer you use.   </p>   
+            <!-- upload video to youtube channel -->
+            <form id="videoForm">
+                <div class="mb-3">
+                    <!-- youtube fa icon -->
+                    <i class="fab fa-youtube" style="font-size: 5em;"></i>
+                    <label for="video" class="form-label">Upload video   </label>
+                    <input type="file" class="form-control mb-2 mt-3" id="video" accept="video/*" required>
+                    <div class="ratio ratio-21x9">
+                        <iframe id="iframe" title="Documentary video" allowfullscreen></iframe>
+                      </div>
+                      <!-- add progess bar -->
+                      <h5 id="counter" class="text-center"></h5>
+                        <div class="progress mt-3">
+                            <!-- counter %-->
+                            
+                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Hide this modal and show the first with the button below.
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
+            </div>
+          </div>
+        </div>
+      </div>
+     
 
 </div>
 
