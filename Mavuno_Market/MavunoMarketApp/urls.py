@@ -24,6 +24,14 @@ urlpatterns = [
     path('callback/', views.callback.process_stk_callback, name='process_stk_callback'),
     path('query/', views.query.query_stk_status, name='query_stk_status'),
     path('b2c/', views.B2C.initiate_b2c, name='initiate_b2c_payment'),
+    #admindashboard
+    path('adminDashboard/', views.admindashboard, name='admindashboard'),
+    #dashmin
+    path('dashmin/', views.admin, name='admin'),
+    #stats
+    path('stats/', views.stats, name='stats'),
+    #users
+    path('users/', views.users, name='users'),
 
 
     

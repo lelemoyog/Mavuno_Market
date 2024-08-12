@@ -48,3 +48,11 @@ def terms_conditions(request):
     return render(request, 'terms_conditions.html')
 def terms_condition(request):
     return render(request, 'terms_condition.html')
+def admindashboard(request):
+    return render(request, 'adminDashboard.html')
+def admin(request):
+    return render(request, 'dashmin.html')
+def stats(request):
+    return render(request, 'stats.html')
+def users(request):
+    return render(request, 'users.html')

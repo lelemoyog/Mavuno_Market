@@ -1,6 +1,6 @@
 import { initializeApp, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,  updateDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,  updateDoc, setDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { User } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 //import https://cdn.jsdelivr.net/npm/apexcharts
@@ -44,6 +44,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
             //update order status
             updateOrderStatus(productId, buyerId);
+            createTransaction(productId, buyerId);
         }
         if (resultCode == "1") {
           //reload in 1000
@@ -56,6 +57,43 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     });
 
     // //reload after 5000
+
+
+    //create transaction
+    function createTransaction(productId, buyerId) {
+        //get the product id
+        //get the product document
+        const transactionDoc = doc(db, "Transactions", productId);
+        //get the product document
+        const productDoc = doc(db, buyerId, productId);
+        getDoc(productDoc).then((docSnap) => {
+            let product = docSnap.data();
+            //conver to plain js object
+            console.log(product);
+            if (product) {
+               
+              //create transaction object
+                const transactionObj = {
+                    // assign a default value if quantity is undefined
+                    status: "paid",
+                    productId: product.productId,
+                    buyerId: product.buyerId,
+                    sellerId: product.sellerId,
+                    price: product.price,
+                    quantity: product.quantity,
+                    orderId: product.orderId,
+                    productId: product.id,
+                    date: new Date().toLocaleString(),
+                };
+                //add product to the database use setDoc and the document id to the product object
+                setDoc(transactionDoc, transactionObj).then(() => {
+                    console.log("Transaction successfully written!");
+                }).catch((error) => {
+                    console.error("Error writing document: ", error);   
+                });
+            }
+        }); 
+    }
    
 
     //update order status

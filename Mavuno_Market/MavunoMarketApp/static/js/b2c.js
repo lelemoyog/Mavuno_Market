@@ -42,6 +42,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             if (type == '1') {
                 //update order status
                 updateOrderStatus(productId, buyerId, orderId);
+                updateTransactionStatus(productId);
             } else if (type == '0') {
                 console.log(type);
                 //update wallet balance
@@ -127,7 +128,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 let product = docSnap.data();
                 //conver to plain js object
                 var quantity = product.quantity;
-                var remainingQuantity = availableQuantity - quantity;
+                var remainingQuantity = parseInt(availableQuantity) - parseInt(quantity);
                 console.log(product);
                 if (product) {
                     const productObj = {
@@ -141,7 +142,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     var orderDoc = doc(db, product.sellerId, productId);
                     var productDoc = doc(db, "products", product.orderId);
                     updateDoc(productDoc, {
-                        amountAvailable: remainingQuantity
+                        amountAvailable: remainingQuantity.toString()
                     })
                     updateDoc(cartDoc, productObj)
                         .then(() => {
@@ -170,6 +171,29 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             });
         }
 
+        });
+    }
+
+    //update transaction status
+    function updateTransactionStatus(transactionId) {
+        //get the transaction document
+        const transactionDoc = doc(db, "Transactions", transactionId);
+        //get the transaction document
+        getDoc(transactionDoc).then(docSnap => {
+            let transaction = docSnap.data();
+            //get the transaction status
+            var transactionStatus = transaction.status;
+
+            //update the transaction status
+            var newTransactionStatus = "completed";
+            //update the transaction status
+            updateDoc(transactionDoc, {
+                status: newTransactionStatus,
+            }).then(() => {
+                console.log("Document successfully updated!");
+            }).catch((error) => {
+                console.error("Error updating document: ", error);
+            });
         });
     }
 
