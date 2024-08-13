@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where, updateDoc,orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where, updateDoc, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { Product } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -30,7 +30,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     //use this as reference const q = query(collection(db, "users"), where("accessLevel", "==", "farmer")); and then limit
     clearBox();
 
-    getDocs(query(collection(db, "users"),orderBy("rating","desc"), where("accesslevel", "==", "farmer"), limit(12))).then(docSnap => {
+    getDocs(query(collection(db, "users"), orderBy("rating", "desc"), where("accesslevel", "==", "farmer"), limit(12))).then(docSnap => {
       let Users = [];
       docSnap.forEach((doc) => {
         Users.push({ ...doc.data(), id: doc.id })
@@ -69,10 +69,17 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         img.alt = name;
 
         var textWhite = document.createElement("div");
+        var checkVerify = document.createElement("div");
         textWhite.className = "text-white bg-success px-3 py-1 rounded position-absolute";
+        checkVerify.className = "text-white bg-success px-3 py-1 rounded position-absolute";
         textWhite.style.top = "10px";
         textWhite.style.left = "10px";
+        checkVerify.style.top = "10px";
+        checkVerify.style.right = "10px";
+        checkVerify.style.display = "none";
         textWhite.innerHTML = location;
+        //used icon check to show that the farmer is verified
+        checkVerify.innerHTML = `<i class="fa fa-check-circle"></i>`;
 
         var border = document.createElement("div");
         border.className = "p-4 border border-success border-top-0 rounded-bottom";
@@ -99,6 +106,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         farmerItem.appendChild(farmerImg);
         farmerImg.appendChild(img);
         farmerItem.appendChild(textWhite);
+        farmerItem.appendChild(checkVerify);
         farmerItem.appendChild(border);
         border.appendChild(h4);
         border.appendChild(dFlex);
@@ -111,8 +119,17 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
           });
         })(name);
 
+        (function (id, checkVerify) {
+          getDoc(doc(db, "verificationRequests", id)).then((docSnap) => {
+            if (docSnap.exists()) {
+              var data = docSnap.data();
+              if (data.status == "verified") {
+                checkVerify.style.display = "block";
+              }
+            }
+          });
+        })(id, checkVerify);
 
-       
 
       }
     });
@@ -377,25 +394,25 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         clearSuggestion();
       }
     });
-    
+
   });
-    
-    
-    
-    
-    var input = document.getElementById('searchInput');
-    var suggestion = document.getElementById('suggestion');
-    
-    suggestion.addEventListener("click", function (event) {
-      event.preventDefault();
-      input.value = suggestion.innerText;
-      suggestion.innerHTML = "";
-    });
 
 
 
 
-  
+  var input = document.getElementById('searchInput');
+  var suggestion = document.getElementById('suggestion');
+
+  suggestion.addEventListener("click", function (event) {
+    event.preventDefault();
+    input.value = suggestion.innerText;
+    suggestion.innerHTML = "";
+  });
+
+
+
+
+
 
 
 
