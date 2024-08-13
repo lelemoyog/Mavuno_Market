@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,updateDoc, deleteDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,updateDoc, deleteDoc,setDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { Product } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -43,6 +43,63 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     }, 2500);
   });
 
+  $('#front').change(function () {
+    // fire the upload here
+    $('#spinner').addClass('show');
+    uploadFrontPiImage();
+    setTimeout(function() {
+      $('#spinner').removeClass('show');
+    }, 2500);
+  });
+
+  $('#back').change(function () {
+    // fire the upload here
+    $('#spinner').addClass('show');
+    uploadbackPiImage();
+    setTimeout(function() {
+      $('#spinner').removeClass('show');
+    }, 2500);
+  });
+
+  $('document').ready(function () {
+    //get the verficationRequest document
+    getDoc(doc(db, "verificationRequests", localStorage.getItem('uid'))).then((docSnap) => {
+      if (docSnap.exists()) {
+        var verificationRequest = docSnap.data();
+        console.log(verificationRequest);
+        var status = verificationRequest.status;
+        if (status === "pending") {
+          document.getElementById("status").innerHTML = "Verification request is pending";
+        }else if (status === "verified") {
+          document.getElementById("status").innerHTML = "Verified Documents";
+          document.getElementById("checkVerify").style.display = "block";
+          document.getElementById("videoFrame").src = verificationRequest.video;
+          document.getElementById("frontImage").src = verificationRequest.front;
+          document.getElementById("backImage").src = verificationRequest.back;
+          document.getElementById("status").addEventListener("click", function () {
+            //check if sec2 style is none
+            if (document.getElementById("sec2").style.display === "none") {
+            document.getElementById("sec2").style.display = "block";
+            document.getElementById("status").innerHTML = "Hide Documents";
+            }else{
+              document.getElementById("sec2").style.display = "none";
+              document.getElementById("status").innerHTML = "Verified Documents";
+            }
+          });
+        }else if (status === "rejected") {
+          document.getElementById("btnGet").innerHTML = "Verification request is rejected";
+          document.getElementById("btnGet").style.display = "block";
+          document.getElementById("status").style.display = "none";
+        }
+      }else{
+        document.getElementById("btnGet").style.display = "block";
+        document.getElementById("status").style.display = "none";
+      }
+    });
+  });
+
+ 
+
   function uploadImage() {
     const file = document.querySelector("#photo").files[0];
     const fileName = file.name;
@@ -80,7 +137,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       const counter = document.querySelector("#counter");
       const iframe = document.querySelector("#iframe");
       progressBar.style.width = progress + "%";
-      counter.innerHTML = progress.toFixed(0) + "%";
+      counter.innerHTML = progress.toFixed(0) + "%" + "  please wait...";
       console.log("Upload progress: " + progress + "%");
     }, (error) => {
       console.error("Error uploading file: ", error);
@@ -90,15 +147,96 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         .then((snapshot) => getDownloadURL(snapshot.ref))
         .then((url) => {
           console.log(url);
-          document.getElementById("photoUrl").value = url;
           iframe.src = url;
+          counter.innerHTML = "Upload complete";
           //add local storage
-          localStorage.setItem('photoUrl', url);
+          localStorage.setItem('videoUrl', url);
           createVideo(url);
         })
         .catch(console.error);
     });
   }
+
+  function uploadFrontPiImage() {
+    const file = document.querySelector("#front").files[0];
+    const fileName = file.name;
+    const storageRef = ref(storage, fileName);
+    const metadata = {
+      contentType: file.type,
+    };
+    const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+
+    uploadTask
+      .then((snapshot) => getDownloadURL(snapshot.ref))
+      .then((url) => {
+        console.log(url);
+        const type = "front";
+        document.getElementById("frontImage").src = url;
+        //add local storage
+        localStorage.setItem('frontPhotoUrl', url);
+        piDocUpload(url,type);
+      })
+      .catch(console.error);
+  }
+  function uploadbackPiImage() {
+    const file = document.querySelector("#back").files[0];
+    const fileName = file.name;
+    const storageRef = ref(storage, fileName);
+    const metadata = {
+      contentType: file.type,
+    };
+    const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+
+    uploadTask
+      .then((snapshot) => getDownloadURL(snapshot.ref))
+      .then((url) => {
+        console.log(url);
+        const type = "back";
+        document.getElementById("backImage").src = url;
+        //add local storage
+        localStorage.setItem('backPhotoUrl', url);
+        piDocUpload(url,type);
+      })
+      .catch(console.error);
+  }
+
+
+//create verification request document in firesotre
+
+function createVerificationRequest() {
+  var verificationRequest = {
+    uid: localStorage.getItem('uid'),
+    status: "pending",
+    front: localStorage.getItem('frontPhotoUrl'),
+    back: localStorage.getItem('backPhotoUrl'),
+    video: localStorage.getItem('videoUrl')
+  };
+
+  //use setDoc and use uid as the doc id
+  setDoc(doc(db, "verificationRequests", localStorage.getItem('uid')), verificationRequest)
+    .then(() => {
+      console.log("Document successfully written!");
+      $("#myAlert").fadeTo(2000, 500).slideUp(500, function () {
+        $("#myAlert").slideUp(500);
+        window.location.href = "/profile/";
+      });
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    });
+}
+
+//click event to create verification request
+
+$('#verify').click(function () {
+  //show spinner
+  $('#verificationSpinner').addClass('show');
+  createVerificationRequest();
+  $('#loading').innerHTML = "sent";
+  setTimeout(function() {
+    $('#verificationSpinner').removeClass('show');
+  }, 2500);
+});
 
   //add video link to videos in firebase firestore
 
@@ -127,6 +265,36 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         console.error("Error adding document: ", error);
       });
   }
+
+
+  function piDocUpload(url,type) {
+    var piDoc = {
+      uid: localStorage.getItem('uid'),
+      url: url,
+      type: type
+    };
+    addDoc(collection(db, "piDocs"), piDoc)
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        //update the product id with the doc ref id
+        updateDoc(doc(db, "piDocs", docRef.id), {
+          id: docRef.id
+        }).then(() => {
+          console.log("Document successfully updated!");
+          $("#myAlert").fadeTo(2000, 500).slideUp(500, function () {
+            $("#myAlert").slideUp(500);
+          });
+        }).catch((error) => {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
+
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+  }
+
 
   //click event to add product image
   $('#productPhoto').change(function () {

@@ -410,6 +410,19 @@
         padding: 5px;
         /* Optional padding between images */
     }
+
+    .image-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .image-container .fas {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 2em;
+        color: #e6eeed;
+    }
 </style>
 
 <!-- //create middle center bootstrap transluscent toast -->
@@ -433,10 +446,16 @@
     <div class="row">
         <div class="profile-nav col-md-3" style="padding-top: 150px;">
             <div class="panel">
+                <!-- green verified fa icon -->
+
+
                 <div class="user-heading round">
-                    <a>
-                        <img type="file" src="https://bootdey.com/img/Content/avatar/avatar3.png" id="img2">
-                    </a>
+                    <div class="image-container">
+                        <a>
+                            <img type="file" src="https://bootdey.com/img/Content/avatar/avatar3.png" id="img2">
+                        </a>
+                        <i class="fas fa-check-circle" id="checkVerify" style="display: none;"></i>
+                    </div>
                     <h1 style="color: #d2e3c3;" class="profileUserName"> </h1>
                     <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
                             data-cfemail="e286879b86879ba2968a87a78f838b8ecc818d8f"><input type="file"
@@ -654,210 +673,258 @@
                             <p><span>Mobile </span>:<span id="profileUserPhone"></span></p>
                         </div>
                         <div>
-                            <p><span> <a class="btn btn-outline-success mb-2" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Get verified</a> </span></p>
+                            <p><span> <a class="btn btn-outline-success mb-2" style="display: none;" id="btnGet"
+                                        data-bs-toggle="modal" href="#exampleModalToggle" role="button">Get verified</a>
+                                </span></p>
+                            <span class="btn btn-outline-success mb-2" id="status"></span>
+                        </div>
+                        <!-- with a mt-3 create a place where we can display a video (documentary) and two images jst beside the video on the right, the image (front, back) should be front then the back below it -->
+                        <div class="row m-2 mb-4" id="sec2" style="display: none;">
+                            <div class="col mb-2">
+                                <!-- title(documentanry) -->
+                                <h4>Documentary</h4>
+                                <div class="ratio ratio-16x9">
+                                    <iframe id="videoFrame" title="Documentary video" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4>Personal identification</h4>
+                                <div class="row">
+                                    <div class="col">
+                                        <img id="frontImage" style="max-width: 100%; height: auto;">
+                                    </div>
+                                    <div class="col">
+                                        <img id="backImage" style="max-width: 100%; height: auto;">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
         <div class="posts" id="posts">
             <h1 style="font-family: Arial, Helvetica, sans-serif;">My Products</h1>
             <div class="image-container">
                 <div class="row g-4" id="productHolder5">
-                 
+
                     <!-- Add more product columns as needed -->
                 </div>
             </div>
-                <!-- Add more images as needed -->
-            </div>
+            <!-- Add more images as needed -->
         </div>
-    
     </div>
-  
-    <!-- Cart Page Start -->
-    <div class="container-fluid py-0 px-0">
-        <div class="container py-0 px-0">
-            <div style="display:none;" id="myAlert3">
-                <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
-                    <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:">
-                        <use xlink:href="#check-circle-fill" />
-                    </svg>
-                    <div id="succ">
-                        Order successfully placed
-                    </div>
+
+</div>
+
+<!-- Cart Page Start -->
+<div class="container-fluid py-0 px-0">
+    <div class="container py-0 px-0">
+        <div style="display:none;" id="myAlert3">
+            <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
+                <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:">
+                    <use xlink:href="#check-circle-fill" />
+                </svg>
+                <div id="succ">
+                    Order successfully placed
                 </div>
             </div>
-            <div style="display:none;" id="myAlert4">
+        </div>
+        <div style="display:none;" id="myAlert4">
+            <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
+                <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:">
+                    <use xlink:href="#check-circle-fill" />
+                </svg>
+                <div>
+                    Product successfully Aproved
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive" style="color: #00806c;" id="posts1">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Products</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody id="cartHolder1">
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<!-- Cart Page End -->
+
+
+
+<!-- Modal -->
+<div class="modal" id="myModalEdit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Edit product details</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- edit product Modal body -->
+
+            <div class="modal-body">
+                <form id="productForm">
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="productNameEdit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Price per kg</label>
+                        <input type="number" class="form-control" id="productPriceEdit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productAmount" class="form-label">Available Amount (kg)</label>
+                        <input type="number" class="form-control" id="productAmountEdit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productCategory" class="form-label">Product Category</label>
+                        <select class="form-control" id="postProductCategoryEdit" required>
+                            <option value="vegetable" selected>Select product category</option>
+                            <option value="vegetable">Vegetable</option>
+                            <option value="fruits">Fruits</option>
+                            <option value="cereals">Cereals</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productAmount" class="form-label">Description</label>
+                        <textarea class="form-control" id="productDescriptionEdit" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="availabilityWindowEnd" class="form-label">Availability Window start</label>
+                        <input type="date" class="form-control" id="availabilityWindowStratEdit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="availabilityWindowEnd" class="form-label">Availability Window End</label>
+                        <input type="date" class="form-control" id="availabilityWindowEndEdit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productImage" class="form-label">Product Image</label>
+                        <input type="file" class="form-control" id="productPhotoEdit" accept="image/*" required>
+                        <input type="text" class="form-control" id="productPhotoEdit2" style="display: none;" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="uploadedImage" class="form-label">Uploaded Image</label>
+                        <img id="uploadedImageEdit" style="max-width: 100%; height: auto;">
+                    </div>
+                </form>
+            </div>
+            <div style="display:none;" id="myAlertEdit">
                 <div class="alert alert-success d-flex align-items-center collapse" role="alert" style=" float: right;">
                     <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:">
                         <use xlink:href="#check-circle-fill" />
                     </svg>
                     <div>
-                        Product successfully Aproved
+                        Product upadated successfully
                     </div>
                 </div>
             </div>
-            <div class="table-responsive" style="color: #00806c;" id="posts1">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Products</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Handle</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cartHolder1">
-
-                    </tbody>
-                </table>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" id="editProduct" form="productForm" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
 
         </div>
     </div>
-    <!-- Cart Page End -->
-
-
-
-    <!-- Modal -->
-    <div class="modal" id="myModalEdit">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit product details</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
-                <!-- edit product Modal body -->
-
-                <div class="modal-body">
-                    <form id="productForm">
-                        <div class="mb-3">
-                            <label for="productName" class="form-label">Product Name</label>
-                            <input type="text" class="form-control" id="productNameEdit" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productPrice" class="form-label">Price per kg</label>
-                            <input type="number" class="form-control" id="productPriceEdit" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productAmount" class="form-label">Available Amount (kg)</label>
-                            <input type="number" class="form-control" id="productAmountEdit" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productCategory" class="form-label">Product Category</label>
-                            <select class="form-control" id="postProductCategoryEdit" required>
-                                <option value="vegetable" selected>Select product category</option>
-                                <option value="vegetable">Vegetable</option>
-                                <option value="fruits">Fruits</option>
-                                <option value="cereals">Cereals</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productAmount" class="form-label">Description</label>
-                            <textarea class="form-control" id="productDescriptionEdit" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="availabilityWindowEnd" class="form-label">Availability Window start</label>
-                            <input type="date" class="form-control" id="availabilityWindowStratEdit" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="availabilityWindowEnd" class="form-label">Availability Window End</label>
-                            <input type="date" class="form-control" id="availabilityWindowEndEdit" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productImage" class="form-label">Product Image</label>
-                            <input type="file" class="form-control" id="productPhotoEdit" accept="image/*" required>
-                            <input type="text" class="form-control" id="productPhotoEdit2" style="display: none;"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="uploadedImage" class="form-label">Uploaded Image</label>
-                            <img id="uploadedImageEdit" style="max-width: 100%; height: auto;">
-                        </div>
-                    </form>
-                </div>
-                <div style="display:none;" id="myAlertEdit">
-                    <div class="alert alert-success d-flex align-items-center collapse" role="alert"
-                        style=" float: right;">
-                        <svg class="bi flex-shrink-0 me-2" width="50" height="50" role="img" aria-label="Success:">
-                            <use xlink:href="#check-circle-fill" />
-                        </svg>
-                        <div>
-                            Product upadated successfully
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" id="editProduct" form="productForm" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
+</div>
 
 
 
 
-    <!-- verification modal -->
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
+<!-- verification modal -->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Documentary</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Documentary</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>Create a documentary showing your farm and products. Method of farming, seeds used for your product and type of firtilizer you use.   </p>   
-            <!-- upload video to youtube channel -->
-            <form id="videoForm">
-                <div class="mb-3">
-                    <!-- youtube fa icon -->
-                    <i class="fab fa-youtube" style="font-size: 5em;"></i>
-                    <label for="video" class="form-label">Upload video   </label>
-                    <input type="file" class="form-control mb-2 mt-3" id="video" accept="video/*" required>
-                    <div class="ratio ratio-21x9">
-                        <iframe id="iframe" title="Documentary video" allowfullscreen></iframe>
-                      </div>
-                      <!-- add progess bar -->
-                      <h5 id="counter" class="text-center"></h5>
+                <h4>Create a documentary showing your farm and products. Method of farming, seeds used for your products
+                    and type of fertilizer you use. </h44>
+                    <!-- upload video to youtube channel -->
+                    <div class="mb-3">
+                        <!-- youtube fa icon -->
+                        <i class="fab fa-youtube" style="font-size: 5em;"></i>
+                        <label for="video" class="form-label">Upload video </label>
+                        <input type="file" class="form-control mb-2 mt-3" id="video" accept="video/*">
+                        <div class="ratio ratio-21x9">
+                            <iframe id="iframe" title="Documentary video" allowfullscreen></iframe>
+                        </div>
+                        <!-- add progess bar -->
+                        <h5 id="counter" class="text-center"></h5>
                         <div class="progress mt-3">
-                            <!-- counter %-->
-                            
-                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <!-- counter%-->
+
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 0%;"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                </div>
+                    </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
+                <button class="btn btn-success" data-bs-target="#exampleModalToggle2"
+                    data-bs-toggle="modal">next</button>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
+    </div>
+</div>
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Personal identification</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Hide this modal and show the first with the button below.
+                <h6>Upload a copy of your national identification card</h6>
+                <!-- add areas side by side for front and back side -->
+                <div class="row">
+                    <div class="col">
+                        <label for="front" class="form-label">Front side</label>
+                        <input type="file" name="front" class="form-control" id="front" accept="image/*">
+                        <img id="frontImage" style="max-width: 100%; height: auto;">
+                    </div>
+                    <div class="col">
+                        <label for="back" class="form-label">Back side</label>
+                        <input type="file" name="back" class="form-control" id="back" accept="image/*">
+                        <img id="backImage" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
             </div>
+
             <div class="modal-footer">
-              <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
+                <!-- add spinner -->
+                <div class="spinner-border text-primary" id="verificationSpinner" role="status" style="display: none;">
+                    <span class="visually-hidden" id="Loading">Loading...</span>
+                </div>
+                <button class="btn btn-success" data-bs-target="#exampleModalToggle"
+                    data-bs-toggle="modal">Back</button>
+                <button class="btn btn-success" id="verify">Request verification</button>
             </div>
-          </div>
         </div>
-      </div>
-     
+    </div>
+</div>
+
 
 </div>
 
