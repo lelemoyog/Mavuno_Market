@@ -49,7 +49,18 @@
   }
 }
 
+.image-container {
+        position: relative;
+        display: inline-block;
+    }
 
+    .image-container .fas {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 2em;
+        color:#28a745;
+    }
 </style>
 
 
@@ -269,8 +280,14 @@
                                 <div class="account-settings text-center">
                                     <div class="user-profile">
                                         <div class="user-avatar">
-                                            <img class="i" src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                id="descriptionFamerImg" alt="Maxwell Admin">
+                                           
+                                                <div class="image-container">
+                                                    <a>
+                                                        <img class="i" src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                id="descriptionFamerImg" alt="img">
+                                                    </a>
+                                                    <i class="fas fa-check-circle" id="checkVerify" style="display: none;"></i>
+                                                </div>
                                         </div>
                                         <style>
                                             .i {

@@ -71,6 +71,15 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
             $('#descriptionFamerPhone').text(user.phone);
 
         });
+
+        getDoc(doc(db, "verificationRequests", uid)).then((docSnap) => {
+            if (docSnap.exists()) {
+              var data = docSnap.data();
+              if (data.status == "verified") {
+                document.querySelector("#checkVerify").style.display = "block";
+              }
+            }
+          });
     }
 
     $('#tel').click(function () {
