@@ -112,12 +112,24 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         border.appendChild(dFlex);
         dFlex.appendChild(p);
         dFlex.appendChild(a);
-        (function (name) {
+        (function (name,id) {
           a.addEventListener('click', function () {
+            getDoc(doc(db, "verificationRequests", id)).then((docSnap) => {
+              if (docSnap.exists()) {
+                var data = docSnap.data();
+                if (data.status == "verified") {
+                  document.getElementById('docVideo').style.display = "block";
+                  document.getElementById("docVideo").className ="row justify-content-center mb-3";
+                  document.getElementById("farmerVideo").src = data.video;
+                }
+              }else{
+                document.getElementById('docVideo').style.display = "none";
+              }
+            });
             $('#modalFarmerName').html(name);
             fetchProducts5(Users[i].uid);
           });
-        })(name);
+        })(name,id);
 
         (function (id, checkVerify) {
           getDoc(doc(db, "verificationRequests", id)).then((docSnap) => {
