@@ -61,6 +61,23 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     }, 2500);
   });
 
+
+  $('#btnGet').click(function () {
+    //check the access level of the user
+     getDoc(doc(db, "users", localStorage.getItem('uid'))).then((docSnap) => {
+       if (docSnap.exists()) {
+         var user = docSnap.data();
+         var accessLevel = user.accesslevel;
+         if (accessLevel === "farmer") {
+          document.getElementById("info").textContent = "Create a documentary showing your farm and products. Method of farming, seeds used for your products and type of fertilizer you use.";
+         }
+         if (accessLevel === "vendor") {
+           document.getElementById("info").textContent = "Create a documentary showing your shop and products. The type of products you sell and the quality of your products.";
+         }
+       }
+    });
+  });
+
   $('document').ready(function () {
     //get the verficationRequest document
     getDoc(doc(db, "verificationRequests", localStorage.getItem('uid'))).then((docSnap) => {
@@ -163,17 +180,19 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     const file = document.querySelector("#front").files[0];
     const fileName = file.name;
     const storageRef = ref(storage, fileName);
+
     const metadata = {
       contentType: file.type,
     };
     const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-
     uploadTask
       .then((snapshot) => getDownloadURL(snapshot.ref))
       .then((url) => {
+         // Set the image URL in the HTML
+        $("#frontImg").attr('src', url);
         console.log(url);
         const type = "front";
-        document.getElementById("frontImage").src = url;
+      
         //add local storage
         localStorage.setItem('frontPhotoUrl', url);
         piDocUpload(url, type);
@@ -194,7 +213,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
       .then((url) => {
         console.log(url);
         const type = "back";
-        document.getElementById("backImage").src = url;
+        document.getElementById("backImg").src = url;
         //add local storage
         localStorage.setItem('backPhotoUrl', url);
         piDocUpload(url, type);
