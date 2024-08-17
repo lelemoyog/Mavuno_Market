@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where,updateDoc, deleteDoc,setDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, addDoc, collection, getDocs, getDoc, doc, onSnapshot, query, limit, where, updateDoc, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { Product } from "/static/js/classes.js";
 import { firebaseConfig } from "/static/js/firebaseSDK.js";
 
@@ -29,7 +29,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     // fire the upload here
     $('#spinner').addClass('show');
     uploadImage();
-    setTimeout(function() {
+    setTimeout(function () {
       $('#spinner').removeClass('show');
     }, 2500);
   });
@@ -38,7 +38,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     // fire the upload here
     $('#spinner').addClass('show');
     uploadVideo();
-    setTimeout(function() {
+    setTimeout(function () {
       $('#spinner').removeClass('show');
     }, 2500);
   });
@@ -47,7 +47,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     // fire the upload here
     $('#spinner').addClass('show');
     uploadFrontPiImage();
-    setTimeout(function() {
+    setTimeout(function () {
       $('#spinner').removeClass('show');
     }, 2500);
   });
@@ -56,7 +56,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     // fire the upload here
     $('#spinner').addClass('show');
     uploadbackPiImage();
-    setTimeout(function() {
+    setTimeout(function () {
       $('#spinner').removeClass('show');
     }, 2500);
   });
@@ -71,7 +71,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         if (status === "pending") {
           document.getElementById("btnGet").style.display = "none";
           document.getElementById("status").innerHTML = "Verification request is pending";
-        }else if (status === "verified") {
+        } else if (status === "verified") {
           document.getElementById("btnGet").style.display = "none";
           document.getElementById("status").innerHTML = "Verified Documents";
           document.getElementById("checkVerify").style.display = "block";
@@ -81,24 +81,26 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
           document.getElementById("status").addEventListener("click", function () {
             //check if sec2 style is none
             if (document.getElementById("sec2").style.display === "none") {
-            document.getElementById("sec2").style.display = "block";
-            document.getElementById("status").innerHTML = "Hide Documents";
-            }else{
+              document.getElementById("btnGet").style.display = "none";
+              document.getElementById("sec2").style.display = "block";
+              document.getElementById("status").innerHTML = "Hide Documents";
+            } else {
+              document.getElementById("btnGet").style.display = "none";
               document.getElementById("sec2").style.display = "none";
               document.getElementById("status").innerHTML = "Verified Documents";
             }
           });
-        }else if (status === "rejected") {
+        } else if (status === "rejected") {
           document.getElementById("btnGet").innerHTML = "Verification request is rejected";
           document.getElementById("status").style.display = "none";
         }
-      }else{
+      } else {
         document.getElementById("status").style.display = "none";
       }
     });
   });
 
- 
+
 
   function uploadImage() {
     const file = document.querySelector("#photo").files[0];
@@ -174,7 +176,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         document.getElementById("frontImage").src = url;
         //add local storage
         localStorage.setItem('frontPhotoUrl', url);
-        piDocUpload(url,type);
+        piDocUpload(url, type);
       })
       .catch(console.error);
   }
@@ -195,52 +197,52 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         document.getElementById("backImage").src = url;
         //add local storage
         localStorage.setItem('backPhotoUrl', url);
-        piDocUpload(url,type);
+        piDocUpload(url, type);
       })
       .catch(console.error);
   }
 
 
-//create verification request document in firesotre
+  //create verification request document in firesotre
 
-function createVerificationRequest() {
-  var verificationRequest = {
-    uid: localStorage.getItem('uid'),
-    status: "pending",
-    front: localStorage.getItem('frontPhotoUrl'),
-    back: localStorage.getItem('backPhotoUrl'),
-    video: localStorage.getItem('videoUrl')
-  };
+  function createVerificationRequest() {
+    var verificationRequest = {
+      uid: localStorage.getItem('uid'),
+      status: "pending",
+      front: localStorage.getItem('frontPhotoUrl'),
+      back: localStorage.getItem('backPhotoUrl'),
+      video: localStorage.getItem('videoUrl')
+    };
 
-  //use setDoc and use uid as the doc id
-  setDoc(doc(db, "verificationRequests", localStorage.getItem('uid')), verificationRequest)
-    .then(() => {
-      console.log("Document successfully written!");
-      $("#myAlert").fadeTo(2000, 500).slideUp(500, function () {
-        $("#myAlert").slideUp(500);
-        window.location.href = "/profile/";
+    //use setDoc and use uid as the doc id
+    setDoc(doc(db, "verificationRequests", localStorage.getItem('uid')), verificationRequest)
+      .then(() => {
+        console.log("Document successfully written!");
+        $("#myAlert").fadeTo(2000, 500).slideUp(500, function () {
+          $("#myAlert").slideUp(500);
+          window.location.href = "/profile/";
+        });
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
       });
-    })
-    .catch((error) => {
-      console.error("Error writing document: ", error);
-    });
-}
+  }
 
-//click event to create verification request
+  //click event to create verification request
 
-$('#verify').click(function () {
-  //show spinner
-  $('#verificationSpinner').addClass('show');
-  createVerificationRequest();
-  $('#loading').innerHTML = "sent";
-  setTimeout(function() {
-    $('#verificationSpinner').removeClass('show');
-  }, 2500);
-});
+  $('#verify').click(function () {
+    //show spinner
+    $('#verificationSpinner').addClass('show');
+    createVerificationRequest();
+    $('#loading').innerHTML = "sent";
+    setTimeout(function () {
+      $('#verificationSpinner').removeClass('show');
+    }, 2500);
+  });
 
   //add video link to videos in firebase firestore
 
-  function createVideo(url) { 
+  function createVideo(url) {
     var video = {
       uid: localStorage.getItem('uid'),
       url: url
@@ -267,7 +269,7 @@ $('#verify').click(function () {
   }
 
 
-  function piDocUpload(url,type) {
+  function piDocUpload(url, type) {
     var piDoc = {
       uid: localStorage.getItem('uid'),
       url: url,
@@ -300,16 +302,16 @@ $('#verify').click(function () {
   $('#productPhoto').change(function () {
     $('#spinner').addClass('show');
     uploadProductImage();
-    setTimeout(function() {
+    setTimeout(function () {
       $('#spinner').removeClass('show');
     }, 2000);
   });
 
   function uploadProductImage() {
     const file = document.querySelector("#productPhoto").files[0];
-     //get the file name
+    //get the file name
     const fileName = file.name;
-     const storageRef = ref(storage, fileName);
+    const storageRef = ref(storage, fileName);
     const metadata = {
       contentType: file.type,
     };
@@ -354,7 +356,7 @@ $('#verify').click(function () {
         $("#myAlert6").slideUp(500);
       });
       //redirect to profile page
-      setTimeout(function() {
+      setTimeout(function () {
         window.location.href = "/profile/";
       }, 1000);
     }).catch((error) => {
@@ -363,41 +365,41 @@ $('#verify').click(function () {
     });
   }
 
-   //fuction to edit products
- function editProduct(productId){
-  //get the product document
-  getDoc(doc(db, "products", productId)).then((docSnap) => {
-    let product = docSnap.data();
-    //conver to plain js object
+  //fuction to edit products
+  function editProduct(productId) {
+    //get the product document
+    getDoc(doc(db, "products", productId)).then((docSnap) => {
+      let product = docSnap.data();
+      //conver to plain js object
 
-    const productObjEdit = {
-      name: $('#productNameEdit').val(),
-      price: $('#productPriceEdit').val(),
-      category: $('#postProductCategoryEdit').val(),
-      description: $('#productDescriptionEdit').val(),
-      imgUrl: $('#productPhotoEdit2').val(),
-      sellerId: product.sellerId,
-      availabilityWindowStart: $('#availabilityWindowStratEdit').val(),
-      availabilityWindowEnd: $('#availabilityWindowEndEdit').val(),
-      amountAvailable: $('#productAmountEdit').val()
+      const productObjEdit = {
+        name: $('#productNameEdit').val(),
+        price: $('#productPriceEdit').val(),
+        category: $('#postProductCategoryEdit').val(),
+        description: $('#productDescriptionEdit').val(),
+        imgUrl: $('#productPhotoEdit2').val(),
+        sellerId: product.sellerId,
+        availabilityWindowStart: $('#availabilityWindowStratEdit').val(),
+        availabilityWindowEnd: $('#availabilityWindowEndEdit').val(),
+        amountAvailable: $('#productAmountEdit').val()
       };
-    //add product to the database use setDoc and the document id to the product object
-    //get uid
-    var productDoc = doc(db, "products", productId);
-    updateDoc(productDoc, productObjEdit)
-      .then(() => {
-        console.log("Product successfully updated!");
-        $("#myAlertEdit").fadeTo(2000, 500).slideUp(500, function () {
-          $("#myAlertEdit").slideUp(500);
-          window.location.href = "/profile/";
+      //add product to the database use setDoc and the document id to the product object
+      //get uid
+      var productDoc = doc(db, "products", productId);
+      updateDoc(productDoc, productObjEdit)
+        .then(() => {
+          console.log("Product successfully updated!");
+          $("#myAlertEdit").fadeTo(2000, 500).slideUp(500, function () {
+            $("#myAlertEdit").slideUp(500);
+            window.location.href = "/profile/";
+          });
+        })
+        .catch((error) => {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
         });
-      })
-      .catch((error) => {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-      });
-  });
-}
+    });
+  }
 
 
 
@@ -427,7 +429,7 @@ $('#verify').click(function () {
   // }; follow the same pattern to create a product object and for the id i want it to be the doc ref id from firebase
 
   //create a function to add a product
-  function addProduct(){
+  function addProduct() {
     var name = $('#productName').val();
     var price = $('#productPrice').val();
     var category = $('#postProductCategory').val();
@@ -468,14 +470,14 @@ $('#verify').click(function () {
         $("#myAlert").fadeTo(2000, 500).slideUp(500, function () {
           $("#myAlert").innerHTML = error.code;
           $("#myAlert").slideUp(500);
-         
+
         });
       });
     })
-    
+
   }
 
- 
+
 
   // $("document").ready(function () {
   //   //get the user access level from local storage
@@ -487,27 +489,27 @@ $('#verify').click(function () {
   //   if (accessLevel === "vendor") {
   //     fetchOrderProducts();
   //   }
-   
+
   // })
 
 
-  
 
- 
+
+
   $("#logOut1").click(function (event) {
     getAuth().signOut().then(() => {
-        // Sign-out successful.
-        console.log('Sign-out successful');
-        //remove user from local storage
-        localStorage.removeItem('uid');
-        window.location.href = "/signin/";
+      // Sign-out successful.
+      console.log('Sign-out successful');
+      //remove user from local storage
+      localStorage.removeItem('uid');
+      window.location.href = "/signin/";
     }).catch((error) => {
-        // An error happened.
-        console.log('An error happened');
+      // An error happened.
+      console.log('An error happened');
     });
-});
+  });
 
 
-  
+
 
 })(jQuery);
