@@ -69,8 +69,10 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         console.log(verificationRequest);
         var status = verificationRequest.status;
         if (status === "pending") {
+          document.getElementById("btnGet").style.display = "none";
           document.getElementById("status").innerHTML = "Verification request is pending";
         }else if (status === "verified") {
+          document.getElementById("btnGet").style.display = "none";
           document.getElementById("status").innerHTML = "Verified Documents";
           document.getElementById("checkVerify").style.display = "block";
           document.getElementById("videoFrame").src = verificationRequest.video;
@@ -88,11 +90,9 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
           });
         }else if (status === "rejected") {
           document.getElementById("btnGet").innerHTML = "Verification request is rejected";
-          document.getElementById("btnGet").style.display = "block";
           document.getElementById("status").style.display = "none";
         }
       }else{
-        document.getElementById("btnGet").style.display = "block";
         document.getElementById("status").style.display = "none";
       }
     });
