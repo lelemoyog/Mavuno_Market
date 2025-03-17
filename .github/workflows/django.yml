@@ -27,4 +27,5 @@ jobs:
         pip install -r Mavuno_Market/requirements.txt
     - name: Run Tests
       run: |
+        cd Mavuno_Market
         python manage.py test
