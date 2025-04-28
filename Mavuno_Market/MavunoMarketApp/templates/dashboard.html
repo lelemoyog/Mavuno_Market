@@ -16,6 +16,94 @@
     <div class="container py-5">
 
         <div class="row">
+
+            <!-- Notifications Icon -->
+            <div class="col-md-6 mb-4">
+                <i class="bi bi-bell fs-3 text-primary" role="button" data-bs-toggle="modal"
+                    data-bs-target="#notificationsModal"></i>
+            </div>
+
+
+            <!-- Notifications Modal -->
+            <div class="modal fade" id="notificationsModal" tabindex="-1" aria-labelledby="notificationsModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="notificationsModalLabel">Notifications</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">Eugene Obunde a vendor, has made an order on 20kg of kamande</li>
+                                <li class="list-group-item">Niron has made payment for 10kg of kamande - KSH 3000 </li>
+                                <li class="list-group-item">Best time for selling kamande is on july, then the demand is more than supply hence leading to better profits</li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="m-0">Market & Customer Insights</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Navigation Tabs -->
+                        <ul class="nav nav-tabs" id="marketTabs" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active" id="bestSelling-tab" data-bs-toggle="tab" data-bs-target="#bestSelling" type="button" role="tab">
+                                    Best-Selling Products
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="topBuyers-tab" data-bs-toggle="tab" data-bs-target="#topBuyers" type="button" role="tab">
+                                    Top Buyers
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="marketTrends-tab" data-bs-toggle="tab" data-bs-target="#marketTrends" type="button" role="tab">
+                                    Market Trends
+                                </button>
+                            </li>
+                        </ul>
+            
+                        <!-- Tab Content -->
+                        <div class="tab-content mt-3" id="marketTabsContent">
+                            <!-- Best-Selling Products -->
+                            <div class="tab-pane fade show active" id="bestSelling" role="tabpanel">
+                                <ul class="list-group" id="bestSellingProducts">
+                                    <li class="list-group-item">Loading...</li>
+                                </ul>
+                            </div>
+            
+                            <!-- Top Buyers -->
+                            <div class="tab-pane fade" id="topBuyers" role="tabpanel">
+                                <ul class="list-group" id="topBuyersList">
+                                    <li class="list-group-item">Loading...</li>
+                                </ul>
+                            </div>
+            
+                            <!-- Market Prices & Demand -->
+                            <div class="tab-pane fade" id="marketTrends" role="tabpanel">
+                                <ul class="list-group" id="marketTrendsList">
+                                    <li class="list-group-item">Fetching data...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+
+
+
             <!-- Total Revenue -->
             <div class="col-12 mb-4">
                 <div class="card">
@@ -83,7 +171,7 @@
                                         <small class="text-muted" id="fruty">Oranges, Mangoes, Bannas</small>
                                     </div>
                                     <div class="user-progress">
-                                        <small class="fw-semibold" id="pfruty">23.8k</small> 
+                                        <small class="fw-semibold" id="pfruty">23.8k</small>
                                     </div>
                                 </div>
                             </li>
@@ -118,15 +206,15 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                         
-                                <div class="card-title">
-                                    <h5 class="text-nowrap mb-2">Profile Engagement</h5>
-                                    <!-- <span class="badge bg-label-warning rounded-pill">Year 2021</span> -->
-                                </div>
-                               
+
+                            <div class="card-title">
+                                <h5 class="text-nowrap mb-2">Profile Engagement</h5>
+                                <!-- <span class="badge bg-label-warning rounded-pill">Year 2021</span> -->
                             </div>
-                            <div id="profileReportChart"></div>
-                        
+
+                        </div>
+                        <div id="profileReportChart"></div>
+
                     </div>
                 </div>
                 <div class="card">
@@ -487,6 +575,138 @@
 
 
 <script type="module" src="{% static 'js/dashboard.js' %}"></script>
+<!-- Bootstrap JS (required for modal functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Chart JS -->
+
+<!-- Mock API Data (Replace with actual API calls) -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Simulating API Data
+        const bestSellingProducts = ["Tomatoes", "Onions", "Avocados"];
+        const topBuyers = ["John Doe - Bulk Purchaser", "Green Grocers Ltd", "Mary’s Organic Farm"];
+        const marketTrends = ["Tomatoes prices rising", "Avocados in high demand", "Onion supply dropping"];
+
+        // Populate Best-Selling Products
+        const bestSellingList = document.getElementById("bestSellingProducts");
+        bestSellingList.innerHTML = bestSellingProducts.map(item => `<li class="list-group-item">${item}</li>`).join("");
+
+        // Populate Top Buyers
+        const topBuyersList = document.getElementById("topBuyers");
+        topBuyersList.innerHTML = topBuyers.map(buyer => `<li class="list-group-item">${buyer}</li>`).join("");
+
+        // Populate Market Trends
+        const marketTrendsList = document.getElementById("marketTrends");
+        marketTrendsList.innerHTML = marketTrends.map(trend => `<li class="list-group-item">${trend}</li>`).join("");
+    });
+</script>
+
+<div class="col-md-12 mb-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="m-0">Market & Customer Insights</h5>
+        </div>
+        <div class="card-body">
+            <!-- Navigation Tabs -->
+            <ul class="nav nav-tabs" id="marketTabs" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" id="bestSelling-tab" data-bs-toggle="tab" data-bs-target="#bestSelling" type="button" role="tab">
+                        Best-Selling Products
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="topBuyers-tab" data-bs-toggle="tab" data-bs-target="#topBuyers" type="button" role="tab">
+                        Top Buyers
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="marketTrends-tab" data-bs-toggle="tab" data-bs-target="#marketTrends" type="button" role="tab">
+                        Market Trends
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content mt-3" id="marketTabsContent">
+                <!-- Best-Selling Products -->
+                <div class="tab-pane fade show active" id="bestSelling" role="tabpanel">
+                    <ul class="list-group" id="bestSellingProducts">
+                        <li class="list-group-item">Loading...</li>
+                    </ul>
+                </div>
+
+                <!-- Top Buyers -->
+                <div class="tab-pane fade" id="topBuyers" role="tabpanel">
+                    <ul class="list-group" id="topBuyersList">
+                        <li class="list-group-item">Loading...</li>
+                    </ul>
+                </div>
+
+                <!-- Market Prices & Demand -->
+                <div class="tab-pane fade" id="marketTrends" role="tabpanel">
+                    <ul class="list-group" id="marketTrendsList">
+                        <li class="list-group-item">Fetching data...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mock API Data (Replace with real API calls) -->
+<!-- Mock API Data (Replace with real API calls) -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Simulated API Data for Best-Selling Products with Peak Season
+        const bestSellingProducts = [
+            { name: "Tomatoes", season: "March 2025 - April 2025" },
+            { name: "Onions", season: "July 2025 - September 2025" },
+            { name: "Avocados", season: "May 2025 - June 2025" }
+        ];
+
+        // Simulated API Data for Top Buyers with Purchases
+        const topBuyers = [
+            { name: "John Doe", product: "Tomatoes", quantity: "500 kg", totalSpent: "Ksh 75,000" },
+            { name: "Green Grocers Ltd", product: "Onions", quantity: "1,000 kg", totalSpent: "Ksh 120,000" },
+            { name: "Mary’s Organic Farm", product: "Avocados", quantity: "300 kg", totalSpent: "Ksh 45,000" }
+        ];
+
+        // Simulated API Data for Market Trends with Time Aspect
+        const marketTrends = [
+            { trend: "Tomato prices expected to peak", time: "March 2025 - April 2025" },
+            { trend: "Avocados in high demand for export", time: "May 2025 - June 2025" },
+            { trend: "Onion prices dropping due to surplus", time: "July 2025 - September 2025" }
+        ];
+
+        // Ensure Elements Exist Before Updating
+        const bestSellingList = document.getElementById("bestSellingProducts");
+        const topBuyersList = document.getElementById("topBuyersList");
+        const marketTrendsList = document.getElementById("marketTrendsList");
+
+        if (bestSellingList) {
+            bestSellingList.innerHTML = bestSellingProducts.map(item => 
+                `<li class="list-group-item"><strong>${item.name}</strong><br>
+                <small class="text-muted">Peak Season: ${item.season}</small></li>`
+            ).join("");
+        }
+
+        if (topBuyersList) {
+            topBuyersList.innerHTML = topBuyers.map(buyer => 
+                `<li class="list-group-item"><strong>${buyer.name}</strong><br> 
+                <small class="text-muted">Bought: ${buyer.quantity} of ${buyer.product}</small><br>
+                <small class="text-muted">Total Spent: ${buyer.totalSpent}</small></li>`
+            ).join("");
+        }
+
+        if (marketTrendsList) {
+            marketTrendsList.innerHTML = marketTrends.map(trend => 
+                `<li class="list-group-item"><strong>${trend.trend}</strong><br> 
+                <small class="text-muted">Time: ${trend.time}</small></li>`
+            ).join("");
+        }
+    });
+</script>
+
 
 
 {% endblock %}
