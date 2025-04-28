@@ -74,12 +74,12 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
         getDoc(doc(db, "verificationRequests", uid)).then((docSnap) => {
             if (docSnap.exists()) {
-              var data = docSnap.data();
-              if (data.status == "verified") {
-                document.querySelector("#checkVerify").style.display = "block";
-              }
+                var data = docSnap.data();
+                if (data.status == "verified") {
+                    document.querySelector("#checkVerify").style.display = "block";
+                }
             }
-          });
+        });
     }
 
     $('#tel').click(function () {
@@ -172,21 +172,23 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     $('document').ready(function () {
         var uid = localStorage.getItem('uid');
         //fetch complete orders 
-        getDocs(query(collection(db, uid), where("status", "==", "completed"))).then(docSnap => {
-            let products = [];
-            docSnap.forEach((doc) => {
-                products.push({ ...doc.data(), id: doc.id })
-            });
-            console.log("complete" + products);
-            //display the products in the cart use doe loop let i = o and use js to create the elements
-            var id = localStorage.getItem('productId');
-            for (let i = 0; i < products.length; i++) {
-                if (products[i].orderId == id) {
-                    document.querySelector("#reviewForm").style.display = "block";
-                }
-            }
-        });
+        if (uid == !null) {
 
+            getDocs(query(collection(db, uid), where("status", "==", "completed"))).then(docSnap => {
+                let products = [];
+                docSnap.forEach((doc) => {
+                    products.push({ ...doc.data(), id: doc.id })
+                });
+                console.log("complete" + products);
+                //display the products in the cart use doe loop let i = o and use js to create the elements
+                var id = localStorage.getItem('productId');
+                for (let i = 0; i < products.length; i++) {
+                    if (products[i].orderId == id) {
+                        document.querySelector("#reviewForm").style.display = "block";
+                    }
+                }
+            });
+        }
 
         //create an event listner for hover
         $('#one').hover(function () {
@@ -266,7 +268,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         });
 
 
-        
+
         var id = localStorage.getItem('productId');
         getDocs(query(collection(db, "comments"), where("productId", "==", id))).then(docSnap => {
             let comments = [];
@@ -319,48 +321,48 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     commentsHolder.appendChild(commentDiv);
                 }
 
-           
-                    var uid = comment.uid;
-                   rating = comment.rating;
-                    numberOfRatings = comments.length;
-                    (function (uid, img, h5, rating, numberOfRatings) {
-                       
-                       rate += parseInt(rating);
-                       console.log(rate);
-                       console.log(numberOfRatings);
-                       
-                            //get the user document
-                           
-                            const userDoc = doc(db, "users", uid);
-                            getDoc(userDoc).then(docSnap => {
-                                let user = docSnap.data();
-                                console.log(user);
-                                //display the famer image
 
-                                var image = user.imgUrl ? user.imgUrl : "https://www.w3schools.com/w3images/avatar2.png";
-                                img.src = image;
-                                h5.innerHTML = user.name;
-                            });
-                      
+                var uid = comment.uid;
+                rating = comment.rating;
+                numberOfRatings = comments.length;
+                (function (uid, img, h5, rating, numberOfRatings) {
+
+                    rate += parseInt(rating);
+                    console.log(rate);
+                    console.log(numberOfRatings);
+
+                    //get the user document
+
+                    const userDoc = doc(db, "users", uid);
+                    getDoc(userDoc).then(docSnap => {
+                        let user = docSnap.data();
+                        console.log(user);
+                        //display the famer image
+
+                        var image = user.imgUrl ? user.imgUrl : "https://www.w3schools.com/w3images/avatar2.png";
+                        img.src = image;
+                        h5.innerHTML = user.name;
+                    });
 
 
-                    })(uid, img, h5, rating, numberOfRatings);
-                
-                };
 
-                var newRating = rate / numberOfRatings;
+                })(uid, img, h5, rating, numberOfRatings);
 
-                console.log(newRating.toFixed(0));
+            };
 
-                var starHolder = document.querySelector("#starholder");
-                if(comments.length != 0){
+            var newRating = rate / numberOfRatings;
+
+            console.log(newRating.toFixed(0));
+
+            var starHolder = document.querySelector("#starholder");
+            if (comments.length != 0) {
                 for (let i = 0; i < newRating.toFixed(0); i++) {
                     var iz = document.createElement('i');
                     iz.className = "fa fa-star ms-2 text-success";
                     starHolder.appendChild(iz);
                 }
             }
-            });
+        });
 
 
     });

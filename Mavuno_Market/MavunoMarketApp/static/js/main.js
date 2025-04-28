@@ -200,6 +200,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
         }
     });
 
+    
 
     $('.back-to-top').click(function () {
         $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
@@ -637,34 +638,34 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                 productRow.appendChild(td5);
 
 
-                if (window.matchMedia("(max-width: 768px)").matches) {
-                    $('#logoutToggle2').show();
-                    img.style.width = "40px";
-                    img.style.height = "40px";
-                    img.className = "img-fluid me-2 rounded-circle img mt-2";
-                    td1.style.fontSize = "1.1em";
-                    td2.style.fontSize = "1.1em";
-                    td3.style.fontSize = "1.1em";
-                    td4.style.fontSize = "1.1em";
-                    td5.style.fontSize = "1.1em";
-                    input.style.fontSize = "1.1em";
-                    input.style.width = "1px !important";
-                    input.style.margin = "0";
-                    div2.style.width = "40px";
-                    div2.className = "input-group quantity mt-3 ms-2";
-                    td5.style.display = "flex";
-                    button3.innerHTML = "<i class='fa fa-check'></i>";
-                    button3.className = "btn btn-sm rounded-circle bg-light border mt-1";
-                    button4.innerHTML = "<i class='fa fa-clock'></i>";
-                    button4.className = "btn btn-sm rounded-circle bg-light border mt-1";
-                    button5.innerHTML = "paid";
-                    button5.className = "btn btn-sm rounded-circle bg-light border mt-1";
-                    button6.innerHTML = "...";
-                    button6.className = "btn btn-sm rounded-circle bg-light border mt-1 ms-1";
-                    button7.className = "btn btn-sm rounded-circle bg-light border mt-1 ms-1";
-                    button8.className = "btn btn-sm rounded-circle bg-light border mt-1 ms-1";
-                    productRow.style.display = "flex";
-                }
+                // if (window.matchMedia("(max-width: 768px)").matches) {
+                //     $('#logoutToggle2').show();
+                //     img.style.width = "40px";
+                //     img.style.height = "40px";
+                //     img.className = "img-fluid me-2 rounded-circle img mt-2";
+                //     td1.style.fontSize = "1.1em";
+                //     td2.style.fontSize = "1.1em";
+                //     td3.style.fontSize = "1.1em";
+                //     td4.style.fontSize = "1.1em";
+                //     td5.style.fontSize = "1.1em";
+                //     input.style.fontSize = "1.1em";
+                //     input.style.width = "1px !important";
+                //     input.style.margin = "0";
+                //     div2.style.width = "40px";
+                //     div2.className = "input-group quantity mt-3 ms-2";
+                //     td5.style.display = "flex";
+                //     button3.innerHTML = "<i class='fa fa-check'></i>";
+                //     button3.className = "btn btn-sm rounded-circle bg-light border mt-1";
+                //     button4.innerHTML = "<i class='fa fa-clock'></i>";
+                //     button4.className = "btn btn-sm rounded-circle bg-light border mt-1";
+                //     button5.innerHTML = "paid";
+                //     button5.className = "btn btn-sm rounded-circle bg-light border mt-1";
+                //     button6.innerHTML = "...";
+                //     button6.className = "btn btn-sm rounded-circle bg-light border mt-1 ms-1";
+                //     button7.className = "btn btn-sm rounded-circle bg-light border mt-1 ms-1";
+                //     button8.className = "btn btn-sm rounded-circle bg-light border mt-1 ms-1";
+                //     productRow.style.display = "flex";
+                // }
 
 
                 //check if status is approved
